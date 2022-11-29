@@ -96,17 +96,15 @@ class App extends Component {
 
           {currentUser ? (
             <div className="navbar-nav collapse navbar-collapse justify-content-end">
-              <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
-                  {/* {currentUser.username} */}
+              <div style={{"display":"flex", "flexDirection":"column"}}>
+                  <a href="/profile" className="nav-link" onClick={this.logOut}>
                   {userDetails.fname + " " + userDetails.lname}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={this.logOut}>
-                  Logout
-                </a>
-              </li>
+                  </a>
+
+                  <a href="/login" className="nav-link" onClick={this.logOut}>
+                    Logout
+                  </a>
+              </div>
               <Userprofile className="userprofile" />
             </div>
             

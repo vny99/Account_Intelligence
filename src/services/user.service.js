@@ -8,6 +8,10 @@ class UserService {
     getUserByEmail(email){
         return axios.get(USER_API_BASE_URL + email, { headers: authHeader() });
     }
+
+    addFavorite(email, id){
+        return axios.get(USER_API_BASE_URL + email + "/" + id, { headers: authHeader() });
+    }
 }
 
 export default new UserService();

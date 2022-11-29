@@ -18,6 +18,9 @@ import Userprofile from "./components/userprofile.component";
 
 import ViewIdeaByIdComponent from './components/view-idea-by-id.component';
 import RecentIdeasTableComponent from "./components/ideas-table.component";
+// import userService from "./services/user.service";
+import UserService from "./services/user.service";
+import Random from "./components/random";
 
 class App extends Component {
   constructor(props) {
@@ -27,18 +30,24 @@ class App extends Component {
     this.state = {
       showAdminBoard: false,
       currentUser: undefined,
+      userDetails: [],
     };
   }
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
-
+    UserService.getUserByEmail(user.email).then((res) => {
+      this.setState({ userDetails: res.data});
+    });
     if (user) {
       this.setState({
         currentUser: user,
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        // userDetails: UserService.getUserByEmail(user.email).data,
+        // userDetails: user.email,
       });
     }
+
   }
 
   logOut() {
@@ -46,11 +55,12 @@ class App extends Component {
     this.setState({
       showAdminBoard: false,
       currentUser: undefined,
+      userDetails: [],
     });
   }
 
   render() {
-    const { currentUser, showAdminBoard } = this.state;
+    const { currentUser, showAdminBoard, userDetails } = this.state;
 
     return (
       <div>
@@ -89,7 +99,8 @@ class App extends Component {
             <div className="navbar-nav collapse navbar-collapse justify-content-end">
               <li className="nav-item">
                 <Link to={"/profile"} className="nav-link">
-                  {currentUser.username}
+                  {/* {currentUser.username} */}
+                  {userDetails.fname + " " + userDetails.lname}
                 </Link>
               </li>
               <li className="nav-item">
@@ -121,7 +132,8 @@ class App extends Component {
 
         <div className="container mt-3">
           <Routes>
-            <Route path="/" element={<About />} />
+            {/* <Route path="/" element={<About />} /> */}
+            <Route path="/" element={<Random />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

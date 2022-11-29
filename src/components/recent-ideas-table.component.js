@@ -18,9 +18,11 @@ class RecentIdeasTableComponent extends Component {
     }
 
     componentDidMount(){
-        IdeaService.getRecentIdeas().then((res) => {
-            this.setState({ ideas: res.data});
-        });
+        // IdeaService.getRecentIdeas().then((res) => {
+        //     this.setState({ ideas: res.data});
+        // });
+
+        IdeaService.getRecentIdeas().then((res) => {this.setState({ ideas: res.data});});
 
     }
 
@@ -54,7 +56,7 @@ class RecentIdeasTableComponent extends Component {
                                              <td style={{"textAlign" : "left"}}>
                                                 <h5><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
                                                 <p style={{"width" : "300px",  "height" : "1.2em", "overflow":"hidden",
-                                                "text-overflow": "ellipsis", "white-space": "nowrap", "fontSize":"12px"}}> {idea.ideaDescription}</p>
+                                                "textOverflow": "ellipsis", "whiteSpace": "nowrap", "fontSize":"12px"}}> {idea.ideaDescription}</p>
                                                 
                                              </td>   
                                              <td>

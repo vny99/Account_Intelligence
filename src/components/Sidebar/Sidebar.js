@@ -3,25 +3,33 @@ import { stack as Menu } from 'react-burger-menu';
 import './Sidebar.css';
 
 import { FcIdea } from "react-icons/fc";
-import { CgCardHearts, CgFileAdd } from "react-icons/cg";
+import { FcKindle } from "react-icons/fc";
 
 
 const props = () => {
   return (
     <Menu width={'80px'}>
+      <a className="bm-item" href="/businesschallenges">
+        
+        <FcKindle style={{marginRight:"10px", "fontSize":"50px"}} />
+        Fresh Ideas
+        
+      </a>
       <a className="bm-item" href="/ideas">
-        <FcIdea style={{marginRight:"10px", "fontSize":"30px"}} />
-        <div>Fresh Ideas</div>
-      </a>
 
-      <a className="bm-item" href="/addIdea">
-        <CgFileAdd color='green' style={{marginRight:"10px", "fontSize":"30px"}} />
-        <div>Add Idea</div>
-      </a>
+        <FcIdea
+          // style={{marginRight:"10px"}} 
+        />
 
-      <a className="bm-item" href="/myFavorites">
-        <CgCardHearts color='red' style={{marginRight:"10px", "fontSize":"30px"}} />
-        <div>My Favorites</div>
+        {/* <div class="myDIV">
+            <FcIdea
+            // style={{marginRight:"10px"}} 
+            />
+          </div>
+
+        <div class="hide">
+          Ideas
+        </div> */}
       </a>
     </Menu>
   );

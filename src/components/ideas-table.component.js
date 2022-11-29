@@ -3,7 +3,10 @@ import IdeaService from '../services/idea.service'
 
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
+import { MdOutlinePlaylistAdd } from "react-icons/md";
+import { MdOutlinePlaylistAddCheck } from "react-icons/md";
 import AddFavourite from './add-favourite.component';
+
 
 class IdeaTableComponent extends Component {
     constructor(props) {
@@ -27,14 +30,22 @@ class IdeaTableComponent extends Component {
     render() {
         return (
             <div>
-                <br></br>
-                 <h2 className="text-center">Ideas</h2>
+                <h2 className="text-center display-3">IDEAS</h2>
+                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" style={{"paddingBottom":"10px"}}>
+                    <a href="/addIdea" class="btn btn-outline-success me-md-2" style={{"fontSize":"small", "fontWeight":"bold", "display":"inline-block", "height":"65px"}} >
+                        <MdOutlinePlaylistAdd size={"30px"} />
+                        <div>Add Idea</div>
+                    </a>
+                    <a href="/addIdea" class="btn btn-outline-warning" style={{"fontSize":"small", "fontWeight":"bold", "display":"inline-block", "height":"65px"}} >
+                        <MdOutlinePlaylistAddCheck size={"30px"} />
+                        <div>My Ideas</div>
+                    </a>
+                </div>
                  <div className = "row">
                         <table style={{"textAlign" : "center"}} className = "table table-striped table-bordered">
 
                             <thead >
                                 <tr>
-                                    {/* <th> Idea id</th> */}
                                     <th> Idea</th>
                                     <th> Response</th>
                                     <th style={{"width" : "80px"}}> Created by</th>

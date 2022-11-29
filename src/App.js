@@ -20,7 +20,7 @@ import ViewIdeaByIdComponent from './components/view-idea-by-id.component';
 import RecentIdeasTableComponent from "./components/ideas-table.component";
 // import userService from "./services/user.service";
 import UserService from "./services/user.service";
-import Random from "./components/random";
+// import Random from "./components/random";
 
 class App extends Component {
   constructor(props) {
@@ -43,8 +43,6 @@ class App extends Component {
       this.setState({
         currentUser: user,
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
-        // userDetails: UserService.getUserByEmail(user.email).data,
-        // userDetails: user.email,
       });
     }
 
@@ -67,23 +65,9 @@ class App extends Component {
         <Sidebar />
         <nav className="navbar navbar-expand navbar-dark bg-danger">
           <Link to={"/"} className="navbar-brand">
-            Echo
+            <strong style={{"fontSize":"xx-large"}}>Echo</strong>
           </Link>
           <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/about"} className="nav-link">
-                About
-              </Link>
-            </li>
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-
             {currentUser && (
               <div className="navbar-nav collapse navbar-collapse justify-content-end">
                 <li className="nav-item">
@@ -93,6 +77,21 @@ class App extends Component {
                 </li>
             </div>
             )}
+
+            {/* {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/admin"} className="nav-link">
+                  Admin Board
+                </Link>
+              </li>
+            )} */}
+
+            <li className="nav-item">
+              <Link to={"/about"} className="nav-link">
+                About
+              </Link>
+            </li>
+
           </div>
 
           {currentUser ? (
@@ -132,8 +131,8 @@ class App extends Component {
 
         <div className="container mt-3">
           <Routes>
-            {/* <Route path="/" element={<About />} /> */}
-            <Route path="/" element={<Random />} />
+            <Route path="/" element={<About />} />
+            {/* <Route path="/" element={<Random />} /> */}
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

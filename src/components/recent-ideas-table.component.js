@@ -18,7 +18,7 @@ class RecentIdeasTableComponent extends Component {
     }
 
     componentDidMount(){
-        IdeaService.getIdeas().then((res) => {
+        IdeaService.getRecentIdeas().then((res) => {
             this.setState({ ideas: res.data});
         });
 

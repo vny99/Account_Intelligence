@@ -11,10 +11,8 @@ const props = () => {
     <Menu width={'80px'}>
       <a className="bm-item" href="/businesschallenges">
         
-        <FcKindle style={{marginRight:"10px"}} />
-        <div className="hide">
-          Business Challenges
-        </div>
+        <FcKindle style={{marginRight:"10px", "fontSize":"50px"}} />
+        Fresh Ideas
         
       </a>
       <a className="bm-item" href="/ideas">

@@ -16,8 +16,8 @@ import About from "./components/about.component";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Userprofile from "./components/userprofile.component";
 
-import RecentIdeasTableComponent from './components/recent-ideas-table.component';
 import ViewIdeaByIdComponent from './components/view-idea-by-id.component';
+import RecentIdeasTableComponent from "./components/ideas-table.component";
 
 class App extends Component {
   constructor(props) {
@@ -129,7 +129,7 @@ class App extends Component {
             <Route path="/profile" element={<Profile />} />
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
-            <Route path = "/recentideas" element = {<RecentIdeasTableComponent />} />
+            <Route path = "/ideas" element = {<RecentIdeasTableComponent />} />
             <Route path = "/viewIdea/:id" element = {<ViewIdeaByIdComponent/>}/>
           </Routes>
         </div>

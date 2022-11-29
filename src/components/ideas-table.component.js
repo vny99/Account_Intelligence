@@ -5,12 +5,12 @@ import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
 import AddFavourite from './add-favourite.component';
 
-class IdeasTableComponent extends Component {
+class IdeaTableComponent extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-                ideas: []
+            ideas: []
         }
     }
     viewIdea(id){
@@ -52,7 +52,7 @@ class IdeasTableComponent extends Component {
                                         <tr key = {idea.id} >
                                             {/* <td> {idea.id}</td> */}
                                              <td style={{"textAlign" : "left"}}>
-                                                <h5><a href="/viewIdea/:idea.id">{idea.ideaTitle}</a></h5>
+                                                <h5><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
                                                 <p style={{"width" : "300px",  "height" : "1.2em", "overflow":"hidden",
                                                 "text-overflow": "ellipsis", "white-space": "nowrap", "fontSize":"12px"}}> {idea.ideaDescription}</p>
                                                 
@@ -86,4 +86,4 @@ class IdeasTableComponent extends Component {
     }
 }
 
-export default IdeasTableComponent;
+export default IdeaTableComponent;

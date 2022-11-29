@@ -9,6 +9,10 @@ class IdeaService {
         return axios.get(IDEA_API_BASE_URL, { headers: authHeader() });
     }
 
+    getRecentIdeas(){
+        return axios.get(IDEA_API_BASE_URL + "/recent/", { headers: authHeader() });
+    }
+
     getIdeaById(ideaId){
         return axios.get(IDEA_API_BASE_URL + '/' + ideaId, { headers: authHeader() });
     }

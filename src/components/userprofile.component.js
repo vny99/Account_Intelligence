@@ -8,9 +8,9 @@ import { FaUserCircle } from "react-icons/fa";
 function Userprofile(){
         return(
             <CDropdown variant="btn-group">
-            <CDropdownToggle color="white" size="lg"> <FaUserCircle color="white" fontSize="1.5em" /></CDropdownToggle>
+            <CDropdownToggle color="white" size="lg"> <FaUserCircle color="#231f20" fontSize="1.9em" /></CDropdownToggle>
             <CDropdownMenu>
-              <CDropdownItem href="/myAccount">My Profile</CDropdownItem>
+              <CDropdownItem href="/profile">My Profile</CDropdownItem>
               {/* <CDropdownItem href="#">Another action</CDropdownItem> */}
               {/* <CDropdownItem href="#">Something else here</CDropdownItem> */}
               <CDropdownDivider/>

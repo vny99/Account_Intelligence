@@ -36,10 +36,10 @@ class App extends Component {
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
-    UserService.getUserByEmail(user.email).then((res) => {
-      this.setState({ userDetails: res.data});
-    });
     if (user) {
+      UserService.getUserByEmail(user.email).then((res) => {
+        this.setState({ userDetails: res.data});
+      })
       this.setState({
         currentUser: user,
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
@@ -129,7 +129,7 @@ class App extends Component {
 
         <div className="container mt-3">
           <Routes>
-            <Route path="/" element={<About />} />
+            <Route path="/" element={<Login />} />
             {/* <Route path="/" element={<Random />} /> */}
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />

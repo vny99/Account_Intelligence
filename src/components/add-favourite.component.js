@@ -13,9 +13,9 @@ class AddFavourite extends Component {
   render() {
     return (
           <div
-            // className="container"
-            // style={{ border: "1px solid black", width: "15%" }}
             onClick={() => this.toggle()}
+//             data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+// sagittis lacus vel augue laoreet rutrum faucibus"
           >
             {this.state.liked === false ? (
               <AiOutlineHeart size={"27px"} color="red" />

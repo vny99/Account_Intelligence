@@ -17,7 +17,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Userprofile from "./components/userprofile.component";
 
 import ViewIdeaByIdComponent from './components/view-idea-by-id.component';
-import RecentIdeasTableComponent from "./components/ideas-table.component";
+import RecentIdeasTableComponent from "./components/fresh-ideas-page.component";
 // import userService from "./services/user.service";
 import UserService from "./services/user.service";
 // import Random from "./components/random";
@@ -89,6 +89,12 @@ class App extends Component {
             <li className="nav-item">
               <Link to={"/about"} className="nav-link">
                 About
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/addIdea"} className="nav-link">
+                Add Idea
               </Link>
             </li>
 

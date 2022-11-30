@@ -1,0 +1,36 @@
+.cat label {
+    line-height: 0.5 em;
+    border-radius: 4px;
+}
+
+.cat label :hover{
+    color: white;
+    border-radius: 4px;
+    background-color: rgb(234, 163, 32);
+}
+
+.cat label span {
+    color: orange;
+    padding: 10px;
+    font-size: small;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+.cat label input {
+    display: none;
+}
+
+/* selects all of the text within the input element and changes the color of the text */
+.cat label input + span{color: rgb(243, 166, 24);}
+
+/* This will declare how a selected input will look giving generic properties */
+.cat input:checked + span{
+    color: white;
+    border-radius: 4px;
+    /* text-shadow: 0 0 6px #605b5b; */
+    border: 1px solid rgb(243, 166, 24);
+    background-color: rgb(243, 166, 24);
+    box-shadow: 0 0 6px rgb(243, 166, 24);
+}

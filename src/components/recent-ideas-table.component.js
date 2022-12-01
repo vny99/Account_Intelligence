@@ -55,8 +55,10 @@ class RecentIdeasTableComponent extends Component {
                                             {/* <td> {idea.id}</td> */}
                                              <td style={{"textAlign" : "left"}}>
                                                 <h5><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
-                                                <p style={{"width" : "300px",  "height" : "1.2em", "overflow":"hidden",
-                                                "textOverflow": "ellipsis", "whiteSpace": "nowrap", "fontSize":"12px"}}> {idea.ideaDescription}</p>
+                                                <p style={{"width" : "500px",  "height" : "4.3em", "overflowY":"hidden",
+                                                "textOverflow": "ellipsis",
+                                                "fontSize":"12px"
+                                                }}> {idea.ideaDescription}</p>
                                                 
                                              </td>   
                                              <td>

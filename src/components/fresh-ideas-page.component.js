@@ -89,7 +89,7 @@ class FreshIdeasPage extends Component {
                             <thead>
                                 <tr>
                                     <th style={{"width" : "100px"}}> Idea</th>
-                                    <th style={{"width" : "80px"}}> Response</th>
+                                    <th style={{"width" : "130px"}}> Response</th>
                                     <th style={{"width" : "90px"}}> Created by</th>
                                     <th style={{"width" : "90px"}}> Created date</th>
                                     <th style={{"width" : "100px"}}> Add favourite</th>
@@ -106,7 +106,7 @@ class FreshIdeasPage extends Component {
                                             {/* <td> {idea.id}</td> */}
                                              <td style={{"textAlign" : "left"}}>
                                                 <h5 style={{"fontSize":"25px"}}><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
-                                                <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",
+                                                <p style={{"width" : "400px",  "height" : "4.3em", "overflowY":"hidden",
                                                 "textOverflow": "ellipsis",
                                                 "fontSize":"12px"
                                                 }}> {idea.ideaDescription}</p>
@@ -141,7 +141,7 @@ class FreshIdeasPage extends Component {
                             <thead >
                                 <tr>
                                     <th style={{"width" : "100px"}}> Idea</th>
-                                    <th style={{"width" : "130px"}}> Response</th>
+                                    <th style={{"width" : "150px"}}> Response</th>
                                     <th style={{"width" : "130px"}}> Created By</th>
                                     <th style={{"width" : "130px"}}> Created date</th>
                                     <th style={{"width" : "130px"}}> Add favourite</th>
@@ -160,7 +160,7 @@ class FreshIdeasPage extends Component {
                                             {/* <td> {idea.id}</td> */}
                                              <td style={{"textAlign" : "left"}}>
                                              <h5 style={{"fontSize":"25px"}}><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
-                                                <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",
+                                                <p style={{"width" : "400px",  "height" : "4.3em", "overflowY":"hidden",
                                                 "textOverflow": "ellipsis",
                                                 "fontSize":"12px"
                                                 }}> {idea.ideaDescription}</p>

@@ -1,36 +1,118 @@
-.cat label {
-    line-height: 0.5 em;
-    border-radius: 4px;
+/* My styling for ribbon style table display */
+a{
+    text-decoration: none;
 }
 
-.cat label :hover{
-    color: white;
-    border-radius: 4px;
-    background-color: rgb(234, 163, 32);
+tbody tr:hover h5 a {
+    color: #f47216;
+}
+
+
+table {
+    border-radius:4px;
+    width:70%;
+    /* margin:100px auto; */
+    background-color: white;
+    border-collapse: collapse; 
+}
+
+tbody tr {
+    border: 1px solid transparent;
+    z-index:7;
+}
+
+tbody td {
+    text-align:center;
+    padding: 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+tbody td.highlight {
+    padding:0;
+    width:4px;
+}
+
+tbody td.highlight div {
+    width:4px;
+    height:60px;
+    border-radius:4px;
+    background-color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+tbody tr:hover {
+    box-shadow: 0px 9px 30px -6px grey;
+    transform: scale(1.02);
+}
+
+tr:hover td {
+    cursor:pointer;
+    color: cadetblue;
+    border-top: 1px solid grey;
+    /* border-bottom: 1px solid grey; */
+}
+
+tr:hover td.highlight div {
+    transform: scaleX(3);
+}
+
+/* For round buttons and hovering effect */
+.btn{
+    
+}
+
+.btn-success {
+    font-family: Raleway-SemiBold;
+    font-size: 13px;
+    color: rgba(103, 192, 103, 0.75);
+    letter-spacing: 1px;
+    line-height: 15px;
+    /* border: 2px solid rgba(103, 192, 103, 0.75); */
+    border-radius: 40px;
+    background: transparent;
+    transition: all 0.3s ease 0s;
+}
+
+.btn-success:hover {
+    color: #FFF;
+    background: rgb(103, 192, 103, 0.75);
+    border: 2px solid rgb(103, 192, 103, 0.75);
 }
 
 .cat label span {
     color: orange;
     padding: 10px;
+    margin-top: 45px;
     font-size: small;
     font-weight: bold;
     text-align: center;
     display: block;
 }
 
+.cat label :hover + span{
+    color: #FFF;
+    background: rgb(240, 173, 78, 0.75);
+    border: 2px solid rgba(240, 173, 78, 0.75);
+}
+
 .cat label input {
     display: none;
 }
 
-/* selects all of the text within the input element and changes the color of the text */
-.cat label input + span{color: rgb(243, 166, 24);}
+.cat label input + span{
+    font-family: Raleway-SemiBold;
+    font-size: 13px;
+    color: rgba(240, 173, 78, 0.75);
+    letter-spacing: 1px;
+    line-height: 15px;
+    /* border: 2px solid rgba(240, 173, 78, 0.75); */
+    border-radius: 40px;
+    background: transparent;
+    transition: all 0.3s ease 0s;
+}
 
-/* This will declare how a selected input will look giving generic properties */
 .cat input:checked + span{
-    color: white;
-    border-radius: 4px;
-    /* text-shadow: 0 0 6px #605b5b; */
-    border: 1px solid rgb(243, 166, 24);
-    background-color: rgb(243, 166, 24);
-    box-shadow: 0 0 6px rgb(243, 166, 24);
+    color: #FFF;
+    background: rgb(240, 173, 78, 0.75);
+    border: 2px solid rgba(240, 173, 78, 0.75);
 }

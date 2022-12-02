@@ -34,7 +34,8 @@ Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
 .bm-menu-wrap {
-  position: fixed;
+  position: relative;
+  top:0px;
   height: 100%;
 }
 
@@ -43,15 +44,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
   /* background: #373a47; */
   background: #231f20;
   /* padding: 2.5em 1.5em 0; */
-  padding: 30px 15px;
+  padding-top: 20px;
   font-size: x-large;
-  width: 120px;
+  width: 80px;
 }
 
 /* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
-}
+/* .bm-morph-shape {
+  fill: #1537cd;
+} */
 
 /* Wrapper for item list */
 .bm-item-list {
@@ -65,39 +66,37 @@ Note: Beware of modifying this element as it can break the animations - you shou
   display: inline-block;
   color: #d1d1d1;
   padding-left: 10px;
-  padding-right: 5px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  /* margin-bottom: 15px; */
   text-align: center;
   text-decoration: none;
 }
 .bm-item div {
   font-size: small;
-  text-align: center;
 }
 
 .bm-item:hover {
-  color: #ffffff;
-  background: rgb(45, 48, 48);
-  border-radius: 10px;
-
-  transform: scale(1.1);
+  color: black;
+  background: rgba(242, 242, 242, 0.5);
+  /* border-radius: 4px; */
 }
 
 /* Styling of overlay */
 .bm-overlay {
+  top:0px;
   background: rgba(0, 0, 0, 0.3);
+
 }
 
 /* .hide {
   display: none;
 } */
 
-.myDIV:hover + .hide {
+/* .myDIV:hover + .hide {
   display: block;
   color: red;
-}
+} */
 
 
 

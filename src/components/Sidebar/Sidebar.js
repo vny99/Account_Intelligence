@@ -10,17 +10,17 @@ const props = () => {
   return (
     <Menu width={'80px'}>
       <a className="bm-item" href="/ideas">
-        <FcIdea style={{marginRight:"10px", "fontSize":"30px"}} />
+        <FcIdea style={{"fontSize":"30px"}} />
         <div>Fresh Ideas</div>
       </a>
 
       <a className="bm-item" href="/addIdea">
-        <CgFileAdd color='green' style={{marginRight:"10px", "fontSize":"30px"}} />
+        <CgFileAdd color='green' style={{"fontSize":"30px"}} />
         <div>Add Idea</div>
       </a>
 
       <a className="bm-item" href="/myFavorites">
-        <CgCardHearts color='red' style={{marginRight:"10px", "fontSize":"30px"}} />
+        <CgCardHearts color='red' style={{"fontSize":"30px"}} />
         <div>My Favorites</div>
       </a>
     </Menu>

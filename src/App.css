@@ -11,6 +11,21 @@ body{
 
 .navbar{
   padding-left: 80px;
+
+  /* My styling for fixed navbar */
+  overflow: hidden;
+  background-color: #666666;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.container {
+  padding: 18px;
+  margin-top: 35px;
+  height: 2000px;
+  z-index: 1;
 }
 
 .justify-content-end{

@@ -38,7 +38,7 @@ export default function Slider() {
                 slides.map(
                     (obj, index) => {
                         return (
-                            <React.Fragment key={obj}>
+                            <React.Fragment key={obj.id}>
                                 {/* <div key={obj.id} className='bgimage'></div> */}
                                 <div className={ slideIndex === index+1 ? "slide active-anim" : "slide"}>
                                     <a key={obj.id} href='/bc' className='slider-text'>

@@ -75,26 +75,26 @@ class App extends Component {
                     Home
                   </Link>
                 </li>
+
+                <li className="nav-item">
+                  <Link to={"/addIdea"} className="nav-link">
+                    Add Idea
+                  </Link>
+                </li>
             </div>
             )}
 
-            {/* {showAdminBoard && (
+            {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/admin"} className="nav-link">
-                  Admin Board
+                  Add Business Challenge
                 </Link>
               </li>
-            )} */}
+            )}
 
             <li className="nav-item">
               <Link to={"/about"} className="nav-link">
                 About
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link to={"/addIdea"} className="nav-link">
-                Add Idea
               </Link>
             </li>
 

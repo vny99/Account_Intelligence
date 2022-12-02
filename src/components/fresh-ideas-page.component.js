@@ -53,45 +53,35 @@ class FreshIdeasPage extends Component {
     }
 
     render() {
-        // const { currentUser, ideas, userDetails } = this.state;
-        // console.log(this.state.ideas.filter((idea)=>idea.fname==="Vandana"))
-        // console.log(this.state.ideas)
         return (
             <div>
-                {/* <h2 className="text-center display-3">IDEAS</h2> */}
-                 <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{"paddingBottom":"10px"}}>
-                    
-                    <a href="/addIdea" className="btn btn-outline-success me-md-2" style={{"fontSize":"small", "fontWeight":"bold", "display":"inline-block", "height":"65px", "border":"none", "marginTop":"15px"}} >
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end" style={{"paddingBottom":"10px"}}>
+                    <a href="/addIdea" className="btn btn-success me-md-2" style={{"fontSize":"small", "fontWeight":"bold", "display":"inline-block", "height":"65px", "border":"none", "marginTop":"49px"}} >
                         <MdOutlinePlaylistAdd size={"30px"} />
                         <div>Add Idea</div>
                     </a>
-                    {/* <button onClick={this.myIdeas} className="btn btn-outline-warning" style={{"fontSize":"small", "fontWeight":"bold", "display":"inline-block", "height":"65px"}} >
-                        <MdOutlinePlaylistAddCheck size={"30px"} />
-                        <div>My Ideas</div>
-                    </button> */}
-
-                    {/* <input onClick={this.myIdeas} class="btn btn-outline-warning" type="checkbox" name="My Ideas" />My Ideas */}
 
                     <div class="cat action">
                         <label>
-                            <input onClick={this.myIdeas} class="btn btn-outline-warning" type="checkbox" />
+                            <input onClick={this.myIdeas} class="btn btn-warning" type="checkbox" />
                             <span>
                                 <MdOutlinePlaylistAddCheck size={"30px"} />
                                 <div>My Ideas</div>
                             </span>
                         </label>
                     </div>
+
                 </div>
                  <div className = "row" id='all'>
                     <h2 className="text-center display-5">All Ideas</h2>
-                        <table style={{"textAlign" : "center"}} className = "table table-border table-hover">
+                        <table style={{"textAlign" : "center"}} className = "table">
                         
                             <thead>
                                 <tr>
                                     <th style={{"width" : "100px"}}> Idea</th>
                                     <th style={{"width" : "130px"}}> Response</th>
                                     <th style={{"width" : "90px"}}> Created by</th>
-                                    <th style={{"width" : "90px"}}> Created date</th>
+                                    <th style={{"width" : "100px"}}> Created date</th>
                                     <th style={{"width" : "100px"}}> Add favourite</th>
                                     <th style={{"width" : "50px"}}> Rewards</th>
                                     <th style={{"width" : "50px"}}> Status</th>
@@ -137,7 +127,7 @@ class FreshIdeasPage extends Component {
 
                     <div id='mine' style={{"display":"none"}}>
                         <h2 className="text-center display-5">My Ideas</h2>
-                        <table style={{"textAlign" : "center"}} className = "table table-border table-hover">
+                        <table style={{"textAlign" : "center"}} className = "table">
                             <thead >
                                 <tr>
                                     <th style={{"width" : "100px"}}> Idea</th>

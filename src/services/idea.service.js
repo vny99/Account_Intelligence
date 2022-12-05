@@ -16,6 +16,10 @@ class IdeaService {
     getIdeaById(ideaId){
         return axios.get(IDEA_API_BASE_URL + '/' + ideaId, { headers: authHeader() });
     }
+
+    getCommentsByIdeaTitle(ideaTitle){
+        return axios.get(IDEA_API_BASE_URL + '/' + ideaTitle, { headers: authHeader() });
+    }
 }
 
 export default new IdeaService();

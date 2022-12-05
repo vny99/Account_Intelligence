@@ -20,7 +20,6 @@ import ViewIdeaByIdComponent from './components/view-idea-by-id.component';
 import RecentIdeasTableComponent from "./components/fresh-ideas-page.component";
 // import userService from "./services/user.service";
 import UserService from "./services/user.service";
-// import Random from "./components/random";
 
 class App extends Component {
   constructor(props) {
@@ -136,7 +135,6 @@ class App extends Component {
         <div className="container mt-3">
           <Routes>
             <Route path="/" element={<Login />} />
-            {/* <Route path="/" element={<Random />} /> */}
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

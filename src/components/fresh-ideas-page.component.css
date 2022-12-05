@@ -3,16 +3,21 @@ a{
     text-decoration: none;
 }
 
-tbody tr:hover h5 a {
-    color: #f47216;
-}
-
 table {
     border-radius:4px;
     width:70%;
-    /* margin:100px auto; */
     background-color: white;
     border-collapse: collapse; 
+}
+
+thead{
+    /* color: #f47216; */
+    /* color: white; */
+    font-size: medium;
+    /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
+    background-color: white;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255), 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
 }
 
 tbody tr {
@@ -22,7 +27,6 @@ tbody tr {
 
 tbody td {
     text-align:center;
-    /* padding: 20px; */
     transition: all 0.2s ease-in-out;
 }
 
@@ -45,6 +49,10 @@ tbody tr:hover {
     transform: scale(1.02);
 }
 
+tbody tr:hover h5 a {
+    color: #f47216;
+}
+
 tr:hover td {
     cursor:pointer;
     color: cadetblue;
@@ -57,8 +65,9 @@ tr:hover td.highlight div {
 }
 
 .btn {
+    /* padding: 10px; */
     margin-left: 10px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
   
 .btn-success {
@@ -72,6 +81,7 @@ tr:hover td.highlight div {
     background: transparent;
     transition: all 0.3s ease 0s;
     padding-top: 10px;
+    /* color: #e8d28c; */
   }
   
 .btn-success:hover {
@@ -106,6 +116,10 @@ tr:hover td.highlight div {
     cursor: pointer;
 }
 
+/* input:checked + input {
+    background-color: blue;
+} */
+
 /* To keep the table header fixed */
 h2{
     position: sticky;
@@ -116,7 +130,18 @@ h2{
 /* To keep the th fixed */
 thead{
     position: sticky;
-    /* top: 135px; */
-    z-index: 7;
+    top: 80px;
+    z-index: 8;
     border-radius: 10px;
+}
+
+h2{
+    font-size: 70px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #9a3c3c, #d39393);
+    /* background-image: linear-gradient(to left, #b31212, #ce9d92); */
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 0px 4px 10px rgba(211, 147, 147, 0.8)
 }

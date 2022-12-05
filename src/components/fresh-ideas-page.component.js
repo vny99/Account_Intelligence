@@ -3,8 +3,6 @@ import IdeaService from '../services/idea.service'
 
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
-import { MdOutlinePlaylistAdd } from "react-icons/md";
-import { MdOutlinePlaylistAddCheck } from "react-icons/md";
 import { BiEditAlt } from "react-icons/bi";
 import AddFavourite from './add-favourite.component';
 import UserService from '../services/user.service';
@@ -23,6 +21,7 @@ class FreshIdeasPage extends Component {
             userDetails: [],
         }
     }
+    
     viewIdea(id){
         this.props.history.push(`/viewIdea/${id}`);
     }
@@ -43,13 +42,13 @@ class FreshIdeasPage extends Component {
     myIdeas(){
         var all = document.getElementById("all");
         var mine = document.getElementById("mine");
-        if (all.style.display === "block") {
-            all.style.display = "none";
-            mine.style.display = "block";
-        }
-        else {
+        if (all.style.display === "none") {
             all.style.display = "block";
             mine.style.display = "none";
+        }
+        else {
+            all.style.display = "none";
+            mine.style.display = "block";
         }
     }
 
@@ -57,10 +56,8 @@ class FreshIdeasPage extends Component {
         return (
             <div style={{"marginTop":"60px"}}>
                 <div>
-                    <h2 className="d-inline-flex" style={{"left":"500px"}}>Fresh Ideas</h2>
-                    <div
-                    className="d-grid gap-2 d-md-flex justify-content-md-end"
-                    style={{"float":"right"}}>
+                    <h2 className="d-inline-flex display-5" style={{"left":"500px"}}>Fresh Ideas</h2>
+                    <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
                         <div>
                             <a href="/addIdea" className="btn btn-success" >
                             Add Idea
@@ -68,8 +65,11 @@ class FreshIdeasPage extends Component {
                         </div>
 
                         <div className="btn btn-warning">
-                            <label for="my-ideas-id"> My Ideas</label>
-                            <input type="checkbox" id="my-ideas-id" onClick={this.myIdeas}></input>
+                            <label for="my-ideas-id">
+                                <input type="checkbox" id="my-ideas-id" onClick={this.myIdeas} />
+                                My Ideas
+                            </label>
+                            
                         </div>
 
                     </div>
@@ -79,17 +79,17 @@ class FreshIdeasPage extends Component {
                         
                             <thead>
                                 <tr>
-                                    <th style={{"width" : "100px"}}> Idea</th>
-                                    <th style={{"width" : "130px"}}> Response</th>
-                                    <th style={{"width" : "90px"}}> Created by</th>
-                                    <th style={{"width" : "100px"}}> Created date</th>
-                                    <th style={{"width" : "100px"}}> Add favourite</th>
-                                    <th style={{"width" : "50px"}}> Rewards</th>
-                                    <th style={{"width" : "50px"}}> Status</th>
-                                    
+                                    <th style={{"width" : "50px"}}> Idea</th>
+                                    <th style={{"width" : "140px"}}> Response</th>
+                                    <th style={{"width" : "40px"}}> Status</th>
+                                    <th style={{"width" : "110px"}}> Created by</th>
+                                    <th style={{"width" : "130px"}}> Created date</th>
+                                    <th style={{"width" : "150px"}}> Add favourite</th>
+                                    <th style={{"width" : "40px"}}> Rewards</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <br></br>
                                 {
                                     this.state.ideas.map(
                                         idea => 
@@ -101,7 +101,7 @@ class FreshIdeasPage extends Component {
                                             {/* <td> {idea.id}</td> */}
                                              <td style={{"textAlign" : "left"}}>
                                                 <h5 style={{"fontSize":"25px"}}><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
-                                                <p style={{"width" : "400px",  "height" : "4.3em", "overflowY":"hidden",
+                                                <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",
                                                 "textOverflow": "ellipsis",
                                                 "fontSize":"12px"
                                                 }}> {idea.ideaDescription}</p>
@@ -117,11 +117,11 @@ class FreshIdeasPage extends Component {
                                                     <div>{idea.commentsCount}</div>
                                                 </span>
                                              </td>
+                                             <td> {idea.ideaStatus}</td>
                                              <td> {idea.fname + " " + idea.lname}</td>
                                              <td> {idea.createdDate}</td>
                                              <td> <AddFavourite /></td>
                                              <td> </td>
-                                             <td> {idea.ideaStatus}</td>
                                              
                                         </tr>
                                     )
@@ -154,22 +154,23 @@ class FreshIdeasPage extends Component {
                     </div>
 
                     <div id='mine' style={{"display":"none"}}>
-                        <h2 className="text-center display-5">My Ideas</h2>
+                        {/* <h2>My Ideas</h2> */}
                         <table style={{"textAlign" : "center"}} className = "table">
                             <thead >
                                 <tr>
-                                    <th style={{"width" : "100px"}}> Idea</th>
-                                    <th style={{"width" : "150px"}}> Response</th>
+                                    <th style={{"width" : "50px"}}> Idea</th>
+                                    <th style={{"width" : "180px"}}> Response</th>
+                                    <th style={{"width" : "40px"}}> Status</th>
                                     <th style={{"width" : "130px"}}> Created By</th>
-                                    <th style={{"width" : "130px"}}> Created date</th>
-                                    <th style={{"width" : "130px"}}> Add favourite</th>
-                                    <th style={{"width" : "50px"}}> Rewards</th>
-                                    <th style={{"width" : "50px"}}> Status</th>
-                                    <th style={{"width" : "50px"}}> Edit</th>
+                                    <th style={{"width" : "150px"}}> Created date</th>
+                                    <th style={{"width" : "150px"}}> Add favourite</th>
+                                    <th style={{"width" : "40px"}}> Rewards</th>
+                                    <th style={{"width" : "40px"}}> Edit</th>
                                     
                                 </tr>
                             </thead>
                             <tbody>
+                                <br></br>
                                 {
                                     // this.state.ideas.map(
                                         this.state.ideas.filter((idea)=>idea.fname===this.state.userDetails.fname).map(
@@ -178,7 +179,7 @@ class FreshIdeasPage extends Component {
                                             {/* <td> {idea.id}</td> */}
                                              <td style={{"textAlign" : "left"}}>
                                              <h5 style={{"fontSize":"25px"}}><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
-                                                <p style={{"width" : "400px",  "height" : "4.3em", "overflowY":"hidden",
+                                                <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",
                                                 "textOverflow": "ellipsis",
                                                 "fontSize":"12px"
                                                 }}> {idea.ideaDescription}</p>
@@ -194,11 +195,11 @@ class FreshIdeasPage extends Component {
                                                     <div>{idea.commentsCount}</div>
                                                 </span>
                                              </td>
+                                             <td> {idea.ideaStatus}</td>
                                              <td> {idea.fname + " " + idea.lname}</td>
                                              <td> {idea.createdDate}</td>
                                              <td> <AddFavourite /></td>
                                              <td> </td>
-                                             <td> {idea.ideaStatus}</td>
                                              <td>
                                                 <a href='/editIdea' className='btn btn-outline-light'><BiEditAlt size={"30px"} color={"#527293"} /></a>
                                             </td>

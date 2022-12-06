@@ -1,25 +1,44 @@
 import React, { Component } from 'react'
 import IdeaService from '../services/idea.service'
 
-import { AiOutlineLike } from "react-icons/ai";
-import { AiOutlineComment } from "react-icons/ai";
-import { BiEditAlt } from "react-icons/bi";
-import AddFavourite from './add-favourite.component';
 import UserService from '../services/user.service';
 import AuthService from '../services/auth.service';
 import "./fresh-ideas-page.component.css"
+import AllRecords from './AllRecords';
+import MyRecords from './MyRecords';
+import Pagination from './Pagination';
 
 
 class FreshIdeasPage extends Component {
     constructor(props) {
         super(props)
-        this.myIdeas = this.myIdeas.bind(this);
 
         this.state = {
-            ideas: [],
+            data: [],
             myIdeasArr: [],
             userDetails: [],
+            currentPage1: 1,
+            currentPage2: 1,
+            recordsPerPage: 3,
         }
+
+        // this.setCurrentPage = this.setCurrentPage.bind(this);
+    }
+
+    setCurrentPage1 = (page) => {
+        this.setState(
+            {
+                currentPage1 : page
+            }
+        );
+    }
+
+    setCurrentPage2 = (page) => {
+        this.setState(
+            {
+                currentPage2 : page
+            }
+        );
     }
     
     viewIdea(id){
@@ -35,7 +54,7 @@ class FreshIdeasPage extends Component {
         }
 
         IdeaService.getIdeas().then((res) => {
-            this.setState({ideas: res.data,});
+            this.setState({data: res.data,});
         });
     }
 
@@ -53,6 +72,18 @@ class FreshIdeasPage extends Component {
     }
 
     render() {
+        const { currentPage1, currentPage2, recordsPerPage, userDetails, data } = this.state;
+
+        const indexOfLastRecord1 = currentPage1 * recordsPerPage;
+        const indexOfFirstRecord1 = indexOfLastRecord1 - recordsPerPage;
+        const currentRecords1 = data.slice(indexOfFirstRecord1, indexOfLastRecord1);
+        const nPages1 = Math.ceil(data.length / recordsPerPage)
+
+        const indexOfLastRecord2 = currentPage2 * recordsPerPage;
+        const indexOfFirstRecord2 = indexOfLastRecord2 - recordsPerPage;
+        const currentRecords2 = data.slice(indexOfFirstRecord2, indexOfLastRecord2);
+        const nPages2 = Math.ceil(data.length / recordsPerPage)
+
         return (
             <div style={{"marginTop":"60px"}}>
                 <div>
@@ -74,143 +105,24 @@ class FreshIdeasPage extends Component {
 
                     </div>
                 </div>
-                 <div className = "row" id='all'>
-                        <table style={{"textAlign" : "center"}} className = "table">
-                        
-                            <thead>
-                                <tr>
-                                    <th style={{"width" : "50px"}}> Idea</th>
-                                    <th style={{"width" : "140px"}}> Response</th>
-                                    <th style={{"width" : "40px"}}> Status</th>
-                                    <th style={{"width" : "110px"}}> Created by</th>
-                                    <th style={{"width" : "130px"}}> Created date</th>
-                                    <th style={{"width" : "150px"}}> Add favourite</th>
-                                    <th style={{"width" : "40px"}}> Rewards</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <br></br>
-                                {
-                                    this.state.ideas.map(
-                                        idea => 
-                                        <tr key = {idea.id}
-                                        // class="clickable" onclick="window.location='https://ide.geeksforgeeks.org/Y4U8qx'"
-                                        onclick="window.location='google.com';"
-                                        
-                                        >
-                                            {/* <td> {idea.id}</td> */}
-                                             <td style={{"textAlign" : "left"}}>
-                                                <h5 style={{"fontSize":"25px"}}><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
-                                                <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",
-                                                "textOverflow": "ellipsis",
-                                                "fontSize":"12px"
-                                                }}> {idea.ideaDescription}</p>
-                                                
-                                             </td>   
-                                             <td>
-                                                <span style={{"display":"inline-block"}}>
-                                                    <AiOutlineLike size={"25px"} color={"DodgerBlue"} />
-                                                    <div>{idea.likesCount}</div>
-                                                </span>
-                                                <span style={{"display":"inline-block", "paddingInline":"30px"}}>
-                                                    <AiOutlineComment size={"25px"} color={"Tomato"} />
-                                                    <div>{idea.commentsCount}</div>
-                                                </span>
-                                             </td>
-                                             <td> {idea.ideaStatus}</td>
-                                             <td> {idea.fname + " " + idea.lname}</td>
-                                             <td> {idea.createdDate}</td>
-                                             <td> <AddFavourite /></td>
-                                             <td> </td>
-                                             
-                                        </tr>
-                                    )
-                                }
-                            </tbody>
-                        </table>
-                        <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">
-                                    {/* Previous */}
-                                </span>
-                            </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">
-                                    {/* Next */}
-                                </span>
-                            </a>
-                            </li>
-                        </ul>
-                        </nav>
-                    </div>
 
-                    <div id='mine' style={{"display":"none"}}>
-                        {/* <h2>My Ideas</h2> */}
-                        <table style={{"textAlign" : "center"}} className = "table">
-                            <thead >
-                                <tr>
-                                    <th style={{"width" : "50px"}}> Idea</th>
-                                    <th style={{"width" : "180px"}}> Response</th>
-                                    <th style={{"width" : "40px"}}> Status</th>
-                                    <th style={{"width" : "130px"}}> Created By</th>
-                                    <th style={{"width" : "150px"}}> Created date</th>
-                                    <th style={{"width" : "150px"}}> Add favourite</th>
-                                    <th style={{"width" : "40px"}}> Rewards</th>
-                                    <th style={{"width" : "40px"}}> Edit</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <br></br>
-                                {
-                                    // this.state.ideas.map(
-                                        this.state.ideas.filter((idea)=>idea.fname===this.state.userDetails.fname).map(
-                                        idea => 
-                                        <tr key = {idea.id} >
-                                            {/* <td> {idea.id}</td> */}
-                                             <td style={{"textAlign" : "left"}}>
-                                             <h5 style={{"fontSize":"25px"}}><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
-                                                <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",
-                                                "textOverflow": "ellipsis",
-                                                "fontSize":"12px"
-                                                }}> {idea.ideaDescription}</p>
-                                                
-                                             </td>   
-                                             <td>
-                                                <span style={{"display":"inline-block"}}>
-                                                    <AiOutlineLike size={"25px"} color={"DodgerBlue"} />
-                                                    <div>{idea.likesCount}</div>
-                                                </span>
-                                                <span style={{"display":"inline-block", "paddingInline":"30px"}}>
-                                                    <AiOutlineComment size={"25px"} color={"Tomato"} />
-                                                    <div>{idea.commentsCount}</div>
-                                                </span>
-                                             </td>
-                                             <td> {idea.ideaStatus}</td>
-                                             <td> {idea.fname + " " + idea.lname}</td>
-                                             <td> {idea.createdDate}</td>
-                                             <td> <AddFavourite /></td>
-                                             <td> </td>
-                                             <td>
-                                                <a href='/editIdea' className='btn btn-outline-light'><BiEditAlt size={"30px"} color={"#527293"} /></a>
-                                            </td>
-                                             
-                                        </tr>
-                                    )
-                                }
-                            </tbody>
-                        </table>
+                <div className = "row" id='all'>
+                    <AllRecords data={currentRecords1}/>
+                    <Pagination
+                        nPages={nPages1}
+                        currentPage={currentPage1}
+                        setCurrentPage={this.setCurrentPage1}
+                    />
+                </div>
 
-                 </div>
+                <div id='mine' style={{"display":"none"}}>
+                    <MyRecords data={currentRecords2} userDetails={userDetails}/>
+                    <Pagination
+                        nPages={nPages2}
+                        currentPage={currentPage2}
+                        setCurrentPage={this.setCurrentPage2}
+                    />
+                </div>
 
             </div>
         )

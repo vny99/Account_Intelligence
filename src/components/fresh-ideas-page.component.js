@@ -96,7 +96,7 @@ class FreshIdeasPage extends Component {
                         </div>
 
                         <div className="btn btn-warning">
-                            <label for="my-ideas-id">
+                            <label htmlFor="my-ideas-id">
                                 <input type="checkbox" id="my-ideas-id" onClick={this.myIdeas} />
                                 My Ideas
                             </label>

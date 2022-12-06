@@ -24,7 +24,7 @@ const MyRecords = ({ data, userDetails }) => {
             </tr>
         </thead>
         <tbody>
-            <br></br>
+            <br />
             {
                 data.filter((idea)=>idea.fname===userDetails.fname).map(
                     idea => 

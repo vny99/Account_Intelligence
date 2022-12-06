@@ -53,7 +53,7 @@ tbody td.highlight div {
 tbody tr:hover {
     box-shadow: 0px 9px 30px -6px grey;
     border-radius: 35px;
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 tbody tr:hover h5 span {

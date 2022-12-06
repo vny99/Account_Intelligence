@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
 import AddFavourite from './add-favourite.component';
-import Modal from './Modal';
+import IdeaPopup from './IdeaPopup';
 
 const AllRecords = ({data}) => {
-    const [openModal, setOpenModal] = useState(false);
+    const [openIdeaPopup, setOpenIdeaPopup] = useState(false);
     return (  
         <table style={{"textAlign" : "center"}} className = "table">
             <thead>
@@ -31,18 +31,18 @@ const AllRecords = ({data}) => {
                                 <td> {idea.id}</td>
                                 <td style={{"textAlign" : "left"}}>
                                     <h5 style={{"fontSize":"25px"}}>
-                                        <span class="link" onClick={() => setOpenModal(true)}> {idea.ideaTitle}</span>
-                                        <Modal open={openModal} onClose={() => setOpenModal(false)} />
+                                        <span className="link" onClick={() => setOpenIdeaPopup(true)}> {idea.ideaTitle}</span>
+                                        <IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} />
                                         {/* <a href="/viewIdea/{idea.id}"> {idea.ideaTitle}</a> */}
                                     </h5>
-                                    
+
                                     <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",
                                     "textOverflow": "ellipsis",
                                     "fontSize":"12px"
                                     }}>
                                         {idea.ideaDescription}
                                     </p>
-                                </td>   
+                                </td>
                                 <td>
                                     <span style={{"display":"inline-block"}}>
                                         <AiOutlineLike size={"25px"} color={"DodgerBlue"} />

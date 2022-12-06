@@ -11,6 +11,7 @@ const MyRecords = ({ data, userDetails }) => {
     <table style={{"textAlign" : "center"}} className = "table">
         <thead >
             <tr>
+                <th style={{"width" : "20px"}}> Idea Id</th>
                 <th style={{"width" : "50px"}}> Idea</th>
                 <th style={{"width" : "180px"}}> Response</th>
                 <th style={{"width" : "40px"}}> Status</th>
@@ -28,7 +29,7 @@ const MyRecords = ({ data, userDetails }) => {
                 data.filter((idea)=>idea.fname===userDetails.fname).map(
                     idea => 
                     <tr key = {idea.id} >
-                        {/* <td> {idea.id}</td> */}
+                        <td> {idea.id}</td>
                             <td style={{"textAlign" : "left"}}>
                             <h5 style={{"fontSize":"25px"}}><a href="/viewIdea/{idea.id}">{idea.ideaTitle}</a></h5>
                             <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",

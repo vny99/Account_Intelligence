@@ -16,7 +16,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     }
 
     return (
-        <nav>
+        <nav style={{"zIndex":"8"}}>
             <ul className='pagination justify-content-center'>
                 <li className="page-item">
                     <a className="page-link" onClick={prevPage} href='#'>

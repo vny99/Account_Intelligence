@@ -1,5 +1,12 @@
 /* My styling for ribbon style table display */
 a{
+    /* text-decoration: none; */
+}
+
+.link {
+    color:dodgerblue;
+    text-decoration:underline;
+    cursor:pointer;
     text-decoration: none;
 }
 
@@ -49,7 +56,7 @@ tbody tr:hover {
     transform: scale(1.02);
 }
 
-tbody tr:hover h5 a {
+tbody tr:hover h5 span {
     color: #f47216;
 }
 

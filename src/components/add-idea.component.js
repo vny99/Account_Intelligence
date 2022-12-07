@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import ideaDataService from "../services/idea.service";
+import IdeaService from "../services/idea.service";
+import "./add-idea.component.css"
 
 export default class Addidea extends Component {
   constructor(props) {
@@ -33,12 +34,12 @@ export default class Addidea extends Component {
   }
 
   saveidea() {
-    var data = {
-      title: this.state.title,
-      description: this.state.description
+    var idea = {
+      ideaTitle: this.state.title,
+      ideaDescription: this.state.description
     };
 
-    ideaDataService.create(data)
+    IdeaService.postIdea(idea)
       .then(response => {
         this.setState({
           id: response.data.id,

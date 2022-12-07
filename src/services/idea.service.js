@@ -17,6 +17,10 @@ class IdeaService {
         return axios.get(IDEA_API_BASE_URL + '/' + ideaId, { headers: authHeader() });
     }
 
+    postIdea(idea) {
+        return axios.post(IDEA_API_BASE_URL, idea, { headers: authHeader() });
+    }
+
     // getCommentsByIdeaTitle(ideaTitle){
     //     return axios.get(IDEA_API_BASE_URL + '/' + ideaTitle, { headers: authHeader() });
     // }

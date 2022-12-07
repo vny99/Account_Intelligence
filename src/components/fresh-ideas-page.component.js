@@ -91,8 +91,8 @@ class FreshIdeasPage extends Component {
                     <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
                         <div>
                             <a href="/addIdea" className="btn btn-success" >
-                            Add Idea
-                        </a>
+                                Add Idea
+                            </a>
                         </div>
 
                         <div className="btn btn-warning">

@@ -20,6 +20,7 @@ import ViewIdeaByIdComponent from './components/ViewIdeaByIdComponent';
 import RecentIdeasTableComponent from "./components/fresh-ideas-page.component";
 // import userService from "./services/user.service";
 import UserService from "./services/user.service";
+import Addidea from "./components/add-idea.component";
 
 class App extends Component {
   constructor(props) {
@@ -143,7 +144,7 @@ class App extends Component {
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
             <Route path = "/ideas" element = {<RecentIdeasTableComponent />} />
-            {/* <Route path="/addIdea" element={<AddIdea />} /> */}
+            <Route path="/addIdea" element={<Addidea />} />
             <Route path = "/viewIdea/:id" element = {<ViewIdeaByIdComponent/>}/>
           </Routes>
         </div>

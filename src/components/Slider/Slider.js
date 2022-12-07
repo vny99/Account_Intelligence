@@ -1,68 +1,130 @@
 import React, {useState} from 'react'
 import './Slider.css'
 import BtnSlider from './BtnSlider'
-import dataSlider from './dataSlider'
+import BusinessChallengesService from '../../services/business-challenege.service'
+import axios from 'axios'
+import authHeader from '../../services/auth-header'
 
 export default function Slider() {
 
-    const [slideIndex, setSlideIndex] = useState(1)
+   const [slides,setSlides]=useState([])
+   const [slideIndex, setSlideIndex] = useState(1)
+
+    const styleObj = {
+        fontSize: 30,
+        
+        textAlign: "center",
+        fontFamily:  "Arial, Helvetica, sans-serif",
+       
+    }
 
     const nextSlide = () => {
-        if(slideIndex !== dataSlider.length){
+        if(slideIndex !== slides.length){
             setSlideIndex(slideIndex + 1)
         } 
-        else if (slideIndex === dataSlider.length){
+        else if (slideIndex === slides.length){
             setSlideIndex(1)
         }
     }
-
+    
     const prevSlide = () => {
-        if(slideIndex !== 1){
-            setSlideIndex(slideIndex - 1)
-        }
-        else if (slideIndex === 1){
-            setSlideIndex(dataSlider.length)
-        }
+        setTimeout(()=>{
+            if(slideIndex !== 1){
+                setSlideIndex(slideIndex -1)
+            }
+            else if (slideIndex === 1){
+                setSlideIndex(slides.length)
+            }
+        },200);
     }
-
+    
     const moveDot = index => {
         setSlideIndex(index)
     }
 
-    const slides = ["Business Challenge 1", "Business Challenge 2", "Business Challenge 3",
-    "Business Challenge 4", "Business Challenge 5"];
+    function resetTimeout() {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+    }
 
+    BusinessChallengesService.getBusinessChallenges().then((res) => {
+        setSlides(res.data);
+    })
+    
+    // React.useEffect(()=>{  
+    //     axios.get('http://localhost:8080/businessChallenges', { headers: authHeader() })
+    // .then((res)=>{
+    //     setSlides(res.data)
+    // })},[])
+    
+    const delay = 4000;
+    const timeoutRef = React.useRef(null);
+ 
+    // function resetTimeout() {
+    //     if (timeoutRef.current) {
+    //         clearTimeout(timeoutRef.current);
+    //     }
+    // }
+
+    React.useEffect(() => {
+        resetTimeout();
+        timeoutRef.current = setTimeout(
+            () =>
+            setSlideIndex((prevIndex) =>
+                prevIndex === slides.length  ? 1 : prevIndex + 1
+            ),
+            delay
+        );
+
+        return () => {
+            resetTimeout();
+        };
+    }, [slideIndex]);
+ 
     return (
-        <div className="container-slider">
-            {
-                slides.map(
-                    (obj, index) => {
+        <div className="container-slider"  >
+            {  
+               (slides.map(
+                    (challenge, index) => {
                         return (
-                            <React.Fragment key={obj.id}>
-                                {/* <div key={obj.id} className='bgimage'></div> */}
+                            <React.Fragment >
+
                                 <div className={ slideIndex === index+1 ? "slide active-anim" : "slide"}>
-                                    <a key={obj.id} href='/bc' className='slider-text'>
-                                        {obj}
-                                        <p>Description</p>
-                                    </a>
-                                    
+                                    <a href='/bc' className='slider-text'>
+                                       <p style={styleObj} > {challenge.challengeTitle || ""}</p>
+                                        <p>{challenge.challengeDescription.slice(0,200)+"..."}</p>
+                                       <h3 className="data">Closing Date: {challenge.expiryDate.slice(0,10)}</h3>
+                                    </a>   
                                 </div>
+            
                             </React.Fragment>
                         )
                     }
                 )
-            }
+           
+            )}
+           
             <BtnSlider moveSlide={nextSlide} direction={"next"} />
-            <BtnSlider moveSlide={prevSlide} direction={"prev"}/>
-
+            <BtnSlider moveSlide={prevSlide}direction={"prev"}  />
+                
             <div className="container-dots">
-                {Array.from({length: 5}).map((item, index) => (
+                {Array.from({length: slides.length}).map((item, index) => (
                     <div 
                     onClick={() => moveDot(index + 1)}
                     className={slideIndex === index + 1 ? "dot active" : "dot"}
                     ></div>
                 ))}
-            </div>
+            </div>  
+
         </div>
+
     )
+
+       
 }
+   
+    
+                    
+
+                

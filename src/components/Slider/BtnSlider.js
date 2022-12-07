@@ -4,13 +4,19 @@ import leftArrow from "./icons/left-arrow.svg";
 import rightArrow from "./icons/right-arrow.svg";
 
 export default function BtnSlider({ direction, moveSlide }) {
-  // console.log(direction, moveSlide);
   return (
+  <div>
+
     <button
       onClick={moveSlide}
       className={direction === "next" ? "btn-slide next" : "btn-slide prev"}
     >
-      <img alt="Arrows" src={direction === "next" ? rightArrow : leftArrow} />
+      <img src={direction === "next" ? rightArrow : leftArrow} alt="" />
+
     </button>
+
+  </div>
   );
+ 
+ 
 }

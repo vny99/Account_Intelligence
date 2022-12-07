@@ -143,6 +143,7 @@ class App extends Component {
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
             <Route path = "/ideas" element = {<RecentIdeasTableComponent />} />
+            {/* <Route path="/addIdea" element={<AddIdea />} /> */}
             <Route path = "/viewIdea/:id" element = {<ViewIdeaByIdComponent/>}/>
           </Routes>
         </div>

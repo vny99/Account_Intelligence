@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
-import { Link } from 'react-router-dom';
 import AddFavourite from './add-favourite.component';
 import IdeaPopup from './IdeaPopup';
 
@@ -34,7 +33,6 @@ const AllRecords = ({data}) => {
                                     <h5 style={{"fontSize":"25px"}}>
 
                                         <span className="link" onClick={() => setOpenIdeaPopup(true)} > {idea.ideaTitle}</span>
-
                                         <IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} />
 
                                         {/* <a onClick={<IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} />}> {idea.ideaTitle}</a> */}

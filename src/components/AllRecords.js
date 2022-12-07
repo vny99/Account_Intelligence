@@ -11,7 +11,7 @@ const AllRecords = ({data}) => {
         <table style={{"textAlign" : "center"}} className = "table">
             <thead>
                 <tr>
-                    <th style={{"width" : "20px"}}> Log</th>
+                    <th style={{"width" : "20px"}}> ID</th>
                     <th style={{"width" : "50px"}}> Idea</th>
                     <th style={{"width" : "140px"}}> Response</th>
                     <th style={{"width" : "40px"}}> Status</th>
@@ -32,10 +32,10 @@ const AllRecords = ({data}) => {
                                 <td style={{"textAlign" : "left"}}>
                                     <h5 style={{"fontSize":"25px"}}>
 
-                                        <span className="link" onClick={() => setOpenIdeaPopup(true)} > {idea.ideaTitle}</span>
-                                        <IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} />
+                                        {/* <span className="link" onClick={() => setOpenIdeaPopup(true)} > {idea.ideaTitle}</span> */}
+                                        {/* <IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} /> */}
 
-                                        {/* <a onClick={<IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} />}> {idea.ideaTitle}</a> */}
+                                        <a href={'/viewIdea/' + idea.id}> {idea.ideaTitle}</a>
                                     </h5>
 
                                     <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",

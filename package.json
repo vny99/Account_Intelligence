@@ -25,6 +25,7 @@
     "react-slideshow-image": "^4.0.5",
     "react-validation": "^3.0.7",
     "sass": "^1.56.1",
+    "swiper": "^8.4.5",
     "validator": "^13.7.0"
   },
   "scripts": {

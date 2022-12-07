@@ -86,7 +86,7 @@ class FreshIdeasPage extends Component {
 
         return (
             <div style={{"marginTop":"60px"}}>
-                <div>
+                <div className="heading-line">
                     <h2 className="d-inline-flex display-5" style={{"left":"550px"}}>Fresh Ideas</h2>
                     <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
                         <div>
@@ -99,8 +99,7 @@ class FreshIdeasPage extends Component {
                             <label htmlFor="my-ideas-id">
                                 <input type="checkbox" id="my-ideas-id" onClick={this.myIdeas} />
                                 My Ideas
-                            </label>
-                            
+                            </label> 
                         </div>
 
                     </div>

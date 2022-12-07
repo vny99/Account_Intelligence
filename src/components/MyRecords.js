@@ -11,7 +11,7 @@ const MyRecords = ({ data, userDetails }) => {
     <table style={{"textAlign" : "center"}} className = "table">
         <thead >
             <tr>
-                <th style={{"width" : "20px"}}> Log</th>
+                <th style={{"width" : "20px"}}> ID</th>
                 <th style={{"width" : "50px"}}> Idea</th>
                 <th style={{"width" : "180px"}}> Response</th>
                 <th style={{"width" : "40px"}}> Status</th>

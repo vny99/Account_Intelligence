@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 import './Slider.css'
 import BtnSlider from './BtnSlider'
 import BusinessChallengesService from '../../services/business-challenege.service'
-import axios from 'axios'
-import authHeader from '../../services/auth-header'
 
 export default function Slider() {
 
@@ -93,8 +91,8 @@ export default function Slider() {
                                 <div className={ slideIndex === index+1 ? "slide active-anim" : "slide"}>
                                     <a href='/bc' className='slider-text'>
                                        <p style={styleObj} > {challenge.challengeTitle || ""}</p>
-                                        <p>{challenge.challengeDescription.slice(0,200)+"..."}</p>
-                                       <h3 className="data">Closing Date: {challenge.expiryDate.slice(0,10)}</h3>
+                                       <p className='challenge-description'>{challenge.challengeDescription.slice(0,400) + "..."}</p>
+                                       <h3 className="data">Expiry Date: {challenge.expiryDate}</h3>
                                     </a>   
                                 </div>
             

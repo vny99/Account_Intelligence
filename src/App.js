@@ -16,7 +16,7 @@ import About from "./components/about.component";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Userprofile from "./components/userprofile.component";
 
-import ViewIdeaByIdComponent from './components/view-idea-by-id.component';
+import ViewIdeaByIdComponent from './components/ViewIdeaByIdComponent';
 import RecentIdeasTableComponent from "./components/fresh-ideas-page.component";
 // import userService from "./services/user.service";
 import UserService from "./services/user.service";

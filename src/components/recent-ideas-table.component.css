@@ -1,0 +1,253 @@
+.head{
+  margin-left: 8rem;
+  font-size: 22px;
+  margin-top: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+.ideas_section{
+  display: flex;
+  flex-direction: row;
+}
+
+.ideas_container,
+.ideas_container2{
+  width: 300px;
+  height: 550px;
+  margin:  1.8rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: transform 0.4s;
+  cursor: pointer;
+  display: flex;
+  overflow: hidden;
+  grid-template-rows: repeat(3, 200px); 
+  grid-template-rows: 200px 200px 200px;
+  flex-direction: column;
+  border-radius: 10px;
+  align-items: flex-start;
+
+}
+
+.ideas_container:hover{
+  transform: scale(1.1);
+}
+
+.ideas_container_name{
+  margin: 1rem 1rem;
+  display: flex;
+  min-height: 75px;
+  max-height: 75px;
+  align-items: flex-start;
+  text-align: left;
+
+  
+}
+
+.ideas_container_description{
+  margin: 1rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  min-height: 120px;
+  max-height: 120px;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.ideas_container_content{
+  margin: 1rem 1rem;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 40px;
+  max-height: 40px;
+  flex-wrap: nowrap;
+  /* align-content: flex-start; */
+  padding-top: 100px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+  margin-top: 3rem;
+  text-align: left;
+}
+
+.ideas_container p{
+  font-family: var(Helvetica);
+ 
+
+}
+
+.ideas_container_likes{
+  /* margin: 1rem 1rem;
+  display: flex;
+  /* justify-content: start; */
+  /* flex-direction: row;
+  margin-top: 1rem;  */
+}
+
+.ideas_container_like{
+  /* margin-left: 1rem;
+  display: flex;
+  flex-direction:row;
+  border-top-right-radius: 1rem;
+  justify-content: flex-end;
+   */
+}
+
+
+
+.ideas_container_name h1{
+  color: rgb(75, 7, 54);
+  line-height: 1.1;
+  font-family: var(Helvetica);
+}
+
+.ideas_container .idea-title-link{
+  text-decoration: none;
+}
+
+.ideas_container .idea-title-link :hover{
+  color: grey
+}
+
+.ideas_container .status-button{
+  margin-left: 20px;
+  color: #fff;
+  width: 74px;
+  height: 28px;
+  text-transform: Helvetica;
+  font-size: 1rem;
+  font-weight: 300;
+  text-decoration: none;
+  background: hsla(250, 19%, 49%, 0.562);
+  border :radius 10px; 
+  padding: -51px -184px;
+  cursor: pointer;
+  transition: all 0.4sec ease;
+  border-radius: 10px;
+  border:1px solid grey;
+  
+
+}
+
+.ideas_container .view-more-button{
+  float: right;
+  margin-right: 10px;
+  color: #fff;
+  text-transform: Helvetica;
+  font-size: 1rem;
+  font-weight: 300;
+  text-decoration: none;
+  background: hsla(250, 19%, 49%, 0.562);
+  border :radius 10px; 
+  padding: 0.5px 15px;
+  cursor: pointer;
+  transition: all 0.4sec ease;
+  border-radius: 10px;
+  border:1px solid grey;
+  align-items: stretch;
+  
+}
+
+/* @media screen and (max-width:1050px) {
+  .ideas_section{
+    display: flex;
+    flex-direction: column;
+  } 
+}
+
+@media screen and (max-width:700px) {
+  .ideas_section{
+    display: flex;
+    flex-direction: column;
+    
+
+  } 
+} */
+@media screen and (max-width:550px) {
+  .ideas_section{
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  
+  .likebutton{
+  /* opacity: 0;
+  width: 90%;
+    height: 90%;
+    border-radius: 3em;
+    border: 1px solid;
+    border-color: #95ed9e;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  } */
+ 
+  }
+
+
+
+.idea.createdDate{
+  font-size: 1.2em;
+
+
+}
+.swiper{
+  width: 10px;
+  
+}
+
+.ideas_container.like{
+    right:100px;
+    float: right;
+
+}
+
+.likescount {
+  /* right: 0px;
+  color: dodgerblue; */
+}
+
+
+
+}
+.ideas_cards{
+  display: flex;
+  flex-direction: row;
+}
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

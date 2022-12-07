@@ -23,6 +23,10 @@ body{
   z-index: 9;
 }
 
+.nav-tabs:visited{
+  font-weight: bolder;
+}
+
 .container {
   padding: 18px;
   margin-top: 35px;
@@ -37,6 +41,7 @@ body{
 .nav-link{
   padding: 0px;
   text-align: center;
+  /* color: rgba(245, 245, 245, 0.734); */
 }
 
 label {

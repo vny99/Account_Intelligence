@@ -87,7 +87,7 @@ class FreshIdeasPage extends Component {
         return (
             <div style={{"marginTop":"60px"}}>
                 <div>
-                    <h2 className="d-inline-flex display-5" style={{"left":"500px"}}>Fresh Ideas</h2>
+                    <h2 className="d-inline-flex display-5" style={{"left":"550px"}}>Fresh Ideas</h2>
                     <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
                         <div>
                             <a href="/addIdea" className="btn btn-success" >
@@ -117,7 +117,7 @@ class FreshIdeasPage extends Component {
 
                 <div id='mine' style={{"display":"none"}}>
                     <MyRecords data={currentRecords2} userDetails={userDetails}/>
-                    <Pagination
+                    <Pagination className="pagination"
                         nPages={nPages2}
                         currentPage={currentPage2}
                         setCurrentPage={this.setCurrentPage2}

@@ -62,7 +62,7 @@ class App extends Component {
     return (
       <div>
         <Sidebar />
-        <nav className="navbar navbar-expand navbar-dark bg-danger">
+        <nav className="navbar nav-tabs navbar-expand navbar-dark bg-danger">
           <Link to={"/"} className="navbar-brand">
             <strong style={{"fontSize":"xx-large"}}>Echo</strong>
           </Link>

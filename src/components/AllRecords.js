@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 import AddFavourite from './add-favourite.component';
 import IdeaPopup from './IdeaPopup';
 
@@ -11,7 +12,7 @@ const AllRecords = ({data}) => {
         <table style={{"textAlign" : "center"}} className = "table">
             <thead>
                 <tr>
-                    <th style={{"width" : "20px"}}> Idea Id</th>
+                    <th style={{"width" : "20px"}}> Log</th>
                     <th style={{"width" : "50px"}}> Idea</th>
                     <th style={{"width" : "140px"}}> Response</th>
                     <th style={{"width" : "40px"}}> Status</th>
@@ -28,12 +29,15 @@ const AllRecords = ({data}) => {
                         idea => 
                         <tr key = {idea.id}
                         >
-                                <td> {idea.id}</td>
+                                <td> {idea.ideaId}</td>
                                 <td style={{"textAlign" : "left"}}>
                                     <h5 style={{"fontSize":"25px"}}>
-                                        <span className="link" onClick={() => setOpenIdeaPopup(true)}> {idea.ideaTitle}</span>
+
+                                        <span className="link" onClick={() => setOpenIdeaPopup(true)} > {idea.ideaTitle}</span>
+
                                         <IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} />
-                                        {/* <a href="/viewIdea/{idea.id}"> {idea.ideaTitle}</a> */}
+
+                                        {/* <a onClick={<IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} />}> {idea.ideaTitle}</a> */}
                                     </h5>
 
                                     <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",

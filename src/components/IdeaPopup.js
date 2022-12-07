@@ -11,8 +11,8 @@ const IdeaPopup = ({ ideaId, open, onClose }) => {
     IdeaService.getIdeaById(ideaId).then((res) => {
         setIdea(res.data)
     });
-    
-    console.log(idea)
+
+    // console.log(idea)
 
     if (!open) return null;
     return (
@@ -33,7 +33,7 @@ const IdeaPopup = ({ ideaId, open, onClose }) => {
                         </button>
                     </div>
 
-                    <Comments />
+                    <Comments ideaId={ideaId} />
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 /* My styling for ribbon style table display */
 a{
-    /* text-decoration: none; */
+    text-decoration: none;
 }
 
 .link {
@@ -53,7 +53,7 @@ tbody td.highlight div {
 tbody tr:hover {
     box-shadow: 0px 9px 30px -6px grey;
     border-radius: 35px;
-    transform: scale(1.05);
+    transform: scale(1.01);
 }
 
 tbody tr:hover h5 span {
@@ -151,4 +151,11 @@ h2{
     background-clip: text;
     -webkit-background-clip: text;
     text-shadow: 0px 4px 10px rgba(211, 147, 147, 0.8)
+}
+
+/* To keep pagination component fixed on screen */
+.pagination{
+    left: 550px;
+    position: fixed;
+    bottom: 1px;
 }

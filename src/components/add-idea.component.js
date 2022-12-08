@@ -70,7 +70,7 @@ export default class Addidea extends Component {
 
   render() {
     return (
-      <div className="submit-form">
+      <div className="submit-form card card-container">
         {this.state.submitted ? (
           <div>
             <h4>Idea submitted successfully!</h4>

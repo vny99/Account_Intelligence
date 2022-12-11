@@ -3,19 +3,15 @@ import "./userprofile.component.css";
 
 import { CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem, CDropdownDivider } from '@coreui/react'
 import { FaUserCircle } from "react-icons/fa";
-// import { Button } from "bootstrap";
 
 function Userprofile(){
         return(
             <CDropdown variant="btn-group">
             <CDropdownToggle color="white" size="lg"> <FaUserCircle color="#231f20" fontSize="1.9em" /></CDropdownToggle>
-            <CDropdownMenu>
+            <CDropdownMenu style={{"backgroundColor":"#f7f2f8"}}>
               <CDropdownItem href="/profile">My Profile</CDropdownItem>
-              {/* <CDropdownItem href="#">Another action</CDropdownItem> */}
-              {/* <CDropdownItem href="#">Something else here</CDropdownItem> */}
-              <CDropdownDivider/>
+              {/* <CDropdownDivider/> */}
               <CDropdownItem href="/rewards" >
-                  {/* Logout */}
                   Rewards
               </CDropdownItem>
               {/* <CDropdownDivider/> */}

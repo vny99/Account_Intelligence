@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import RoleService from "../services/role.service";
 
 import Slider from "./Slider/Slider";
-import RecentIdeasTableComponent from './recent-ideas-table.component';
+import RecentIdeasCardsComponent from './recent-ideas-cards.component';
 
 export default class Home extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ export default class Home extends Component {
       <div className="container">
         <header className="jumbotron">
           <Slider />
-          <RecentIdeasTableComponent />
+          <RecentIdeasCardsComponent />
         </header>
       </div>
     );

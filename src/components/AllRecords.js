@@ -6,51 +6,47 @@ import AddFavourite from './add-favourite.component';
 import IdeaPopup from './IdeaPopup';
 
 const AllRecords = ({data}) => {
-    const [openIdeaPopup, setOpenIdeaPopup] = useState(false);
     return (  
-        <table style={{"textAlign" : "center"}} className = "table">
-            <thead>
+        <table className = "table">
+            <thead style={{"textAlign":"center", "verticalAlign":"middle"}}>
                 <tr>
-                    <th style={{"width" : "20px"}}> ID</th>
-                    <th style={{"width" : "50px"}}> Idea</th>
-                    <th style={{"width" : "140px"}}> Response</th>
-                    <th style={{"width" : "40px"}}> Status</th>
-                    <th style={{"width" : "110px"}}> Created by</th>
-                    <th style={{"width" : "130px"}}> Created date</th>
-                    <th style={{"width" : "150px"}}> Add favourite</th>
-                    <th style={{"width" : "40px"}}> Rewards</th>
+                    <th> ID </th>
+                    <th> Idea</th>
+                    <th> Response</th>
+                    <th> Status</th>
+
+                    <th> Created by</th>
+                    <th> Created date</th>
+                    <th> Favourite</th>
+                    <th> Rewards</th>
                 </tr>
             </thead>
             <tbody>
                 <br></br>
                 {
                     data.map(
-                        idea => 
-                        <tr key = {idea.id}
-                        >
-                                <td> {idea.ideaId}</td>
+                        idea =>
+                        // <a href={'/viewIdea/' + idea.id} style={{"color":"black", "width":"max-content"}}> 
+                        <tr key = {idea.id} > 
+                                <td style={{"verticalAlign":"middle"}}>
+                                    <b> <i> {idea.ideaId} </i> </b>
+                                    </td>
                                 <td style={{"textAlign" : "left"}}>
-                                    <h5 style={{"fontSize":"25px"}}>
-
-                                        {/* <span className="link" onClick={() => setOpenIdeaPopup(true)} > {idea.ideaTitle}</span> */}
-                                        {/* <IdeaPopup ideaId={idea.id} open={openIdeaPopup} onClose={() => setOpenIdeaPopup(false)} /> */}
-
-                                        <a href={'/viewIdea/' + idea.id}> {idea.ideaTitle}</a>
-                                    </h5>
-
-                                    <p style={{"width" : "300px",  "height" : "4.3em", "overflowY":"hidden",
-                                    "textOverflow": "ellipsis",
-                                    "fontSize":"12px"
-                                    }}>
-                                        {idea.ideaDescription}
-                                    </p>
+                                    <a href={'/viewIdea/' + idea.id}>
+                                        {/* <h5 style={{ "fontSize":"25px"}}> */}
+                                        <div className='idea-title' style={{"fontWeight":"bold"}}> {idea.ideaTitle} </div>
+                                        {/* </h5> */}
+                                        <p style={{"width" : "500px", "height" : "4.3em", "overflowY":"hidden", "textOverflow": "ellipsis", "fontSize":"14px"}}>
+                                            {idea.ideaDescription}
+                                        </p>
+                                    </a>
                                 </td>
-                                <td>
-                                    <span style={{"display":"inline-block"}}>
+                                <td style={{"display":"inline-block"}}>
+                                    <span style={{"display":"inline-block", "paddingInline":"13px"}}>
                                         <AiOutlineLike size={"25px"} color={"DodgerBlue"} />
                                         <div>{idea.likesCount}</div>
                                     </span>
-                                    <span style={{"display":"inline-block", "paddingInline":"30px"}}>
+                                    <span style={{"display":"inline-block"}}>
                                         <AiOutlineComment size={"25px"} color={"Tomato"} />
                                         <div>{idea.commentsCount}</div>
                                     </span>
@@ -62,6 +58,7 @@ const AllRecords = ({data}) => {
                                 <td> </td>
                                 
                         </tr>
+                        // </a>
                     )
                 }
             </tbody>

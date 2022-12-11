@@ -17,7 +17,7 @@ const MyRecords = ({ data, userDetails }) => {
                 <th style={{"width" : "40px"}}> Status</th>
                 <th style={{"width" : "130px"}}> Created By</th>
                 <th style={{"width" : "150px"}}> Created date</th>
-                <th style={{"width" : "150px"}}> Add favourite</th>
+                <th style={{"width" : "150px"}}> Favourite</th>
                 <th style={{"width" : "40px"}}> Rewards</th>
                 <th style={{"width" : "40px"}}> Edit</th>
                 

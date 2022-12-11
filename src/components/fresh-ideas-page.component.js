@@ -19,7 +19,7 @@ class FreshIdeasPage extends Component {
             userDetails: [],
             currentPage1: 1,
             currentPage2: 1,
-            recordsPerPage: 3,
+            recordsPerPage: 10,
         }
 
         // this.setCurrentPage = this.setCurrentPage.bind(this);
@@ -85,7 +85,7 @@ class FreshIdeasPage extends Component {
         const nPages2 = Math.ceil(data.length / recordsPerPage)
 
         return (
-            <div style={{"marginTop":"60px"}}>
+            <div>
                 <div className="heading-line">
                     <h2 className="d-inline-flex display-5" style={{"left":"550px"}}>Fresh Ideas</h2>
                     <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>

@@ -1,7 +1,5 @@
 /* My styling for ribbon style table display */
-a{
-    text-decoration: none;
-}
+
 
 .link {
     color:dodgerblue;
@@ -23,7 +21,7 @@ thead{
     font-size: medium;
     /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
     background-color: rgb(227, 213, 245);
-    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(230, 213, 238), 0.3em 0.3em 1em rgba(241, 139, 163, 0.3);
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(230, 213, 238), 0.3em 0.3em 1em rgba(142, 141, 141, 0.3);
 
 }
 
@@ -56,15 +54,30 @@ tbody tr:hover {
     transform: scale(1.01);
 }
 
-tbody tr:hover h5 span {
-    color: #f47216;
+tbody tr:hover {
+    /* color: #f47216; */
 }
 
-tr:hover td {
+tr a{
+    text-decoration: none;
+    color: black;
+}
+
+tr .idea-title {
+    color: rgb(126, 64, 95)
+}
+
+tr:hover .idea-title {
+    color:rgb(235, 72, 99)
+}
+
+tr:hover td{
     cursor:pointer;
     color: cadetblue;
-    /* border-top: 1px solid grey; */
-    /* border-bottom: 1px solid grey; */
+}
+
+tr:hover p {
+    color:cadetblue;
 }
 
 tr:hover td.highlight div {
@@ -74,6 +87,7 @@ tr:hover td.highlight div {
 .btn {
     /* padding: 10px; */
     margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
     /* margin-right: 10px; */
 }
   
@@ -132,17 +146,7 @@ h2{
     position: sticky;
     top: 80px;
     z-index: 8;
-}
 
-/* To keep the th fixed */
-thead{
-    position: sticky;
-    top: 80px;
-    z-index: 8;
-    border-radius: 10px;
-}
-
-h2{
     font-size: 70px;
     font-weight: 600;
     background-image: linear-gradient(to left, #9a3c3c, #d39393);
@@ -150,7 +154,26 @@ h2{
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-    text-shadow: 0px 4px 10px rgba(211, 147, 147, 0.8)
+    text-shadow: 0px 4px 10px rgba(126, 64, 95, 0.8);
+    /* color: rgb(126, 64, 95); */
+}
+
+/* To keep the heading line fixed */
+.heading-line{
+    background-color: #f7f2f8;
+    position: sticky;
+    top: 69px;
+    padding-top: 10px;
+    z-index: 9;
+    transform: scale(1.1);
+}
+
+/* To keep the th fixed */
+thead{
+    position: sticky;
+    top: 139px;
+    z-index: 8;
+    border-radius: 10px;
 }
 
 /* To keep pagination component fixed on screen */

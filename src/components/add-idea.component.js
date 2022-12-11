@@ -63,16 +63,16 @@ export default class Addidea extends Component {
       title: "",
       description: "",
       published: false,
-
       submitted: false
     });
   }
 
   render() {
     return (
-      <div className="submit-form card card-container">
+      <div className="submit-form add-idea-card
+      ">
         {this.state.submitted ? (
-          <div>
+          <div style={{"textAlign":"center"}}>
             <h4>Idea submitted successfully!</h4>
             <button className="btn btn-success" onClick={this.newidea}>
               Add
@@ -94,22 +94,24 @@ export default class Addidea extends Component {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea
                 className="form-control"
                 id="description"
                 required
+                rows="7"
                 value={this.state.description}
                 onChange={this.onChangeDescription}
                 name="description"
-              />
+              >
+              </textarea>
             </div>
 
-            <button onClick={this.saveidea} className="btn btn-success">
+            <button onClick={this.saveidea} style={{"marginTop":"20px"}} className="btn btn-success">
               Submit
             </button>
+
           </div>
         )}
       </div>

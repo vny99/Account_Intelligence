@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { AiOutlineComment } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
-import { useRef,useState } from 'react';
 import {Swiper,SwiperSlide} from "swiper/react"
 import { Pagination,Navigation } from 'swiper';
 import "swiper/css";
@@ -9,9 +8,9 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import IdeaService from '../services/idea.service'
-import "./recent-ideas-table.component.css"
+import "./recent-ideas-cards.component.css"
 
-class RecentIdeasTableComponent extends Component {
+class RecentIdeasCardsComponent extends Component {
 
     constructor(props) {
         super(props)
@@ -33,17 +32,15 @@ class RecentIdeasTableComponent extends Component {
     render() {
         return (
             <div>
-                <div className="head"><p>Top ideas</p></div>
-                <div className='swiper_body'>
+                <div className="head"><h1 className="d-inline-flex display-6 cards-title">Latest ideas</h1></div>
+                <div className='swiper_body' style={{}}>
                     <Swiper
                         slidesPerView={3}
-                        spaceBetween={30}
+                        spaceBetween={0}
                         slidesPerGroup={3}
                         loop={true}
                         loopFillGroupWithBlank={true}
-                        pagination={{
-                        clickable: true,
-                        }}
+                        // pagination={{ clickable: true, }}
                         navigation={true}
                         modules={[Pagination, Navigation]}
                         className="mySwiper"
@@ -51,16 +48,22 @@ class RecentIdeasTableComponent extends Component {
                         {
                             this.state.ideas.map(
                                 idea =>
-                                <SwiperSlide>
+                                <SwiperSlide
+                                // style={{"left":"60px"}}
+                                >
                                     <div className="ideas">
                                         <div className="ideas_container" key={idea.id}>
                                             <span>
-                                                <span style={{ "display": "inline-block", "padding": "5px", "align-items": "flex-end", "flex-direction": "column" }} className="like">
+                                                <span style={{ "display": "inline-block", "padding": "5px", "align-items": "flex-end", "flex-direction": "column",
+                                                // "marginLeft":"10px"
+                                                }} className="like">
                                                     <AiOutlineLike size={"25px"} />
                                                     <div>{idea.likesCount}</div>
                                                 </span>
 
-                                                <span style={{ "display": "inline-block", "padding": "5px" }} className="like">
+                                                <span style={{ "display": "inline-block", "padding": "5px",
+                                                // "marginLeft":"213px"
+                                                }} className="like">
                                                     <AiOutlineComment size={"25px"} color={"Tomato"} />
                                                     <div>{idea.commentsCount}</div>
                                                 </span>
@@ -68,14 +71,14 @@ class RecentIdeasTableComponent extends Component {
                                             </span>
 
                                             <div className="ideas_container_name">
-                                                <a href='/viewIdea' className='idea-title-link'>
+                                                <a href={'/viewIdea/' + idea.id} className='idea-title-link'>
                                                     <h1>{idea.ideaTitle}</h1>
                                                 </a>
                                             </div>
 
                                             <div className="ideas_container_description">
-                                                <p>Consumers always worry whether some interior decoration item will not only fit their homes but will look the best for them. Augmented reality helps to place a 3D object inside the room
-                                                    <h1>{idea.Description}</h1>
+                                                <p>
+                                                    {/* {idea.ideaDescription} */}
                                                 </p>
                                             </div>
 
@@ -106,4 +109,4 @@ class RecentIdeasTableComponent extends Component {
         );
     }
 };
-export default RecentIdeasTableComponent;
+export default RecentIdeasCardsComponent;

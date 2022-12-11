@@ -63,8 +63,8 @@ class App extends Component {
     return (
       <div>
         <Sidebar />
-        <nav className="navbar nav-tabs navbar-expand">
-          <Link to={"/"} className="navbar-brand">
+        <nav className="navbar nav-tabs navbar-expand-sm">
+          <Link to={"/about"} className="navbar-brand">
             <strong style={{"fontSize":"xx-large"}}>Echo</strong>
           </Link>
           <div className="navbar-nav mr-auto">
@@ -93,6 +93,12 @@ class App extends Component {
             )}
 
             <li className="nav-item">
+              <Link to={"/search"} className="nav-link">
+                Search
+              </Link>
+            </li>
+
+            <li className="nav-item">
               <Link to={"/about"} className="nav-link">
                 About
               </Link>
@@ -103,7 +109,7 @@ class App extends Component {
           {currentUser ? (
             <div className="navbar-nav collapse navbar-collapse justify-content-end">
               <div style={{"display":"flex", "flexDirection":"column"}}>
-                  <a href="/profile" className="nav-link" onClick={this.logOut}>
+                  <a href="/profile" className="nav-link">
                   {userDetails.fname + " " + userDetails.lname}
                   </a>
 
@@ -111,7 +117,7 @@ class App extends Component {
                     Logout
                   </a>
               </div>
-              <Userprofile className="userprofile" />
+              <Userprofile />
             </div>
             
           ) : (

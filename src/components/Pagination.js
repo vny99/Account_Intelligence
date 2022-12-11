@@ -3,6 +3,8 @@ import React from 'react'
 import { FcPrevious } from "react-icons/fc"
 import { FcNext } from "react-icons/fc"
 
+import "./Pagination.css"
+
 const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
 
     const pageNumbers = [...Array(nPages + 1).keys()].slice(1)

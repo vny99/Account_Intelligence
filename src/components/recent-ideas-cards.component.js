@@ -49,7 +49,7 @@ class RecentIdeasCardsComponent extends Component {
                             this.state.ideas.map(
                                 idea =>
                                 <SwiperSlide
-                                // style={{"left":"60px"}}
+                                // style={{"left":"25px"}}
                                 >
                                     <div className="ideas">
                                         <div className="ideas_container" key={idea.id}>
@@ -77,9 +77,7 @@ class RecentIdeasCardsComponent extends Component {
                                             </div>
 
                                             <div className="ideas_container_description">
-                                                <p>
-                                                    {/* {idea.ideaDescription} */}
-                                                </p>
+                                                <p> {idea.ideaDescription} </p>
                                             </div>
 
                                             <div className="ideas_container_content">

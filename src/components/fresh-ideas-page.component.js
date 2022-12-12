@@ -4,8 +4,8 @@ import IdeaService from '../services/idea.service'
 import UserService from '../services/user.service';
 import AuthService from '../services/auth.service';
 import "./fresh-ideas-page.component.css"
-import AllRecords from './AllRecords';
-import MyRecords from './MyRecords';
+import AllIdeas from './all-ideas.component';
+import MyIdeas from './my-ideas.components';
 import Pagination from './Pagination';
 
 
@@ -106,7 +106,7 @@ class FreshIdeasPage extends Component {
                 </div>
 
                 <div className = "row" id='all'>
-                    <AllRecords data={currentRecords1}/>
+                    <AllIdeas data={currentRecords1}/>
                     <Pagination
                         nPages={nPages1}
                         currentPage={currentPage1}
@@ -115,7 +115,7 @@ class FreshIdeasPage extends Component {
                 </div>
 
                 <div id='mine' style={{"display":"none"}}>
-                    <MyRecords data={currentRecords2} userDetails={userDetails}/>
+                    <MyIdeas data={currentRecords2} userDetails={userDetails}/>
                     <Pagination className="pagination"
                         nPages={nPages2}
                         currentPage={currentPage2}

@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
 import AddFavourite from './add-favourite.component';
-import IdeaPopup from './IdeaPopup';
 
-const AllRecords = ({data}) => {
+const AllIdeas = ({data}) => {
     return (  
         <table className = "table">
             <thead style={{"textAlign":"center", "verticalAlign":"middle"}}>
@@ -66,4 +65,4 @@ const AllRecords = ({data}) => {
     ) 
 }
 
-export default AllRecords
+export default AllIdeas

@@ -8,6 +8,10 @@ class BusinessChallengesService {
     getBusinessChallenges(){
         return axios.get(CHALLENGES_API_BASE_URL, { headers: authHeader() });
     }
+
+    getChallengeById(challengeId){
+        return axios.get(CHALLENGES_API_BASE_URL + '/' + challengeId, { headers: authHeader() });
+    }
 }
 
 export default new BusinessChallengesService();

@@ -8,7 +8,7 @@ function Userprofile(){
         return(
             <CDropdown variant="btn-group">
             <CDropdownToggle color="white" size="lg"> <FaUserCircle color="#231f20" fontSize="1.9em" /></CDropdownToggle>
-            <CDropdownMenu style={{"backgroundColor":"#f7f2f8"}}>
+            <CDropdownMenu>
               <CDropdownItem href="/profile">My Profile</CDropdownItem>
               {/* <CDropdownDivider/> */}
               <CDropdownItem href="/rewards" >

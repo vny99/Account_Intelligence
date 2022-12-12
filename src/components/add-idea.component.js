@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import IdeaService from "../services/idea.service";
 import "./add-idea.component.css"
 
-export default class Addidea extends Component {
+export default class AddIdea extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);

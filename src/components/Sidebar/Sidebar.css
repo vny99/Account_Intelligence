@@ -44,11 +44,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* General sidebar styles */
 .bm-menu {
   /* background: #373a47; */
-  background: #231f20;
+  background: rgb(126, 64, 95);
+  
   /* padding: 2.5em 1.5em 0; */
   padding-top: 20px;
-  font-size: x-large;
-  width: 80px;
+  /* font-size: x-large; */
+  width: 90px;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -73,6 +74,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 20px;
+  padding-top: 20px;
   /* margin-bottom: 15px; */
   text-align: center;
   text-decoration: none;
@@ -84,13 +86,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-item:hover {
   color: black;
   background: rgba(242, 242, 242, 0.5);
-  font-size: larger;
-  font-weight: 600;
+  /* font-size: larger; */
+  font-weight: 500;
   /* text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8); */
   /* background-image: linear-gradient(to left, #846969, #d39393); */
-  border: 2px solid transparent;
+  /* border: 2px solid transparent; */
   border-radius: 20px;
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
 }
 
 /* Styling of overlay */

@@ -16,11 +16,13 @@ import About from "./components/about.component";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Userprofile from "./components/userprofile.component";
 
-import ViewIdeaByIdComponent from './components/ViewIdeaByIdComponent';
-import RecentIdeasTableComponent from "./components/fresh-ideas-page.component";
-// import userService from "./services/user.service";
+import ViewIdeaByIdComponent from './components/view-idea-by-id.component';
+import ViewChallengeByIdComponent from './components/view-challenge-by-id.component';
 import UserService from "./services/user.service";
-import Addidea from "./components/add-idea.component";
+import AddIdea from "./components/add-idea.component";
+import AddChallenge from "./components/add-challenge.component";
+import FreshIdeasPage from "./components/fresh-ideas-page.component";
+import BusinessChallengesPage from "./components/business-challenges-page.component";
 
 class App extends Component {
   constructor(props) {
@@ -86,7 +88,7 @@ class App extends Component {
 
             {showAdminBoard && (
               <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
+                <Link to={"/addChallenge"} className="nav-link">
                   Add Business Challenge
                 </Link>
               </li>
@@ -149,9 +151,12 @@ class App extends Component {
             <Route path="/profile" element={<Profile />} />
             <Route path="/user" element={<BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
-            <Route path = "/ideas" element = {<RecentIdeasTableComponent />} />
-            <Route path="/addIdea" element={<Addidea />} />
+            <Route path = "/ideas" element = {<FreshIdeasPage />} />
+            <Route path = "/challenges" element = {<BusinessChallengesPage />} />
+            <Route path="/addIdea" element={<AddIdea />} />
+            <Route path="/addChallenge" element={<AddChallenge />} />
             <Route path = "/viewIdea/:id" element = {<ViewIdeaByIdComponent/>}/>
+            <Route path = "/viewChallenge/:id" element = {<ViewChallengeByIdComponent/>}/>
           </Routes>
         </div>
       </div>

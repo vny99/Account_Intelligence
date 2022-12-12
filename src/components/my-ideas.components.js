@@ -5,10 +5,10 @@ import { AiOutlineComment } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import AddFavourite from './add-favourite.component';
 
-const MyRecords = ({ data, userDetails }) => {
+const MyIdeas = ({ data, userDetails }) => {
     
   return (  
-    <table style={{"textAlign" : "center"}} className = "table">
+    <table className = "table">
         <thead >
             <tr>
                 <th style={{"width" : "20px"}}> ID</th>
@@ -64,4 +64,4 @@ const MyRecords = ({ data, userDetails }) => {
   ) 
 }
 
-export default MyRecords
+export default MyIdeas

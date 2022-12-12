@@ -3,6 +3,7 @@ import { stack as Menu } from 'react-burger-menu';
 import './Sidebar.css';
 
 import { FcIdea } from "react-icons/fc";
+import { FcTimeline } from "react-icons/fc";
 import { CgCardHearts, CgFileAdd } from "react-icons/cg";
 import Logo from ".//logo.jpg"
 
@@ -13,6 +14,11 @@ const props = () => {
       <a className="bm-item" href="/ideas">
         <FcIdea style={{"fontSize":"30px"}} />
         <div>Fresh Ideas</div>
+      </a>
+
+      <a className="bm-item" href="/challenges">
+        <FcTimeline style={{"fontSize":"30px"}} />
+        <div>Business Challenges</div>
       </a>
 
       <a className="bm-item" href="/addIdea">

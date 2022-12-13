@@ -1,10 +1,12 @@
 import React from 'react'
+import { useState } from 'react';
 
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
 import AddFavourite from './add-favourite.component';
 
 const AllIdeas = ({data}) => {
+
     return (  
         <table className = "table">
             <thead style={{"textAlign":"center", "verticalAlign":"middle"}}>
@@ -25,16 +27,13 @@ const AllIdeas = ({data}) => {
                 {
                     data.map(
                         idea =>
-                        // <a href={'/viewIdea/' + idea.id} style={{"color":"black", "width":"max-content"}}> 
                         <tr key = {idea.id} > 
                                 <td style={{"verticalAlign":"middle"}}>
                                     <b> <i> {idea.ideaId} </i> </b>
-                                    </td>
+                                </td>
                                 <td style={{"textAlign" : "left"}}>
                                     <a href={'/viewIdea/' + idea.id}>
-                                        {/* <h5 style={{ "fontSize":"25px"}}> */}
                                         <div className='idea-title' style={{"fontWeight":"bold"}}> {idea.ideaTitle} </div>
-                                        {/* </h5> */}
                                         <p style={{"width" : "500px", "height" : "4.3em", "overflowY":"hidden", "textOverflow": "ellipsis", "fontSize":"14px"}}>
                                             {idea.ideaDescription}
                                         </p>
@@ -51,7 +50,9 @@ const AllIdeas = ({data}) => {
                                     </span>
                                 </td>
                                 <td> {idea.ideaStatus}</td>
-                                <td> {idea.fname + " " + idea.lname}</td>
+                                <td>
+                                    {idea.fname + " " + idea.lname}
+                                </td>
                                 <td> {idea.createdDate}</td>
                                 <td> <AddFavourite /></td>
                                 <td> </td>

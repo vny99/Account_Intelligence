@@ -8,13 +8,12 @@ class CommentService{
         return axios.get(COMMENT_API_BASE_URL, { headers: authHeader() });
     }
 
-    getById(commentId){
-        return axios.get(COMMENT_API_BASE_URL + '/' + commentId, { headers: authHeader() });
+    getCommentsByIdeaId(ideaId){
+        return axios.get(COMMENT_API_BASE_URL + '/' + ideaId, { headers: authHeader() });
     }
     
-    postComment(ideaId,commentText,commentedBy) {
-        return axios
-          .post(COMMENT_API_BASE_URL, { ideaId,commentText,commentedBy }, { headers: authHeader() })
-      }
+    postComment(ideaId, commentText) {
+        return axios.post(COMMENT_API_BASE_URL + "/" + ideaId, { params: {commentText: commentText}, headers: authHeader() })
+    }
 }
 export default new CommentService();

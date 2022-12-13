@@ -1,3 +1,4 @@
+
 .container-slider {
   max-width: 1800px; 
   height: 240px;
@@ -7,7 +8,7 @@
   box-shadow:300% silver;
   border-radius: 20px;
   background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ),
-  url("C:\jar_zip_files\MyEureka-frontend\src\components\images\slider-background.jpg");
+  url("/public/slider-background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: inset 0 0 0 1000px rgba(146, 138, 138, 0.2);

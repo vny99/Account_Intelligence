@@ -106,7 +106,7 @@ class FreshIdeasPage extends Component {
                 </div>
 
                 <div className = "row" id='all'>
-                    <AllIdeas data={currentRecords1}/>
+                    <AllIdeas data={currentRecords1}   />
                     <Pagination
                         nPages={nPages1}
                         currentPage={currentPage1}

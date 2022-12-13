@@ -13,17 +13,17 @@ class IdeaService {
         return axios.get(IDEA_API_BASE_URL + "/recent/", { headers: authHeader() });
     }
 
-    getIdeaById(ideaId){
-        return axios.get(IDEA_API_BASE_URL + '/' + ideaId, { headers: authHeader() });
+    getIdeaByIdeaId(ideaId){
+        return axios.get(IDEA_API_BASE_URL + "/ideaId", { params: {ideaId: ideaId}, headers: authHeader() });
+    }
+
+    getIdeaByUserId(userId){
+        return axios.get(IDEA_API_BASE_URL + "/userId", { params: {userId: userId}, headers: authHeader() });
     }
 
     postIdea(idea) {
         return axios.post(IDEA_API_BASE_URL, idea, { headers: authHeader() });
     }
-
-    // getCommentsByIdeaTitle(ideaTitle){
-    //     return axios.get(IDEA_API_BASE_URL + '/' + ideaTitle, { headers: authHeader() });
-    // }
 }
 
 export default new IdeaService();

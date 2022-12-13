@@ -14,42 +14,30 @@ function ViewIdeaByIdComponent(props) {
     const [idea, setIdea] = useState({});
     const { id } = useParams();
     const [commentButton, setCommentButton] = useState(false);
-    const [comments, setComments] = useState({});
-    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState({});
     const [userName, setUserName] = useState("");
     var [date, setDate] = useState(new Date());
 
-    useEffect(() => {
-        var timer = setInterval(() => setDate(new Date()), 1000);
-        //   return function cleanup() {
-        //     clearInterval(timer)
-        // }
-    });
+    var timer = setInterval(() => setDate(new Date()), 1000);
 
     useEffect(() => {
-        commentService.getById(id).then((res) => {
-        setComments(res.data);
-        });
-    });
 
-    useEffect(() => {
-        IdeaService.getIdeaById(id).then((res) => {
-        setIdea(res.data);
+        commentService.getCommentsByIdeaId(id).then((res) => {
+            setComments(res.data);
         });
 
-        const user = JSON.parse(localStorage.getItem("user"));
-        setUserName(user.username);
-        if (user.roles[0] === "ROLE_ADMIN" || user.roles[1] === "ROLE_ADMIN") {
-        console.log("admin");
-        }
-    }, []);
+        IdeaService.getIdeaByIdeaId(id).then((res) => {
+            setIdea(res.data);
+        });
 
-    console.log(idea);
+    });
 
     const handleSubmit = (e) => {
         setCommentButton(false);
         let ideaId = idea.id;
-        commentService.postComment(ideaId, comment, userName);
+        console.log("Posting comment")
+        commentService.postComment(ideaId, comment);
     };
 
     return (

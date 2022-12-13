@@ -48,7 +48,7 @@ export default class Profile extends Component {
         <div className="profile-card">
         <div className='upper-container'>
              <div className='image-container'>
-               <img src="profileimage.jpg" alt='' height="100px" width="100px"/>
+               <img src="profileimage.jpg" alt='profile image' height="100px" width="100px"/>
              </div>
         </div>
         <div className="lower-container">

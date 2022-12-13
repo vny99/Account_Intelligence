@@ -133,16 +133,11 @@ tr:hover td.highlight div {
     cursor: pointer;
 }
 
-/* input:checked + input {
-    background-color: blue;
-} */
-
 /* To keep the table header fixed */
 h2{
     position: sticky;
     top: 80px;
     z-index: 8;
-
     font-size: 70px;
     font-weight: 600;
     background-image: linear-gradient(to left, #9a3c3c, #d39393);
@@ -158,8 +153,9 @@ h2{
 .heading-line{
     background-color: #f7f2f8;
     position: sticky;
-    top: 69px;
+    top: 67px;
     padding-top: 10px;
+    margin-bottom: 10px;
     z-index: 9;
     transform: scale(1.1);
 }
@@ -167,7 +163,7 @@ h2{
 /* To keep the th fixed */
 thead{
     position: sticky;
-    top: 139px;
+    top: 148px;
     z-index: 8;
     border-radius: 10px;
 }

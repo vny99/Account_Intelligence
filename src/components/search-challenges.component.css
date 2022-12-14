@@ -1,0 +1,70 @@
+.list {
+    text-align: left;
+    max-width: 650px;
+    
+    /* margin: auto; */
+    /* float: right; */
+    /* padding-right: 90px; */
+    /* padding: 14px 16px; */
+    
+  }
+  
+  .col-md-8{
+    margin-top: 22%;
+    width: 730px;
+  }
+  .list-group{
+    width:401px;
+  }
+  .list-group :hover{
+    background-color: rgb(216, 214, 214);
+  
+  }
+  
+  /* 
+  .popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background-color: red;
+  } */
+  
+  /* .dropdown{
+    position: relative;
+    display: inline-block;
+  } */
+  
+  /* .col-md-6{
+    display: none;
+    padding-bottom: -2cm;
+    position: absolute; */
+    /* background-color:;
+    min-width: 230px;
+    border: 0px solid rgb(240, 178, 178);
+     z-index: 9;
+  } */ */
+  
+  
+  .submit-form {
+    max-width: 300px;
+    margin: auto;
+  }
+  
+  .edit-form {
+    max-width: 300px;
+    margin: auto;}
+  
+  .list-group-item{
+    /* height: 1000px; */
+  }
+  .list-group-item{
+    /* line-break: normal; */
+    white-space: pre-wrap
+  }
+  .list-group-item :hover{
+    /* background-color: bisque;
+    border-color: red; */
+    
+  }
+  
+  

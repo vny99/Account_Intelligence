@@ -24,6 +24,10 @@ class IdeaService {
     postIdea(idea) {
         return axios.post(IDEA_API_BASE_URL, idea, { headers: authHeader() });
     }
+
+    findByTitleDescription(searchItem) {
+        return axios.get(IDEA_API_BASE_URL + "/search", { params: { searchItem: searchItem}, headers: authHeader() });
+    }
 }
 
 export default new IdeaService();

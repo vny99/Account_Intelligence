@@ -23,6 +23,8 @@ import AddIdea from "./components/add-idea.component";
 import AddChallenge from "./components/add-challenge.component";
 import FreshIdeasPage from "./components/fresh-ideas-page.component";
 import BusinessChallengesPage from "./components/business-challenges-page.component";
+import Ideasearch from "./components/search-ideas.component";
+import Dropdown from "./components/dropdown.component";
 
 class App extends Component {
   constructor(props) {
@@ -154,6 +156,8 @@ class App extends Component {
             <Route path = "/ideas" element = {<FreshIdeasPage />} />
             <Route path = "/challenges" element = {<BusinessChallengesPage />} />
             <Route path="/addIdea" element={<AddIdea />} />
+            {/* <Route path = "/search" element = {<Ideasearch />} /> */}
+            <Route path = "/search" element = {<Dropdown />} />
             <Route path="/addChallenge" element={<AddChallenge />} />
             <Route path = "/viewIdea/:id" element = {<ViewIdeaByIdComponent/>}/>
             <Route path = "/viewChallenge/:id" element = {<ViewChallengeByIdComponent/>}/>

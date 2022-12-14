@@ -14,9 +14,9 @@
 .ideas_container,
 .ideas_container2
 {
-  padding: 10px;
+  padding: 16px;
   width: 320px;
-  height: 450px;
+  height: 430px;
   margin:  1.8rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: transform 0.4s;
@@ -37,21 +37,16 @@
 }
 
 .ideas_container_name{
-  /* margin: 1rem 1rem; */
   margin-top: 5px;
-  /* margin-bottom: 10px; */
   display: flex;
-  /* min-height: 40px;
-  max-height: 40px; */
-  /* align-items: flex-start; */
   text-align: left;
-  /* background-color: pink; */
 }
 
 .ideas_container_name h1{
   color: rgb(75, 7, 54);
   line-height: 1.1;
-  font-size: xx-large;
+  font-size: x-large;
+  font-weight: bold;
   font-family: var(Helvetica);
 }
 
@@ -59,23 +54,33 @@
   text-align: left;
   overflow-y:hidden;
   text-overflow: ellipsis;
+  font-size: 16px;
+  margin-bottom: 17px;
+
+  /* To limit description to 3 lines */
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   /* number of lines to show */
+   -webkit-line-clamp: 4; 
+           line-clamp: 4; 
+   -webkit-box-orient: vertical;
 }
 
-.ideas_container_content{
+.ideas_container_status{
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.ideas_container_created{
   font-size: 16px;
   margin-bottom: 30px;
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 40px;
-  max-height: 40px;
-  /* flex-wrap: nowrap; */
-  /* align-content: flex-start; */
-  padding-top: 100px;
-  /* padding-bottom: 10px; */
-  /* border-bottom: 1px solid black; */
-  /* margin-top: 3rem; */
   text-align: left;
 }
 
@@ -93,7 +98,6 @@
 
 .ideas_container .view-more-button{
   float: right;
-  /* margin-right: 10px; */
   color: #fff;
   text-transform: Helvetica;
   font-size: 1rem;
@@ -106,6 +110,7 @@
   transition: all 0.4sec ease;
   border-radius: 10px;
   border:1px solid grey;
+  width: 290px;
 }
 
 .ideas_container .view-more-button:hover{
@@ -134,6 +139,7 @@
   display: flex;
   flex-direction: row;
 }
+
 .swiper {
   width: 100%;
   height: 100%;

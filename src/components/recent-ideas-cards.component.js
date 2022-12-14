@@ -32,7 +32,7 @@ class RecentIdeasCardsComponent extends Component {
     render() {
         return (
             <div>
-                <div className="head"><h1 className="d-inline-flex display-6 cards-title">Latest ideas</h1></div>
+                <div className="head"><h1 className="d-inline-flex display-6 cards-title">Most Recent Ideas</h1></div>
                 <div className='swiper_body' style={{}}>
                     <Swiper
                         slidesPerView={3}
@@ -78,17 +78,21 @@ class RecentIdeasCardsComponent extends Component {
                                                 <p> {idea.ideaDescription} </p>
                                             </div>
 
-                                            <div className="ideas_container_content">
+                                            <div className='ideas_container_status' >
+                                                <span style={{"backgroundColor":"rgb(102, 147, 102)", "color":"white", "padding":"2px", "border":"4px solid transparent", "borderRadius":"10px"}}>
+                                                    {idea.ideaStatus}
+                                                </span>
+                                            </div>
+
+                                            <div className="ideas_container_created">
                                                 <div> <b>Created Date: </b>{idea.createdDate} </div>
                                                 <div> <b>Created By: </b>{idea.fname + " " + idea.lname} </div>
                                             </div>
 
                                             <div>
-                                                {idea.ideaStatus}
                                                 <a href={'/viewIdea/' + idea.id} className="view-more-button" style={{"marginLeft":"108px"}} >
                                                     View more
                                                 </a>
-                                                {/* <button onClick={""} className="view-more-button" style={{"marginLeft":"108px"}}>view more</button> */}
                                             </div>
                                         </div>
                                     </div>

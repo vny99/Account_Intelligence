@@ -50,20 +50,8 @@ export default function Slider() {
         setSlides(res.data);
     })
     
-    // React.useEffect(()=>{  
-    //     axios.get('http://localhost:8080/businessChallenges', { headers: authHeader() })
-    // .then((res)=>{
-    //     setSlides(res.data)
-    // })},[])
-    
     const delay = 4000;
     const timeoutRef = React.useRef(null);
- 
-    // function resetTimeout() {
-    //     if (timeoutRef.current) {
-    //         clearTimeout(timeoutRef.current);
-    //     }
-    // }
 
     React.useEffect(() => {
         resetTimeout();

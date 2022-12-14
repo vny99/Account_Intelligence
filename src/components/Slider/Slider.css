@@ -1,8 +1,6 @@
-
 .container-slider {
   max-width: 1800px; 
   height: 240px;
-  margin: 1px auto 0;
   position: relative;
   overflow: hidden;
   box-shadow:300% silver;

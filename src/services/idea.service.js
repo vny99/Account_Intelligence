@@ -13,6 +13,14 @@ class IdeaService {
         return axios.get(IDEA_API_BASE_URL + "/recent/", { headers: authHeader() });
     }
 
+    getMostlikedcards(){
+        return axios.get(IDEA_API_BASE_URL + "/liked", { headers: authHeader() });
+    }
+
+    getMostcommentedcards(){
+        return axios.get(IDEA_API_BASE_URL + "/commented", { headers: authHeader() });
+    }
+
     getIdeaByIdeaId(ideaId){
         return axios.get(IDEA_API_BASE_URL + "/ideaId", { params: {ideaId: ideaId}, headers: authHeader() });
     }

@@ -4,6 +4,8 @@ import RoleService from "../services/role.service";
 
 import Slider from "./Slider/Slider";
 import RecentIdeasCardsComponent from './recent-ideas-cards.component';
+import MostLikedCardsComponent from "./most-liked-cards.component";
+import MostCommentedCardsComponent from "./most-commented-cards.component";
 
 export default class Home extends Component {
   constructor(props) {
@@ -38,6 +40,8 @@ export default class Home extends Component {
         <header className="jumbotron">
           <Slider />
           <RecentIdeasCardsComponent />
+          <MostLikedCardsComponent />
+          <MostCommentedCardsComponent />
         </header>
       </div>
     );

@@ -20,8 +20,7 @@
 @media screen and (max-width: 700px){
  .container-slider {
    margin: 50px 10px 0;
-}
-
+  }
 }
 
 .slide {
@@ -45,33 +44,25 @@
 }
 
 .btn-slide {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #f1f1f1;
-  border: 1px solid rgba(34, 34, 34, 0.287);
+  /* width: 60px;
+  height: 60px; */
+  font-size: 40px;
+  color: dodgerblue;
+  background: transparent;
+  border: 1px solid transparent;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  /* background: red;
-  height: 100px;
-  width: 200px; */
   
-  -moz-box-shadow:    inset  0  10px 10px -10px grey, 
+  /* -moz-box-shadow:    inset  0  10px 10px -10px grey, 
     inset  0 -10px 10px -10px grey;
   -webkit-box-shadow: inset  0  10px 10px -10px grey, 
     inset  0 -10px 10px -10px grey;
   box-shadow:        inset  0  10px 10px -10px grey, 
-    inset  0 -10px 10px -10px grey;
+    inset  0 -10px 10px -10px grey; */
 
-}
-
-.btn-slide img {
-  width: 25px;
-  height: 25px;
-  pointer-events: none;
 }
 
 .prev {
@@ -115,8 +106,6 @@
   position: absolute;
   font-size: 16px;
 
-  /* font-style: centaur; */
-  /* text-shadow: 3px 2px black; */
   top: 50%;
   left: 50%;
   transition:  all .3s ease-out;

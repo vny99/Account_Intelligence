@@ -33,7 +33,7 @@ class RecentIdeasCardsComponent extends Component {
         return (
             <div>
                 <div className="head"><h1 className="d-inline-flex display-6 cards-title">Most Recent Ideas</h1></div>
-                <div className='swiper_body' style={{}}>
+                <div className='swiper_body'>
                     <Swiper
                         slidesPerView={3}
                         spaceBetween={0}
@@ -51,6 +51,7 @@ class RecentIdeasCardsComponent extends Component {
                                 <SwiperSlide
                                 // style={{"left":"25px"}}
                                 >
+                                    
                                     <div className="ideas">
                                         <div className="ideas_container" key={idea.id}>
                                             <div style={{"display":"flex", "alignItems":"flex-start"}}>

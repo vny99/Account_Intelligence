@@ -86,9 +86,17 @@ class FreshIdeasPage extends Component {
 
         return (
             <div>
-                <div className="heading-line">
-                    <h2 className="d-inline-flex display-5" style={{"left":"550px"}}>Fresh Ideas</h2>
-                    <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
+                <div className="heading-line"
+                // style={{"backgroundColor":"pink"}}
+                >
+                    <h2
+                    className="d-inline-flex display-5"
+                    style={{"left":"550px"}}
+                    >Fresh Ideas</h2>
+                    <div
+                    className="d-inline-flex"
+                    style={{"float":"right", "marginTop":"15px"}}
+                    >
                         <div>
                             <a href="/addIdea" className="btn btn-success" >
                                 Add Idea

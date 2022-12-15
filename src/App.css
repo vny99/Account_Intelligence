@@ -1,5 +1,11 @@
 /* @import url(https://fonts.googleapis.com/css?family=Roboto:300); */
 
+/* To turn off scrolling when unncessary and turn on only when necessary */
+html, body {
+  margin: 0;
+  height: max-content;
+}
+
 body{
   /* font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif; */
   /* font-family: 'Times New Roman', Times, serif */
@@ -27,13 +33,10 @@ body{
 
   background-color: #d9d2db;
   box-shadow: 3px 3px 5px 2px rgba(106, 105, 105, 0.689);
-  /* height: 300px; */
 }
 
 .container {
-  padding: 18px;
-  margin-top: 35px;
-  height: 2000px;
+  margin-top: 20px;
   z-index: 1;
 }
 

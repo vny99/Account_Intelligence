@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BusinessChallengesService from '../services/business-challenge.service'
 
-import "./business-challenges-page.component.css"
+// import "./business-challenges-page.component.css"
 import Pagination from './Pagination';
 import Challenges from './challenges.component';
 import AuthService from '../services/auth.service';
@@ -75,7 +75,7 @@ class BusinessChallengesPage extends Component {
                 </div>
 
                 <div className = "row" id='all'>
-                    <Challenges data={currentRecords}/>
+                    <Challenges data={currentRecords} showAdminBoard = {showAdminBoard}/>
                     <Pagination
                         nPages={nPages}
                         currentPage={currentPage}

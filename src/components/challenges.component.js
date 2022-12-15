@@ -1,6 +1,7 @@
 import React from 'react'
+import { BiEditAlt } from 'react-icons/bi'
 
-const Challenges = ({data}) => {
+const Challenges = ({data, showAdminBoard}) => {
     console.log(data)
 
     return (  
@@ -13,6 +14,7 @@ const Challenges = ({data}) => {
                     <th> Created by</th>
                     <th> Created date</th>
                     <th> Expiry date</th>
+                    {showAdminBoard && ( <th> Edit</th> )}
                 </tr>
             </thead>
             <tbody>
@@ -32,20 +34,36 @@ const Challenges = ({data}) => {
                                         </p>
                                     </a>
                                 </td>
-                                <td> {challenge.challengeStatus}</td>
-                                <td> {challenge.fname + " " + challenge.lname}</td>
-                                <td>
+                                <td style={{"fontSize":"14px"}}> {challenge.challengeStatus}</td>
+                                <td style={{"fontSize":"14px"}}> {challenge.fname + " " + challenge.lname}</td>
+                                <td style={{"fontSize":"14px"}}>
                                     {/* { challenge.creaatedDate|date:'d M Y' } */}
-                                    {/* { challenge.createdDate.strftime('%d %B %Y')} */}
                                     {/* {challenge.createdDate} */}
                                     {/* {new Date(challenge.createdDate).toUTCString()} */}
-                                    {new Date(challenge.createdDate).toDateString().slice(4, 11) + "," + new Date(challenge.createdDate).toDateString().slice(11)}
+                                        {
+                                            // date eg: 14
+                                            new Date(challenge.createdDate).toDateString().slice(8, 11) +
+                                            // month eg: Dec
+                                            new Date(challenge.createdDate).toDateString().slice(4, 8) + 
+                                            // year eg: 2022
+                                            new Date(challenge.createdDate).toDateString().slice(11)
+                                        }
                                     {/* {challenge.createdDate.slice(0, 10)} */}
                                     {/* {new Date(challenge.createdDate).toISOString().slice(4, 16)} */}
                                 </td>
-                                <td> 
-                                {new Date(challenge.expiryDate).toDateString().slice(4, 11) + "," + new Date(challenge.expiryDate).toDateString().slice(11)}
+                                <td style={{"fontSize":"14px"}}> 
+                                    {
+                                        new Date(challenge.expiryDate).toDateString().slice(8, 11) +
+                                        new Date(challenge.expiryDate).toDateString().slice(4, 8) + 
+                                        new Date(challenge.expiryDate).toDateString().slice(11)
+                                    }
                                 </td>
+
+                                {showAdminBoard && (
+                                    <td>
+                                        <a href='/editChallenge' className='btn btn-outline-light'><BiEditAlt size={"30px"} color={"#527293"} /></a>
+                                    </td> 
+                                )} 
                                 
                         </tr>
                         // </a>

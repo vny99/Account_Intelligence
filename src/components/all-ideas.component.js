@@ -49,11 +49,11 @@ const AllIdeas = ({data}) => {
                                         <div>{idea.commentsCount}</div>
                                     </span>
                                 </td>
-                                <td> {idea.ideaStatus}</td>
-                                <td>
+                                <td style={{"fontSize":"14px"}}> {idea.ideaStatus}</td>
+                                <td style={{"fontSize":"14px"}}>
                                     {idea.fname + " " + idea.lname}
                                 </td>
-                                <td> {idea.createdDate}</td>
+                                <td style={{"fontSize":"14px"}}> {idea.createdDate}</td>
                                 <td> <AddFavourite /></td>
                                 <td> </td>
                                 

@@ -1,7 +1,7 @@
 .head{
   margin-left: 1rem;
   font-size: 22px;
-  margin-top: 3rem;
+  margin-top: 20px;
   align-items: center;
   justify-content: center;
 }
@@ -11,13 +11,17 @@
   flex-direction: row;
 }
 
+.swiper-button-prev, .swiper-button-next{
+  color: dodgerblue
+}
+
 .ideas_container,
 .ideas_container2
 {
   padding: 16px;
   width: 320px;
   height: 430px;
-  margin:  1.8rem;
+  margin: 30px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: transform 0.4s;
   cursor: pointer;
@@ -28,12 +32,10 @@
   grid-template-rows: 200px 200px 200px;
   flex-direction: column;
   border-radius: 10px;
-  /* align-items: flex-start; */
-
 }
 
 .ideas_container:hover{
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .ideas_container_name{

@@ -78,8 +78,12 @@ export default function Slider() {
                                 <div className={ slideIndex === index+1 ? "slide active-anim" : "slide"}>
                                     <a href={'/viewChallenge/' + challenge.id} className='slider-text'>
                                        <p className='challenge-title' style={styleObj} > {challenge.challengeTitle || ""}</p>
-                                       <p className='challenge-description'>{challenge.challengeDescription.slice(0,400) + "..."}</p>
-                                       <div className="expiry-date">Expiry Date: {new Date(challenge.expiryDate).toDateString().slice(4, 11) + "," + new Date(challenge.expiryDate).toDateString().slice(11)}</div>
+                                       <p className='challenge-description' style={{"textAlign":"left"}}>{challenge.challengeDescription.slice(0,400) + "..."}</p>
+                                       <div className="expiry-date">Expiry Date: {
+                                            new Date(challenge.expiryDate).toDateString().slice(8, 11) +
+                                            new Date(challenge.expiryDate).toDateString().slice(4, 8) + 
+                                            new Date(challenge.expiryDate).toDateString().slice(11)
+                                        }</div>
                                     </a>   
                                 </div>
                             </React.Fragment>

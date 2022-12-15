@@ -52,14 +52,15 @@ const MyIdeas = ({ data, userDetails }) => {
                                 <div>{idea.commentsCount}</div>
                             </span>
                         </td>
-                        <td> {idea.ideaStatus}</td>
-                        <td> {idea.fname + " " + idea.lname}</td>
-                        <td> {idea.createdDate}</td>
+                        <td style={{"fontSize":"14px"}}> {idea.ideaStatus}</td>
+                        <td style={{"fontSize":"14px"}}> {idea.fname + " " + idea.lname}</td>
+                        <td style={{"fontSize":"14px"}}> {idea.createdDate}</td>
                         <td> <AddFavourite /></td>
                         <td> </td>
                         <td>
                             <a href='/editIdea' className='btn btn-outline-light'><BiEditAlt size={"30px"} color={"#527293"} /></a>
-                        </td>    
+                        </td>
+                            
                     </tr>
                 )
             }

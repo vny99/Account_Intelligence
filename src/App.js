@@ -143,7 +143,10 @@ class App extends Component {
           )}
         </nav>
 
-        <div className="container mt-3">
+        <div 
+        className="container mt-3"
+        // style={{"backgroundColor":"pink"}}
+        >
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/about" element={<About />} />

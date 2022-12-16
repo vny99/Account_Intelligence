@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BusinessChallengesService from '../services/business-challenge.service'
 
-function ViewChallengeByIdComponent(props) {
+function ViewChallengeById(props) {
     const [challenge, setChallenge] = useState({});
     const { id } = useParams();
     
@@ -51,4 +51,4 @@ function ViewChallengeByIdComponent(props) {
     )
 }
 
-export default ViewChallengeByIdComponent;
+export default ViewChallengeById;

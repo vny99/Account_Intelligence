@@ -16,15 +16,15 @@ import About from "./components/about.component";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Userprofile from "./components/userprofile.component";
 
-import ViewIdeaByIdComponent from './components/view-idea-by-id.component';
-import ViewChallengeByIdComponent from './components/view-challenge-by-id.component';
 import UserService from "./services/user.service";
 import AddIdea from "./components/add-idea.component";
 import AddChallenge from "./components/add-challenge.component";
 import FreshIdeasPage from "./components/fresh-ideas-page.component";
 import BusinessChallengesPage from "./components/business-challenges-page.component";
-import Ideasearch from "./components/search-ideas.component";
 import Dropdown from "./components/dropdown.component";
+import ViewIdeaById from "./components/view-idea-by-id.component";
+import ViewChallengeById from "./components/view-challenge-by-id.component";
+import EditChallengeById from "./components/edit-challenge-by-id.component.js";
 
 class App extends Component {
   constructor(props) {
@@ -162,8 +162,9 @@ class App extends Component {
             {/* <Route path = "/search" element = {<Ideasearch />} /> */}
             <Route path = "/search" element = {<Dropdown />} />
             <Route path="/addChallenge" element={<AddChallenge />} />
-            <Route path = "/viewIdea/:id" element = {<ViewIdeaByIdComponent/>}/>
-            <Route path = "/viewChallenge/:id" element = {<ViewChallengeByIdComponent/>}/>
+            <Route path = "/viewIdea/:id" element = {<ViewIdeaById />}/>
+            <Route path = "/viewChallenge/:id" element = {<ViewChallengeById />}/>
+            <Route path = "/editChallenge/:id" element = {<EditChallengeById />}/>
           </Routes>
         </div>
       </div>

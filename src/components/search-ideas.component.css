@@ -11,6 +11,23 @@
     margin-bottom: 10px;
 }
 
+a{
+    text-decoration: none;
+}
+
+a .idea-title{
+    color: dodgerblue
+}
+
+a .description, .status{
+    color: black;
+}
+
+.status{
+    margin-left: 0px;
+    font-size: medium;
+}
+
 .description{
     padding-top: 5px;
     padding-bottom: 5px;

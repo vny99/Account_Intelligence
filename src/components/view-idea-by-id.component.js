@@ -11,7 +11,7 @@ import flowImage from "./images/flowStatus.jpg";
 import commentService from "../services/comment.service";
 import { useNavigate} from "react-router-dom";
 
-function ViewIdeaByIdComponent(props) {
+function ViewIdeaById(props) {
     const [idea, setIdea] = useState({});
     const { id } = useParams();
     const [commentButton, setCommentButton] = useState(false);
@@ -242,4 +242,4 @@ function ViewIdeaByIdComponent(props) {
   );
 }
 
-export default ViewIdeaByIdComponent;
+export default ViewIdeaById;

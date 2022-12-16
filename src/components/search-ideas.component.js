@@ -73,11 +73,13 @@ export default class Ideasearch extends Component {
                 key={index}
               >
                 <a href={'/viewIdea/' + idea.id}>
-                  <div className='idea-title'><b>{idea.ideaTitle}</b> </div>
+                  <div className='idea-title'><b><u>{idea.ideaTitle}</u></b> </div>
+                  <div className="description">{idea.ideaDescription}</div>
+                  <div className="status"><b>Status : </b>{idea.ideaStatus}</div>
                 </a>
                 
-                <div className="description">{idea.ideaDescription}</div>
-                <div><b>STATUS : </b>{idea.ideaStatus}</div>
+                {/* <div className="description">{idea.ideaDescription}</div>
+                <div><b>STATUS : </b>{idea.ideaStatus}</div> */}
               </li>
             ))}
         </ul>

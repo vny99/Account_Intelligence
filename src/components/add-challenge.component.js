@@ -108,7 +108,7 @@ export default class AddChallenge extends Component {
               <label htmlFor="date">Expiry Date</label>
               <input
                 type="date"
-                className="form-control"
+                className="form-control challenge-date-input"
                 id="expiryDate"
                 required
                 value="2022-12-31" 

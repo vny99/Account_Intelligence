@@ -40,16 +40,16 @@ const Challenges = ({data, showAdminBoard}) => {
                                     {/* { challenge.creaatedDate|date:'d M Y' } */}
                                     {/* {challenge.createdDate} */}
                                     {/* {new Date(challenge.createdDate).toUTCString()} */}
-                                        {
-                                            // date eg: 14
-                                            new Date(challenge.createdDate).toDateString().slice(8, 11) +
-                                            // month eg: Dec
-                                            new Date(challenge.createdDate).toDateString().slice(4, 8) + 
-                                            // year eg: 2022
-                                            new Date(challenge.createdDate).toDateString().slice(11)
-                                        }
                                     {/* {challenge.createdDate.slice(0, 10)} */}
                                     {/* {new Date(challenge.createdDate).toISOString().slice(4, 16)} */}
+                                    {
+                                        // date eg: 14
+                                        new Date(challenge.createdDate).toDateString().slice(8, 11) +
+                                        // month eg: Dec
+                                        new Date(challenge.createdDate).toDateString().slice(4, 8) + 
+                                        // year eg: 2022
+                                        new Date(challenge.createdDate).toDateString().slice(11)
+                                    }
                                 </td>
                                 <td style={{"fontSize":"14px"}}> 
                                     {
@@ -61,7 +61,7 @@ const Challenges = ({data, showAdminBoard}) => {
 
                                 {showAdminBoard && (
                                     <td>
-                                        <a href='/editChallenge' className='btn btn-outline-light'><BiEditAlt size={"30px"} color={"#527293"} /></a>
+                                        <a href={'/editChallenge/' + challenge.id} className='btn btn-outline-light'><BiEditAlt size={"30px"} color={"#527293"} /></a>
                                     </td> 
                                 )} 
                                 

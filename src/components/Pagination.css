@@ -1,20 +1,13 @@
+.pagination{
+    
+}
+
 /* To change pagination class colors */
 .pagination > li > a
 {
     /* background-color: white; */
     background-color: rgb(207, 204, 204);
     color: #5A4181;
-}
-
-.pagination > li > a:focus,
-.pagination > li > a:hover,
-.pagination > li > span:focus,
-.pagination > li > span:hover
-{ 
-    /* background-color: rgb(227, 213, 245); */
-    /* color: #5a5a5a; */
-    /* background-color: #eee; */
-    /* border-color: #ddd; */
 }
 
 .pagination > .active > a

@@ -29,7 +29,9 @@ const AllIdeas = ({data}) => {
                         idea =>
                         <tr key = {idea.id} > 
                                 <td style={{"verticalAlign":"middle"}}>
-                                    <b> <i> {idea.ideaId} </i> </b>
+                                    {/* <b> <i>  */}
+                                        {idea.ideaId} 
+                                    {/* </i> </b> */}
                                 </td>
                                 <td style={{"textAlign" : "left"}}>
                                     <a href={'/viewIdea/' + idea.id}>

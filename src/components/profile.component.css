@@ -2,7 +2,6 @@
     position: fixed;
     top:85px;
     left: 380px;
-    /* background-color: pink; */
     width: auto;
     height: auto;
 }
@@ -39,8 +38,9 @@
 .lower-container {
     margin-top:50px;
     height:300px;
-    /* background:blue; */
-    text-align:center;
+    /* padding-left: 40px;
+    text-align:left; */
+    text-align: center;
     font-family:Georgia, 'Times New Roman', Times, serif;
 }
 

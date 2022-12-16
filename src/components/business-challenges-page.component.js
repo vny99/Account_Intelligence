@@ -40,7 +40,7 @@ class BusinessChallengesPage extends Component {
             this.setState({ userDetails: res.data});
         })
         this.setState({
-            showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+            showAdminBoard: user.role.authority.includes("ROLE_ADMIN"),
         });
         }
 

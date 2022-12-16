@@ -19,7 +19,7 @@ class FreshIdeasPage extends Component {
             userDetails: [],
             currentPage1: 1,
             currentPage2: 1,
-            recordsPerPage: 10,
+            recordsPerPage: 3,
         }
 
         // this.setCurrentPage = this.setCurrentPage.bind(this);
@@ -114,8 +114,9 @@ class FreshIdeasPage extends Component {
                 </div>
 
                 <div className = "row" id='all'>
-                    <AllIdeas data={currentRecords1}   />
+                    <AllIdeas data={currentRecords1}  />
                     <Pagination
+                        // style={{"back"}}
                         nPages={nPages1}
                         currentPage={currentPage1}
                         setCurrentPage={this.setCurrentPage1}

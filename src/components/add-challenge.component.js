@@ -104,14 +104,14 @@ export default class AddChallenge extends Component {
                 name="description"
               >
               </textarea>
-            
+
               <label htmlFor="date">Expiry Date</label>
               <input
                 type="date"
                 className="form-control"
                 id="expiryDate"
                 required
-                value={this.state.expiryDate}
+                value="2022-12-31" 
                 onChange={this.onChangeExpiryDate}
                 name="expiryDate"
               />

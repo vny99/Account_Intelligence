@@ -46,7 +46,7 @@ class App extends Component {
       })
       this.setState({
         currentUser: user,
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        showAdminBoard: user.role.authority.includes("ROLE_ADMIN"),
       });
     }
 

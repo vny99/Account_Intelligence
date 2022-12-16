@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import IdeaService from "../services/idea.service";
-import Comments from "./Comments";
 import "./view-idea-by-id.component.css";
 import { AiOutlineLike, AiOutlineClose } from "react-icons/ai";
+import { TbArrowBackUp } from "react-icons/tb";
 import { BiMedal } from "react-icons/bi";
-import Axios from "axios";
 import flowImage from "./images/flowStatus.jpg";
 import commentService from "../services/comment.service";
+import { useNavigate} from "react-router-dom";
 
 function ViewIdeaByIdComponent(props) {
     const [idea, setIdea] = useState({});
@@ -44,7 +44,7 @@ function ViewIdeaByIdComponent(props) {
     setEmail(user.email);
     setCurrentUserId(user.id);
     console.log(user);
-    if (user.roles[0] === "ROLE_ADMIN" || user.roles[1] === "ROLE_ADMIN") {
+    if (user.role.authority.includes("ROLE_ADMIN")) {
        setAdmin(true);
     }
   }, []);
@@ -54,6 +54,7 @@ function ViewIdeaByIdComponent(props) {
     let ideaId = idea.id;
     commentService.post(ideaId, comment, userName);
   };
+
   const handleUpdate = (e) => {
     setStatus(e.target.value);
 
@@ -67,8 +68,20 @@ function ViewIdeaByIdComponent(props) {
   const handleEdit=()=>{
     window.Location("/home")
   }
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // navigate('/about', {replace: true});
+    navigate(-1);
+  };
+
   return (
     <div className="specific_idea">
+      <button className="back-button btn btn-outline-secondary" style={{"float":"right"}} onClick={handleClick}>
+        <TbArrowBackUp size="30px" />
+        <h6>Back</h6>
+      </button>
       <div className="idea">
         <div className="idea_header"></div>
         <div className="idea_title">

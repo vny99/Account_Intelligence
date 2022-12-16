@@ -21,15 +21,16 @@ export default class Dropdown extends Component{
   render() {
      const { condition } = this.state;
      return (
-         <div className = "drop">
-            <div class = "select">
-          <select>
-          <option><button class = "btn1" onClick={() => this.handleClick(true)}>Ideas</button></option>
-          <option><button class = "btn2" onClick={() => this.handleClick(false)}>BusinessChallenges</button></option></select></div>
-           
-          {condition === true ? <Ideasearch /> : <BusinessChallengesSearch />}
+         <div className="search-container">
+          <div>{condition === true ? <Ideasearch /> : <BusinessChallengesSearch />}</div>
+            <div className="search-dropdown">
+              <select className="form-select" aria-label="Default select example">
+                <option selected><button class = "btn1" onClick={() => this.handleClick(true)}>Ideas</button></option>
+                <option><button class = "btn2" onClick={() => this.handleClick(false)}>BusinessChallenges</button></option>
+              </select>
+            </div>
 
-         </div>
+          </div>
      )
   }
 }

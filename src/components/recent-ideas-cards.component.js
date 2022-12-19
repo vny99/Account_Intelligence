@@ -86,7 +86,13 @@ class RecentIdeasCardsComponent extends Component {
                                             </div>
 
                                             <div className="ideas_container_created">
-                                                <div> <b>Created Date: </b>{idea.createdDate} </div>
+                                                <div> <b>Created Date: </b>
+                                                    {
+                                                        new Date(idea.createdDate).toDateString().slice(8, 11) +
+                                                        new Date(idea.createdDate).toDateString().slice(4, 8) + 
+                                                        new Date(idea.createdDate).toDateString().slice(11)
+                                                    }
+                                                </div>
                                                 <div> <b>Created By: </b>{idea.fname + " " + idea.lname} </div>
                                             </div>
 

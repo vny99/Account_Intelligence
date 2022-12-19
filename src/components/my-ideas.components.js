@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { AiOutlineLike } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
-import AddFavourite from './add-favourite.component';
+import IdeaService from '../services/idea.service';
 
 const MyIdeas = ({ data, userDetails }) => {
     console.log(userDetails)
@@ -56,8 +56,20 @@ const MyIdeas = ({ data, userDetails }) => {
                         </td>
                         <td style={{"fontSize":"14px"}}> {idea.ideaStatus}</td>
                         <td style={{"fontSize":"14px"}}> {idea.fname + " " + idea.lname}</td>
-                        <td style={{"fontSize":"14px"}}> {idea.createdDate}</td>
-                        <td> <AddFavourite /></td>
+                        <td style={{"fontSize":"14px"}}>
+                            {
+                                new Date(idea.createdDate).toDateString().slice(8, 11) +
+                                new Date(idea.createdDate).toDateString().slice(4, 8) + 
+                                new Date(idea.createdDate).toDateString().slice(11)
+                            }
+                        </td>
+                        <td>
+                            {IdeaService.isFavoriteIdeaOfCurrentUser(idea.id) === false ? (
+                            <AiOutlineHeart size={"40px"} color="red" />
+                            ) : (
+                            <AiFillHeart size={"40px"} color="red" />
+                            )}
+                        </td>
                         <td> </td>
                         <td>
                             <a href='/editIdea' className='btn btn-outline-light'><BiEditAlt size={"30px"} color={"#527293"} /></a>

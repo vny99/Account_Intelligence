@@ -40,10 +40,6 @@ class FreshIdeasPage extends Component {
             }
         );
     }
-    
-    viewIdea(id){
-        this.props.history.push(`/viewIdea/${id}`);
-    }
 
     componentDidMount(){
         const user = AuthService.getCurrentUser();
@@ -87,7 +83,6 @@ class FreshIdeasPage extends Component {
         return (
             <div>
                 <div className="heading-line"
-                // style={{"backgroundColor":"pink"}}
                 >
                     <h2
                     className="d-inline-flex display-5"

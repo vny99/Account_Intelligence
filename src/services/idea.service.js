@@ -36,6 +36,10 @@ class IdeaService {
     findByTitleDescription(searchItem) {
         return axios.get(IDEA_API_BASE_URL + "/search", { params: { searchItem: searchItem}, headers: authHeader() });
     }
+
+    isFavoriteIdeaOfCurrentUser(ideaId){
+        return axios.get(IDEA_API_BASE_URL + "/isFavorite/" + ideaId , {headers: authHeader() });
+    }
 }
 
 export default new IdeaService();

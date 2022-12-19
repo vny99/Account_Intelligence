@@ -1,11 +1,20 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
 
-import { AiOutlineLike } from "react-icons/ai";
-import { AiOutlineComment } from "react-icons/ai";
-import AddFavourite from './add-favourite.component';
+import { AiFillHeart, AiOutlineHeart, AiOutlineLike, AiOutlineComment } from "react-icons/ai";
+import IdeaService from '../services/idea.service';
+import AddFavorite from './add-favourite.component';
 
 const AllIdeas = ({data}) => {
+    const [isFavorite, setIsFavorite] = useState([]);
+
+    // const checkFavorite = (e) => {
+    //     IdeaService.isFavoriteIdeaOfCurrentUser(idea.id).then((res) => {
+    //         // setIsFavorite(res.data);
+    //         console.log(res.data)
+    //     })
+    // };
 
     return (  
         <table className = "table">
@@ -55,8 +64,25 @@ const AllIdeas = ({data}) => {
                                 <td style={{"fontSize":"14px"}}>
                                     {idea.fname + " " + idea.lname}
                                 </td>
-                                <td style={{"fontSize":"14px"}}> {idea.createdDate}</td>
-                                <td> <AddFavourite /></td>
+                                <td style={{"fontSize":"14px"}}>
+                                    {
+                                        new Date(idea.createdDate).toDateString().slice(8, 11) +
+                                        new Date(idea.createdDate).toDateString().slice(4, 8) + 
+                                        new Date(idea.createdDate).toDateString().slice(11)
+                                    }
+                                </td>
+
+                                <td>
+
+                                    {/* {isFavorite === false ? (
+                                    <AiOutlineHeart size={"40px"} color="red" />
+                                    ) : (
+                                    <AiFillHeart size={"40px"} color="red" />
+                                    )} */}
+
+                                    <AddFavorite />
+                                </td>
+
                                 <td> </td>
                                 
                         </tr>

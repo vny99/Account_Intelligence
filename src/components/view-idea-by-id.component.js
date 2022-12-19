@@ -4,19 +4,20 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import IdeaService from "../services/idea.service";
 import "./view-idea-by-id.component.css";
-import { AiOutlineLike, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineLike } from "react-icons/ai";
 import { TbArrowBackUp } from "react-icons/tb";
-import { BiMedal } from "react-icons/bi";
+import { BiEditAlt, BiMedal } from "react-icons/bi";
 import flowImage from "./images/flowStatus.jpg";
-import commentService from "../services/comment.service";
+import CommentService from "../services/comment.service";
 import { useNavigate} from "react-router-dom";
+import AddFavourite from "./add-favourite.component";
 
 function ViewIdeaById(props) {
     const [idea, setIdea] = useState({});
     const { id } = useParams();
     const [commentButton, setCommentButton] = useState(false);
-    const [comments, setComments] = useState({});
-    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([]);
+    const [commentText, setCommentText] = useState("");
     const [userName, setUserName] = useState("");
     const [email, setEmail]=useState("");
     var [date, setDate] = useState(new Date());
@@ -27,10 +28,9 @@ function ViewIdeaById(props) {
     const [currentUserId, setCurrentUserId]=useState("");
 
     useEffect(() => {
-        commentService.getCommentsByIdeaId(id).then((res) => {
+      CommentService.getCommentsByIdeaId(id).then((res) => {
         setComments(res.data);
-        });
-        setUserId(comment.userId);
+      });
     });
 
     useEffect(() => {
@@ -42,8 +42,7 @@ function ViewIdeaById(props) {
     const user = JSON.parse(localStorage.getItem("user"));
     setUserName(user.id);
     setEmail(user.email);
-    setCurrentUserId(user.id);
-    console.log(user);
+    setCurrentUserId(user.id); // here id is ideaid
     if (user.role.authority.includes("ROLE_ADMIN")) {
        setAdmin(true);
     }
@@ -52,7 +51,7 @@ function ViewIdeaById(props) {
   const handleSubmit = (e) => {
     setCommentButton(false);
     let ideaId = idea.id;
-    commentService.post(ideaId, comment, userName);
+    CommentService.postComment(ideaId, commentText);
   };
 
   const handleUpdate = (e) => {
@@ -65,14 +64,8 @@ function ViewIdeaById(props) {
     IdeaService.updateIdea(idea.ideaId, myIdea);
   };
 
-  const handleEdit=()=>{
-    window.Location("/home")
-  }
-
   const navigate = useNavigate();
-
   const handleClick = () => {
-    // navigate('/about', {replace: true});
     navigate(-1);
   };
 
@@ -190,9 +183,13 @@ function ViewIdeaById(props) {
             <AiOutlineLike className="like_icon" />
             {idea.commentsCount}
           </div>
+          <div>
+            {/* {console.log(email, idea.ideaId)} */}
+            <AddFavourite ideaId={idea.ideaId} />
+          </div>
           <div className="badge">
             <BiMedal className="ruby_badge" />
-            <BiMedal className="daimond_badge" />
+            <BiMedal className="diamond_badge" />
             <BiMedal className="gold_badge" />
             <BiMedal className="silver_badge" />
             <BiMedal className="bronze_badge" />
@@ -209,7 +206,7 @@ function ViewIdeaById(props) {
               className="comment-form textarea"
               rows="3"
               placeholder="Write your Comment"
-              onChange={(e) => setComment(e.target.value)}
+              onChange={(e) => setCommentText(e.target.value)}
             ></textarea>
             <button className="comment-form button" onClick={handleSubmit}>
               Post Comment
@@ -219,24 +216,26 @@ function ViewIdeaById(props) {
       </div>
 
       <div className="comments_section">
-        {Object.keys(comments).map((key) => {
-          return (
-            <div>
-              <div className="commentBody">
-                <div className="commentText" key={key}>
-                  {comments[key].commentText}
-                </div>
-                <div className="commentedBy" key={key}>
-                  Posted by : {comments[key].fname +" "+comments[key].lname}
-                </div>
-                <div className="commentedDate" key={key}>
-                  {" "}
-                  Posted on : {comments[key].commentedDate}
-                </div>
+        {comments.map(
+          comment => (
+          <div>
+            <div className="commentBody">
+              <div className="commentText" key={comment.id}>
+                {comment.commentText}
+                <span className="commentEdit">
+                  <a href='/editComment'><BiEditAlt size={"30px"} /></a>
+                </span>
+              </div>
+              <div className="commentedBy" key={comment.id}>
+                Posted by : {comment.fname + " " + comment.lname}
+              </div>
+              <div className="commentedDate" key={comment.id}>
+                Posted on : {comment.commentedDate}
               </div>
             </div>
-          );
-        })}
+          </div>
+          )
+        )}
       </div>
     </div>
   );

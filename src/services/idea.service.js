@@ -41,8 +41,8 @@ class IdeaService {
         return axios.get(IDEA_API_BASE_URL + "/search", { params: { searchItem: searchItem}, headers: authHeader() });
     }
 
-    isFavoriteIdeaOfCurrentUser(ideaId){
-        return axios.get(IDEA_API_BASE_URL + "/isFavorite/" + ideaId , {headers: authHeader() });
+    isFavoriteIdeaOfCurrentUser(id){
+        return axios.get(IDEA_API_BASE_URL + "/isFavorite/" + id , {headers: authHeader() });
     }
 }
 

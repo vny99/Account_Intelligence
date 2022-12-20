@@ -6,7 +6,7 @@ import { BiEditAlt } from "react-icons/bi";
 import IdeaService from '../services/idea.service';
 
 const MyIdeas = ({ data, userDetails }) => {
-    console.log(userDetails)
+    // console.log(userDetails)
     
   return (  
     <table className = "table">

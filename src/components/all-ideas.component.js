@@ -7,14 +7,13 @@ import IdeaService from '../services/idea.service';
 import AddFavorite from './add-favourite.component';
 
 const AllIdeas = ({data}) => {
-    const [isFavorite, setIsFavorite] = useState([]);
+    const [isFavorite, setIsFavorite] = useState(false)
 
-    // const checkFavorite = (e) => {
-    //     IdeaService.isFavoriteIdeaOfCurrentUser(idea.id).then((res) => {
-    //         // setIsFavorite(res.data);
-    //         console.log(res.data)
-    //     })
-    // };
+    function checkFavorite(id) {
+        IdeaService.isFavoriteIdeaOfCurrentUser(id).then(
+            (res) => setIsFavorite(res.data)
+        )
+    }
 
     return (  
         <table className = "table">
@@ -73,14 +72,14 @@ const AllIdeas = ({data}) => {
                                 </td>
 
                                 <td>
+                                    {checkFavorite(idea.id)}
+                                    {isFavorite ? (<span>Favorite</span>) : (<span>Not favorite</span>)}
+                                    {/* {console.log(checkFavorite(idea.id))} */}
+                                  {/* {console.log("in render")} */}
+                                    {/* {console.log(fun(idea.id))} */}
+                                    {/* {console.log(fun(idea.id))} */}
+                                    {/* {checkFavorite(idea.id)} */}
 
-                                    {/* {isFavorite === false ? (
-                                    <AiOutlineHeart size={"40px"} color="red" />
-                                    ) : (
-                                    <AiFillHeart size={"40px"} color="red" />
-                                    )} */}
-
-                                    <AddFavorite />
                                 </td>
 
                                 <td> </td>

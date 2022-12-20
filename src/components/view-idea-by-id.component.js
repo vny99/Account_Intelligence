@@ -188,7 +188,7 @@ function ViewIdeaById(props) {
           </div>
           <div>
             {/* {console.log(email, idea.ideaId)} */}
-            <AddFavourite ideaId={idea.ideaId} />
+            <AddFavourite ideaId={idea.id} />
           </div>
           <div className="badge">
             <BiMedal className="ruby_badge" />

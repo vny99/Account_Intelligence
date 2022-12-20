@@ -26,7 +26,11 @@ class RecentIdeasCardsComponent extends Component {
     }
 
     componentDidMount() {
-        IdeaService.getRecentIdeas().then((res) => { this.setState({ ideas: res.data }); });
+        IdeaService.getRecentIdeas().then((res) => {
+            this.setState({
+                ideas: res.data 
+            })
+        });
     }
 
     render() {
@@ -39,13 +43,14 @@ class RecentIdeasCardsComponent extends Component {
                         spaceBetween={0}
                         slidesPerGroup={3}
                         loop={true}
-                        loopFillGroupWithBlank={true}
+                        // loopFillGroupWithBlank={true}
                         // pagination={{ clickable: true, }}
                         navigation={true}
                         modules={[Pagination, Navigation]}
                         className="mySwiper"
                     >
                         {
+
                             this.state.ideas.map(
                                 idea =>
                                 <SwiperSlide

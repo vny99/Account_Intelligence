@@ -12,7 +12,8 @@
 }
 
 .swiper-button-prev, .swiper-button-next{
-  color: dodgerblue
+  color: dodgerblue;
+  --swiper-navigation-size: 30px;
 }
 
 .ideas_container,

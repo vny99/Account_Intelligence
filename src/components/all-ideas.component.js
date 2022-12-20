@@ -1,19 +1,29 @@
 import React from 'react'
+import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
 import { AiFillHeart, AiOutlineHeart, AiOutlineLike, AiOutlineComment } from "react-icons/ai";
+import { BiChevronDownCircle } from 'react-icons/bi';
 import IdeaService from '../services/idea.service';
 import AddFavorite from './add-favourite.component';
 
 const AllIdeas = ({data}) => {
     const [isFavorite, setIsFavorite] = useState(false)
 
-    function checkFavorite(id) {
+    const checkFavorite = useCallback((id) => {
         IdeaService.isFavoriteIdeaOfCurrentUser(id).then(
             (res) => setIsFavorite(res.data)
         )
-    }
+        console.log(isFavorite)
+      }, [isFavorite]);
+
+    // function checkFavorite(id) {
+    //     IdeaService.isFavoriteIdeaOfCurrentUser(id).then(
+    //         (res) => setIsFavorite(res.data)
+    //     )
+    //     console.log(isFavorite)
+    // }
 
     return (  
         <table className = "table">
@@ -71,14 +81,12 @@ const AllIdeas = ({data}) => {
                                     }
                                 </td>
 
-                                <td>
-                                    {checkFavorite(idea.id)}
-                                    {isFavorite ? (<span>Favorite</span>) : (<span>Not favorite</span>)}
-                                    {/* {console.log(checkFavorite(idea.id))} */}
-                                  {/* {console.log("in render")} */}
-                                    {/* {console.log(fun(idea.id))} */}
-                                    {/* {console.log(fun(idea.id))} */}
+                                <td
+                                // onClick={checkFavorite(idea.id)}
+                                >
                                     {/* {checkFavorite(idea.id)} */}
+                                    {/* {console.log(isFavorite)} */}
+                                    {isFavorite ? (<span>Favorite</span>) : (<span>Not favorite</span>)}
 
                                 </td>
 

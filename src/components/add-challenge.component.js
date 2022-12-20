@@ -18,40 +18,48 @@ export default class AddChallenge extends Component {
       title: "",
       description: "", 
       expiryDate:"",
-      submitted: false
+      submitted: false,
+      tv:false,
+      dv:false,
+      dav:false
     };
   }
 
   onChangeTitle(e) {
+    this.setState({tv:true})
     this.setState({
       title: e.target.value
     });
   }
 
   onChangeDescription(e) {
+    this.setState({dv:true})
     this.setState({
       description: e.target.value
     });
   }
 
   onChangeExpiryDate(e) {
+    this.setState({dav:true})
     this.setState({
       expiryDate: e.target.value
     });
   }
 
   saveChallenge() {
-    var challenge = {
-      challengeTitle: this.state.title,
-      challengeDescription: this.state.description,
-      expiryDate:this.state.expiryDate
-    };
-    console.log(challenge)
-    BusinessChallengesService.addChallenge(challenge)
-    .then((res)=>{
-      console.log(res.date);
-      this.setState({submitted:true})
-    })
+    if(this.state.tv==true&&this.state.dv==true&&this.state.dav==true){
+      var challenge = {
+        challengeTitle: this.state.title,
+        challengeDescription: this.state.description,
+        expiryDate:this.state.expiryDate
+      };
+      console.log(challenge)
+      BusinessChallengesService.addChallenge(challenge)
+      .then((res)=>{
+        console.log(res.date);
+        this.setState({submitted:true})
+      })
+    }
   }
 
   newChallenge() 
@@ -72,7 +80,7 @@ export default class AddChallenge extends Component {
         {this.state.submitted ? (
           <div style={{"textAlign":"center"}}>
             <h4>Business Challenge submitted successfully!</h4>
-            <a href="/home"> <button className="btn btn-success" style={{"width":"20%"}}>
+            <a href="/challenges"> <button className="btn btn-success" style={{"width":"20%"}}>
              ok
             </button></a>
           </div>
@@ -111,7 +119,8 @@ export default class AddChallenge extends Component {
                 className="form-control challenge-date-input"
                 id="expiryDate"
                 required
-                value="2022-12-31" 
+                // value="2022-12-31"
+                value={this.state.expiryDate}
                 onChange={this.onChangeExpiryDate}
                 name="expiryDate"
               />

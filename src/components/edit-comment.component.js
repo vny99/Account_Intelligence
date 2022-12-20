@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./edit-comment.component.css";
 import { useEffect } from "react";
 
-import CommentService from "../services/comment.service"
+import IdeaCommentsService from "../services/idea-comments.service"
 
 function EditComment(props) {
   const {id}  = useParams();
@@ -19,7 +19,7 @@ function EditComment(props) {
   }, []);
 
   const navigateToEditComment=()=>{
-    CommentService.updateComment(id, updatedcomment).then((res) => {
+    IdeaCommentsService.updateComment(id, updatedcomment).then((res) => {
       setUpdatedComment(res.data);
     });
     navigate("/ideas")

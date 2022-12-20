@@ -4,53 +4,47 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import IdeaService from "../services/idea.service";
 import "./view-idea-by-id.component.css";
-import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
 import { TbArrowBackUp } from "react-icons/tb";
 import { BiEditAlt, BiMedal } from "react-icons/bi";
 import flowImage from "./images/flowStatus.jpg";
-import CommentService from "../services/comment.service";
+import IdeaCommentsService from "../services/idea-comments.service";
 import { useNavigate} from "react-router-dom";
 import AddFavourite from "./add-favourite.component";
+import LikesService from "../services/likes.service";
+import AuthService from "../services/auth.service";
 
-function ViewIdeaById(props) {
-    const [idea, setIdea] = useState({});
-    const { id } = useParams();
-    const [commentButton, setCommentButton] = useState(false);
-    const [comments, setComments] = useState([]);
-    const [commentText, setCommentText] = useState("");
-    const [userName, setUserName] = useState("");
-    const [email, setEmail]=useState("");
-    var [date, setDate] = useState(new Date());
-    const [status, setStatus] = useState("RAISED");
-    const [flow, toggleFlow] = useState(false);
-    const [admin, setAdmin] = useState(false);
-    const [currentUserId, setCurrentUserId]=useState("");
+function ViewIdeaById() {
+  const [idea, setIdea] = useState({});
+  const { id } = useParams();
+  const [commentButton, setCommentButton] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState("");
+  const [status, setStatus] = useState("RAISED");
+  const [flow, toggleFlow] = useState(false);
+  const [admin, setAdmin] = useState(false);
+  const [likeId, setLikeId] = useState("");
+  const [currentUserId, setCurrentUserId] = useState("");
 
-    useEffect(() => {
-      CommentService.getCommentsByIdeaId(id).then((res) => {
-        setComments(res.data);
-      });
-    }, comments);
+  useEffect(() => {
+    IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
+  }, [idea]);
 
-    useEffect(() => {
-        IdeaService.getIdeaByIdeaId(id).then((res) => {
-        setIdea(res.data);
-        }
-    );
+  useEffect(() => {
+    IdeaCommentsService.getCommentsByIdeaId(id).then((res) => { setComments(res.data); })
+    LikesService.getLikeOfCurrentUser(id).then((res)=>{ setLikeId(res.data); })
+  }, [comments, likeId]);
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    setUserName(user.id);
-    setEmail(user.email);
-    setCurrentUserId(user.id); // here id is ideaid
-    if (user.role.authority.includes("ROLE_ADMIN")) {
-       setAdmin(true);
-    }
-  }, []);
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    setCurrentUserId(user.id)
+    if (user.role.authority.includes("ROLE_ADMIN")) { setAdmin(true); }
+  }, [currentUserId])
 
   const handleSubmit = (e) => {
     setCommentButton(false);
     let ideaId = idea.id;
-    CommentService.postComment(ideaId, commentText);
+    IdeaCommentsService.postComment(ideaId, commentText);
   };
 
   const handleUpdate = (e) => {
@@ -60,17 +54,25 @@ function ViewIdeaById(props) {
     IdeaService.updateIdea(idea.id, myIdea);
   };
 
+  const handleLike=()=>{
+    if(likeId === "") {
+      let data={ ideaId: idea.id }
+      LikesService.like(data);
+    }
+
+    else{
+      LikesService.unLike(likeId)
+    } 
+  }
+
   const navigateToEditComment = (e) => {
-    // let fun = e.target.name
     let commentId = e.target.getAttribute("arg")
     console.log(commentId)
     navigate("/editComment/" + commentId );
   };
 
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(-1);
-  };
+  const handleClick = () => { navigate(-1); };
 
   return (
     <div className="specific_idea">
@@ -78,102 +80,47 @@ function ViewIdeaById(props) {
         <TbArrowBackUp size="30px" />
         <h6>Back</h6>
       </button>
+      
       <div className="idea">
         <div className="idea_header"></div>
-        <div className="idea_title">
-          <h1>{idea.ideaTitle}</h1>
-        </div>
-        <div className="idea_description">
-          <p>{idea.ideaDescription}</p>
-        </div>
+        <div className="idea_title"> <h1>{idea.ideaTitle}</h1> </div>
+        <div className="idea_description"> <p>{idea.ideaDescription}</p> </div>
+
         <div className="status">
           <strong>Status :</strong>
           <div className="status_bar">
             <strong>
-              {idea.ideaStatus === "RAISED" && (
-                <div className="raised">
-                  <p>RAISED</p>
-                </div>
-              )}
-              {idea.ideaStatus === "REVIEWED" && (
-                <div className="reviewed">
-                  <p>REVIEWED</p>
-                </div>
-              )}
-              {idea.ideaStatus === "REJECTED" && (
-                <div className="rejected">
-                  <p>REJECTED</p>
-                </div>
-              )}
-              {idea.ideaStatus === "ACCEPTED" && (
-                <div className="accepted">
-                  <p>ACCEPTED</p>
-                </div>
-              )}
-              {idea.ideaStatus === "IMPLEMENTED" && (
-                <div className="implemented">
-                  <p>IMPLEMENTED</p>
-                </div>
-              )}
+              {idea.ideaStatus === "RAISED" && ( <div className="raised"><p>RAISED</p> </div> )}
+              {idea.ideaStatus === "REVIEWED" && ( <div className="reviewed"><p>REVIEWED</p> </div> )}
+              {idea.ideaStatus === "REJECTED" && ( <div className="rejected"><p>REJECTED</p> </div> )}
+              {idea.ideaStatus === "ACCEPTED" && ( <div className="accepted"><p>ACCEPTED</p> </div> )}
+              {idea.ideaStatus === "IMPLEMENTED" && ( <div className="implemented"><p>IMPLEMENTED</p> </div> )}
             </strong>
-            <div
-              className="workflow"
-              onClick={() => {
-                toggleFlow(true);
-              }}
-            >
-              <p>workflow</p>{" "}
-            </div>
+
+            <div className="workflow" onClick={() => { toggleFlow(true); }} > <p>workflow</p> </div>
+
             {flow && (
-              <div
-                className="workflow_overlay"
-                onClick={() => {
-                  toggleFlow(false);
-                }}
-              >
-                <div className="workflow_img scale-up-center">
-                  <img src={flowImage} alt="" />
-                </div>
+              <div className="workflow_overlay" onClick={() => { toggleFlow(false); }} >
+                <div className="workflow_img scale-up-center"> <img src={flowImage} alt="" /> </div>
               </div>
             )}
+
             {admin && (
               <div className="update__container">
                 {idea.ideaStatus === "RAISED" && (
-                  <button
-                    className="update__container_buttons"
-                    value="REVIEWED"
-                    onClick={handleUpdate}
-                  >
-                    REVIEWED
-                  </button>
+                  <button className="update__container_buttons" value="REVIEWED" onClick={handleUpdate} >REVIEWED</button>
                 )}
+
                 {idea.ideaStatus === "REVIEWED" && (
                   <div>
-                    <button
-                      className="update__container_buttons"
-                      value="ACCEPTED"
-                      onClick={handleUpdate}
-                    >
-                      ACCEPTED
-                    </button>
-                    <button
-                      className="update__container_buttons"
-                      value="REJECTED"
-                      onClick={handleUpdate}
-                    >
-                      REJECTED
-                    </button>
+                    <button className="update__container_buttons" value="ACCEPTED" onClick={handleUpdate} >ACCEPTED</button>
+                    <button className="update__container_buttons" value="REJECTED" onClick={handleUpdate} >REJECTED</button>
                   </div>
                 )}
+
                 {idea.ideaStatus === "ACCEPTED" && (
                   <div>
-                    <button
-                      className="update__container_buttons"
-                      value="IMPLEMENTED"
-                      onClick={handleUpdate}
-                    >
-                      IMPLEMENTED
-                    </button>
+                    <button className="update__container_buttons" value="IMPLEMENTED" onClick={handleUpdate} >IMPLEMENTED</button>
                   </div>
                 )}
               </div>
@@ -182,14 +129,19 @@ function ViewIdeaById(props) {
         </div>
 
         <div className="idea_likes">
-          <div className="idea_like-icon">
-            <AiOutlineLike className="like_icon" />
-            {idea.commentsCount}
-          </div>
-          <div>
-            {/* {console.log(email, idea.ideaId)} */}
-            <AddFavourite ideaId={idea.id} />
-          </div>
+          {likeId !== "" ?
+            <div className="idea_like-icon">
+              <AiTwotoneLike size={"40px"} className="like_icon" onClick={handleLike}/ >
+              <div style={{"textAlign":"center"}} >{idea.likesCount}</div>
+            </div> :
+            <div className="idea_like-icon">
+              <AiOutlineLike size={"40px"} className="like_icon-inactive" onClick={handleLike}/>
+              <div style={{"textAlign":"center"}} >{idea.likesCount}</div>
+            </div>
+          }
+
+          <div> <AddFavourite ideaId={idea.id} /> </div>
+
           <div className="badge">
             <BiMedal className="ruby_badge" />
             <BiMedal className="diamond_badge" />
@@ -199,8 +151,8 @@ function ViewIdeaById(props) {
           </div>
         </div>
       </div>
-
-  <br/>
+      
+      <br/>
       <div className="Cards">
         <div className="comment-box">
           <p>Leave a Comment</p>
@@ -219,26 +171,26 @@ function ViewIdeaById(props) {
       </div>
 
       <div className="comments_section">
+        {/* {console.log(comments)} */}
         {comments.map(
           comment => (
           <div>
             <div className="commentBody">
               <div className="commentText" key={comment.id}>
                 {comment.commentText}
-                <span className="commentEdit">
-                  {/* {console.log(comment.id)} */}
-                  <button>
-                    {/* Edit */}
-                    <BiEditAlt onClick={navigateToEditComment} arg={comment.id} size={"30px"} />
-                  </button>
-                </span>
+
+                {(currentUserId === comment.userId) ?
+                  (
+                    <div className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
+                      <button className="btn btn-outline-secondary"> <BiEditAlt onClick={navigateToEditComment} arg={comment.id} size={"20px"} /> </button>
+                    </div>
+                  ) : ( <div> </div> )
+                }
               </div>
-              <div className="commentedBy" key={comment.id}>
-                Posted by : {comment.fname + " " + comment.lname}
-              </div>
-              <div className="commentedDate" key={comment.id}>
-                Posted on : {comment.commentedDate}
-              </div>
+
+              <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
+              <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>
+
             </div>
           </div>
           )

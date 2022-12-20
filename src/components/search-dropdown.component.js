@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import "./dropdown.component.css";
+import "./search-dropdown.component.css";
 import Ideasearch from "./search-ideas.component";
 import BusinessChallengesSearch from "./search-challenges.component";
 
 
-export default class Dropdown extends Component{
+export default class SearchDropdown extends Component{
     constructor(props) {
         super(props);
         this.state = {

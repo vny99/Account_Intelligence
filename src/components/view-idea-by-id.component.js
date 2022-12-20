@@ -24,14 +24,13 @@ function ViewIdeaById(props) {
     const [status, setStatus] = useState("RAISED");
     const [flow, toggleFlow] = useState(false);
     const [admin, setAdmin] = useState(false);
-    const [userId, setUserId]=useState("");
     const [currentUserId, setCurrentUserId]=useState("");
 
     useEffect(() => {
       CommentService.getCommentsByIdeaId(id).then((res) => {
         setComments(res.data);
       });
-    });
+    }, comments);
 
     useEffect(() => {
         IdeaService.getIdeaByIdeaId(id).then((res) => {
@@ -56,12 +55,16 @@ function ViewIdeaById(props) {
 
   const handleUpdate = (e) => {
     setStatus(e.target.value);
-
     let myIdea = idea;
-
     myIdea.ideaStatus = e.target.value;
+    IdeaService.updateIdea(idea.id, myIdea);
+  };
 
-    IdeaService.updateIdea(idea.ideaId, myIdea);
+  const navigateToEditComment = (e) => {
+    // let fun = e.target.name
+    let commentId = e.target.getAttribute("arg")
+    console.log(commentId)
+    navigate("/editComment/" + commentId );
   };
 
   const navigate = useNavigate();
@@ -223,7 +226,11 @@ function ViewIdeaById(props) {
               <div className="commentText" key={comment.id}>
                 {comment.commentText}
                 <span className="commentEdit">
-                  <a href='/editComment'><BiEditAlt size={"30px"} /></a>
+                  {/* {console.log(comment.id)} */}
+                  <button>
+                    {/* Edit */}
+                    <BiEditAlt onClick={navigateToEditComment} arg={comment.id} size={"30px"} />
+                  </button>
                 </span>
               </div>
               <div className="commentedBy" key={comment.id}>

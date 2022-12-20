@@ -9,6 +9,10 @@ class BusinessChallengesService {
         return axios.get(CHALLENGES_API_BASE_URL, { headers: authHeader() });
     }
 
+    getRecentFiveBusinessChallenges(){
+        return axios.get(CHALLENGES_API_BASE_URL + "/recent", { headers: authHeader() });
+    }
+
     getChallengeById(challengeId){
         return axios.get(CHALLENGES_API_BASE_URL + '/' + challengeId, { headers: authHeader() });
     }

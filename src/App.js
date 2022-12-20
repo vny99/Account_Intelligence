@@ -21,7 +21,7 @@ import AddIdea from "./components/add-idea.component";
 import AddChallenge from "./components/add-challenge.component";
 import FreshIdeasPage from "./components/fresh-ideas-page.component";
 import BusinessChallengesPage from "./components/business-challenges-page.component";
-import Dropdown from "./components/dropdown.component";
+import SearchDropdown from "./components/search-dropdown.component";
 import ViewIdeaById from "./components/view-idea-by-id.component";
 import ViewChallengeById from "./components/view-challenge-by-id.component";
 import EditChallengeById from "./components/edit-challenge-by-id.component.js";
@@ -161,13 +161,12 @@ class App extends Component {
             <Route path = "/ideas" element = {<FreshIdeasPage />} />
             <Route path = "/challenges" element = {<BusinessChallengesPage />} />
             <Route path="/addIdea" element={<AddIdea />} />
-            {/* <Route path = "/search" element = {<Ideasearch />} /> */}
-            <Route path = "/search" element = {<Dropdown />} />
+            <Route path = "/search" element = {<SearchDropdown />} />
             <Route path="/addChallenge" element={<AddChallenge />} />
             <Route path = "/viewIdea/:id" element = {<ViewIdeaById />}/>
             <Route path = "/viewChallenge/:id" element = {<ViewChallengeById />}/>
             <Route path = "/editChallenge/:id" element = {<EditChallengeById />}/>
-            <Route path = "/editComment" element = {<EditComment />}/>
+            <Route path = "/editComment/:id" element = {<EditComment />}/>
             <Route path = "/myFavorites" element = {<MyFavoriteIdeasPage />}/>
           </Routes>
         </div>

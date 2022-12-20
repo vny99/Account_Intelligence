@@ -10,7 +10,10 @@ class UserService {
     }
 
     addFavorite(ideaId){
-        return axios.post(USER_API_BASE_URL + ideaId, { headers: authHeader() });
+        console.log(authHeader())
+        console.log(ideaId)
+        // return axios.post(USER_API_BASE_URL, ideaId, { headers: authHeader() });
+        return axios.post(USER_API_BASE_URL + "addFavorite", { params: { ideaId: ideaId}, headers: authHeader() });
     }
 
     getFavorites() {

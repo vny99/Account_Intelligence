@@ -19,7 +19,7 @@ class FreshIdeasPage extends Component {
             userDetails: [],
             currentPage1: 1,
             currentPage2: 1,
-            recordsPerPage: 3,
+            recordsPerPage: 10,
         }
 
         // this.setCurrentPage = this.setCurrentPage.bind(this);

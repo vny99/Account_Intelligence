@@ -119,8 +119,8 @@ export default class AddChallenge extends Component {
                 className="form-control challenge-date-input"
                 id="expiryDate"
                 required
-                // value="2022-12-31"
-                value={this.state.expiryDate}
+                value=" "
+                // value={this.state.expiryDate}
                 onChange={this.onChangeExpiryDate}
                 name="expiryDate"
               />

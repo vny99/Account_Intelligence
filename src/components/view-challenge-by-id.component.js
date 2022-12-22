@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import ChallengeCommentsService from "../services/challenge-comments.service"
 import BusinessChallengesService from '../services/business-challenge.service'
 import { TbArrowBackUp } from 'react-icons/tb';
 
-function ViewChallengeById(props) {
+function ViewChallengeById() {
     const { id } = useParams();
     const [userName, setUserName] = useState("");
     const [challenge, setChallenge] = useState({});
@@ -54,30 +54,23 @@ function ViewChallengeById(props) {
             </button>
                 <div className="idea">
                     <div className="idea_header"></div>
-            
-                    <div className="idea_title">
-                        <h1>{challenge.challengeTitle}</h1>
-                    </div>
-            
-                    <div className="idea_description">
-                        <p>{challenge.challengeDescription}</p>
-                    </div>
-                    
+                    <div className="idea_title"><h1>{challenge.challengeTitle}</h1></div>
+                    <div className="idea_description"><p>{challenge.challengeDescription}</p></div>
                     <div className="closingDate">
                         <p>
-                        Expiry Date:
-                        {
-                            new Date(challenge.createdDate).toDateString().slice(8, 11) +
-                            // month eg: Dec
-                            new Date(challenge.createdDate).toDateString().slice(4, 8) + 
-                            // year eg: 2022
-                            new Date(challenge.createdDate).toDateString().slice(11)
-                        }
+                            Expiry Date:
+                            {
+                                new Date(challenge.createdDate).toDateString().slice(8, 11) +
+                                // month eg: Dec
+                                new Date(challenge.createdDate).toDateString().slice(4, 8) + 
+                                // year eg: 2022
+                                new Date(challenge.createdDate).toDateString().slice(11)
+                            }
                         </p>
                     </div>
                 </div>
         
-                <div className="comment-box">
+                <div className="challenge-comment-box">
                     <p>Leave a Comment</p>
                     <form className="comment-form">
                         <textarea
@@ -99,8 +92,8 @@ function ViewChallengeById(props) {
                         return(
                         <div>
                             <div className="commentBody">
-                                <div className="commentText" key={key}>{comments[key].commentText}</div>
-                                <div className="commentedBy" key={key}>Posted by : {comments[key].commentedBy}</div>
+                                <div className="commentText" key={key}>{comment.commentText}</div>
+                                <div className="commentedBy" key={key}>Posted by : {comment.commentedBy}</div>
                             </div> 
                         </div>
                         )

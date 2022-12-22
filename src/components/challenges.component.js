@@ -1,7 +1,7 @@
 import React from 'react'
 import { BiEditAlt } from 'react-icons/bi'
 
-import EditChallengeById from "./edit-challenge-by-id.component.js";
+import EditChallengeById from "./edit-challenge.component.js";
 import Modal from "react-bootstrap/Modal";
 import "./add-challenge.component.css";
 import { useState } from "react";

@@ -63,7 +63,6 @@ export default class EditChallengeById extends React.Component{
       expiryDate:this.state.closingdate
     };
 
-    // BusinessChallengesService.addChallenge(challenge)
     BusinessChallengesService.updateChallenge(challenge)
     .then((res)=>{
       console.log(res.date);

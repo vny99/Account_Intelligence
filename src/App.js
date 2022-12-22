@@ -24,8 +24,8 @@ import BusinessChallengesPage from "./components/business-challenges-page.compon
 import SearchDropdown from "./components/search-dropdown.component";
 import ViewIdeaById from "./components/view-idea-by-id.component";
 import ViewChallengeById from "./components/view-challenge-by-id.component";
-import EditChallengeById from "./components/edit-challenge-by-id.component.js";
-import EditComment from "./components/edit-comment.component";
+import EditChallengeById from "./components/edit-challenge.component.js";
+import EditComment from "./components/edit-idea-comment.component";
 import MyFavoriteIdeasPage from "./components/my-favorite-ideas-page.component";
 
 class App extends Component {
@@ -166,7 +166,7 @@ class App extends Component {
             <Route path = "/viewIdea/:id" element = {<ViewIdeaById />}/>
             <Route path = "/viewChallenge/:id" element = {<ViewChallengeById />}/>
             <Route path = "/editChallenge/:id" element = {<EditChallengeById />}/>
-            <Route path = "/editComment/:id" element = {<EditComment />}/>
+            <Route path = "/editIdeaComment/:commentId/:commentText" element = {<EditComment />}/>
             <Route path = "/myFavorites" element = {<MyFavoriteIdeasPage />}/>
           </Routes>
         </div>

@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
+import IdeaService from "../services/idea.service";
 
 class AddFavourite extends Component {
   constructor(props) {
     super(props);
     this.state = {
       liked: false,
+      localLiked: false,
       email: "",
-      // email: this.props.email,
       ideaId: this.props.ideaId,
     };
-    // console.log(email, ideaId);
-    // console.log(this.state.email, this.state.ideaId);
   }
 
   componentDidMount(){
@@ -21,20 +20,21 @@ class AddFavourite extends Component {
     if (user) {
       this.setState({ email: user.email});
     }
+
 }
 
   toggle = () => {
-    let localLiked = this.state.liked;
 
-    // Toggle the state variable liked
+    let localLiked = this.state.liked
+
+    // IdeaService.isFavoriteIdeaOfCurrentUser(this.state.ideaId).then((res) => {
+    //   this.setState({ localLiked: res.data});
+    // })
+
     localLiked = !localLiked;
     if (localLiked === true){
-    // console.log(this.state.email, this.props.ideaId)
-    UserService.addFavorite(this.props.ideaId)
+      UserService.addFavorite(this.props.ideaId)
     }
-    // else{
-    //   UserService.removeFavorite(this.state.email, this.props.ideaId)
-    // }
 
     this.setState({ liked: localLiked });
   };

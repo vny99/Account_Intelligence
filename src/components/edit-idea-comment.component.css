@@ -1,0 +1,43 @@
+.Comment-Box{
+  width:80%;
+  margin: auto;
+  border: 1px solid #ccc;
+  padding:10px 20px;
+  font-family: SF Pro Text,SF Pro Icons,AOS Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+  border-radius:5px;
+  box-shadow:0px 0px 10px 1px rgb(165, 165, 165);
+}
+
+.Comment-Box{
+  text-align: left;
+  font-size:20px;
+  color:#777;
+}
+
+.Comment-Form Textarea{
+  width:100%;
+  padding:3px;
+  margin:1px 0;
+  box-sizing:border-box;
+  outline:none;
+  font-size:18px;
+  font-family: SF Pro Text,SF Pro Icons,AOS Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+  border:1px solid #ddd;
+  color:#777;
+}
+
+.edit-Comment-form button{
+  margin:1px 0;
+  border:none;
+  background-color:#d0d0d0;
+  padding:8px;
+  font-size:18px;
+  border-radius:3px;
+  color:#444;
+}
+
+.edit-Comment-form button:hover{
+  color:white;
+  background-color :grey;
+}
+  

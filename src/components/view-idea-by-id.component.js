@@ -13,6 +13,8 @@ import { useNavigate} from "react-router-dom";
 import AddFavourite from "./add-favourite.component";
 import LikesService from "../services/likes.service";
 import AuthService from "../services/auth.service";
+import Modal from "react-bootstrap/Modal";
+import EditIdea from "./edit-idea.component";
 
 function ViewIdeaById() {
   const [idea, setIdea] = useState({});
@@ -25,6 +27,8 @@ function ViewIdeaById() {
   const [admin, setAdmin] = useState(false);
   const [likeId, setLikeId] = useState("");
   const [currentUserId, setCurrentUserId] = useState("");
+  const [show, setShow] = useState(false);
+  const [editId, setEditId] = useState("");
 
   useEffect(() => {
     IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
@@ -54,6 +58,16 @@ function ViewIdeaById() {
     IdeaService.updateIdea(idea.id, myIdea);
   };
 
+  const handleShow = (data) => {
+    setShow(true);
+    setEditId(data);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    setEditId("");
+  };
+
   const handleLike=()=>{
     if(likeId === "") {
       let data={ ideaId: idea.id }
@@ -65,10 +79,8 @@ function ViewIdeaById() {
     } 
   }
 
-  const navigateToEditComment = (e) => {
-    let commentId = e.target.getAttribute("arg")
-    console.log(commentId)
-    navigate("/editComment/" + commentId );
+  const navigateToEditComment = (commentId, commentText) => {
+    navigate("/editIdeaComment/" + commentId + "/" + commentText );
   };
 
   const navigate = useNavigate();
@@ -125,6 +137,20 @@ function ViewIdeaById() {
                 )}
               </div>
             )}
+            
+            <BiEditAlt className="button_edit" size={"30px"} color={"#527293"} onClick={() => { handleShow(idea.id); }} />
+            <Modal show={show} onHide={handleClose} className="name">
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <h1>Edit Fresh Idea</h1>
+                </Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body>
+              <EditIdea id={editId}/>
+              </Modal.Body>
+            </Modal>
+
           </div>
         </div>
 
@@ -163,26 +189,22 @@ function ViewIdeaById() {
               placeholder="Write your Comment"
               onChange={(e) => setCommentText(e.target.value)}
             ></textarea>
-            <button className="comment-form button" onClick={handleSubmit}>
-              Post Comment
-            </button>
+            <button className="post-comment-form button" onClick={handleSubmit}>Post Comment</button>
           </form>
         </div>
       </div>
 
       <div className="comments_section">
-        {/* {console.log(comments)} */}
         {comments.map(
           comment => (
           <div>
             <div className="commentBody">
               <div className="commentText" key={comment.id}>
                 {comment.commentText}
-
                 {(currentUserId === comment.userId) ?
                   (
                     <div className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
-                      <button className="btn btn-outline-secondary"> <BiEditAlt onClick={navigateToEditComment} arg={comment.id} size={"20px"} /> </button>
+                      <button className="btn btn-outline-secondary"> <BiEditAlt onClick={event=> {navigateToEditComment(comment.id, comment.commentText)}} size={"20px"} /> </button>
                     </div>
                   ) : ( <div> </div> )
                 }

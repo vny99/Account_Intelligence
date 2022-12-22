@@ -1,29 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "./edit-comment.component.css";
-import { useEffect } from "react";
-
+import "./edit-idea-comment.component.css";
 import IdeaCommentsService from "../services/idea-comments.service"
 
-function EditComment(props) {
-  const {id}  = useParams();
-  console.log(id)
-  const navigate=useNavigate();
+function EditComment() {
+  const { commentId, commentText }  = useParams();
+  const navigate = useNavigate();
   const [updatedcomment, setUpdatedComment] = useState("");
-  const [currentUserId, setCurrentUserId]=useState("");
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setCurrentUserId(user.id); // here id is userid
-  }, []);
-
-  const navigateToEditComment=()=>{
-    IdeaCommentsService.updateComment(id, updatedcomment).then((res) => {
+  const navigateToEditComment = () => {
+    IdeaCommentsService.updateComment(commentId, updatedcomment).then((res) => {
       setUpdatedComment(res.data);
     });
-    navigate("/ideas")
-    // navigate("/viewIdea/" + ideaId);
+    navigate(-1);
   }
   
   return(
@@ -34,11 +24,11 @@ function EditComment(props) {
           <textarea
             className="Comment-Form Textarea"
             rows="3"
-            placeholder="Write your Comment"
+            value={commentText}
             onChange={(e) => setUpdatedComment(e.target.value)}
           ></textarea>
           <br/>
-          <button className="Comment-form button" onClick={navigateToEditComment}>
+          <button className="edit-Comment-form button" onClick={navigateToEditComment}>
             Post Comment
           </button>
         </form>

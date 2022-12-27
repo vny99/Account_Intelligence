@@ -1,5 +1,5 @@
 import React from 'react';
-import { stack as Menu } from 'react-burger-menu';
+import { slide as Menu } from 'react-burger-menu';
 import './Sidebar.css';
 
 import { FcIdea } from "react-icons/fc";
@@ -26,7 +26,9 @@ const props = () => {
         <div>Add Idea</div>
       </a>
 
-      <a className="bm-item" href="/myFavorites">
+      <a
+      // onMouseEnter={}
+      className="bm-item" href="/myFavorites">
         <CgCardHearts color='rgb(181, 72, 72)' style={{"fontSize":"30px"}} />
         <div>My Favorites</div>
       </a>

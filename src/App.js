@@ -14,6 +14,7 @@ import BoardAdmin from "./components/board-admin.component";
 import About from "./components/about.component";
 
 import Sidebar from "./components/Sidebar/Sidebar";
+import MySidebar from "./components/Sidebar/MySidebar";
 import Userprofile from "./components/userprofile.component";
 
 import UserService from "./services/user.service";
@@ -69,6 +70,7 @@ class App extends Component {
     return (
       <div>
         <Sidebar />
+        {/* <MySidebar /> */}
         <nav className="navbar nav-tabs navbar-expand-sm">
           <Link to={"/about"} className="navbar-brand">
             <strong style={{"fontSize":"xx-large"}}>Echo</strong>

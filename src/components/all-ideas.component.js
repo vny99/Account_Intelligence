@@ -1,6 +1,5 @@
 import React from 'react'
 import { useCallback } from 'react';
-import { useEffect } from 'react';
 import { useState } from 'react';
 
 import { AiFillHeart, AiOutlineHeart, AiOutlineLike, AiOutlineComment } from "react-icons/ai";
@@ -18,13 +17,6 @@ const AllIdeas = ({data}) => {
         console.log(isFavorite)
       }, [isFavorite]);
 
-    // function checkFavorite(id) {
-    //     IdeaService.isFavoriteIdeaOfCurrentUser(id).then(
-    //         (res) => setIsFavorite(res.data)
-    //     )
-    //     console.log(isFavorite)
-    // }
-
     return (  
         <table className = "table">
             <thead style={{"textAlign":"center", "verticalAlign":"middle"}}>
@@ -36,7 +28,7 @@ const AllIdeas = ({data}) => {
 
                     <th> Created by</th>
                     <th> Created date</th>
-                    <th> Favourite</th>
+                    {/* <th> Favourite</th> */}
                     <th> Rewards</th>
                 </tr>
             </thead>
@@ -70,9 +62,7 @@ const AllIdeas = ({data}) => {
                                     </span>
                                 </td>
                                 <td style={{"fontSize":"14px"}}> {idea.ideaStatus}</td>
-                                <td style={{"fontSize":"14px"}}>
-                                    {idea.fname + " " + idea.lname}
-                                </td>
+                                <td style={{"fontSize":"14px"}}> {idea.fname + " " + idea.lname}</td>
                                 <td style={{"fontSize":"14px"}}>
                                     {
                                         new Date(idea.createdDate).toDateString().slice(8, 11) +
@@ -81,14 +71,14 @@ const AllIdeas = ({data}) => {
                                     }
                                 </td>
 
-                                <td
-                                // onClick={checkFavorite(idea.id)}
-                                >
+                                {/* <td */}
+                                {/* onClick={checkFavorite(idea.id)} */}
+                                {/* > */}
                                     {/* {checkFavorite(idea.id)} */}
                                     {/* {console.log(isFavorite)} */}
-                                    {isFavorite ? (<span>Favorite</span>) : (<span>Not favorite</span>)}
+                                    {/* {isFavorite ? (<span>Favorite</span>) : (<span>Not favorite</span>)} */}
 
-                                </td>
+                                {/* </td> */}
 
                                 <td> </td>
                                 

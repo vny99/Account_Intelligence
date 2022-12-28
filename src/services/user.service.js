@@ -13,6 +13,10 @@ class UserService {
         return axios({ method: 'post', url: USER_API_BASE_URL + "addFavorite/" + id, headers: authHeader() })
     }
 
+    removeFavorite(id){
+        return axios({ method: 'post', url: USER_API_BASE_URL + "removeFavorite/" + id, headers: authHeader() })
+    }
+
     getFavorites() {
         return axios.get(USER_API_BASE_URL + "favorites", { headers: authHeader() });
     }

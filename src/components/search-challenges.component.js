@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import BusinessChallengesService from "../services/business-challenge.service";
 import "./search-challenges.component.css";
 
-
-
 export default class BusinessChallengesSearch extends Component {
   constructor(props) {
     super(props);
@@ -28,12 +26,6 @@ export default class BusinessChallengesSearch extends Component {
   componentDidMount() {
     // this.retrieveTutorials();
   }
-  // handleSearch() {
-  //   this.setState({
-  //     search: false
-  //   })
-  //   console.log("search")
-  // }
 
 
   onChangeSearchItem(e) {

@@ -38,9 +38,8 @@ class MostLikedCardsComponent extends Component {
                         slidesPerView={3}
                         spaceBetween={0}
                         slidesPerGroup={3}
-                        loop={true}
+                        // loop={true}
                         loopFillGroupWithBlank={true}
-                        // pagination={{ clickable: true, }}
                         navigation={true}
                         modules={[Pagination, Navigation]}
                         className="mySwiper"
@@ -53,53 +52,49 @@ class MostLikedCardsComponent extends Component {
                                 >
                                     <div className="ideas">
                                         <div className="ideas_container" key={idea.id}>
-                                            <div style={{"display":"flex", "alignItems":"flex-start"}}>
-                                                <div style={{ "display": "inline-block", "padding": "5px", "align-items": "flex-start", "flex-direction": "column",
-                                                }} className="like">
-                                                    <AiOutlineLike size={"25px"} />
-                                                    <div>{idea.likesCount}</div>
+                                            <a href={'/viewIdea/' + idea.id} className='idea-title-link'>
+                                                <div style={{"display":"flex", "alignItems":"flex-start"}}>
+                                                    <div style={{ "display": "inline-block", "padding": "5px", "align-items": "flex-start", "flex-direction": "column",
+                                                    }} className="like">
+                                                        <AiOutlineLike size={"25px"} />
+                                                        <div>{idea.likesCount}</div>
+                                                    </div>
+
+                                                    <div style={{ "display": "inline-block", "padding": "5px",
+                                                    "marginLeft":"220px"
+                                                    }} className="like">
+                                                        <AiOutlineComment size={"25px"} color={"Tomato"} />
+                                                        <div>{idea.commentsCount}</div>
+                                                    </div>
                                                 </div>
 
-                                                <div style={{ "display": "inline-block", "padding": "5px",
-                                                "marginLeft":"220px"
-                                                }} className="like">
-                                                    <AiOutlineComment size={"25px"} color={"Tomato"} />
-                                                    <div>{idea.commentsCount}</div>
-                                                </div>
-                                            </div>
-
-                                            <div className="ideas_container_name">
-                                                <a href={'/viewIdea/' + idea.id} className='idea-title-link'>
+                                                <div className="ideas_container_name">
                                                     <h1>{idea.ideaTitle}</h1>
-                                                </a>
-                                            </div>
-
-                                            <div className="ideas_container_description">
-                                                <p> {idea.ideaDescription} </p>
-                                            </div>
-
-                                            <div className='ideas_container_status' >
-                                                <span style={{"backgroundColor":"rgb(102, 147, 102)", "color":"white", "padding":"2px", "border":"4px solid transparent", "borderRadius":"10px"}}>
-                                                    {idea.ideaStatus}
-                                                </span>
-                                            </div>
-
-                                            <div className="ideas_container_created">
-                                                <div> <b>Created Date: </b>
-                                                    {
-                                                        new Date(idea.createdDate).toDateString().slice(8, 11) +
-                                                        new Date(idea.createdDate).toDateString().slice(4, 8) + 
-                                                        new Date(idea.createdDate).toDateString().slice(11)
-                                                    }
                                                 </div>
-                                                <div> <b>Created By: </b>{idea.fname + " " + idea.lname} </div>
-                                            </div>
 
-                                            <div>
-                                                <a href={'/viewIdea/' + idea.id} className="view-more-button" style={{"marginLeft":"108px"}} >
-                                                    View more
-                                                </a>
-                                            </div>
+                                                <div className="ideas_container_description">
+                                                    <p> {idea.ideaDescription} </p>
+                                                </div>
+
+                                                <div className='ideas_container_status' >
+                                                    <div> <b>Status: </b>
+                                                    {/* <span style={{"backgroundColor":"rgb(102, 147, 102)", "color":"white", "padding":"2px", "border":"4px solid transparent", "borderRadius":"10px"}}> */}
+                                                        {idea.ideaStatus}
+                                                    {/* </span> */}
+                                                    </div>
+                                                </div>
+
+                                                <div className="ideas_container_created">
+                                                    <div> <b>Created Date: </b>
+                                                        {
+                                                            new Date(idea.createdDate).toDateString().slice(8, 11) +
+                                                            new Date(idea.createdDate).toDateString().slice(4, 8) + 
+                                                            new Date(idea.createdDate).toDateString().slice(11)
+                                                        }
+                                                    </div>
+                                                    <div> <b>Created By: </b>{idea.fname + " " + idea.lname} </div>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </SwiperSlide>

@@ -7,6 +7,8 @@ export default class AddIdea extends Component {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeBenefitCategory = this.onChangeBenefitCategory.bind(this);
+    this.onChangeCategory = this.onChangeCategory.bind(this);
     this.saveidea = this.saveidea.bind(this);
     this.newidea = this.newidea.bind(this);
 
@@ -15,10 +17,21 @@ export default class AddIdea extends Component {
       id: null,
       title: "",
       description: "", 
+      benefitCategory: "Internal",
+      category: "Account Initiatives", 
       published: false,
-
-      submitted: false
+      submitted: false,
+      benefitCategoriesList: [],
+      categoriesList: []
     };
+  }
+
+  componentDidMount() {
+    IdeaService.getBenefitCategoriesList().then(res => {
+      this.setState({ benefitCategoriesList: res.data }) })
+
+    IdeaService.getCategoriesList().then(res => {
+      this.setState({ categoriesList: res.data }) })
   }
 
   onChangeTitle(e) {
@@ -33,10 +46,24 @@ export default class AddIdea extends Component {
     });
   }
 
+  onChangeBenefitCategory(e) {
+    this.setState({
+      benefitCategory: e.target.value
+    });
+  }
+
+  onChangeCategory(e) {
+    this.setState({
+      category: e.target.value
+    });
+  }
+
   saveidea() {
     var idea = {
       ideaTitle: this.state.title,
-      ideaDescription: this.state.description
+      ideaDescription: this.state.description,
+      benefitCategory: this.state.benefitCategory,
+      category: this.state.category
     };
 
     IdeaService.postIdea(idea)
@@ -45,8 +72,9 @@ export default class AddIdea extends Component {
           id: response.data.id,
           title: response.data.title,
           description: response.data.description,
+          benefitCategory: response.data.benefitCategory,
+          category: response.data.category,
           published: response.data.published,
-
           submitted: true
         });
         console.log(response.data);
@@ -62,6 +90,8 @@ export default class AddIdea extends Component {
       id: null,
       title: "",
       description: "",
+      benefitCategory: "Internal",
+      category: "Account Initiatives",
       published: false,
       submitted: false
     });
@@ -100,12 +130,40 @@ export default class AddIdea extends Component {
                 className="form-control"
                 id="description"
                 required
-                rows="7"
+                rows="2"
                 value={this.state.description}
                 onChange={this.onChangeDescription}
                 name="description"
               >
               </textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Benefit Category</label>
+              <select class="form-select" aria-label="Default select example"
+              value={this.state.benefitCategory}
+              onChange={this.onChangeBenefitCategory}>
+                { this.state.benefitCategoriesList.map( bc =>
+                  <option
+                  >
+                    {bc.name}
+                  </option>
+                )}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Category</label>
+                <select class="form-select" aria-label="Default select example"
+                value={this.state.category}
+                onChange={this.onChangeCategory}>
+                { this.state.categoriesList.map( c =>
+                  <option
+                  >
+                    {c.name}
+                  </option> 
+                )}
+                </select>
             </div>
 
             <button onClick={this.saveidea} style={{"marginTop":"20px"}} className="btn btn-success">

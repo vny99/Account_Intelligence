@@ -17,7 +17,6 @@ class LikesService {
     }
 
     unLike(id) {
-        console.log(id)
         return axios.delete(LIKE_API_BASE_URL + "unlike/" + id, { headers: authHeader() })
     }
 }

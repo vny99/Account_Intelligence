@@ -15,31 +15,16 @@ class FreshIdeasPage extends Component {
 
         this.state = {
             data: [],
-            myIdeasArr: [],
+            myIdeasData: [],
             userDetails: [],
             currentPage1: 1,
             currentPage2: 1,
             recordsPerPage: 10,
         }
-
-        // this.setCurrentPage = this.setCurrentPage.bind(this);
     }
 
-    setCurrentPage1 = (page) => {
-        this.setState(
-            {
-                currentPage1 : page
-            }
-        );
-    }
-
-    setCurrentPage2 = (page) => {
-        this.setState(
-            {
-                currentPage2 : page
-            }
-        );
-    }
+    setCurrentPage1 = (page) => { this.setState({ currentPage1 : page }); }
+    setCurrentPage2 = (page) => { this.setState({ currentPage2 : page }); }
 
     componentDidMount(){
         const user = AuthService.getCurrentUser();
@@ -51,6 +36,7 @@ class FreshIdeasPage extends Component {
 
         IdeaService.getIdeas().then((res) => {
             this.setState({data: res.data,});
+            this.setState({myIdeasData: res.data.filter((idea)=>idea.userId===this.state.userDetails.id)})
         });
     }
 
@@ -68,7 +54,7 @@ class FreshIdeasPage extends Component {
     }
 
     render() {
-        const { currentPage1, currentPage2, recordsPerPage, userDetails, data } = this.state;
+        const { currentPage1, currentPage2, recordsPerPage, userDetails, data, myIdeasData } = this.state;
 
         const indexOfLastRecord1 = currentPage1 * recordsPerPage;
         const indexOfFirstRecord1 = indexOfLastRecord1 - recordsPerPage;
@@ -77,21 +63,17 @@ class FreshIdeasPage extends Component {
 
         const indexOfLastRecord2 = currentPage2 * recordsPerPage;
         const indexOfFirstRecord2 = indexOfLastRecord2 - recordsPerPage;
-        const currentRecords2 = data.slice(indexOfFirstRecord2, indexOfLastRecord2);
-        const nPages2 = Math.ceil(data.length / recordsPerPage)
+        const currentRecords2 = myIdeasData.slice(indexOfFirstRecord2, indexOfLastRecord2);
+        const nPages2 = Math.ceil(myIdeasData.length / recordsPerPage)
 
         return (
             <div>
-                <div className="heading-line"
-                >
-                    <h2
-                    className="d-inline-flex display-5"
-                    style={{"left":"550px"}}
-                    >Fresh Ideas</h2>
-                    <div
-                    className="d-inline-flex"
-                    style={{"float":"right", "marginTop":"15px"}}
-                    >
+                <div className="heading-line">
+                    <h2 className="d-inline-flex display-5" style={{"left":"550px"}}>
+                        Fresh Ideas
+                    </h2>
+
+                    <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
                         <div>
                             <a href="/addIdea" className="btn btn-success" >
                                 Add Idea

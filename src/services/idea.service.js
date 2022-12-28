@@ -44,6 +44,14 @@ class IdeaService {
     isFavoriteIdeaOfCurrentUser(id){
         return axios.get(IDEA_API_BASE_URL + "/isFavorite/" + id , {headers: authHeader() });
     }
+
+    getBenefitCategoriesList(){
+        return axios.get(IDEA_API_BASE_URL + "/benefitcategories", {headers: authHeader() })
+    }
+
+    getCategoriesList(){
+        return axios.get(IDEA_API_BASE_URL + "/categories", {headers: authHeader() })
+    }
 }
 
 export default new IdeaService();

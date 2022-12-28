@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import IdeaService from "../services/idea.service";
 import "./view-idea-by-id.component.css";
-import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
 import { TbArrowBackUp } from "react-icons/tb";
 import { BiEditAlt, BiMedal } from "react-icons/bi";
 import flowImage from "./images/flowStatus.jpg";
@@ -15,6 +15,7 @@ import LikesService from "../services/likes.service";
 import AuthService from "../services/auth.service";
 import Modal from "react-bootstrap/Modal";
 import EditIdea from "./edit-idea.component";
+import UserService from "../services/user.service";
 
 function ViewIdeaById() {
   const [idea, setIdea] = useState({});
@@ -29,6 +30,7 @@ function ViewIdeaById() {
   const [currentUserId, setCurrentUserId] = useState("");
   const [show, setShow] = useState(false);
   const [editId, setEditId] = useState("");
+  const [localLiked, setLocalLiked] = useState(false);
 
   useEffect(() => {
     IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
@@ -37,7 +39,8 @@ function ViewIdeaById() {
   useEffect(() => {
     IdeaCommentsService.getCommentsByIdeaId(id).then((res) => { setComments(res.data); })
     LikesService.getLikeOfCurrentUser(id).then((res)=>{ setLikeId(res.data); })
-  }, [comments, likeId]);
+    IdeaService.isFavoriteIdeaOfCurrentUser(id).then((res) => { setLocalLiked(res.data); })
+  }, [comments, likeId, localLiked]);
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -77,6 +80,11 @@ function ViewIdeaById() {
     else{
       LikesService.unLike(likeId)
     } 
+  }
+
+  const handleFavorite=()=>{
+    if(!localLiked) { UserService.addFavorite(id) }
+    else{ UserService.removeFavorite(id) } 
   }
 
   const navigateToEditComment = (commentId, commentText) => {
@@ -166,7 +174,13 @@ function ViewIdeaById() {
             </div>
           }
 
-          <div> <AddFavourite ideaId={idea.id} /> </div>
+          <div>
+            {localLiked ?
+              <AiFillHeart size={"40px"} color="red" onClick={handleFavorite} />
+              :
+              <AiOutlineHeart size={"40px"} color="red" onClick={handleFavorite} />
+            }
+          </div>
 
           <div className="badge">
             <BiMedal className="ruby_badge" />

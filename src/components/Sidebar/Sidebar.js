@@ -10,7 +10,9 @@ import Logo from ".//logo.jpg"
 
 const props = () => {
   return (
-      <Menu width={'80px'} customBurgerIcon={ <img src={Logo} /> } >
+      <Menu width={'80px'}
+      // customBurgerIcon={ <img src={Logo} /> }
+      >
       <a className="bm-item" href="/ideas">
         <FcIdea style={{"fontSize":"30px"}} />
         <div>Fresh Ideas</div>

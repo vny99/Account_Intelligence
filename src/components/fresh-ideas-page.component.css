@@ -86,30 +86,29 @@ tr:hover td.highlight div {
 .btn-success {
     font-family: Raleway-SemiBold;
     font-size: 13px;
-    color: rgba(103, 192, 103, 0.75);
+    color: rgba(148, 160, 148, 0.75);
     letter-spacing: 1px;
     line-height: 15px;
-    border: 2px solid rgba(103, 192, 103, 0.75);
+    border: 2px solid rgba(148, 160, 148, 0.75);
     border-radius: 40px;
     background: transparent;
     transition: all 0.3s ease 0s;
     padding-top: 10px;
-    /* color: #e8d28c; */
   }
   
 .btn-success:hover {
     color: #FFF;
-    background: rgb(103, 192, 103, 0.75);
-    border: 2px solid rgb(103, 192, 103, 0.75);
+    background: rgba(148, 160, 148, 0.75);
+    border: 2px solid rgba(148, 160, 148, 0.75);
 }
 
 .btn-warning {
     font-family: Raleway-SemiBold;
     font-size: 13px;
-    color: rgba(240, 173, 78, 0.75);
+    color: rgba(148, 160, 148, 0.75);
     letter-spacing: 1px;
     line-height: 0px;
-    border: 2px solid rgba(240, 173, 78, 0.75);
+    border: 2px solid rgba(148, 160, 148, 0.75);
     border-radius: 40px;
     background: transparent;
     transition: all 0.3s ease 0s;
@@ -117,8 +116,8 @@ tr:hover td.highlight div {
   
 .btn-warning:hover {
     color: #FFF;
-    background: rgb(240, 173, 78, 0.75);
-    border: 2px solid rgba(240, 173, 78, 0.75);
+    background: rgba(148, 160, 148, 0.75);
+    border: 2px solid rgba(148, 160, 148, 0.75);
 }
 
 .btn-warning input {
@@ -137,11 +136,11 @@ h2{
     font-size: 70px;
     font-weight: 600;
     background-image: linear-gradient(to left, #9a3c3c, #d39393);
-    /* background-image: linear-gradient(to left, #b31212, #ce9d92); */
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-    text-shadow: 0px 4px 10px rgba(126, 64, 95, 0.8);
+    /* background-image: linear-gradient(to left, #b31212, #ce9d92); */
+    /* text-shadow: 0px 4px 10px rgba(126, 64, 95, 0.8); */
     /* color: rgb(126, 64, 95); */
 }
 

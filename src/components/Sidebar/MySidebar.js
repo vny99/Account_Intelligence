@@ -1,6 +1,6 @@
 import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
-import './MySidebar.css';
+// import './MySidebar.css';
 
 import { FcIdea } from "react-icons/fc";
 import { FcTimeline } from "react-icons/fc";

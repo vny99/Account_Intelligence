@@ -66,6 +66,15 @@ public class LikesController {
 		}
 	}
 	
+	@DeleteMapping("/likes/unlike/{id}")
+	void unLike(@PathVariable String id) {
+		Like like = likesRepo.findById(id).get();
+		Idea myIdea = ideasRepo.findById(like.getIdeaId()).get();
+		myIdea.setLikesCount(myIdea.getLikesCount()-1);
+		likesRepo.deleteById(id);
+		ideasRepo.save(myIdea);
+	}
+	
 	@GetMapping("/likes/currentUserLikes/{id}")
 	String getLikeOfCurrentUser(@PathVariable String id) {
 		List<Like> likes = likesRepo.findLikesByIdeaId(id);
@@ -83,13 +92,5 @@ public class LikesController {
 		}
 		return null;
 	}
-	
-	@DeleteMapping("/likes/unlike/{id}")
-	void unLike(@PathVariable String id) {
-		Like like = likesRepo.findById(id).get();
-		Idea myIdea = ideasRepo.findById(like.getIdeaId()).get();
-		myIdea.setLikesCount(myIdea.getLikesCount()-1);
-		likesRepo.deleteById(id);
-		ideasRepo.save(myIdea);
-	}
+
 }

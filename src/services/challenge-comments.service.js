@@ -12,8 +12,8 @@ class ChallengeCommentsService {
         return axios.get(COMMENT_API_BASE_URL + '/' + challengeId, { headers: authHeader() });
     }
     
-    postBusinessComment(challengeId, commentText) {
-        return axios.post(COMMENT_API_BASE_URL + "/" + challengeId, commentText, { headers: authHeader() })
+    postComment(challengeId, commentText) {
+        return axios.post(COMMENT_API_BASE_URL, {commentText, challengeId}, { headers: authHeader() })
     }
 }
 

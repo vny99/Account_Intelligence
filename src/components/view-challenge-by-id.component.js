@@ -17,15 +17,14 @@ function ViewChallengeById() {
     
     useEffect(()=>{
         ChallengeCommentsService.getBusinessCommentsByIdeaId(id). then((res) => {
-            setComments(res.data);
+            // setComments(res.data);
+            console.log(res.data)
         });
     },[]);
       
     useEffect(() => {
-        BusinessChallengesService.getChallengeById(id).then((res) => {
-            setChallenge(res.data)
-        });
-        const user = JSON.parse(localStorage.getItem("user"));
+        BusinessChallengesService.getChallengeById(id).then((res) => { setChallenge(res.data) });
+        // const user = JSON.parse(localStorage.getItem("user"));
     }, []);
     
     const handleSubmit = (e) => {
@@ -33,7 +32,7 @@ function ViewChallengeById() {
         let challengeId = challenge.id;
         console.log(challengeId)
         var comm = { commentText : comment }
-        ChallengeCommentsService.postBusinessComment(challengeId, comm, userName).then((res)=>{
+        ChallengeCommentsService.postComment(challengeId, comm, userName).then((res)=>{
             console.log(res.date);
         })
     };
@@ -42,8 +41,6 @@ function ViewChallengeById() {
     const handleClick = () => {
         navigate(-1);
     };
-    
-    console.log(challenge)
     
     return (
         <div>
@@ -88,17 +85,22 @@ function ViewChallengeById() {
                 </div>
         
                 <div className="comments_section">
-                    {Object.keys(comments).map((key)=>{
-                        return(
-                        <div>
-                            <div className="commentBody">
-                                <div className="commentText" key={key}>{comment.commentText}</div>
-                                <div className="commentedBy" key={key}>Posted by : {comment.commentedBy}</div>
-                            </div> 
-                        </div>
-                        )
-                    })}
+        {comments.map(
+          comment => (
+            <div>
+              <div className="commentBody">
+                <div className="commentText" key={comment.id}>
+                  {comment.commentText}
                 </div>
+
+                <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
+                <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>
+
+              </div>
+            </div>
+          )
+        )}
+      </div>
             </div>
         </div> 
     );

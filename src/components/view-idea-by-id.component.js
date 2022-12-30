@@ -45,7 +45,7 @@ function ViewIdeaById() {
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     setCurrentUserId(user.id)
-    if (user.role.authority.includes("ROLE_ADMIN")) { setAdmin(true); }
+    if (user.role.authority.includes("ROLE_FIADMIN")) { setAdmin(true); }
   }, [currentUserId])
 
   const handleSubmit = (e) => {
@@ -96,26 +96,41 @@ function ViewIdeaById() {
 
   return (
     <div className="specific_idea">
-      <button className="back-button btn btn-outline-secondary" style={{"float":"right"}} onClick={handleClick}>
+      <button className="back-button btn btn-secondary" style={{"float":"right"}} onClick={handleClick}>
         <TbArrowBackUp size="30px" />
         <h6>Back</h6>
       </button>
       
       <div className="idea">
-        <div className="idea_header"></div>
-        <div className="idea_title"> <h1>{idea.ideaTitle}</h1> </div>
+        <div className="idea_header">
+          <div className="idea_title"> <h1>{idea.ideaTitle}</h1> </div>
+          <div className="button_edit">
+            <BiEditAlt size={"30px"} onClick={() => { handleShow(idea.id); }} />
+            <span style={{"marginLeft":"3px"}}>Edit Idea</span>
+          </div>
+          <Modal show={show} onHide={handleClose} className="name">
+            <Modal.Header closeButton>
+              <Modal.Title>
+                <h1>Edit Fresh Idea</h1>
+              </Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+            <EditIdea id={editId}/>
+            </Modal.Body>
+          </Modal>
+        </div>
+
         <div className="idea_description"> <p>{idea.ideaDescription}</p> </div>
 
         <div className="status">
           <strong>Status :</strong>
           <div className="status_bar">
-            <strong>
-              {idea.ideaStatus === "RAISED" && ( <div className="raised"><p>RAISED</p> </div> )}
-              {idea.ideaStatus === "REVIEWED" && ( <div className="reviewed"><p>REVIEWED</p> </div> )}
-              {idea.ideaStatus === "REJECTED" && ( <div className="rejected"><p>REJECTED</p> </div> )}
-              {idea.ideaStatus === "ACCEPTED" && ( <div className="accepted"><p>ACCEPTED</p> </div> )}
-              {idea.ideaStatus === "IMPLEMENTED" && ( <div className="implemented"><p>IMPLEMENTED</p> </div> )}
-            </strong>
+            {idea.ideaStatus === "RAISED" && ( <div className="raised"><p>RAISED</p> </div> )}
+            {idea.ideaStatus === "REVIEWED" && ( <div className="reviewed"><p>REVIEWED</p> </div> )}
+            {idea.ideaStatus === "REJECTED" && ( <div className="rejected"><p>REJECTED</p> </div> )}
+            {idea.ideaStatus === "ACCEPTED" && ( <div className="accepted"><p>ACCEPTED</p> </div> )}
+            {idea.ideaStatus === "IMPLEMENTED" && ( <div className="implemented"><p>IMPLEMENTED</p> </div> )}
 
             <div className="workflow" onClick={() => { toggleFlow(true); }} > <p>workflow</p> </div>
 
@@ -146,7 +161,10 @@ function ViewIdeaById() {
               </div>
             )}
             
-            <BiEditAlt className="button_edit" size={"30px"} color={"#527293"} onClick={() => { handleShow(idea.id); }} />
+            {/* <div className="button_edit">
+              <BiEditAlt size={"30px"} onClick={() => { handleShow(idea.id); }} />
+              <span style={{"marginLeft":"3px"}}>Edit Idea</span>
+            </div>
             <Modal show={show} onHide={handleClose} className="name">
               <Modal.Header closeButton>
                 <Modal.Title>
@@ -157,7 +175,7 @@ function ViewIdeaById() {
               <Modal.Body>
               <EditIdea id={editId}/>
               </Modal.Body>
-            </Modal>
+            </Modal> */}
 
           </div>
         </div>
@@ -211,24 +229,24 @@ function ViewIdeaById() {
       <div className="comments_section">
         {comments.map(
           comment => (
-          <div>
-            <div className="commentBody">
-              <div className="commentText" key={comment.id}>
-                {comment.commentText}
-                {(currentUserId === comment.userId) ?
-                  (
-                    <div className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
-                      <button className="btn btn-outline-secondary"> <BiEditAlt onClick={event=> {navigateToEditComment(comment.id, comment.commentText)}} size={"20px"} /> </button>
-                    </div>
-                  ) : ( <div> </div> )
-                }
+            <div>
+              <div className="commentBody">
+                <div className="commentText" key={comment.id}>
+                  {comment.commentText}
+                  {(currentUserId === comment.userId) ?
+                    (
+                      <div className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
+                        <button className="btn btn-outline-secondary"> <BiEditAlt onClick={event=> {navigateToEditComment(comment.id, comment.commentText)}} size={"20px"} /> </button>
+                      </div>
+                    ) : ( <div> </div> )
+                  }
+                </div>
+
+                <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
+                <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>
+
               </div>
-
-              <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
-              <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>
-
             </div>
-          </div>
           )
         )}
       </div>

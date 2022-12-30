@@ -14,7 +14,6 @@ import BoardAdmin from "./components/board-admin.component";
 import About from "./components/about.component";
 
 import Sidebar from "./components/Sidebar/Sidebar";
-import MySidebar from "./components/Sidebar/MySidebar";
 import Userprofile from "./components/userprofile.component";
 
 import UserService from "./services/user.service";
@@ -49,7 +48,7 @@ class App extends Component {
       })
       this.setState({
         currentUser: user,
-        showAdminBoard: user.role.authority.includes("ROLE_ADMIN"),
+        showAdminBoard: user.role.authority.includes("ROLE_BCADMIN"),
       });
     }
 
@@ -100,17 +99,27 @@ class App extends Component {
               </li>
             )}
 
-            <li className="nav-item">
-              <Link to={"/search"} className="nav-link">
-                Search
-              </Link>
-            </li>
+            {currentUser && (
+              <div className="navbar-nav collapse navbar-collapse justify-content-end">
+                <li className="nav-item">
+                  <Link to={"/search"} className="nav-link">
+                    Search
+                  </Link>
+                </li>
 
-            <li className="nav-item">
+                <li className="nav-item">
+                  <Link to={"/about"} className="nav-link">
+                    About
+                  </Link>
+                </li>
+              </div>
+            )}
+
+            {/* <li className="nav-item">
               <Link to={"/about"} className="nav-link">
                 About
               </Link>
-            </li>
+            </li> */}
 
           </div>
 
@@ -149,7 +158,6 @@ class App extends Component {
 
         <div 
         className="container mt-3"
-        // style={{"backgroundColor":"pink"}}
         >
           <Routes>
             <Route path="/" element={<Login />} />

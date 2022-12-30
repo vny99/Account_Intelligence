@@ -13,33 +13,29 @@ export default class Profile extends Component {
       currentUser: [],
       userDetails: {},
       role: "",
+      department: "",
       status:false
     };
   } 
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
-    // console.log(user)
     if (user) {
-      // this.state.userDetails = UserService.getUserByEmail(user.email)
       UserService.getUserByEmail(user.email).then((res) => {
-        // console.log(res.data)
         this.setState({
           userDetails: res.data,
           status: res.data.active,
-          role: res.data.role.name
+          role: res.data.role.name,
+          department: res.data.department.name
         });
       })
-      this.setState({
-        currentUser: user,
-      });
+      this.setState({ currentUser: user, });
     }
+
   }
 
   render() {
-    const { userDetails, status, role } = this.state;
-    console.log("status : " + status)
-    console.log(userDetails)
+    const { userDetails, status, role, department } = this.state;
 
     if (this.state.redirect) {
       return <Navigate to={this.state.redirect} />
@@ -64,15 +60,20 @@ export default class Profile extends Component {
             <div style={{"paddingTop":"10px"}}>
               <div style={{"fontWeight":"bold", "display":"inline", "textAlign":"left"}}>Department : </div>
                 <span
-                  style={{"marginRight":"10px", "padding":"4px", "border":"4px solid transparent",
-                  "borderRadius":"10px", "backgroundColor":"purple", "color":"white"}}>
-                  {userDetails.department}
+                  // style={{"marginRight":"10px", "padding":"4px", "border":"4px solid transparent",
+                  // "borderRadius":"10px", "backgroundColor":"purple", "color":"white"}}
+                >
+                  { department }
                 </span>
             </div>
 
             <div style={{"paddingTop":"10px"}}>
               <div style={{"fontWeight":"bold", "display":"inline", "textAlign":"left"}}>Role : </div>
-              <span> {role}</span>
+              <span>
+                {role === "ROLE_USER" && "User"}
+                {role === "ROLE_FIADMIN" && "Fresh Ideas Admin"}
+                {role === "ROLE_BCADMIN" && "Business Challenges Admin"}
+              </span>
             </div>
 
             <div style={{"paddingTop":"10px"}}><strong>Status : </strong> {status ? "Active" : "Inactive"} </div>

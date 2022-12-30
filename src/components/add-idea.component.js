@@ -144,8 +144,7 @@ export default class AddIdea extends Component {
               value={this.state.benefitCategory}
               onChange={this.onChangeBenefitCategory}>
                 { this.state.benefitCategoriesList.map( bc =>
-                  <option
-                  >
+                  <option>
                     {bc.name}
                   </option>
                 )}

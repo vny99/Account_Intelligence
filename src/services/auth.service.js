@@ -35,6 +35,15 @@ class AuthService {
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));;
   }
+
+  getDepartmentsList() {
+    return axios.get(API_URL + "departments");
+  }
+
+  getRolesList() {
+    return axios.get(API_URL + "roles");
+  }
+
 }
 
 export default new AuthService();

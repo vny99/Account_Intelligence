@@ -68,8 +68,9 @@ class App extends Component {
 
     return (
       <div>
-        <Sidebar />
-        {/* <MySidebar /> */}
+        <Sidebar currentUser = {currentUser} />
+        {/* {currentUser && ( <Sidebar /> ) } */}
+
         <nav className="navbar nav-tabs navbar-expand-sm">
           <Link to={"/about"} className="navbar-brand">
             <strong style={{"fontSize":"xx-large"}}>Echo</strong>
@@ -137,23 +138,22 @@ class App extends Component {
               <Userprofile />
             </div>
             
-          ) : (
-            <div className="navbar-nav collapse navbar-collapse justify-content-end">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
-                  Login
-                </Link>
-              </li>
+            ) : (
+              <div className="navbar-nav collapse navbar-collapse justify-content-end">
+                <li className="nav-item">
+                  <Link to={"/login"} className="nav-link">
+                    Login
+                  </Link>
+                </li>
 
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
-            </div>
-
-            
-          )}
+                <li className="nav-item">
+                  <Link to={"/register"} className="nav-link">
+                    Sign Up
+                  </Link>
+                </li>
+              </div>
+            )
+          }
         </nav>
 
         <div 

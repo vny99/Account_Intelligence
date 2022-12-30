@@ -8,34 +8,38 @@ import { CgCardHearts, CgFileAdd } from "react-icons/cg";
 import Logo from ".//logo.jpg"
 
 
-const props = () => {
+const Sidebar = (props) => {
   return (
       <Menu width={'80px'}
       // customBurgerIcon={ <img src={Logo} /> }
       >
-      <a className="bm-item" href="/ideas">
-        <FcIdea style={{"fontSize":"30px"}} />
-        <div>Fresh Ideas</div>
-      </a>
+        {props.currentUser && (
+          <>
+            <a className="bm-item" href="/ideas">
+              <FcIdea style={{"fontSize":"30px"}} />
+              <div>Fresh Ideas</div>
+            </a>
 
-      <a className="bm-item" href="/challenges">
-        <FcTimeline style={{"fontSize":"30px"}} />
-        <div>Business Challenges</div>
-      </a>
+            <a className="bm-item" href="/challenges">
+              <FcTimeline style={{"fontSize":"30px"}} />
+              <div>Business Challenges</div>
+            </a>
 
-      <a className="bm-item" href="/addIdea">
-        <CgFileAdd color='rgba(103, 192, 103, 0.75)' style={{"fontSize":"30px"}} />
-        <div>Add Idea</div>
-      </a>
+            <a className="bm-item" href="/addIdea">
+              <CgFileAdd color='rgba(103, 192, 103, 0.75)' style={{"fontSize":"30px"}} />
+              <div>Add Idea</div>
+            </a>
 
-      <a
-      // onMouseEnter={}
-      className="bm-item" href="/myFavorites">
-        <CgCardHearts color='rgb(181, 72, 72)' style={{"fontSize":"30px"}} />
-        <div>My Favorites</div>
-      </a>
+            <a
+            // onMouseEnter={}
+            className="bm-item" href="/myFavorites">
+              <CgCardHearts color='rgb(181, 72, 72)' style={{"fontSize":"30px"}} />
+              <div>My Favorites</div>
+            </a>
+          </>
+        )}
     </Menu>
   );
 };
 
-export default props;
+export default Sidebar;

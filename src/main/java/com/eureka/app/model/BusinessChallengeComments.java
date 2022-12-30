@@ -7,61 +7,100 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class BusinessChallengeComments {
 	@Id
 	private String id;
-	private String userId;
 	private String commentText;
-	private String commentedBy;
+	private String ideaId;
+	private String userId;
+	private String fname;
+	private String lname;
 	private String commentedDate;
+	private int rewards;
 	
 	public BusinessChallengeComments() {
 		super();
 	}
 	
-	public BusinessChallengeComments( String userId, String commentText, String commentedBy, String commentedDate) {
+	public BusinessChallengeComments(String id, String commentText, String ideaId, String userId, String fname, String lname,
+			String commentedDate, int rewards) {
 		super();
-		this.userId = userId;
+		this.id = id;
 		this.commentText = commentText;
-		this.commentedBy = commentedBy;
+		this.ideaId = ideaId;
+		this.userId = userId;
+		this.fname = fname;
+		this.lname = lname;
 		this.commentedDate = commentedDate;
+		this.rewards = rewards;
 	}
 	
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getCommentText() {
 		return commentText;
 	}
-	
+
 	public void setCommentText(String commentText) {
 		this.commentText = commentText;
 	}
-	
-	public String getCommentedBy() {
-		return commentedBy;
+
+	public String getIdeaId() {
+		return ideaId;
 	}
-	
-	public void setCommentedBy(String commentedBy) {
-		this.commentedBy = commentedBy;
+
+	public void setIdeaId(String ideaId) {
+		this.ideaId = ideaId;
 	}
-	
-	public String getCommentedDate() {
-		return commentedDate;
-	}
-	
-	public void setCommentedDate(String commentedDate) {
-		this.commentedDate = commentedDate;
-	}
-	
+
 	public String getUserId() {
 		return userId;
 	}
-	
+
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
+	public String getCommentedDate() {
+		return commentedDate;
+	}
+
+	public void setCommentedDate(String commentedDate) {
+		this.commentedDate = commentedDate;
+	}
+
+	public int getRewards() {
+		return rewards;
+	}
+
+	public void setRewards(int rewards) {
+		this.rewards = rewards;
+	}
+
+	@Override
+	public String toString() {
+		return "BusinessChallengeComments [id=" + id + ", commentText=" + commentText + ", ideaId=" + ideaId
+				+ ", userId=" + userId + ", fname=" + fname + ", lname=" + lname + ", commentedDate=" + commentedDate
+				+ ", rewards=" + rewards + "]";
 	}
 	
 }

@@ -1,5 +1,8 @@
 package com.eureka.app.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eureka.app.model.BenefitCategory;
+import com.eureka.app.model.Category;
 import com.eureka.app.model.Department;
 import com.eureka.app.model.ERole;
 import com.eureka.app.model.Role;
@@ -126,5 +132,19 @@ public class AuthController {
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
+	
+	@GetMapping("/departments")
+	public List<Department> getDepartmentsList() {
+		List<Department> departmentsList = new ArrayList<>();
+		departmentsList = departmentRepository.findAll();
+		return departmentsList;
+	}
+	
+	@GetMapping("/roles")
+	public List<Role> getRolesList() {
+		List<Role> rolesList = new ArrayList<>();
+		rolesList = roleRepository.findAll();
+		return rolesList;
 	}
 }

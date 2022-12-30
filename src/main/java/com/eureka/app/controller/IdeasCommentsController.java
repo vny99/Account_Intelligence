@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eureka.app.model.BusinessChallengeComments;
+import com.eureka.app.model.BusinessChallenges;
 import com.eureka.app.model.Idea;
 import com.eureka.app.model.IdeaComments;
 import com.eureka.app.model.User;
@@ -25,7 +27,6 @@ import com.eureka.app.repository.CommentsRepository;
 import com.eureka.app.repository.IdeasRepository;
 import com.eureka.app.repository.UserRepository;
 import com.eureka.app.security.services.UserDetailsImpl;
-import com.eureka.app.service.UpdateIdeaCommentsCount;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -58,51 +59,57 @@ public class IdeasCommentsController {
 		Idea idea = ideasRepo.findById(ideaId).get();
 		ideaComments = idea.getComments();
 		
-//		System.out.println(idea.getIdeaId());
-//		System.out.println(idea.getCommentsCount());
-//		System.out.println(ideaComments.size());
-		
 		idea.setCommentsCount(ideaComments.size());
 		ideasRepo.save(idea);
-		
-//		int commentsCount = UpdateIdeaCommentsCount.updateIdeaCommentsCount(idea.getId(), ideaComments);
-//		System.out.println(commentsCount);
-//		System.out.println(idea.getCommentsCount());
 		
 		return ideaComments;
 	}
 	
 	@PostMapping("/comments")
-	public void addcomment(@RequestBody IdeaComments ideaComments ) {
+	public ResponseEntity<IdeaComments> postComment(@RequestBody IdeaComments ideaComment ) {
         
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        String email = userDetails.getUsername();
-        User user = usersRepo.findByEmail(email);
-        
-        ideaComments.setUserId(user.getId());
-        ideaComments.setFname(user.getFname());
-        ideaComments.setLname(user.getLname());
-        
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-        String commentedDate = formatter.format(date);
-        ideaComments.setCommentedDate(commentedDate);
-        
-        commentsRepo.save(ideaComments);
-        
-        Idea idea = ideasRepo.findById(ideaComments.getIdeaId()).get();
-        List<IdeaComments> comments = idea.getComments();
-        comments.add(ideaComments);
-        idea.setComments(comments);
-        
-        int commentsCount = idea.getCommentsCount();
-        commentsCount++;
-        idea.setCommentsCount(commentsCount);
-        
-//		UpdateIdeaCommentsCount.updateIdeaCommentsCount(idea.getId(), idea.getComments());
-        
-        ideasRepo.save(idea);
+		if(ideaComment != null) {
+			try {
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		        String email = userDetails.getUsername();
+		        User user = usersRepo.findByEmail(email);
+		        
+		        ideaComment.setUserId(user.getId());
+		        ideaComment.setFname(user.getFname());
+		        ideaComment.setLname(user.getLname());
+		        
+		        Date date = new Date();
+		        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+		        String commentedDate = formatter.format(date);
+		        ideaComment.setCommentedDate(commentedDate);
+		        
+		        commentsRepo.save(ideaComment);
+		        
+		        Idea idea = ideasRepo.findById(ideaComment.getIdeaId()).get();
+		        List<IdeaComments> comments = idea.getComments();
+		        comments.add(ideaComment);
+		        idea.setComments(comments);
+		        
+		        int commentsCount = idea.getCommentsCount();
+		        commentsCount++;
+		        idea.setCommentsCount(commentsCount);
+		        
+//				UpdateIdeaCommentsCount.updateIdeaCommentsCount(idea.getId(), idea.getComments());
+		        
+		        ideasRepo.save(idea);
+				
+				return new ResponseEntity<>(ideaComment, HttpStatus.CREATED);
+			}
+			
+			catch(Exception e) {
+				return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		}
+		
+		else {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
 	
 	@PutMapping("updatecomment/{id}")

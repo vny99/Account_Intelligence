@@ -120,12 +120,12 @@ function ViewIdeaById() {
       </button>
       
       <div className="idea">
+        <div style={{"margin-left":"95%","padding-top":"5px"}}>
+          <BiEditAlt size={"30px"} color={"#527293"} onClick={() => { handleShow(idea.id); }}/>
+        </div>
+
         <div className="idea_header">
           <div className="idea_title"> <h1>{idea.ideaTitle}</h1> </div>
-          <span className="button_edit" onClick={() => { handleShow(idea.id); }}>
-            <BiEditAlt size={"30px"} />
-            <span style={{"marginLeft":"3px"}}>Edit Idea</span>
-          </span>
           <Modal show={show} onHide={handleClose} className="name">
             <Modal.Header closeButton>
               <Modal.Title>

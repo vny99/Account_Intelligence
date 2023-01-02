@@ -22,9 +22,8 @@ export default class EditChallengeById extends React.Component{
 
   componentDidMount(){
     var id = this.props
-    console.log("hello",id.id)
 
-    BusinessChallengesService.getChallengeById(id.id).then((res)=>{
+    BusinessChallengesService.getBusinesssChallengeById(id.id).then((res)=>{
       this.setState({
           title: res.data.challengeTitle,
           description: res.data.challengeDescription,

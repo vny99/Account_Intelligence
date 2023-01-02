@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eureka.app.model.BusinessChallengeComments;
-import com.eureka.app.model.BusinessChallenges;
 import com.eureka.app.model.Idea;
 import com.eureka.app.model.IdeaComments;
 import com.eureka.app.model.User;
@@ -43,11 +41,6 @@ public class IdeasCommentsController {
 	@GetMapping("/comments")
 	public List<IdeaComments> getAllComments() {
 		List<IdeaComments> allComments = commentsRepo.findAll();
-		List<IdeaComments> allCountUpdatedComments = new ArrayList<>();
-		
-		for (IdeaComments comment : allComments) {
-			
-		}
 		
 		return allComments;
 	}

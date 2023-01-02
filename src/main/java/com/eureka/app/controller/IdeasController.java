@@ -114,7 +114,7 @@ public class IdeasController {
 	}
 	
 	@PostMapping("/ideas")
-	public ResponseEntity<Idea> postIdea(@RequestBody IdeaRequest ideaRequest) {
+	public ResponseEntity<Idea> addIdea(@RequestBody IdeaRequest ideaRequest) {
     try {
     	int seqNumber = (int) SequenceGeneratorService.generateSequence(Idea.SEQUENCE_NAME);
     	String idString = "ID" + String.format("%05d", seqNumber);

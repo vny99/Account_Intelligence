@@ -8,7 +8,7 @@ public class BusinessChallengeComments {
 	@Id
 	private String id;
 	private String commentText;
-	private String ideaId;
+	private String challengeId;
 	private String userId;
 	private String fname;
 	private String lname;
@@ -19,12 +19,12 @@ public class BusinessChallengeComments {
 		super();
 	}
 	
-	public BusinessChallengeComments(String id, String commentText, String ideaId, String userId, String fname, String lname,
+	public BusinessChallengeComments(String id, String commentText, String challengeId, String userId, String fname, String lname,
 			String commentedDate, int rewards) {
 		super();
 		this.id = id;
 		this.commentText = commentText;
-		this.ideaId = ideaId;
+		this.challengeId = challengeId;
 		this.userId = userId;
 		this.fname = fname;
 		this.lname = lname;
@@ -48,12 +48,12 @@ public class BusinessChallengeComments {
 		this.commentText = commentText;
 	}
 
-	public String getIdeaId() {
-		return ideaId;
+	public String getChallengeId() {
+		return challengeId;
 	}
 
-	public void setIdeaId(String ideaId) {
-		this.ideaId = ideaId;
+	public void setChallengeId(String challengeId) {
+		this.challengeId = challengeId;
 	}
 
 	public String getUserId() {
@@ -98,7 +98,7 @@ public class BusinessChallengeComments {
 
 	@Override
 	public String toString() {
-		return "BusinessChallengeComments [id=" + id + ", commentText=" + commentText + ", ideaId=" + ideaId
+		return "BusinessChallengeComments [id=" + id + ", commentText=" + commentText + ", challengeId=" + challengeId
 				+ ", userId=" + userId + ", fname=" + fname + ", lname=" + lname + ", commentedDate=" + commentedDate
 				+ ", rewards=" + rewards + "]";
 	}

@@ -3,8 +3,10 @@ package com.eureka.app.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -20,11 +22,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eureka.app.model.BStatus;
 import com.eureka.app.model.BusinessChallenges;
-import com.eureka.app.model.Idea;
 import com.eureka.app.model.User;
 import com.eureka.app.payload.request.ChallengeRequest;
 import com.eureka.app.repository.BusinessChallengesRepository;
@@ -91,7 +93,7 @@ public class BusinessChallengesController {
 	}
 
 	@PostMapping("/businessChallenges")
-	public ResponseEntity<BusinessChallenges> createBusinessChallenge(@RequestBody ChallengeRequest challengeRequest) {
+	public ResponseEntity<BusinessChallenges> addBusinessChallenge(@RequestBody ChallengeRequest challengeRequest) {
 		try {
 			int seqNumber = (int) SequenceGeneratorService.generateSequence(BusinessChallenges.SEQUENCE_NAME);
 	    	String idString = "BC" + String.format("%05d", seqNumber);
@@ -102,6 +104,7 @@ public class BusinessChallengesController {
 	    	String email = userDetails.getUsername();
 	    	User user = usersRepo.findByEmail(email);
 	    	
+	    	String userId = user.getId();
 	    	String fname = user.getFname();
 	        String lname = user.getLname();
 	    	
@@ -112,8 +115,9 @@ public class BusinessChallengesController {
 	        
 	        BStatus challengeStatus = BStatus.OPENED;
 	        
-	        BusinessChallenges businessChallenge = new BusinessChallenges(idString, fname, lname, challengeRequest.getChallengeTitle(),
+	        BusinessChallenges businessChallenge = new BusinessChallenges(idString, userId, fname, lname, challengeRequest.getChallengeTitle(),
 	        		challengeRequest.getChallengeDescription(), createdDate, challengeRequest.getExpiryDate(), challengeStatus);
+	        
 			businessChallengeRepo.save(businessChallenge);
 			
 			return new ResponseEntity<>(businessChallenge, HttpStatus.CREATED);
@@ -124,14 +128,75 @@ public class BusinessChallengesController {
 		}
 	}
 	
-	@PutMapping("/businessChallenges/update")
-	public ResponseEntity<BusinessChallenges> updateIdea(@RequestBody BusinessChallenges challenge) {
-		BusinessChallenges myChallenge = businessChallengeRepo.findById(challenge.getChallengeId()).get();
-		myChallenge.setChallengeTitle(challenge.getChallengeTitle());
-		myChallenge.setChallengeDescription(challenge.getChallengeDescription());
-		myChallenge.setExpiryDate(challenge.getExpiryDate());
-		return new ResponseEntity<>(businessChallengeRepo.save(myChallenge), HttpStatus.OK);
-	}
+//	@PutMapping("/businessChallenges/update")
+//	public ResponseEntity<BusinessChallenges> updateChallenge(@RequestBody BusinessChallenges challenge) {
+//		BusinessChallenges myChallenge = businessChallengeRepo.findById(challenge.getChallengeId()).get();
+//		myChallenge.setChallengeTitle(challenge.getChallengeTitle());
+//		myChallenge.setChallengeDescription(challenge.getChallengeDescription());
+//		myChallenge.setExpiryDate(challenge.getExpiryDate());
+//		return new ResponseEntity<>(businessChallengeRepo.save(myChallenge), HttpStatus.OK);
+//	}
+	
+	@PutMapping("challenges/{id}")
+    public ResponseEntity<BusinessChallenges> updateChallenge(@PathVariable String id, @RequestBody BusinessChallenges challenge) {
+        BusinessChallenges myChallenge = businessChallengeRepo.findById(id).get();
+        myChallenge .setChallengeStatus(challenge .getChallengeStatus());
+        return new ResponseEntity<>(businessChallengeRepo.save(myChallenge ), HttpStatus.OK);
+    }
+
+    private List<String> matchDescription(String searchItem) {
+        List<BusinessChallenges> challengesList = businessChallengeRepo.findAll();
+        List<String> matchingList = new ArrayList<>();
+        for ( BusinessChallenges challenges : challengesList) {
+            if ((challenges.getChallengeDescription()).toLowerCase().contains(searchItem.toLowerCase())) {
+                matchingList.add(challenges.getId());
+            }
+        }
+        return matchingList;
+    }
+
+    private List<String> matchTitle(String searchItem) {
+        List<BusinessChallenges> challnegesList =  businessChallengeRepo.findAll();
+        List<String> matchingList = new ArrayList<>();
+        for (BusinessChallenges challenges : challnegesList) {
+            if ((challenges.getChallengeTitle()).toLowerCase().contains(searchItem.toLowerCase())) {
+                matchingList.add(challenges.getId());
+            }
+        }
+        return matchingList;
+    }
+
+    @GetMapping("/businessChallenges/search")
+    public ResponseEntity<List<BusinessChallenges>> searchChallenge(@RequestParam(required = false) String searchItem) {
+        try {
+            List<BusinessChallenges> freshchallenges = new ArrayList<>();
+            Set<String> challengesIdList = new HashSet<>();
+            if (searchItem != "" ) {
+                if ( matchTitle(searchItem).size() > 0) {
+                    challengesIdList.addAll(matchTitle(searchItem));
+                }
+
+                if (matchDescription(searchItem).size() > 0) {
+                    challengesIdList.addAll(matchDescription(searchItem));
+                }
+              }
+
+            for (String id : challengesIdList) {
+                freshchallenges.add(businessChallengeRepo.findById(id).get());
+            }
+
+            if (freshchallenges.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(freshchallenges, HttpStatus.OK);
+        }
+
+        catch (Exception e) {
+            System.out.println(e);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 	@DeleteMapping("/businessChallenges")
 	public ResponseEntity<HttpStatus> deleteAllBusinessChallenges() {

@@ -20,21 +20,16 @@ public class BusinessChallenges {
 	private String id;
 	@Indexed(unique=true)
 	private String challengeId;
+	@Indexed(unique=true)
+	private String userId;
 	private String fname;
 	private String lname;
 	private String challengeTitle;
 	private String challengeDescription;
 	private Date createdDate;
+	private int commentsCount;
 	private Date expiryDate;
 	private BStatus challengeStatus;
-	public List<BusinessChallengeComments> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<BusinessChallengeComments> comments) {
-		this.comments = comments;
-	}
-
 	@DBRef
 	private List<BusinessChallengeComments> comments = new ArrayList<>();
 	
@@ -42,10 +37,11 @@ public class BusinessChallenges {
 		super();
 	}
 
-	public BusinessChallenges(String challengeId, String fname, String lname, String challengeTitle, String challengeDescription,
-			Date createdDate, Date expiryDate, BStatus challengeStatus) {
+	public BusinessChallenges(String challengeId, String userId, String fname, String lname, String challengeTitle,
+			String challengeDescription, Date createdDate, Date expiryDate, BStatus challengeStatus) {
 		super();
 		this.challengeId = challengeId;
+		this.userId = userId;
 		this.fname = fname;
 		this.lname = lname;
 		this.challengeTitle = challengeTitle;
@@ -53,38 +49,30 @@ public class BusinessChallenges {
 		this.createdDate = createdDate;
 		this.expiryDate = expiryDate;
 		this.challengeStatus = challengeStatus;
-	}
-
-	public BusinessChallenges(String id, String challengeId, String fname, String lname, String challengeTitle,
-			String challengeDescription, Date createdDate, Date expiryDate, BStatus challengeStatus,
-			List<BusinessChallengeComments> comments) {
-		super();
-		this.id = id;
-		this.challengeId = challengeId;
-		this.fname = fname;
-		this.lname = lname;
-		this.challengeTitle = challengeTitle;
-		this.challengeDescription = challengeDescription;
-		this.createdDate = createdDate;
-		this.expiryDate = expiryDate;
-		this.challengeStatus = challengeStatus;
-		this.comments = comments;
 	}
 
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getChallengeId() {
 		return challengeId;
 	}
 
 	public void setChallengeId(String challengeId) {
 		this.challengeId = challengeId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getFname() {
@@ -111,28 +99,12 @@ public class BusinessChallenges {
 		this.challengeTitle = challengeTitle;
 	}
 
-	public Date getExpiryDate() {
-		return expiryDate;
-	}
-
-	public void setExpiryDate(Date expiryDate) {
-		this.expiryDate = expiryDate;
-	}
-
 	public String getChallengeDescription() {
 		return challengeDescription;
 	}
-	
+
 	public void setChallengeDescription(String challengeDescription) {
 		this.challengeDescription = challengeDescription;
-	}
-
-	public BStatus getChallengeStatus() {
-		return challengeStatus;
-	}
-
-	public void setChallengeStatus(BStatus challengeStatus) {
-		this.challengeStatus = challengeStatus;
 	}
 
 	public Date getCreatedDate() {
@@ -143,12 +115,49 @@ public class BusinessChallenges {
 		this.createdDate = createdDate;
 	}
 
+	public int getCommentsCount() {
+		return commentsCount;
+	}
+
+	public void setCommentsCount(int commentsCount) {
+		this.commentsCount = commentsCount;
+	}
+
+	public List<BusinessChallengeComments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<BusinessChallengeComments> comments) {
+		this.comments = comments;
+	}
+
+	public Date getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	public BStatus getChallengeStatus() {
+		return challengeStatus;
+	}
+
+	public void setChallengeStatus(BStatus challengeStatus) {
+		this.challengeStatus = challengeStatus;
+	}
+
+	public static String getSequenceName() {
+		return SEQUENCE_NAME;
+	}
+
 	@Override
 	public String toString() {
-		return "BusinessChallenges [id=" + id + ", challengeId=" + challengeId + ", fname=" + fname + ", lname=" + lname
-				+ ", challengeTitle=" + challengeTitle + ", challengeDescription=" + challengeDescription
-				+ ", createdDate=" + createdDate + ", expiryDate=" + expiryDate + ", challengeStatus=" + challengeStatus
-				+ ", comments=" + comments + "]";
+		return "BusinessChallenges [id=" + id + ", challengeId=" + challengeId + ", userId=" + userId + ", fname="
+				+ fname + ", lname=" + lname + ", challengeTitle=" + challengeTitle + ", challengeDescription="
+				+ challengeDescription + ", createdDate=" + createdDate + ", commentsCount=" + commentsCount
+				+ ", expiryDate=" + expiryDate + ", challengeStatus=" + challengeStatus + ", comments=" + comments
+				+ "]";
 	}
 	
 }

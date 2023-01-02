@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ideaService from '../services/idea.service';
+import IdeaService from '../services/idea.service';
 import "./add-idea.component.css"
 
 export default class EditIdea extends React.Component{
@@ -23,7 +23,7 @@ export default class EditIdea extends React.Component{
   
   componentDidMount(){
     var id = this.props.id
-    ideaService.getIdeaByIdeaId(id).then((res)=>{
+    IdeaService.getIdeaByIdeaId(id).then((res)=>{
       console.log(res.data)
       this.setState({
         title: res.data.ideaTitle,
@@ -58,7 +58,7 @@ export default class EditIdea extends React.Component{
       ideaDescription: this.state.description,
     };
     console.log(idea)
-    ideaService.update(idea)
+    IdeaService.updateIdea(idea)
     .then((res)=>{
       console.log(res.date);
       this.setState({submitted:true})

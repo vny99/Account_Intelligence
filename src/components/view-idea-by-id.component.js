@@ -104,10 +104,10 @@ function ViewIdeaById() {
       <div className="idea">
         <div className="idea_header">
           <div className="idea_title"> <h1>{idea.ideaTitle}</h1> </div>
-          <div className="button_edit">
-            <BiEditAlt size={"30px"} onClick={() => { handleShow(idea.id); }} />
+          <span className="button_edit" onClick={() => { handleShow(idea.id); }}>
+            <BiEditAlt size={"30px"} />
             <span style={{"marginLeft":"3px"}}>Edit Idea</span>
-          </div>
+          </span>
           <Modal show={show} onHide={handleClose} className="name">
             <Modal.Header closeButton>
               <Modal.Title>
@@ -160,22 +160,6 @@ function ViewIdeaById() {
                 )}
               </div>
             )}
-            
-            {/* <div className="button_edit">
-              <BiEditAlt size={"30px"} onClick={() => { handleShow(idea.id); }} />
-              <span style={{"marginLeft":"3px"}}>Edit Idea</span>
-            </div>
-            <Modal show={show} onHide={handleClose} className="name">
-              <Modal.Header closeButton>
-                <Modal.Title>
-                  <h1>Edit Fresh Idea</h1>
-                </Modal.Title>
-              </Modal.Header>
-
-              <Modal.Body>
-              <EditIdea id={editId}/>
-              </Modal.Body>
-            </Modal> */}
 
           </div>
         </div>

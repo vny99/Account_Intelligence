@@ -47,14 +47,14 @@ export default class AddChallenge extends Component {
   }
 
   saveChallenge() {
-    if(this.state.tv==true&&this.state.dv==true&&this.state.dav==true){
+    if(this.state.tv === true && this.state.dv === true && this.state.dav === true){
       var challenge = {
         challengeTitle: this.state.title,
         challengeDescription: this.state.description,
         expiryDate:this.state.expiryDate
       };
       console.log(challenge)
-      BusinessChallengesService.addChallenge(challenge)
+      BusinessChallengesService.addBusinessChallenge(challenge)
       .then((res)=>{
         console.log(res.date);
         this.setState({submitted:true})

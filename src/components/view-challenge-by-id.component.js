@@ -23,8 +23,7 @@ function ViewChallengeById() {
     },[]);
       
     useEffect(() => {
-        BusinessChallengesService.getChallengeById(id).then((res) => { setChallenge(res.data) });
-        // const user = JSON.parse(localStorage.getItem("user"));
+        BusinessChallengesService.getBusinesssChallengeById(id).then((res) => { setChallenge(res.data) });
     }, []);
     
     const handleSubmit = (e) => {

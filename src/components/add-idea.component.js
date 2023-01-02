@@ -66,7 +66,7 @@ export default class AddIdea extends Component {
       category: this.state.category
     };
 
-    IdeaService.postIdea(idea)
+    IdeaService.addIdea(idea)
       .then(response => {
         this.setState({
           id: response.data.id,

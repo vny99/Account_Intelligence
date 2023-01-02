@@ -29,7 +29,7 @@ class IdeaService {
         return axios.get(IDEA_API_BASE_URL + "/userId", { params: {userId: userId}, headers: authHeader() });
     }
 
-    postIdea(idea) {
+    addIdea(idea) {
         return axios.post(IDEA_API_BASE_URL, idea, { headers: authHeader() });
     }
 

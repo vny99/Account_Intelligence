@@ -13,16 +13,20 @@ class BusinessChallengesService {
         return axios.get(CHALLENGES_API_BASE_URL + "/recent", { headers: authHeader() });
     }
 
-    getChallengeById(challengeId){
+    getBusinesssChallengeById(challengeId){
         return axios.get(CHALLENGES_API_BASE_URL + '/' + challengeId, { headers: authHeader() });
     }
 
-    addChallenge(challenge){
+    addBusinessChallenge(challenge){
         return axios.post(CHALLENGES_API_BASE_URL, challenge, { headers: authHeader() });
     }
 
     updateChallenge(challenge){
         return axios.put(CHALLENGES_API_BASE_URL + "/update", challenge, { headers: authHeader() })
+    }
+
+    findByTitleDescription(searchItem) {
+        return axios.get(CHALLENGES_API_BASE_URL + "/search", { params: { searchItem: searchItem}, headers: authHeader() });
     }
 }
 

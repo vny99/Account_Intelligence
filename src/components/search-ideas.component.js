@@ -18,6 +18,10 @@ export default class Ideasearch extends Component {
     };
   
   }
+
+  componentDidMount() {
+    console.log("Entered Ideasearch component")
+  }
   
   onChangeSearchItem(e) {
     const searchItem = e.target.value;

@@ -157,6 +157,8 @@ public class IdeasController {
 	public ResponseEntity<Idea> updateIdea(@PathVariable String id, @RequestBody Idea idea) {
 		Idea myIdea = ideasRepo.findById(id).get();
 		myIdea.setIdeaStatus(idea.getIdeaStatus());
+		myIdea.setRewards(idea.getRewards());
+		
 		return new ResponseEntity<>(ideasRepo.save(myIdea), HttpStatus.OK);
 	}
 

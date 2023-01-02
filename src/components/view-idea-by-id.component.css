@@ -47,14 +47,10 @@
 
 .workflow p {
   color: blue;
-  font-size: smaller;
+  font-size: 16px;
   margin-left: 3rem;
   cursor: pointer;
-}
-
-.workflow p:hover {
-  border-bottom: 1px solid blue;
-  color: rgb(15, 61, 211);
+  text-decoration: underline blue;
 }
 
 .workflow_img{
@@ -142,28 +138,28 @@
 }
 
 .raised p { 
-  color: rgb(136, 222, 6);
   margin-left: 0.75rem;
+  font-size: 16px;
 }
 
 .reviewed p {
-  color: rgb(11, 192, 192);
   margin-left: 0.75rem;
+  font-size: 16px;
 }
 
 .accepted p {
-  color: rgb(13, 48, 245);
   margin-left: 0.75rem;
+  font-size: 16px;
 }
 
 .implemented p {
-  color: rgb(91, 91, 10);
   margin-left: 0.75rem;
+  font-size: 16px;
 }
 
 .rejected p {
-  color: rgb(186, 12, 12);
   margin-left: 0.75rem;
+  font-size: 16px;
 }
 
 .idea-rewards{
@@ -249,32 +245,32 @@
 }
 
 .gold_badge{
-  color: gold;
-  height: 40px;
+  color: rgb(222, 190, 7);
+  height: 50px;
   width: auto;
 }
 
 .ruby_badge{
   color: rgb(250, 22, 250);
-  height: 40px;
+  height: 50px;
   width: auto;
 }
 
 .diamond_badge{
-  color:#fff;
-  height: 40px;
+  color:#0588a5;
+  height: 50px;
   width: auto;
 }
 
 .silver_badge{
   color: silver;
-  height: 40px;
+  height: 50px;
   width: auto;
 }
 
 .bronze_badge{
   color:rgb(205, 127, 50);
-  height: 40px;
+  height: 50px;
   width: auto;
 }
 
@@ -320,18 +316,10 @@
 
 .commentedBy{
   font-family: SF Pro Text,SF Pro Icons,AOS Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
-  /* text-align: right;
-  margin-top: 4.3rem;
-  font-size: smaller;
-  margin-right: 2rem; */
 }
 
 .commentedDate{
   font-family: SF Pro Text,SF Pro Icons,AOS Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
-  /* text-align: left;
-  margin-top: -1rem;
-  font-size: smaller;
-  margin-left: 1rem; */
 }
 
 .comment-box{

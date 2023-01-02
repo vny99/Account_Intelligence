@@ -8,11 +8,12 @@ class ChallengeCommentsService {
         return axios.get(COMMENT_API_BASE_URL, { headers: authHeader() });
     }
 
-    getBusinessCommentsByIdeaId(challengeId){
+    getChallengeCommentsByChallengeId(challengeId){
         return axios.get(COMMENT_API_BASE_URL + '/' + challengeId, { headers: authHeader() });
     }
     
     postComment(challengeId, commentText) {
+        console.log({commentText, challengeId})
         return axios.post(COMMENT_API_BASE_URL, {commentText, challengeId}, { headers: authHeader() })
     }
 }

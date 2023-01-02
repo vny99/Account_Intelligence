@@ -13,14 +13,15 @@ function ViewChallengeById() {
     const [challenge, setChallenge] = useState({});
     const [commentButton,setCommentButton]=useState()
     const [comments, setComments] = useState([]);
-    const [comment, setComment] = useState({});
+    const [commentText, setCommentText] = useState({});
     
     useEffect(()=>{
-        ChallengeCommentsService.getBusinessCommentsByIdeaId(id). then((res) => {
-            // setComments(res.data);
-            console.log(res.data)
+        ChallengeCommentsService.getChallengeCommentsByChallengeId(id). then((res) => {
+            setComments(res.data);
         });
-    },[]);
+    }
+    , [comments]
+    );
       
     useEffect(() => {
         BusinessChallengesService.getBusinesssChallengeById(id).then((res) => { setChallenge(res.data) });
@@ -28,11 +29,8 @@ function ViewChallengeById() {
     
     const handleSubmit = (e) => {
         setCommentButton(false);
-        let challengeId = challenge.id;
-        console.log(challengeId)
-        var comm = { commentText : comment }
-        ChallengeCommentsService.postComment(challengeId, comm, userName).then((res)=>{
-            console.log(res.date);
+        ChallengeCommentsService.postComment(id, commentText).then((res)=>{
+            console.log(res.data);
         })
     };
 
@@ -73,7 +71,7 @@ function ViewChallengeById() {
                         className="comment-form textarea"
                         rows="3"
                         placeholder="Write your Comment"
-                        onChange={(e) => setComment(e.target.value)}
+                        onChange={(e) => setCommentText(e.target.value)}
                         >
                         </textarea>
             

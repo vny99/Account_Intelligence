@@ -143,7 +143,7 @@ function ViewIdeaById() {
 
         <div className="idea_status_rewards">
           <div className="status">
-            <strong>Status :</strong>
+            <strong>Status:</strong>
             <div className="status_bar">
               {idea.ideaStatus === "RAISED" && ( <div className="raised"><p>Raised</p> </div> )}
               {idea.ideaStatus === "REVIEWED" && ( <div className="reviewed"><p>Reviewed</p> </div> )}

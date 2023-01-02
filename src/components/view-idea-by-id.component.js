@@ -28,6 +28,7 @@ function ViewIdeaById() {
   const [admin, setAdmin] = useState(false);
   const [likeId, setLikeId] = useState("");
   const [currentUserId, setCurrentUserId] = useState("");
+  const [rewards,setRewards]=useState(0);
   const [show, setShow] = useState(false);
   const [editId, setEditId] = useState("");
   const [localLiked, setLocalLiked] = useState(false);
@@ -43,6 +44,7 @@ function ViewIdeaById() {
   }, [comments, likeId, localLiked]);
 
   useEffect(() => {
+    setRewards(idea.rewards)
     const user = AuthService.getCurrentUser();
     setCurrentUserId(user.id)
     if (user.role.authority.includes("ROLE_FIADMIN")) { setAdmin(true); }
@@ -87,6 +89,22 @@ function ViewIdeaById() {
     else{ UserService.removeFavorite(id) } 
   }
 
+  const handleRewards=(e)=>{
+    if(e.target.value==="100"){ setRewards(100); }
+    else if(e.target.value==="50"){ setRewards(50); }
+    else if(e.target.value==="30"){ setRewards(30); }
+    else if(e.target.value==="20"){ setRewards(20); }
+    else if(e.target.value==="10"){ setRewards(10); }
+    else{ setRewards(0); }
+  }
+
+  const handleSave=()=>{
+    let myIdea = idea;
+    myIdea.rewards=rewards;
+    IdeaService.updateIdea(idea.id, myIdea);
+    console.log(myIdea)
+  }
+
   const navigateToEditComment = (commentId, commentText) => {
     navigate("/editIdeaComment/" + commentId + "/" + commentText );
   };
@@ -123,46 +141,71 @@ function ViewIdeaById() {
 
         <div className="idea_description"> <p>{idea.ideaDescription}</p> </div>
 
-        <div className="status">
-          <strong>Status :</strong>
-          <div className="status_bar">
-            {idea.ideaStatus === "RAISED" && ( <div className="raised"><p>RAISED</p> </div> )}
-            {idea.ideaStatus === "REVIEWED" && ( <div className="reviewed"><p>REVIEWED</p> </div> )}
-            {idea.ideaStatus === "REJECTED" && ( <div className="rejected"><p>REJECTED</p> </div> )}
-            {idea.ideaStatus === "ACCEPTED" && ( <div className="accepted"><p>ACCEPTED</p> </div> )}
-            {idea.ideaStatus === "IMPLEMENTED" && ( <div className="implemented"><p>IMPLEMENTED</p> </div> )}
+        <div className="idea_status_rewards">
+          <div className="status">
+            <strong>Status :</strong>
+            <div className="status_bar">
+              {idea.ideaStatus === "RAISED" && ( <div className="raised"><p>Raised</p> </div> )}
+              {idea.ideaStatus === "REVIEWED" && ( <div className="reviewed"><p>Reviewed</p> </div> )}
+              {idea.ideaStatus === "REJECTED" && ( <div className="rejected"><p>Rejected</p> </div> )}
+              {idea.ideaStatus === "ACCEPTED" && ( <div className="accepted"><p>Accepted</p> </div> )}
+              {idea.ideaStatus === "IMPLEMENTED" && ( <div className="implemented"><p>Implemented</p> </div> )}
 
-            <div className="workflow" onClick={() => { toggleFlow(true); }} > <p>workflow</p> </div>
+              <div className="workflow" onClick={() => { toggleFlow(true); }} > <p>workflow</p> </div>
 
-            {flow && (
-              <div className="workflow_overlay" onClick={() => { toggleFlow(false); }} >
-                <div className="workflow_img scale-up-center"> <img src={flowImage} alt="" /> </div>
-              </div>
-            )}
-
-            {admin && (
-              <div className="update__container">
-                {idea.ideaStatus === "RAISED" && (
-                  <button className="update__container_buttons" value="REVIEWED" onClick={handleUpdate} >REVIEWED</button>
-                )}
-
-                {idea.ideaStatus === "REVIEWED" && (
-                  <div>
-                    <button className="update__container_buttons" value="ACCEPTED" onClick={handleUpdate} >ACCEPTED</button>
-                    <button className="update__container_buttons" value="REJECTED" onClick={handleUpdate} >REJECTED</button>
-                  </div>
-                )}
-
-                {idea.ideaStatus === "ACCEPTED" && (
-                  <div>
-                    <button className="update__container_buttons" value="IMPLEMENTED" onClick={handleUpdate} >IMPLEMENTED</button>
-                  </div>
-                )}
-              </div>
-            )}
-
+              {flow && (
+                <div className="workflow_overlay" onClick={() => { toggleFlow(false); }} >
+                  <div className="workflow_img scale-up-center"> <img src={flowImage} alt="" /> </div>
+                </div>
+              )}
+            </div>
           </div>
+
+          {admin &&
+            <div className="idea_rewards">
+              <div className="idea-rewards">
+                <p>Rewards:</p>
+                <select className="rewards_drop" onChange={handleRewards} name="rewards" >
+                  <option value="0" hidden><p>select rewards</p></option>
+                  <option value="100">100 points</option>
+                  <option value="50">50 points</option>
+                  <option value="30">30 points</option>
+                  <option value="20">20 points</option>
+                  <option value="10">10 points</option>
+                </select>
+
+                <button onClick={handleSave} className="rewards_button">
+                  Submit
+                </button>
+              </div>
+            </div>
+          }
+
         </div>
+        
+        {admin && (
+          <div className="change_status">
+            <strong><p>Want to change status of Idea</p></strong>
+            <div className="update__container">
+              {idea.ideaStatus === "RAISED" && (
+                <button className="update__container_buttons" value="REVIEWED" onClick={handleUpdate} >Reviewed</button>
+              )}
+
+              {idea.ideaStatus === "REVIEWED" && (
+                <div>
+                  <button className="update__container_buttons" value="ACCEPTED" onClick={handleUpdate} >Accepted</button>
+                  <button className="update__container_buttons_r" value="REJECTED" onClick={handleUpdate} >Rejected</button>
+                </div>
+              )}
+
+              {idea.ideaStatus === "ACCEPTED" && (
+                <div>
+                  <button className="update__container_buttons" value="IMPLEMENTED" onClick={handleUpdate} >Implemented</button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="idea_likes">
           {likeId !== "" ?
@@ -185,11 +228,11 @@ function ViewIdeaById() {
           </div>
 
           <div className="badge">
-            <BiMedal className="ruby_badge" />
-            <BiMedal className="diamond_badge" />
-            <BiMedal className="gold_badge" />
-            <BiMedal className="silver_badge" />
-            <BiMedal className="bronze_badge" />
+            {idea.rewards===100&& <div className="badge_points"><BiMedal className="ruby_badge" /><p>{idea.rewards}</p></div>}
+            {idea.rewards===50&& <div className="badge_points"><BiMedal className="diamond_badge" /><p>{idea.rewards}</p></div>}
+            {idea.rewards===30&& <div className="badge_points"><BiMedal className="gold_badge" /><p>{idea.rewards}</p></div>}
+            {idea.rewards===20&& <div className="badge_points"><BiMedal className="silver_badge" /><p>{idea.rewards}</p></div>}
+            {idea.rewards===10&& <div className="badge_points"><BiMedal className="bronze_badge" /><p>{idea.rewards}</p></div>}
           </div>
         </div>
       </div>

@@ -180,6 +180,13 @@ class App extends Component {
             <Route path = "/myFavorites" element = {<MyFavoriteIdeasPage />}/>
           </Routes>
         </div>
+
+        <footer class="page-footer font-small ">
+          <div class="footer-copyright text-center py-3">© 2023 Copyright:
+              <a href='https://www.soprasteria.com/'>   Soprasteria.com</a>
+          </div>
+        </footer>
+
       </div>
     );
   }

@@ -116,17 +116,18 @@ function ViewChallengeById() {
                                 <div className="commentBody">
                                     <div className="commentText" key={comment.id}>
                                         {comment.commentText}
-                                        {currentUserId === comment.userId && (
-                                            <div className="CommentEdit" style={{ display: "inline", float: "top-right" }}>
-                                                <button className="btn btn-outline-secondary">
-                                                {" "}
-                                                <BiEditAlt
-                                                    onClick={(event) => navigateToEditComment(comment.id, comment.commentText, challenge.id)}
-                                                    size={"20px"}
-                                                />{" "}
-                                                </button>
-                                            </div>
-                                        )}
+                                        {(currentUserId === comment.userId) ? 
+                                            (
+                                                <div className="CommentEdit" style={{ display: "inline-block", float: "top-right" }}>
+                                                    <button className="btn btn-outline-secondary">
+                                                        <BiEditAlt
+                                                            onClick={() => navigateToEditComment(comment.id, comment.commentText, challenge.id)}
+                                                        size={"20px"}
+                                                        />
+                                                    </button>
+                                                </div>
+                                            ) :( <div> </div> )
+                                        }
                                     </div>
                                     <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
                                     <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>

@@ -271,7 +271,7 @@ function ViewIdeaById() {
                   {(currentUserId === comment.userId) ?
                     (
                       <div className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
-                        <button className="btn btn-secondary"> <BiEditAlt onClick={event => {navigateToEditComment(comment.id, comment.commentText)}} size={"20px"} /> </button>
+                        <button className="btn btn-secondary"> <BiEditAlt onClick={() => {navigateToEditComment(comment.id, comment.commentText)}} size={"20px"} /> </button>
                       </div>
                     ) : ( <div> </div> )
                   }

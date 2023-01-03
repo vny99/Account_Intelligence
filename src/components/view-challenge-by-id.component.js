@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
+import AuthService from "../services/auth.service";
 import { BiEditAlt } from 'react-icons/bi'
 import "./view-challenge-by-id.component.css";
 import ChallengeCommentsService from "../services/challenge-comments.service"
@@ -10,30 +11,31 @@ import Modal from "react-bootstrap/Modal";
 import EditPage from "./edit-challenge.component.js";
 
 function ViewChallengeById() {
-    const { id } = useParams();
-    const [userName, setUserName] = useState("");
+    const { challengeId } = useParams();
     const [challenge, setChallenge] = useState({});
     const [commentButton,setCommentButton]=useState()
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState({});
     const [show, setShow] = useState(false);
     const [editId, setEditId] = useState("");
+    const [currentUserId, setCurrentUserId]=useState("");
     
-    useEffect(()=>{
-        ChallengeCommentsService.getChallengeCommentsByChallengeId(id). then((res) => {
-            setComments(res.data);
-        });
-    }
-    , [comments]
-    );
-      
     useEffect(() => {
-        BusinessChallengesService.getBusinesssChallengeById(id).then((res) => { setChallenge(res.data) });
+        BusinessChallengesService.getBusinesssChallengeById(challengeId).then((res) => { setChallenge(res.data) });
     }, []);
+
+    useEffect(() => {
+        const user = AuthService.getCurrentUser();
+        setCurrentUserId(user.id)
+    })
+
+    useEffect(()=>{
+        ChallengeCommentsService.getChallengeCommentsByChallengeId(challengeId). then((res) => { setComments(res.data); });
+    } , []);
     
     const handleSubmit = (e) => {
         setCommentButton(false);
-        ChallengeCommentsService.postComment(id, commentText).then((res)=>{
+        ChallengeCommentsService.postComment(challengeId, commentText).then((res)=>{
             console.log(res.data);
         })
     };
@@ -46,6 +48,10 @@ function ViewChallengeById() {
     const handleShow = (data) => {
         setShow(true);
         setEditId(data);
+    };
+
+    const navigateToEditComment = (commentId, commentText, challengeId ) => {
+        navigate("/editChallengeComment/" + commentId + "/" + commentText + "/" + challengeId);
     };
 
     const navigate = useNavigate();
@@ -61,15 +67,20 @@ function ViewChallengeById() {
                 <h6>Back</h6>
             </button>
                 <div className="idea">
-                    <div style={{"margin-left":"95%","padding-top":"5px"}}>
-                        <BiEditAlt size={"30px"} color={"#527293"} onClick={() => { handleShow(challenge.id); }}/>
-                    </div>
+                    {currentUserId === challenge.userId && (
+                        <div style={{"margin-left":"95%","padding-top":"5px"}}>
+                            <BiEditAlt size={"30px"} color={"#527293"} onClick={() => { handleShow(challenge.id); }}/>
+                        </div> 
+                    )}
                     <div className="idea_header"></div>
                     <div className="idea_title"><h1>{challenge.challengeTitle}</h1></div>
                     <div className="idea_description"><p>{challenge.challengeDescription}</p></div>
-                    <div className="closingDate">
+                    <div className="postedby"><strong>Posted By: </strong>{challenge.fname + " " + challenge.lname}</div>
+                    <div className="expiryDate">
                         <p>
-                            Expiry Date:
+                            {/* <strong> */}
+                                Expiry Date: 
+                            {/* </strong> */}
                             {
                                 new Date(challenge.createdDate).toDateString().slice(8, 11) +
                                 // month eg: Dec
@@ -92,7 +103,7 @@ function ViewChallengeById() {
                         >
                         </textarea>
             
-                        <button className="comment-form button" onClick={handleSubmit}>
+                        <button className="comment-form button" disabled={commentText.length < 1} onClick={handleSubmit}>
                             Post Comment
                         </button>
                     </form>
@@ -100,19 +111,28 @@ function ViewChallengeById() {
         
                 <div className="comments_section">
                     {comments.map(
-                    comment => (
-                        <div>
-                        <div className="commentBody">
-                            <div className="commentText" key={comment.id}>
-                            {comment.commentText}
+                        comment => (
+                            <div>
+                                <div className="commentBody">
+                                    <div className="commentText" key={comment.id}>
+                                        {comment.commentText}
+                                        {currentUserId === comment.userId && (
+                                            <div className="CommentEdit" style={{ display: "inline", float: "top-right" }}>
+                                                <button className="btn btn-outline-secondary">
+                                                {" "}
+                                                <BiEditAlt
+                                                    onClick={(event) => navigateToEditComment(comment.id, comment.commentText, challenge.id)}
+                                                    size={"20px"}
+                                                />{" "}
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
+                                    <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>
+                                </div>
                             </div>
-
-                            <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
-                            <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>
-
-                        </div>
-                        </div>
-                    )
+                        )
                     )}
                 </div>
 

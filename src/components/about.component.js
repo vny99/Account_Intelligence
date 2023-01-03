@@ -1,9 +1,19 @@
 import React, { Component } from "react";
+import "./about.component.css"
+import Bulb from "./images/bulb.png"
 
 class About extends Component {
     render() {
         return (
-            <h1 style={{"margin":"50px"}}>About page</h1>
+            <div className="header section__padding" id="home">
+                <div className="header_content">
+                    <h1 className="gradient__text">Make your ideas come alive</h1>
+                    <p>Echo is the knowledge-sharing community among Sopra Sterians where employees provide their thoughts for the improvment of organization and experts put their heads together to crack  toughest challengs.</p>
+                </div>
+                <div className="header-image">
+                    <img src={Bulb} alt="bulb"/>
+                </div>
+            </div>
         );
     }
 }

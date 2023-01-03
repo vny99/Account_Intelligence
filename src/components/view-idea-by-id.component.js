@@ -120,12 +120,16 @@ function ViewIdeaById() {
       </button>
       
       <div className="idea">
-        <div style={{"margin-left":"95%","padding-top":"5px"}}>
-          <BiEditAlt size={"30px"} color={"#527293"} onClick={() => { handleShow(idea.id); }}/>
-        </div>
-
         <div className="idea_header">
-          <div className="idea_title"> <h1>{idea.ideaTitle}</h1> </div>
+          <div className="idea_title">
+            <h1>
+              {idea.ideaTitle}
+              
+              {currentUserId === idea.userId && (
+                  <BiEditAlt className="edit_idea_button" size={"45px"} onClick={() => { handleShow(idea.id) }} />
+              )}
+            </h1>
+            </div>
           <Modal show={show} onHide={handleClose} className="name">
             <Modal.Header closeButton>
               <Modal.Title>
@@ -140,6 +144,7 @@ function ViewIdeaById() {
         </div>
 
         <div className="idea_description"> <p>{idea.ideaDescription}</p> </div>
+        <div className="Postedby"><strong>Posted By: </strong>{idea.fname + " " + idea.lname}</div>
 
         <div className="idea_status_rewards">
           <div className="status">
@@ -234,6 +239,9 @@ function ViewIdeaById() {
             {idea.rewards===20&& <div className="badge_points"><BiMedal className="silver_badge" /><p>{idea.rewards}</p></div>}
             {idea.rewards===10&& <div className="badge_points"><BiMedal className="bronze_badge" /><p>{idea.rewards}</p></div>}
           </div>
+          
+          {/* <div className="Postedby"> Posted By: {idea.fname + " " + idea.lname}</div> */}
+
         </div>
       </div>
       
@@ -248,7 +256,7 @@ function ViewIdeaById() {
               placeholder="Write your Comment"
               onChange={(e) => setCommentText(e.target.value)}
             ></textarea>
-            <button className="post-comment-form button" onClick={handleSubmit}>Post Comment</button>
+            <button className="post-comment-form button" disabled={commentText.length < 1} onClick={handleSubmit}>Post Comment</button>
           </form>
         </div>
       </div>
@@ -263,7 +271,7 @@ function ViewIdeaById() {
                   {(currentUserId === comment.userId) ?
                     (
                       <div className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
-                        <button className="btn btn-outline-secondary"> <BiEditAlt onClick={event=> {navigateToEditComment(comment.id, comment.commentText)}} size={"20px"} /> </button>
+                        <button className="btn btn-secondary"> <BiEditAlt onClick={event => {navigateToEditComment(comment.id, comment.commentText)}} size={"20px"} /> </button>
                       </div>
                     ) : ( <div> </div> )
                   }

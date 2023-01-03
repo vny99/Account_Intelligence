@@ -1,12 +1,13 @@
 /* @import url(https://fonts.googleapis.com/css?family=Roboto:300); */
 
 /* To turn off scrolling when unncessary and turn on only when necessary */
-html, body {
+html,
+body {
   margin: 0;
   height: max-content;
 }
 
-body{
+body {
   /* font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif; */
   /* font-family: 'Times New Roman', Times, serif */
   font-family: Arial, Helvetica, sans-serif;
@@ -19,7 +20,7 @@ body{
 
 }
 
-.navbar{
+.navbar {
   padding-left: 80px;
   padding-top: 3px;
   padding-bottom: 3px;
@@ -38,19 +39,23 @@ body{
 .container {
   margin-top: 20px;
   z-index: 1;
+  padding-bottom: 2.5rem;
+  margin-bottom: 20px;
 }
 
-.justify-content-end{
+.justify-content-end {
   padding-right: 5px;
 }
 
-.nav-link{
+.nav-link {
   padding: 0px;
   text-align: center;
   /* color: rgba(245, 245, 245, 0.734); */
 }
 
-.nav-link:hover, .nav-link:focus, .nav-link:active {
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:active {
   color: white;
   background-color: #5A4181 !Important;
   border: solid 1px #5A4181 !Important;
@@ -90,11 +95,24 @@ label {
 }
 
 .page-footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
-  height: 2.5rem;
-} 
+  height: 40px;
+  background-color: black;
+  z-index: 9999;
+  margin-top: auto;
+
+  /* flex: 1; */
+  /* justify-content: space-between; */
+  /* clear: both; */
+  /* display: block; */
+}
+
+.footer-copyright {
+  color: white;
+}
 
 /* .userprofile{
   float: right;
@@ -114,4 +132,3 @@ label {
   .col-11 {width: 91.66%;}
   .col-12 {width: 100%;}
 } */
-

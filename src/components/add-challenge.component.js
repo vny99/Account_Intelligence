@@ -8,7 +8,6 @@ export default class AddChallenge extends Component {
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeExpiryDate=this.onChangeExpiryDate.bind(this);
-    
     this.saveChallenge = this.saveChallenge.bind(this);
     this.newChallenge = this.newChallenge.bind(this);
 
@@ -80,9 +79,7 @@ export default class AddChallenge extends Component {
         {this.state.submitted ? (
           <div style={{"textAlign":"center"}}>
             <h4>Business Challenge submitted successfully!</h4>
-            <a href="/challenges"> <button className="btn btn-success" style={{"width":"20%"}}>
-             ok
-            </button></a>
+            <a href="/challenges"> <button className="btn btn-success" style={{"width":"20%"}}>Ok</button></a>
           </div>
         ) : (
           <div>

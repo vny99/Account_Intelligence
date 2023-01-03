@@ -24,9 +24,9 @@ import BusinessChallengesPage from "./components/business-challenges-page.compon
 import SearchDropdown from "./components/search-dropdown.component";
 import ViewIdeaById from "./components/view-idea-by-id.component";
 import ViewChallengeById from "./components/view-challenge-by-id.component";
-import EditChallengeById from "./components/edit-challenge.component.js";
-import EditComment from "./components/edit-idea-comment.component";
 import MyFavoriteIdeasPage from "./components/my-favorite-ideas-page.component";
+import EditIdeaComment from "./components/edit-idea-comment.component";
+import EditChallengeComment from "./components/edit-challenge-comment.component";
 
 class App extends Component {
   constructor(props) {
@@ -166,26 +166,26 @@ class App extends Component {
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/user" element={<BoardUser />} />
-            <Route path="/admin" element={<BoardAdmin />} />
+            {/* <Route path="/user" element={<BoardUser />} />
+            <Route path="/admin" element={<BoardAdmin />} /> */}
             <Route path = "/ideas" element = {<FreshIdeasPage />} />
             <Route path = "/challenges" element = {<BusinessChallengesPage />} />
             <Route path="/addIdea" element={<AddIdea />} />
             <Route path = "/search" element = {<SearchDropdown />} />
             <Route path="/addChallenge" element={<AddChallenge />} />
             <Route path = "/viewIdea/:id" element = {<ViewIdeaById />}/>
-            <Route path = "/viewChallenge/:id" element = {<ViewChallengeById />}/>
-            <Route path = "/editChallenge/:id" element = {<EditChallengeById />}/>
-            <Route path = "/editIdeaComment/:commentId/:commentText" element = {<EditComment />}/>
+            <Route path = "/viewChallenge/:challengeId" element = {<ViewChallengeById />}/>
+            <Route path="/editChallengeComment/:commentId/:commentText/:challengeId" element={<EditChallengeComment/>}/>
+            <Route path = "/editIdeaComment/:commentId/:commentText" element = {<EditIdeaComment />}/>
             <Route path = "/myFavorites" element = {<MyFavoriteIdeasPage />}/>
           </Routes>
         </div>
 
-        {/* <footer class="page-footer font-small ">
+        <footer class="page-footer" >
           <div class="footer-copyright text-center py-3">© 2023 Copyright:
-              <a href='https://www.soprasteria.com/'>   Soprasteria.com</a>
+              <a href='https://www.soprasteria.com/' style={{"color":"white"}}>   Soprasteria.com</a>
           </div>
-        </footer> */}
+        </footer>
 
       </div>
     );

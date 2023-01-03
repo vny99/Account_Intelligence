@@ -13,8 +13,12 @@ class ChallengeCommentsService {
     }
     
     postComment(challengeId, commentText) {
-        console.log({commentText, challengeId})
         return axios.post(COMMENT_API_BASE_URL, {commentText, challengeId}, { headers: authHeader() })
+    }
+
+    updateBusinessChallengeComment(commentId, commentText) {
+        console.log(commentId, commentText)
+        return axios.put(COMMENT_API_BASE_URL + "/updateComment/" + commentId, {commentText}, { headers: authHeader() })
     }
 }
 

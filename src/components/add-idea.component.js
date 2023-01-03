@@ -104,9 +104,7 @@ export default class AddIdea extends Component {
         {this.state.submitted ? (
           <div style={{"textAlign":"center"}}>
             <h4>Idea submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newidea}>
-              Add
-            </button>
+            <a href="/ideas"> <button className="btn btn-success" style={{"width":"20%"}}>Ok</button></a>
           </div>
         ) : (
           <div>

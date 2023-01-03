@@ -32,8 +32,13 @@
   color: black;
   font-size: 16px;
 }
+
+.postedby{
+  text-align:end;
+  margin-left:2rem;
+}
    
-.closingDate {
+.expiryDate {
   margin: 0.5rem 2rem;
   display: flex;
   flex-direction: column;
@@ -131,7 +136,7 @@
   flex-direction: column;
   color:black;
   font-family:century ;
-  height: 100px;
+  /* height: 100px; */
   border: 1px solid black;
 }
 

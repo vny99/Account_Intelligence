@@ -62,7 +62,7 @@ function ViewChallengeById() {
     return (
         <div>
             <div className="specific_idea">
-            <button className="back-button btn btn-outline-secondary" style={{"float":"right"}} onClick={handleClick}>
+            <button className="back-button btn btn-secondary" style={{"float":"right"}} onClick={handleClick}>
                 <TbArrowBackUp size="30px" />
                 <h6>Back</h6>
             </button>

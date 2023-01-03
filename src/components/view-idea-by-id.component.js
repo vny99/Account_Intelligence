@@ -219,7 +219,7 @@ function ViewIdeaById() {
               <div style={{"textAlign":"center"}} >{idea.likesCount}</div>
             </div> :
             <div className="idea_like-icon">
-              <AiOutlineLike size={"40px"} className="like_icon-inactive" onClick={handleLike}/>
+              <AiOutlineLike size={"40px"} className="like_icon_inactive" onClick={handleLike}/>
               <div style={{"textAlign":"center"}} >{idea.likesCount}</div>
             </div>
           }

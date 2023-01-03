@@ -144,4 +144,15 @@ public class UserController {
 	public User getUserByEmail(@PathVariable String email) {
 		return userRepo.findByEmail(email);
 	}
+	
+	@PostMapping("users/{email}")
+    public User updateUserByEmail(@PathVariable String email, @RequestBody User user) {
+        User existingUser = userRepo.findByEmail(email);
+        existingUser.setFname(user.getFname());
+        existingUser.setLname(user.getLname());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setDepartment(user.getDepartment());
+        userRepo.save(existingUser);
+        return existingUser;
+    }
 }

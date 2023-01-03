@@ -20,6 +20,10 @@ class UserService {
     getFavorites() {
         return axios.get(USER_API_BASE_URL + "favorites", { headers: authHeader() });
     }
+
+    updateUserByEmail(email, profile){
+        return axios.post(USER_API_BASE_URL + email, profile,{ headers: authHeader() });
+    }
 }
 
 export default new UserService();

@@ -3,6 +3,9 @@ import { Navigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 import UserService from "../services/user.service";
 import './profile.component.css';
+import { BiEditAlt } from "react-icons/bi";
+import Modal from "react-bootstrap/Modal";
+import EditPage from "./edit-profile.component";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -13,8 +16,10 @@ export default class Profile extends Component {
       currentUser: [],
       userDetails: {},
       role: "",
-      department: "",
-      status:false
+      id: "",
+      status: false,
+      show: false,
+      editId: "",
     };
   } 
 
@@ -31,19 +36,26 @@ export default class Profile extends Component {
       })
       this.setState({ currentUser: user, });
     }
+  }
 
+  handleClose = () => {
+    this.setState({ show: false, editId: "" });
+  };
+
+  handleShow(data) {
+    this.setState({ show: true, editId: data });
   }
 
   render() {
     const { userDetails, status, role, department } = this.state;
 
     if (this.state.redirect) {
-      return <Navigate to={this.state.redirect} />
+      return <Navigate to = {this.state.redirect} />
     }
     
     return (
-      <div className="container profile-container">
-        <div className="profile-card">
+      <div>
+        <div className="profile-card" style={{"height":"450px"}}>
           <div className='upper-container'>
               <div className='image-container'>
                 <img src="profileimage.jpg" alt='profile image' height="100px" width="100px"/>
@@ -59,12 +71,7 @@ export default class Profile extends Component {
 
             <div style={{"paddingTop":"10px"}}>
               <div style={{"fontWeight":"bold", "display":"inline", "textAlign":"left"}}>Department : </div>
-                <span
-                  // style={{"marginRight":"10px", "padding":"4px", "border":"4px solid transparent",
-                  // "borderRadius":"10px", "backgroundColor":"purple", "color":"white"}}
-                >
-                  { department }
-                </span>
+                <span>{ department }</span>
             </div>
 
             <div style={{"paddingTop":"10px"}}>
@@ -77,8 +84,21 @@ export default class Profile extends Component {
             </div>
 
             <div style={{"paddingTop":"10px"}}><strong>Status : </strong> {status ? "Active" : "Inactive"} </div>
+            <div className="btn btn-secondary" style={{"marginTop":"40px"}} onClick={() => { this.handleShow(this.state.id); }}>
+              <BiEditAlt size={"30px"} />
+              Edit Profile
+            </div>
+
           </div>
         </div>
+
+        <Modal show={this.state.show} onHide={this.handleClose} className="name" >
+          <Modal.Header closeButton>
+            <Modal.Title><h1>Edit Profile</h1></Modal.Title>
+          </Modal.Header>
+          <Modal.Body><EditPage id={this.state.editId} /></Modal.Body>
+        </Modal>
+
       </div>
     );
   }

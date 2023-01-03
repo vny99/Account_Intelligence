@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,7 +44,7 @@ public class BusinessChallengesCommentsController {
 	}
 
 	@GetMapping("/challengecomments/{businessId}")
-	public List<BusinessChallengeComments> getCommentsByIdeaId(@PathVariable String businessId){
+	public List<BusinessChallengeComments> getChallengeCommentsByChallengeId(@PathVariable String businessId){
 		List<BusinessChallengeComments> comments = new ArrayList<>();
 		
 		BusinessChallenges businessChallenges = challengesRepo.findById(businessId).get();
@@ -54,11 +55,8 @@ public class BusinessChallengesCommentsController {
 
 	@PostMapping("/challengecomments")
 	public ResponseEntity<BusinessChallengeComments> postComment(@RequestBody BusinessChallengeComments businessChallengeComment) {
-		System.out.println(businessChallengeComment);
 		if(businessChallengeComment != null) {
 			try {
-//				System.out.println(businessChallengeComment);
-				
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		    	UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 		    	String email = userDetails.getUsername(); //email is fetched in the username
@@ -100,4 +98,12 @@ public class BusinessChallengesCommentsController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@PutMapping("challengecomments/updateComment/{id}")
+    public ResponseEntity<BusinessChallengeComments> updateComment(@PathVariable String id,
+            @RequestBody BusinessChallengeComments challengeComments) {
+        BusinessChallengeComments myCom = commentsRepo.findById(id).get();
+        myCom.setCommentText(challengeComments.getCommentText());
+        return new ResponseEntity<>(commentsRepo.save(myCom), HttpStatus.OK);
+    }
 }

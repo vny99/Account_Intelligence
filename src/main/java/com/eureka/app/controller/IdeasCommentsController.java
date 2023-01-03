@@ -38,14 +38,14 @@ public class IdeasCommentsController {
 	@Autowired
 	IdeasRepository ideasRepo;
 	
-	@GetMapping("/comments")
+	@GetMapping("/ideaComments")
 	public List<IdeaComments> getAllComments() {
 		List<IdeaComments> allComments = commentsRepo.findAll();
 		
 		return allComments;
 	}
 	
-	@GetMapping("/comments/{ideaId}")
+	@GetMapping("/ideaComments/{ideaId}")
 	public List<IdeaComments> getCommentsByIdeaId(@PathVariable String ideaId){
 		List<IdeaComments> ideaComments = new ArrayList<>();
 		
@@ -58,7 +58,7 @@ public class IdeasCommentsController {
 		return ideaComments;
 	}
 	
-	@PostMapping("/comments")
+	@PostMapping("/ideaComments")
 	public ResponseEntity<IdeaComments> postComment(@RequestBody IdeaComments ideaComment ) {
         
 		if(ideaComment != null) {
@@ -105,7 +105,7 @@ public class IdeasCommentsController {
 		}
     }
 	
-	@PutMapping("updatecomment/{id}")
+	@PutMapping("/ideaComments/updateComment/{id}")
     public ResponseEntity<IdeaComments> updateComment(@PathVariable String id,
             @RequestBody IdeaComments ideaComments) {
 		System.out.println(id);

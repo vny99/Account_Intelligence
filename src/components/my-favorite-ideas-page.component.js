@@ -6,6 +6,7 @@ import "./fresh-ideas-page.component.css"
 import Pagination from './Pagination';
 import { AiFillHeart, AiOutlineComment, AiOutlineHeart, AiOutlineLike } from 'react-icons/ai';
 import IdeaService from '../services/idea.service';
+import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
 
 
 class MyFavoriteIdeasPage extends Component {
@@ -146,9 +147,9 @@ class MyFavoriteIdeasPage extends Component {
 
                                             <td> 
                                                 {IdeaService.isFavoriteIdeaOfCurrentUser(idea.id) === false ? (
-                                                <AiOutlineHeart size={"40px"} color="red" />
+                                                <FcLikePlaceholder size={"40px"} color="red" />
                                                 ) : (
-                                                <AiFillHeart size={"40px"} color="red" />
+                                                <FcLike size={"40px"} color="red" />
                                                 )}
                                             </td>
                                             <td> </td>

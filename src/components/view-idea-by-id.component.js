@@ -15,6 +15,7 @@ import AuthService from "../services/auth.service";
 import Modal from "react-bootstrap/Modal";
 import EditIdea from "./edit-idea.component";
 import UserService from "../services/user.service";
+import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 
 function ViewIdeaById() {
   const [idea, setIdea] = useState({});
@@ -232,9 +233,9 @@ function ViewIdeaById() {
 
           <div>
             {localLiked ?
-              <AiFillHeart size={"40px"} color="red" onClick={handleFavorite} />
+              <FcLike size={"40px"} color="red" onClick={handleFavorite} />
               :
-              <AiOutlineHeart size={"40px"} color="red" onClick={handleFavorite} />
+              <FcLikePlaceholder size={"40px"} color="red" onClick={handleFavorite} />
             }
           </div>
 

@@ -9,8 +9,6 @@ import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardAdmin from "./components/board-admin.component";
 import About from "./components/about.component";
 
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -27,6 +25,10 @@ import ViewChallengeById from "./components/view-challenge-by-id.component";
 import MyFavoriteIdeasPage from "./components/my-favorite-ideas-page.component";
 import EditIdeaComment from "./components/edit-idea-comment.component";
 import EditChallengeComment from "./components/edit-challenge-comment.component";
+import { SiMaterialdesignicons } from "react-icons/si";
+import { TbApiApp, TbApiAppOff } from "react-icons/tb";
+import { FcIcons8Cup } from "react-icons/fc";
+import { BiGame } from "react-icons/bi";
 
 class App extends Component {
   constructor(props) {
@@ -73,7 +75,8 @@ class App extends Component {
 
         <nav className="navbar nav-tabs navbar-expand-sm">
           <Link to={"/about"} className="navbar-brand">
-            <strong style={{"fontSize":"xx-large"}}>Echo</strong>
+            <strong style={{"fontSize":"xx-large"}}> <h1 className="app-title-navbar">Echo</h1></strong>
+
           </Link>
           <div className="navbar-nav mr-auto">
             {currentUser && (
@@ -166,8 +169,6 @@ class App extends Component {
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
-            {/* <Route path="/user" element={<BoardUser />} />
-            <Route path="/admin" element={<BoardAdmin />} /> */}
             <Route path = "/ideas" element = {<FreshIdeasPage />} />
             <Route path = "/challenges" element = {<BusinessChallengesPage />} />
             <Route path="/addIdea" element={<AddIdea />} />

@@ -7,7 +7,7 @@ class About extends Component {
         return (
             <div className="header section__padding" id="home">
                 <div className="header_content">
-                    <h2 className="gradient_text">Echo</h2>
+                    <h2>Echo</h2>
                     <h1>Make your ideas come alive</h1>
                     <p>Echo is the knowledge-sharing community among Sopra Sterians where employees provide their thoughts for the improvment of organization and experts put their heads together to crack  toughest challengs.</p>
                 </div>

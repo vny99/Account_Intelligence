@@ -128,15 +128,6 @@ public class BusinessChallengesController {
 		}
 	}
 	
-//	@PutMapping("/businessChallenges/update")
-//	public ResponseEntity<BusinessChallenges> updateChallenge(@RequestBody BusinessChallenges challenge) {
-//		BusinessChallenges myChallenge = businessChallengeRepo.findById(challenge.getChallengeId()).get();
-//		myChallenge.setChallengeTitle(challenge.getChallengeTitle());
-//		myChallenge.setChallengeDescription(challenge.getChallengeDescription());
-//		myChallenge.setExpiryDate(challenge.getExpiryDate());
-//		return new ResponseEntity<>(businessChallengeRepo.save(myChallenge), HttpStatus.OK);
-//	}
-	
 	@PutMapping("/businessChallenges/{id}")
     public ResponseEntity<BusinessChallenges> updateChallenge(@PathVariable String id, @RequestBody BusinessChallenges challenge) {
         BusinessChallenges myChallenge = businessChallengeRepo.findById(id).get();

@@ -61,17 +61,15 @@
 }
 
 .postedby{
-  text-align:end;
   margin-left:2rem;
 }
-   
-.expiryDate {
-  margin: 0.5rem 2rem;
+
+.postedby {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: justify;
-  margin-left: 73%;
+  flex-direction: row;
+  gap: 390px;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
 }
 
 .edit_button {

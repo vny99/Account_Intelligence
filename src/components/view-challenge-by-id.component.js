@@ -86,18 +86,20 @@ function ViewChallengeById() {
                     <div className="idea_header"></div>
                     <div className="idea_title"><h1>{challenge.challengeTitle}</h1></div>
                     <div className="idea_description"><p>{challenge.challengeDescription}</p></div>
-                    <div className="postedby"><strong>Posted By: </strong>{challenge.fname + " " + challenge.lname}</div>
-                    <div className="expiryDate">
-                        <p>
-                            <strong>Expiry Date: </strong>
-                            {
-                                new Date(challenge.createdDate).toDateString().slice(8, 11) +
-                                // month eg: Dec
-                                new Date(challenge.createdDate).toDateString().slice(4, 8) + 
-                                // year eg: 2022
-                                new Date(challenge.createdDate).toDateString().slice(11)
-                            }
-                        </p>
+                    <div className="postedby">
+                        <div><strong>Posted By: </strong>{challenge.fname + " " + challenge.lname}</div>
+                        <div className="expiryDate">
+                            <p>
+                                <strong>Expiry Date: </strong>
+                                {
+                                    new Date(challenge.expiryDate).toDateString().slice(8, 11) +
+                                    // month eg: Dec
+                                    new Date(challenge.expiryDate).toDateString().slice(4, 8) + 
+                                    // year eg: 2022
+                                    new Date(challenge.expiryDate).toDateString().slice(11)
+                                }
+                            </p>
+                        </div>
                     </div>
                 </div>
         

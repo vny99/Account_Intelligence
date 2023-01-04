@@ -21,8 +21,8 @@ class BusinessChallengesService {
         return axios.post(CHALLENGES_API_BASE_URL, challenge, { headers: authHeader() });
     }
 
-    updateChallenge(challenge){
-        return axios.put(CHALLENGES_API_BASE_URL + "/update", challenge, { headers: authHeader() })
+    updateChallenge(id, challenge){
+        return axios.put(CHALLENGES_API_BASE_URL + "/" + id, challenge, { headers: authHeader() })
     }
 
     findByTitleDescription(searchItem) {

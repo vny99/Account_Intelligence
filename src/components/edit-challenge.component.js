@@ -17,20 +17,17 @@ export default class EditChallenge extends React.Component{
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeClosingDate=this.onChangeClosingDate.bind(this);
-    this.saveidea = this.saveidea.bind(this);
+    this.saveChallenge = this.saveChallenge.bind(this);
   }
 
   componentDidMount(){
-    var id = this.props
-    // console.log
-    BusinessChallengesService.getBusinesssChallengeById(id.id).then((res)=>{
+    var id = this.props.id
+    BusinessChallengesService.getBusinesssChallengeById(id).then((res)=>{
       this.setState({
           title: res.data.challengeTitle,
           description: res.data.challengeDescription,
           closingdate: res.data.expiryDate,
-          url:"viewChallenge/"+id.id
         });
-      console.log(res.data);
    })
   }
 
@@ -52,18 +49,16 @@ export default class EditChallenge extends React.Component{
     })
   }
 
-  saveidea() {
-
-    var id1=this.props
+  saveChallenge() {
+    var id = this.props.id
     var challenge = {
-      challengeId:id1.id,
+      id: id,
       challengeTitle: this.state.title,
       challengeDescription: this.state.description,
-      expiryDate:this.state.closingdate
+      expiryDate: this.state.closingdate
     };
 
-    BusinessChallengesService.updateChallenge(challenge)
-    .then((res)=>{
+    BusinessChallengesService.updateChallenge(id, challenge).then((res)=>{
       console.log(res.date);
       this.setState({submitted:true})
     })
@@ -71,18 +66,12 @@ export default class EditChallenge extends React.Component{
   }
 
   render() {
-    var id=this.props
-
     return (
       <div className="submit-form">
         {this.state.submitted ? (
           <div style={{"textAlign":"center"}}>
             <h4>Business Challenge Edited successfully!</h4>
-            <a href="/home">
-              <button className="btn btn-success" style={{"width":"20%"}}>
-                ok
-              </button>
-            </a>
+            <a href = {this.state.url}><button className="btn btn-secondary" style={{"width":"20%"}}>Ok</button></a>
           </div>
         ) : (
           <div class="name">
@@ -125,9 +114,11 @@ export default class EditChallenge extends React.Component{
               />
             </div>
 
-            <button onClick={this.saveidea} style={{"marginTop":"20px"}} className="btn btn-success">
-              Submit
-            </button>
+            <div style={{"textAlign":"center"}}>
+              <button onClick={this.saveChallenge} style={{"marginTop":"20px"}} className="btn btn-secondary">
+                Submit
+              </button>
+            </div>
 
           </div>
         )}

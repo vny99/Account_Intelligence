@@ -63,14 +63,11 @@ export default class EditIdea extends React.Component{
           {this.state.submitted ? (
             <div style={{"textAlign":"center"}}>
               <h4> Edit Fresh Idea Successfully!</h4>
-              <a href={this.state.url}><button className="btn btn-success" style={{"width":"20%"}}>
-              ok
-              </button></a>
+              <a href = {this.state.url}><button className="btn btn-secondary" style={{"width":"20%"}}>Ok</button></a>
             </div>
           ) : (
             
             <div class="">
-              {/* <h1>Edit Business Challenge</h1> */}
               <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input
@@ -98,9 +95,11 @@ export default class EditIdea extends React.Component{
                 </textarea>
               </div>
 
-              <button onClick={this.saveIdea} style={{"marginTop":"20px"}} className="btn btn-success">
-                Submit
-              </button>
+              <div style={{"textAlign":"center"}}>
+                <button onClick={this.saveIdea} style={{"marginTop":"20px"}} className="btn btn-secondary">
+                  Submit
+                </button>
+              </div>
 
             </div>
           )}

@@ -137,11 +137,15 @@ public class BusinessChallengesController {
 //		return new ResponseEntity<>(businessChallengeRepo.save(myChallenge), HttpStatus.OK);
 //	}
 	
-	@PutMapping("challenges/{id}")
+	@PutMapping("/businessChallenges/{id}")
     public ResponseEntity<BusinessChallenges> updateChallenge(@PathVariable String id, @RequestBody BusinessChallenges challenge) {
         BusinessChallenges myChallenge = businessChallengeRepo.findById(id).get();
-        myChallenge .setChallengeStatus(challenge .getChallengeStatus());
-        return new ResponseEntity<>(businessChallengeRepo.save(myChallenge ), HttpStatus.OK);
+        myChallenge.setChallengeTitle(challenge.getChallengeTitle());
+        myChallenge.setChallengeDescription(challenge.getChallengeDescription());
+        myChallenge.setExpiryDate(challenge.getExpiryDate());
+        myChallenge.setChallengeStatus(challenge .getChallengeStatus());
+        
+        return new ResponseEntity<>(businessChallengeRepo.save(myChallenge), HttpStatus.OK);
     }
 
     private List<String> matchDescription(String searchItem) {

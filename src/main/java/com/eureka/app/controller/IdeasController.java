@@ -156,6 +156,9 @@ public class IdeasController {
 	@PutMapping("ideas/{id}")
 	public ResponseEntity<Idea> updateIdea(@PathVariable String id, @RequestBody Idea idea) {
 		Idea myIdea = ideasRepo.findById(id).get();
+		
+		myIdea.setIdeaTitle(idea.getIdeaTitle());
+		myIdea.setIdeaDescription(idea.getIdeaDescription());
 		myIdea.setIdeaStatus(idea.getIdeaStatus());
 		myIdea.setRewards(idea.getRewards());
 		

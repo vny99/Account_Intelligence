@@ -10,7 +10,6 @@ import { BiEditAlt, BiMedal } from "react-icons/bi";
 import flowImage from "./images/flowStatus.jpg";
 import IdeaCommentsService from "../services/idea-comments.service";
 import { useNavigate} from "react-router-dom";
-import AddFavourite from "./add-favourite.component";
 import LikesService from "../services/likes.service";
 import AuthService from "../services/auth.service";
 import Modal from "react-bootstrap/Modal";
@@ -19,6 +18,8 @@ import UserService from "../services/user.service";
 
 function ViewIdeaById() {
   const [idea, setIdea] = useState({});
+  const [benefitCategory, setBenefitCategory] = useState({});
+  const [category, setCategory] = useState({});
   const { id } = useParams();
   const [commentButton, setCommentButton] = useState(false);
   const [comments, setComments] = useState([]);
@@ -34,7 +35,11 @@ function ViewIdeaById() {
   const [localLiked, setLocalLiked] = useState(false);
 
   useEffect(() => {
-    IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
+    IdeaService.getIdeaByIdeaId(id).then((res) => {
+      setIdea(res.data);
+      setBenefitCategory(res.data.benefitCategory)
+      setCategory(res.data.category)
+    });
   }, [idea]);
 
   useEffect(() => {
@@ -60,6 +65,7 @@ function ViewIdeaById() {
     setStatus(e.target.value);
     let myIdea = idea;
     myIdea.ideaStatus = e.target.value;
+    console.log(idea.id, myIdea)
     IdeaService.updateIdea(idea.id, myIdea);
   };
 
@@ -120,31 +126,31 @@ function ViewIdeaById() {
       </button>
       
       <div className="idea">
+        {currentUserId === idea.userId && (
+          <div style={{"margin-left":"90%","padding-top":"5px"}}>
+            <BiEditAlt className="edit_idea_button" size={"45px"} onClick={() => { handleShow(idea.id) }} />
+            <Modal show={show} onHide={handleClose} className="name">
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <h1>Edit Fresh Idea</h1>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <EditIdea id={editId}/>
+              </Modal.Body>
+            </Modal>
+          </div>
+        )}
         <div className="idea_header">
-          <div className="idea_title">
-            <h1>
-              {idea.ideaTitle}
-              
-              {currentUserId === idea.userId && (
-                  <BiEditAlt className="edit_idea_button" size={"45px"} onClick={() => { handleShow(idea.id) }} />
-              )}
-            </h1>
-            </div>
-          <Modal show={show} onHide={handleClose} className="name">
-            <Modal.Header closeButton>
-              <Modal.Title>
-                <h1>Edit Fresh Idea</h1>
-              </Modal.Title>
-            </Modal.Header>
-
-            <Modal.Body>
-            <EditIdea id={editId}/>
-            </Modal.Body>
-          </Modal>
+          <div className="idea_title"><h1>{idea.ideaTitle}</h1></div>
         </div>
 
         <div className="idea_description"> <p>{idea.ideaDescription}</p> </div>
-        <div className="Postedby"><strong>Posted By: </strong>{idea.fname + " " + idea.lname}</div>
+        <div className="Postedby">
+          <div><strong>Posted By: </strong>{idea.fname + " " + idea.lname}</div>
+          <div><strong>Benefit category: </strong>{benefitCategory.name}</div>
+          <div><strong>Category: </strong>{category.name}</div>
+        </div>
 
         <div className="idea_status_rewards">
           <div className="status">

@@ -181,8 +181,8 @@ class App extends Component {
           </Routes>
         </div>
 
-        <footer class="page-footer" >
-          <div class="footer-copyright text-center py-3">© 2023 Copyright:
+        <footer className="page-footer" >
+          <div className="footer-copyright text-center py-3">© 2023 Copyright:
               <a href='https://www.soprasteria.com/' style={{"color":"white"}}>   Soprasteria.com</a>
           </div>
         </footer>

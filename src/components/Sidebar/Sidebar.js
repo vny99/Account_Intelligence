@@ -10,7 +10,7 @@ import Logo from ".//logo.jpg"
 
 const Sidebar = (props) => {
   return (
-      <Menu width={'80px'}
+      <Menu
       // customBurgerIcon={ <img src={Logo} /> }
       >
         {props.currentUser && (

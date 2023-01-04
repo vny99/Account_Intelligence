@@ -8,7 +8,6 @@ import { BiEditAlt } from "react-icons/bi";
 import IdeaService from '../services/idea.service';
 
 const MyIdeas = ({ data, userDetails }) => {
-
     return (  
         <table className = "table">
             <thead style={{"textAlign":"center", "verticalAlign":"middle"}}>

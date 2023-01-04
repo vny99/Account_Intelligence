@@ -9,6 +9,7 @@ import BusinessChallengesService from '../services/business-challenge.service'
 import { TbArrowBackUp } from 'react-icons/tb';
 import Modal from "react-bootstrap/Modal";
 import EditPage from "./edit-challenge.component.js";
+import EditChallenge from './edit-challenge.component.js';
 
 function ViewChallengeById() {
     const { challengeId } = useParams();
@@ -68,9 +69,19 @@ function ViewChallengeById() {
             </button>
                 <div className="idea">
                     {currentUserId === challenge.userId && (
-                        <div style={{"margin-left":"95%","padding-top":"5px"}}>
-                            <BiEditAlt size={"30px"} color={"#527293"} onClick={() => { handleShow(challenge.id); }}/>
-                        </div> 
+                        <div style={{"margin-left":"90%","padding-top":"5px"}}>
+                            <BiEditAlt className="edit_challenge_button" size={"45px"} onClick={() => { handleShow(challenge.id); }}/>
+                            <Modal show={show} onHide={handleClose} className="name">
+                                <Modal.Header closeButton>
+                                <Modal.Title>
+                                    <h1>Edit Business Challenge</h1>
+                                </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                <EditChallenge id={editId} />
+                                </Modal.Body>
+                            </Modal>
+                        </div>
                     )}
                     <div className="idea_header"></div>
                     <div className="idea_title"><h1>{challenge.challengeTitle}</h1></div>
@@ -78,9 +89,7 @@ function ViewChallengeById() {
                     <div className="postedby"><strong>Posted By: </strong>{challenge.fname + " " + challenge.lname}</div>
                     <div className="expiryDate">
                         <p>
-                            {/* <strong> */}
-                                Expiry Date: 
-                            {/* </strong> */}
+                            <strong>Expiry Date: </strong>
                             {
                                 new Date(challenge.createdDate).toDateString().slice(8, 11) +
                                 // month eg: Dec
@@ -118,8 +127,8 @@ function ViewChallengeById() {
                                         {comment.commentText}
                                         {(currentUserId === comment.userId) ? 
                                             (
-                                                <div className="CommentEdit" style={{ display: "inline-block", float: "top-right" }}>
-                                                    <button className="btn btn-outline-secondary">
+                                                <div className="CommentEdit" style={{ display: "inline-block", "float":"right" }}>
+                                                    <button className="btn btn-secondary">
                                                         <BiEditAlt
                                                             onClick={() => navigateToEditComment(comment.id, comment.commentText, challenge.id)}
                                                         size={"20px"}
@@ -136,18 +145,6 @@ function ViewChallengeById() {
                         )
                     )}
                 </div>
-
-                <Modal show={show} onHide={handleClose} className="name">
-                    <Modal.Header closeButton>
-                    <Modal.Title>
-                        <h1>Edit Business Challenge</h1>
-                    </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                    <EditPage id={editId} />
-                    </Modal.Body>
-                </Modal>
-                
             </div>
         </div> 
     );

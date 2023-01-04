@@ -2,7 +2,7 @@ import React from 'react';
 import BusinessChallengesService from "../services/business-challenge.service"
 import "./add-challenge.component.css"
 
-export default class EditChallengeById extends React.Component{
+export default class EditChallenge extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ export default class EditChallengeById extends React.Component{
 
   componentDidMount(){
     var id = this.props
-
+    // console.log
     BusinessChallengesService.getBusinesssChallengeById(id.id).then((res)=>{
       this.setState({
           title: res.data.challengeTitle,

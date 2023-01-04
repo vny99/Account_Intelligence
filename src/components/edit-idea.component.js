@@ -10,24 +10,23 @@ export default class EditIdea extends React.Component{
       id: '',
       title: '',
       description: '',
-      expiryDate: '',
+      status: '',
       url: '',
       redirect: false
     }
 
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeClosingDate=this.onChangeClosingDate.bind(this);
-    this.saveidea = this.saveidea.bind(this);  
+    this.saveIdea = this.saveIdea.bind(this);  
   }
   
   componentDidMount(){
     var id = this.props.id
     IdeaService.getIdeaByIdeaId(id).then((res)=>{
-      console.log(res.data)
       this.setState({
         title: res.data.ideaTitle,
         description: res.data.ideaDescription,
+        status: res.data.ideaStatus
       });
     })
   }
@@ -44,25 +43,15 @@ export default class EditIdea extends React.Component{
     })
   }
 
-  onChangeClosingDate(e){
-    this.setState({
-      closingdate: e.target.value
-    })
-  }
-
-  saveidea() {
-   var id1=this.props
+  saveIdea() {
+   var id1 = this.props
     var idea = {
-      ideaId:id1.id,
+      id: id1.id,
       ideaTitle: this.state.title,
       ideaDescription: this.state.description,
+      ideaStatus: this.state.status
     };
-    console.log(idea)
-    IdeaService.updateIdea(idea)
-    .then((res)=>{
-      console.log(res.date);
-      this.setState({submitted:true})
-    })
+    IdeaService.updateIdea(id1.id, idea).then(()=>{ this.setState({submitted:true}) })
   }
 
   render() 
@@ -74,7 +63,7 @@ export default class EditIdea extends React.Component{
           {this.state.submitted ? (
             <div style={{"textAlign":"center"}}>
               <h4> Edit Fresh Idea Successfully!</h4>
-              <a href={this.state.url}>  <button className="btn btn-success" style={{"width":"20%"}}>
+              <a href={this.state.url}><button className="btn btn-success" style={{"width":"20%"}}>
               ok
               </button></a>
             </div>
@@ -109,7 +98,7 @@ export default class EditIdea extends React.Component{
                 </textarea>
               </div>
 
-              <button onClick={this.saveidea} style={{"marginTop":"20px"}} className="btn btn-success">
+              <button onClick={this.saveIdea} style={{"marginTop":"20px"}} className="btn btn-success">
                 Submit
               </button>
 

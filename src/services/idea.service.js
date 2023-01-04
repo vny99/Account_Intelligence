@@ -33,7 +33,8 @@ class IdeaService {
         return axios.post(IDEA_API_BASE_URL, idea, { headers: authHeader() });
     }
 
-    updateIdea(ideaId,idea){
+    updateIdea(ideaId, idea){
+        console.log(ideaId, idea)
         return axios.put(IDEA_API_BASE_URL + "/" + ideaId, idea, { headers: authHeader() });
     }
 

@@ -7,7 +7,6 @@ import "./fresh-ideas-page.component.css"
 import AllIdeas from './all-ideas.component';
 import MyIdeas from './my-ideas.components';
 import Pagination from './Pagination';
-import { FcAddRow, FcList } from 'react-icons/fc';
 
 
 class FreshIdeasPage extends Component {

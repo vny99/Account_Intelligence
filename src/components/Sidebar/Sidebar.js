@@ -2,17 +2,14 @@ import React from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import './Sidebar.css';
 
-import { FcIdea } from "react-icons/fc";
+import { FcAddDatabase, FcAddRow, FcIdea } from "react-icons/fc";
 import { FcTimeline } from "react-icons/fc";
-import { CgCardHearts, CgFileAdd } from "react-icons/cg";
-import Logo from ".//logo.jpg"
+import { CgCardHearts } from "react-icons/cg";
 
 
 const Sidebar = (props) => {
   return (
-      <Menu
-      // customBurgerIcon={ <img src={Logo} /> }
-      >
+      <Menu>
         {props.currentUser && (
           <>
             <a className="bm-item" href="/ideas">
@@ -25,10 +22,18 @@ const Sidebar = (props) => {
               <div>Business Challenges</div>
             </a>
 
-            <a className="bm-item" href="/addIdea">
-              <CgFileAdd color='rgba(103, 192, 103, 0.75)' style={{"fontSize":"30px"}} />
+            <a className="bm-item" href="/addIdea" style={{"padding":"20px"}}>
+              <FcAddRow color='rgba(103, 192, 103, 0.75)' style={{"fontSize":"30px"}} />
               <div>Add Idea</div>
             </a>
+
+            { props.isAdmin && (
+              <a className="bm-item" href="/addChallenge">
+                <FcAddDatabase color='rgba(103, 192, 103, 0.75)' style={{"fontSize":"30px"}} />
+                <div>Add Business Challenge</div>
+              </a>
+
+            )}
 
             <a
             // onMouseEnter={}

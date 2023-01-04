@@ -45,7 +45,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* General sidebar styles */
 .bm-menu {
   background: rgb(126, 64, 95);
-  padding-top: 20px;
+  padding-top: 1px;
   width: 90px;
 }
 
@@ -63,8 +63,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Individual item */
 .bm-item {
-  margin-left: 5px;
-  margin-right: 5px;
+  /* margin-left: 5px; */
+  /* margin-right: 5px; */
   margin-bottom: 5px;
   display: inline-block;
   color: #d1d1d1;
@@ -72,22 +72,22 @@ Note: Beware of modifying this element as it can break the animations - you shou
   padding-right: 10px;
   padding-bottom: 20px;
   padding-top: 20px;
-  /* margin-bottom: 15px; */
   text-align: center;
   text-decoration: none;
 }
+
 .bm-item div {
-  font-size: small;
+  font-size: 13px;
 }
 
 .bm-item:hover {
   color: black;
   background: rgba(242, 242, 242, 0.5);
   /* font-size: larger; */
-  font-weight: 500;
+  /* font-weight: 500; */
   /* text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8); */
-  /* background-image: linear-gradient(to left, #846969, #d39393); */
-  /* border: 2px solid transparent; */
+  background-image: linear-gradient(to left, #dfc9dd, #bea3cb);
+  border: 0px solid transparent;
   border-radius: 20px;
   /* transform: scale(1.01); */
 }

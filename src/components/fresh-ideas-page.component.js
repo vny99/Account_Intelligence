@@ -7,6 +7,7 @@ import "./fresh-ideas-page.component.css"
 import AllIdeas from './all-ideas.component';
 import MyIdeas from './my-ideas.components';
 import Pagination from './Pagination';
+import { FcAddRow, FcList } from 'react-icons/fc';
 
 
 class FreshIdeasPage extends Component {
@@ -82,12 +83,14 @@ class FreshIdeasPage extends Component {
                     <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
                         <div>
                             <a href="/addIdea" className="btn btn-secondary" >
+                                {/* <FcAddRow size={"20px"} style={{"paddingRight":"10px"}} /> */}
                                 Add Idea
                             </a>
                         </div>
 
                         <div className="btn btn-secondary my-ideas-button">
                             <label htmlFor="my-ideas-id">
+                                {/* <FcList size={"20px"} style={{"paddingRight":"10px"}} /> */}
                                 <input type="checkbox" id="my-ideas-id" onClick={this.myIdeas} />
                                 My Ideas
                             </label> 

@@ -64,7 +64,7 @@ class BusinessChallengesPage extends Component {
                     {showAdminBoard && (
                         <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
                             <div>
-                                <a href="/addChallenge" className="btn btn-success" >
+                                <a href="/addChallenge" className="btn btn-secondary" >
                                     Add Business Challenge
                                 </a>
                             </div>

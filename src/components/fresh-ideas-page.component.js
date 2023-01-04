@@ -20,7 +20,10 @@ class FreshIdeasPage extends Component {
             currentPage1: 1,
             currentPage2: 1,
             recordsPerPage: 10,
+            myIdeasButton: false
         }
+
+        this.myIdeas = this.myIdeas.bind(this);
     }
 
     setCurrentPage1 = (page) => { this.setState({ currentPage1 : page }); }
@@ -44,17 +47,19 @@ class FreshIdeasPage extends Component {
         var all = document.getElementById("all");
         var mine = document.getElementById("mine");
         if (all.style.display === "none") {
+            this.setState({ myIdeasButton: false});
             all.style.display = "block";
             mine.style.display = "none";
         }
         else {
+            this.setState({ myIdeasButton: true});
             all.style.display = "none";
             mine.style.display = "block";
         }
     }
 
     render() {
-        const { currentPage1, currentPage2, recordsPerPage, userDetails, data, myIdeasData } = this.state;
+        const { currentPage1, currentPage2, recordsPerPage, userDetails, data, myIdeasData, myIdeasButton } = this.state;
 
         const indexOfLastRecord1 = currentPage1 * recordsPerPage;
         const indexOfFirstRecord1 = indexOfLastRecord1 - recordsPerPage;
@@ -70,17 +75,18 @@ class FreshIdeasPage extends Component {
             <div>
                 <div className="heading-line">
                     <h2 className="d-inline-flex display-5" style={{"left":"550px"}}>
-                        Fresh Ideas
+                        {!myIdeasButton &&  "Fresh Ideas"}
+                        {myIdeasButton &&  "My Ideas"}
                     </h2>
 
                     <div className="d-inline-flex" style={{"float":"right", "marginTop":"15px"}}>
                         <div>
-                            <a href="/addIdea" className="btn btn-success" >
+                            <a href="/addIdea" className="btn btn-secondary" >
                                 Add Idea
                             </a>
                         </div>
 
-                        <div className="btn btn-warning">
+                        <div className="btn btn-secondary my-ideas-button">
                             <label htmlFor="my-ideas-id">
                                 <input type="checkbox" id="my-ideas-id" onClick={this.myIdeas} />
                                 My Ideas

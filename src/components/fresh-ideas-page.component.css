@@ -102,29 +102,16 @@ tr:hover td.highlight div {
     border: 2px solid rgba(148, 160, 148, 0.75);
 }
 
-.btn-warning {
-    font-family: Raleway-SemiBold;
-    font-size: 13px;
-    color: rgba(148, 160, 148, 0.75);
-    letter-spacing: 1px;
+.my-ideas-button {
+    padding-top: 8px;
     line-height: 0px;
-    border: 2px solid rgba(148, 160, 148, 0.75);
-    border-radius: 40px;
-    background: transparent;
-    transition: all 0.3s ease 0s;
-}
-  
-.btn-warning:hover {
-    color: #FFF;
-    background: rgba(148, 160, 148, 0.75);
-    border: 2px solid rgba(148, 160, 148, 0.75);
 }
 
-.btn-warning input {
+.my-ideas-button input {
     display: none;
 }
 
-.btn-warning label{
+.my-ideas-button label{
     cursor: pointer;
 }
 

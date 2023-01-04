@@ -118,9 +118,9 @@ tr:hover td.highlight div {
 /* To keep the table header fixed */
 h2{
     position: sticky;
-    top: 80px;
+    /* top: 80px; */
     z-index: 8;
-    font-size: 70px;
+    font-size: 50px;
     font-weight: 600;
     background-image: linear-gradient(to left, #9a3c3c, #d39393);
     color: transparent;
@@ -154,5 +154,5 @@ thead{
 .pagination{
     left: 550px;
     position: fixed;
-    bottom: 1px;
+    bottom: 30px;
 }

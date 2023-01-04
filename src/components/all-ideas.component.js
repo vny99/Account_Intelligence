@@ -2,10 +2,8 @@ import React from 'react'
 import { useCallback } from 'react';
 import { useState } from 'react';
 
-import { AiFillHeart, AiOutlineHeart, AiOutlineLike, AiOutlineComment } from "react-icons/ai";
-import { BiChevronDownCircle } from 'react-icons/bi';
+import { AiOutlineLike, AiOutlineComment } from "react-icons/ai";
 import IdeaService from '../services/idea.service';
-import AddFavorite from './add-favourite.component';
 
 const AllIdeas = ({data}) => {
     const [isFavorite, setIsFavorite] = useState(false)
@@ -27,7 +25,7 @@ const AllIdeas = ({data}) => {
                     <th> Status</th>
 
                     <th> Created by</th>
-                    <th> Created date</th>
+                    <th width="150px"> Created date</th>
                     {/* <th> Favourite</th> */}
                     <th> Rewards</th>
                 </tr>
@@ -80,7 +78,7 @@ const AllIdeas = ({data}) => {
 
                                 {/* </td> */}
 
-                                <td> </td>
+                                <td>{idea.rewards} </td>
                                 
                         </tr>
                         // </a>

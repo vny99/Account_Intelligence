@@ -75,7 +75,7 @@ class FreshIdeasPage extends Component {
         return (
             <div>
                 <div className="heading-line">
-                    <h2 className="d-inline-flex display-5" style={{"left":"550px"}}>
+                    <h2 className="d-inline-flex display-5" style={{"left":"500px"}}>
                         {!myIdeasButton &&  "Fresh Ideas"}
                         {myIdeasButton &&  "My Ideas"}
                     </h2>

@@ -70,7 +70,7 @@ const MyIdeas = ({ data, userDetails }) => {
                                 <AiFillHeart size={"40px"} color="red" />
                                 )}
                             </td> */}
-                            <td> </td>
+                            <td> {idea.rewards} </td>
                             {/* <td>
                                 <a href='/editIdea' className='btn btn-outline-light'><BiEditAlt size={"30px"} color={"#527293"} /></a>
                             </td> */}

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import IdeaService from "../services/idea.service";
 import "./search-ideas.component.css";
+import Highlighter from "react-highlight-words";
+// import { FcSearch } from "react-icons/fc";
 
 export default class Ideasearch extends Component {
   constructor(props) {
@@ -55,6 +57,7 @@ export default class Ideasearch extends Component {
     return (
       <div className="list row">
         <div>
+          {/* <FcSearch /> */}
           <input
             type="text"
             className="form-control search-ideas-form-control"
@@ -76,14 +79,30 @@ export default class Ideasearch extends Component {
                 onClick={() => this.setActiveTutorial(idea, index)}
                 key={index}
               >
+                {/* {console.log(searchItem)} */}
                 <a href={'/viewIdea/' + idea.id}>
-                  <div className='idea-title'><b><u>{idea.ideaTitle}</u></b> </div>
-                  <div className="description">{idea.ideaDescription}</div>
+                  <div className='idea-title'><b><u>
+                    {/* {idea.ideaTitle} */}
+                    <Highlighter
+                      highlightClassName="YourHighlightClass"
+                      // searchWords={["auction", "or", "the"]}
+                      searchWords={[searchItem]}
+                      autoEscape={true}
+                      textToHighlight={idea.ideaTitle}
+                    />
+                  </u></b> </div>
+                  <div className="description">
+                    {/* {idea.ideaDescription} */}
+                    <Highlighter
+                      highlightClassName="YourHighlightClass"
+                      // searchWords={["auction", "or", "the"]}
+                      searchWords={[searchItem]}
+                      autoEscape={true}
+                      textToHighlight={idea.ideaDescription}
+                    />
+                  </div>
                   <div className="status"><b>Status : </b>{idea.ideaStatus}</div>
                 </a>
-                
-                {/* <div className="description">{idea.ideaDescription}</div>
-                <div><b>STATUS : </b>{idea.ideaStatus}</div> */}
               </li>
             ))}
         </ul>

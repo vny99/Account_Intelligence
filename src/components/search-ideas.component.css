@@ -39,3 +39,9 @@ a .description, .status{
             line-clamp: 2; 
     -webkit-box-orient: vertical;
 }
+
+.mark, mark {
+    padding: 0.1875em;
+    /* padding: 0em; */
+    background-color: rgb(205, 186, 189);
+}

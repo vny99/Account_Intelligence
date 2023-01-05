@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BusinessChallengesService from "../services/business-challenge.service";
 import "./search-challenges.component.css";
+import Highlighter from "react-highlight-words";
 
 export default class BusinessChallengesSearch extends Component {
   constructor(props) {
@@ -82,8 +83,26 @@ export default class BusinessChallengesSearch extends Component {
                   key={index}
                 >
                  <a href={'/viewChallenge/' + challenge.id}>
-                  <div className='challenge-title'><b><u>{challenge.challengeTitle}</u></b> </div>
-                  <div className="description">{challenge.challengeDescription}</div>
+                  <div className='challenge-title'><b><u>
+                    {/* {challenge.challengeTitle} */}
+                    <Highlighter
+                      highlightClassName="YourHighlightClass"
+                      // searchWords={["auction", "or", "the"]}
+                      searchWords={[searchItem]}
+                      autoEscape={true}
+                      textToHighlight={challenge.challengeTitle}
+                    />
+                  </u></b> </div>
+                  <div className="description">
+                    {/* {challenge.challengeDescription} */}
+                    <Highlighter
+                      highlightClassName="YourHighlightClass"
+                      // searchWords={["auction", "or", "the"]}
+                      searchWords={[searchItem]}
+                      autoEscape={true}
+                      textToHighlight={challenge.challengeDescription}
+                    />
+                  </div>
                   <div className="status"><b>Status : </b>{challenge.challengeStatus}</div>
                 </a>
               

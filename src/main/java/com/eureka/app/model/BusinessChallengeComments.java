@@ -3,7 +3,7 @@ package com.eureka.app.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "BusinessChallengeComments" )
+@Document(collection = "BusinessChallengeComments")
 public class BusinessChallengeComments {
 	@Id
 	private String id;

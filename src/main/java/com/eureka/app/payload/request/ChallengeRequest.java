@@ -4,26 +4,28 @@ import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class ChallengeRequest {
 	@NotBlank
 	private String challengeTitle;
 	@NotBlank
 	private String challengeDescription;
-	private Date expiryDate;
+	@NotBlank
+    private String businessArea;
+    private Date expiryDate;
 	
 	public ChallengeRequest() {
 		super();
 	}
 	
-	public ChallengeRequest(String challengeTitle, String challengeDescription, Date expiryDate) {
+	public ChallengeRequest(@NotBlank String challengeTitle, @NotBlank String challengeDescription,
+			@NotBlank String businessArea, Date expiryDate) {
 		super();
 		this.challengeTitle = challengeTitle;
 		this.challengeDescription = challengeDescription;
+		this.businessArea = businessArea;
 		this.expiryDate = expiryDate;
 	}
-	
+
 	public String getChallengeTitle() {
 		return challengeTitle;
 	}
@@ -36,6 +38,13 @@ public class ChallengeRequest {
 	public void setChallengeDescription(String challengeDescription) {
 		this.challengeDescription = challengeDescription;
 	}
+	public String getBusinessArea() {
+		return businessArea;
+	}
+
+	public void setBusinessArea(String businessArea) {
+		this.businessArea = businessArea;
+	}
 	public Date getExpiryDate() {
 		return expiryDate;
 	}
@@ -43,4 +52,9 @@ public class ChallengeRequest {
 		this.expiryDate = expiryDate;
 	}
 
+	@Override
+	public String toString() {
+		return "ChallengeRequest [challengeTitle=" + challengeTitle + ", challengeDescription=" + challengeDescription
+				+ ", businessArea=" + businessArea + ", expiryDate=" + expiryDate + "]";
+	}
 }

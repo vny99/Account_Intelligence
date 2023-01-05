@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eureka.app.model.BStatus;
+import com.eureka.app.model.BusinessArea;
 import com.eureka.app.model.BusinessChallenges;
 import com.eureka.app.model.User;
 import com.eureka.app.payload.request.ChallengeRequest;
+import com.eureka.app.repository.BusinessAreasRepository;
 import com.eureka.app.repository.BusinessChallengesRepository;
 import com.eureka.app.repository.UserRepository;
 import com.eureka.app.security.services.UserDetailsImpl;
@@ -42,6 +44,9 @@ public class BusinessChallengesController {
 	
 	@Autowired
 	UserRepository usersRepo;
+	
+	@Autowired
+	BusinessAreasRepository businessAreasRepo;
 
 	@GetMapping("/businessChallenges")
 	public List<BusinessChallenges> getBusinessChallenges() {
@@ -212,5 +217,12 @@ public class BusinessChallengesController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/businessChallenges/businessAreas")
+    public List<BusinessArea> getBusinessAreasList() {
+        List<BusinessArea> businessAreasList = new ArrayList<>();
+        businessAreasList = businessAreasRepo.findAll();
+        return businessAreasList;
+    }
 
 }

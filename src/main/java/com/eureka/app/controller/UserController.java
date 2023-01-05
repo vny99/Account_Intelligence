@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eureka.app.model.Department;
 import com.eureka.app.model.Idea;
 import com.eureka.app.model.User;
+import com.eureka.app.payload.request.SignupRequest;
+import com.eureka.app.repository.DepartmentRepository;
 import com.eureka.app.repository.IdeasRepository;
 import com.eureka.app.repository.UserRepository;
 import com.eureka.app.security.services.UserDetailsImpl;
@@ -34,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	IdeasRepository ideasRepo;
+	
+	@Autowired
+	DepartmentRepository departmentsRepo;
 	
 	@GetMapping("/users")
 	public List<User> getAllUsers(@RequestParam(required = false) String email) {
@@ -146,12 +152,18 @@ public class UserController {
 	}
 	
 	@PostMapping("users/{email}")
-    public User updateUserByEmail(@PathVariable String email, @RequestBody User user) {
+    public User updateUserByEmail(@PathVariable String email, @RequestBody SignupRequest user) {
         User existingUser = userRepo.findByEmail(email);
+        
+        Department department = null;
+        String strDepartment = user.getDepartment();
+        Department userDepartment = departmentsRepo.findByName(strDepartment);
+        department = userDepartment;
+        
         existingUser.setFname(user.getFname());
         existingUser.setLname(user.getLname());
         existingUser.setEmail(user.getEmail());
-        existingUser.setDepartment(user.getDepartment());
+        existingUser.setDepartment(department);
         userRepo.save(existingUser);
         return existingUser;
     }

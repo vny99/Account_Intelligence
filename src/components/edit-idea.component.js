@@ -1,5 +1,4 @@
 import React from 'react';
-
 import IdeaService from '../services/idea.service';
 import "./add-idea.component.css"
 
@@ -44,14 +43,14 @@ export default class EditIdea extends React.Component{
   }
 
   saveIdea() {
-   var id1 = this.props
+   var id = this.props.id
     var idea = {
-      id: id1.id,
+      id: id,
       ideaTitle: this.state.title,
       ideaDescription: this.state.description,
       ideaStatus: this.state.status
     };
-    IdeaService.updateIdea(id1.id, idea).then(()=>{ this.setState({submitted:true}) })
+    IdeaService.updateIdea(id, idea).then(()=>{ this.setState({submitted:true}) })
   }
 
   render() 

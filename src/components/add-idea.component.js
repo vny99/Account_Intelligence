@@ -104,7 +104,7 @@ export default class AddIdea extends Component {
         {this.state.submitted ? (
           <div style={{"textAlign":"center"}}>
             <h4>Idea submitted successfully!</h4>
-            <a href="/ideas"> <button className="btn btn-success" style={{"width":"20%"}}>Ok</button></a>
+            <a href="/ideas"> <button className="btn btn-secondary" style={{"width":"20%"}}>Ok</button></a>
           </div>
         ) : (
           <div>
@@ -163,9 +163,11 @@ export default class AddIdea extends Component {
                 </select>
             </div>
 
-            <button onClick={this.saveidea} style={{"marginTop":"20px"}} className="btn btn-success">
-              Submit
-            </button>
+            <div style={{"textAlign":"center"}}>
+              <button onClick={this.saveidea} style={{"marginTop":"20px"}} className="btn btn-secondary">
+                Submit
+              </button>
+            </div>
 
           </div>
         )}

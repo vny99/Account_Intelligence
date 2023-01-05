@@ -10,6 +10,7 @@ export default class EditChallenge extends React.Component{
       title: '',
       description: '',
       expiryDate: '',
+      status: '',
       url:'',
       redirect: false
     }
@@ -27,6 +28,7 @@ export default class EditChallenge extends React.Component{
           title: res.data.challengeTitle,
           description: res.data.challengeDescription,
           closingdate: res.data.expiryDate,
+          status: res.data.challengeStatus
         });
    })
   }
@@ -55,14 +57,10 @@ export default class EditChallenge extends React.Component{
       id: id,
       challengeTitle: this.state.title,
       challengeDescription: this.state.description,
-      expiryDate: this.state.closingdate
+      expiryDate: this.state.closingdate,
+      challengeStatus: this.state.status
     };
-
-    BusinessChallengesService.updateChallenge(id, challenge).then((res)=>{
-      console.log(res.date);
-      this.setState({submitted:true})
-    })
-
+    BusinessChallengesService.updateChallenge(id, challenge).then(()=>{ this.setState({submitted:true}) })
   }
 
   render() {
@@ -102,7 +100,7 @@ export default class EditChallenge extends React.Component{
               </textarea>
               
             
-              <label htmlFor="date">Closing Date</label>
+              <label htmlFor="date">Expiry Date</label>
               <input
                 type="date"
                 className="form-control"

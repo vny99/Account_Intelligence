@@ -92,7 +92,7 @@ export default class AddChallenge extends Component {
         {this.state.submitted ? (
           <div style={{"textAlign":"center"}}>
             <h4>Business Challenge submitted successfully!</h4>
-            <a href="/challenges"> <button className="btn btn-success" style={{"width":"20%"}}>Ok</button></a>
+            <a href="/challenges"> <button className="btn btn-secondary" style={{"width":"20%"}}>Ok</button></a>
           </div>
         ) : (
           <div>
@@ -145,9 +145,11 @@ export default class AddChallenge extends Component {
               />
             </div>
 
-            <button onClick={this.saveChallenge} style={{"marginTop":"20px"}} className="btn btn-success">
-              Submit
-            </button>
+            <div style={{"textAlign":"center"}}>
+              <button onClick={this.saveChallenge} style={{"marginTop":"20px"}} className="btn btn-secondary">
+                Submit
+              </button>
+            </div>
 
           </div>
         )}

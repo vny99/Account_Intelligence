@@ -120,8 +120,10 @@ public class BusinessChallengesController {
 	        
 	        BStatus challengeStatus = BStatus.OPENED;
 	        
+	        BusinessArea businessArea = businessAreasRepo.findByName(challengeRequest.getBusinessArea());
+	        
 	        BusinessChallenges businessChallenge = new BusinessChallenges(idString, userId, fname, lname, challengeRequest.getChallengeTitle(),
-	        		challengeRequest.getChallengeDescription(), createdDate, challengeRequest.getExpiryDate(), challengeStatus);
+	        		challengeRequest.getChallengeDescription(), createdDate, challengeRequest.getExpiryDate(), challengeStatus, businessArea);
 	        
 			businessChallengeRepo.save(businessChallenge);
 			
@@ -135,11 +137,11 @@ public class BusinessChallengesController {
 	
 	@PutMapping("/businessChallenges/{id}")
     public ResponseEntity<BusinessChallenges> updateChallenge(@PathVariable String id, @RequestBody BusinessChallenges challenge) {
-        BusinessChallenges myChallenge = businessChallengeRepo.findById(id).get();
+		BusinessChallenges myChallenge = businessChallengeRepo.findById(id).get();
         myChallenge.setChallengeTitle(challenge.getChallengeTitle());
         myChallenge.setChallengeDescription(challenge.getChallengeDescription());
         myChallenge.setExpiryDate(challenge.getExpiryDate());
-        myChallenge.setChallengeStatus(challenge .getChallengeStatus());
+        myChallenge.setChallengeStatus(challenge.getChallengeStatus());
         
         return new ResponseEntity<>(businessChallengeRepo.save(myChallenge), HttpStatus.OK);
     }

@@ -32,13 +32,15 @@ public class BusinessChallenges {
 	private BStatus challengeStatus;
 	@DBRef
 	private List<BusinessChallengeComments> comments = new ArrayList<>();
+	@DBRef
+	private BusinessArea businessArea;
 	
 	public BusinessChallenges() {
 		super();
 	}
 
 	public BusinessChallenges(String challengeId, String userId, String fname, String lname, String challengeTitle,
-			String challengeDescription, Date createdDate, Date expiryDate, BStatus challengeStatus) {
+			String challengeDescription, Date createdDate, Date expiryDate, BStatus challengeStatus, BusinessArea businessArea) {
 		super();
 		this.challengeId = challengeId;
 		this.userId = userId;
@@ -49,6 +51,7 @@ public class BusinessChallenges {
 		this.createdDate = createdDate;
 		this.expiryDate = expiryDate;
 		this.challengeStatus = challengeStatus;
+		this.businessArea = businessArea;
 	}
 
 	public String getId() {
@@ -147,6 +150,14 @@ public class BusinessChallenges {
 		this.challengeStatus = challengeStatus;
 	}
 
+	public BusinessArea getBusinessArea() {
+		return businessArea;
+	}
+
+	public void setBusinessArea(BusinessArea businessArea) {
+		this.businessArea = businessArea;
+	}
+
 	public static String getSequenceName() {
 		return SEQUENCE_NAME;
 	}
@@ -157,7 +168,7 @@ public class BusinessChallenges {
 				+ fname + ", lname=" + lname + ", challengeTitle=" + challengeTitle + ", challengeDescription="
 				+ challengeDescription + ", createdDate=" + createdDate + ", commentsCount=" + commentsCount
 				+ ", expiryDate=" + expiryDate + ", challengeStatus=" + challengeStatus + ", comments=" + comments
-				+ "]";
+				+ ", businessArea=" + businessArea + "]";
 	}
 	
 }

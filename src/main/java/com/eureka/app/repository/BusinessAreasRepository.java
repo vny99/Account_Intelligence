@@ -6,4 +6,6 @@ import com.eureka.app.model.BusinessArea;
 
 public interface BusinessAreasRepository extends MongoRepository<BusinessArea, String> {
 
+	BusinessArea findByName(String businessArea);
+
 }

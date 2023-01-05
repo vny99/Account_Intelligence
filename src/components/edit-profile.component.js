@@ -17,20 +17,21 @@ export default class EditProfile extends Component {
       department:"",
       url: "",
       errors: {},
-      status: false,
+      departmentsList: [],
     };
 
-    this.onChangelname = this.onChangelname.bind(this);
-    this.onChangefname = this.onChangefname.bind(this);
-    this.onChangeemail = this.onChangeemail.bind(this);
-    this.onChangedepartment = this.onChangedepartment.bind(this);
-    this.onChangerole = this.onChangerole.bind(this);
+    this.onChangeLname = this.onChangeLname.bind(this);
+    this.onChangeFname = this.onChangeFname.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeDepartment = this.onChangeDepartment.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
   }
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
-   
+    AuthService.getDepartmentsList().then(res => {
+      this.setState({ departmentsList: res.data }) })
     if (user) {
       UserService.getUserByEmail(user.email).then((res) => {
         this.setState({
@@ -69,21 +70,21 @@ export default class EditProfile extends Component {
     return isValid;
   };
   
-  onChangefname(e) {
+  onChangeFname(e) {
     this.setState({ fname: e.target.value, });
   }
-  onChangelname(e) {
+  onChangeLname(e) {
     this.setState({ lname: e.target.value, });
   }
   
-  onChangeemail(e) {
+  onChangeEmail(e) {
     this.setState({ email: e.target.value, });
   }
-  onChangedepartment(e) {
+  onChangeDepartment(e) {
     this.setState({ department: e.target.value, });
   }
 
-  onChangerole(e) {
+  onChangeRole(e) {
     this.setState({ role: e.target.value, });
   }
 
@@ -111,7 +112,7 @@ export default class EditProfile extends Component {
             <h4>Profile edited successfully!</h4>
             <a href={this.state.url}>
               {" "}
-              <button className="btn btn-success" style={{ width: "20%" }}>
+              <button className="btn btn-secondary" style={{ width: "20%" }}>
                 ok
               </button>
             </a>
@@ -127,8 +128,7 @@ export default class EditProfile extends Component {
                 id="fname"
                 required
                 value={this.state.fname}
-                onChange={this.onChangefname
-                }
+                onChange={this.onChangeFname}
                 name="fname"
               />
             </div>
@@ -141,8 +141,7 @@ export default class EditProfile extends Component {
                 id="lname"
                 required
                 value={this.state.lname}
-                onChange={this.onChangelname
-                }
+                onChange={this.onChangeLname}
                 name="lname"
               />
             </div>
@@ -155,28 +154,26 @@ export default class EditProfile extends Component {
                 id="email"
                 required
                 value={this.state.email}
-                onChange={this.onChangeemail
-                }
+                onChange={this.onChangeEmail}
                 name="email"
                 disabled
               />
             </div>
+
             <div className="form-group">
               <p className="error_class">{this.state.errors.department}</p>
               <label htmlFor="department">Department</label>
-              <input
-                type="text"
-                className="form-control"
-                id="department"
-                required
-                value={this.state.department}
-                onChange={this.onChangedepartment
-                }
-                name="department"
-              />
+              <select class="form-select" aria-label="Default select example"
+                value={this.state.department.name}
+                onChange={this.onChangeDepartment}
+              >
+                { this.state.departmentsList.map( dept =>
+                <option>
+                  {dept.name}
+                </option> )}
+              </select>
             </div>
             <div className="form-group">
-              {/* <p className="error_class">{this.state.errors.title}</p> */}
               <label htmlFor="ROle">Role</label>
               <input
                 type="text"
@@ -184,19 +181,16 @@ export default class EditProfile extends Component {
                 id="role"
                 required
                 value={this.state.role}
-                onChange={this.onChangerole
-                }
+                onChange={this.onChangeRole}
                 name="role"
                 disabled
               />
             </div>
-            <button
-              onClick={this.saveProfile}
-              style={{ marginTop: "20px" }}
-              className="btn btn-success"
-            >
-              Submit
-            </button>
+            <div style={{"textAlign":"center"}}>
+              <button onClick={this.saveProfile} style={{ marginTop: "20px"}} className="btn btn-secondary">
+                Submit
+              </button>
+            </div>
           </div>
         )}
       </div>

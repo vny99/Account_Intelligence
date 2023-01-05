@@ -65,7 +65,7 @@ export default class Register extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeDepartment = this.onChangeDepartment.bind(this);
-    this.onChangeRole = this.onChangeRole.bind(this);
+    // this.onChangeRole = this.onChangeRole.bind(this);
     
     this.state = {
       fname: "",
@@ -73,7 +73,7 @@ export default class Register extends Component {
       email: "",
       password: "",
       department: "FCI",
-      role: "",
+      // role: "",
       successful: false,
       message: "",
 
@@ -95,7 +95,7 @@ export default class Register extends Component {
   onChangeEmail(e) { this.setState({ email: e.target.value }); }
   onChangePassword(e) { this.setState({ password: e.target.value }); }
   onChangeDepartment(e) { this.setState({ department: e.target.value }); }
-  onChangeRole(e) { this.setState({ role: e.target.value }); }
+  // onChangeRole(e) { this.setState({ role: e.target.value }); }
 
   handleRegister(e) {
     e.preventDefault();
@@ -113,7 +113,7 @@ export default class Register extends Component {
         this.state.email,
         this.state.password,
         this.state.department,
-        this.state.role
+        // this.state.role
       ).then(
         response => {
           this.setState({
@@ -219,7 +219,7 @@ export default class Register extends Component {
                   </select>
                 </div>
 
-                <div class="form-group">
+                {/* <div class="form-group">
                   <label>Role</label>
                   <select class="form-select" aria-label="Default select example"
                     value={this.state.role}
@@ -232,7 +232,7 @@ export default class Register extends Component {
                     )}
 
                   </select>
-                </div>
+                </div> */}
                 
                 <div className="form-group">
                   <br></br>

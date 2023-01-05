@@ -17,7 +17,7 @@ class BusinessChallengesPage extends Component {
             challenges: [],
             userDetails: [],
             currentPage: 1,
-            recordsPerPage: 3,
+            recordsPerPage: 10,
         }
     }
 

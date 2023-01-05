@@ -7,7 +7,6 @@
   height: 26px;
   left: 20px;
   top: 18px;
-  
 }
 
 /* Color/shape of burger icon bars */
@@ -18,29 +17,32 @@
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
   background: rgb(78, 78, 81);
-  aria-hidden: false
 }
 
 /* Position and sizing of clickable cross button */
-/* .bm-cross-button {
+.bm-cross-button {
+  margin-top: 0px;
+  left: 100px;
   height: 24px;
   width: 24px;
-} */
+}
 
 /* Color/shape of close button cross */
-/* .bm-cross {
+.bm-cross {
   background: #bdc3c7;
-} */
+}
 
 /*
 Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
-.bm-menu-wrap {
+/* .bm-menu-wrap {
   position: relative;
   top:0px;
   height: 100%;
-}
+  background-color: pink;
+  width: 90px;
+} */
 
 /* General sidebar styles */
 .bm-menu {
@@ -50,9 +52,9 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 /* Morph shape necessary with bubble or elastic */
-/* .bm-morph-shape {
-  fill: #1537cd;
-} */
+.bm-morph-shape {
+  /* fill: #1537cd; */
+}
 
 /* Wrapper for item list */
 .bm-item-list {

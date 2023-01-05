@@ -183,7 +183,7 @@ class App extends Component {
         </div>
 
         <footer className="page-footer" >
-          <div className="footer-copyright text-center py-3">© 2023 Copyright:
+          <div className="footer-copyright text-center">© 2023 Copyright:
               <a href='https://www.soprasteria.com/' style={{"color":"white"}}>   Soprasteria.com</a>
           </div>
         </footer>

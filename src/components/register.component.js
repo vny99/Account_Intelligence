@@ -210,12 +210,7 @@ export default class Register extends Component {
                     value={this.state.department}
                     onChange={this.onChangeDepartment}
                   >
-                    { this.state.departmentsList.map( dept =>
-                      <option>
-                        {dept.name}
-                      </option>
-                    )}
-
+                    { this.state.departmentsList.map( dept => <option>{dept.name}</option>)}
                   </select>
                 </div>
 

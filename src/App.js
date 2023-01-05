@@ -25,10 +25,6 @@ import ViewChallengeById from "./components/view-challenge-by-id.component";
 import MyFavoriteIdeasPage from "./components/my-favorite-ideas-page.component";
 import EditIdeaComment from "./components/edit-idea-comment.component";
 import EditChallengeComment from "./components/edit-challenge-comment.component";
-import { SiMaterialdesignicons } from "react-icons/si";
-import { TbApiApp, TbApiAppOff } from "react-icons/tb";
-import { FcIcons8Cup } from "react-icons/fc";
-import { BiGame } from "react-icons/bi";
 
 class App extends Component {
   constructor(props) {
@@ -119,16 +115,15 @@ class App extends Component {
               </div>
             )}
 
-            {/* <li className="nav-item">
-              <Link to={"/about"} className="nav-link">
-                About
-              </Link>
-            </li> */}
-
           </div>
 
           {currentUser ? (
             <div className="navbar-nav collapse navbar-collapse justify-content-end">
+              <li className="nav-item" style={{"marginRight":"30px", "paddingTop":"0px"}}>
+                  <img src="logo-soprasteria.jpg" alt="Sopra Steria" />
+                  {/* <div lang="en-GB">The world is how we shape it</div> */}
+              </li>
+
               <div style={{"display":"flex", "flexDirection":"column"}}>
                   <a href="/profile" className="nav-link">
                   {userDetails.fname + " " + userDetails.lname}
@@ -143,6 +138,11 @@ class App extends Component {
             
             ) : (
               <div className="navbar-nav collapse navbar-collapse justify-content-end">
+                
+                <li className="nav-item" style={{"marginRight":"30px", "paddingTop":"0px"}}>
+                  <img src="logo-soprasteria.jpg" alt="Sopra Steria" />
+                </li>
+
                 <li className="nav-item">
                   <Link to={"/login"} className="nav-link">
                     Login

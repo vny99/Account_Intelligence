@@ -21,6 +21,7 @@
     "react-bootstrap": "^2.6.0",
     "react-burger-menu": "^3.0.8",
     "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.18.0",
     "react-icons": "^4.6.0",
     "react-popper": "^2.3.0",
     "react-pro-sidebar": "^1.0.0-alpha.7",
@@ -55,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "mark.js": "^8.11.1"
   }
 }

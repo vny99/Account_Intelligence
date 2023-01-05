@@ -37,7 +37,6 @@ export default class EditProfile extends Component {
         this.setState({
           userDetails: res.data,
           status: res.data.active,
-          role: res.data.role.name,
           fname:res.data.fname,
           lname:res.data.lname,
           email:res.data.email,

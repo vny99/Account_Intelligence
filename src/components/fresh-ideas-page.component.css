@@ -156,3 +156,9 @@ thead{
     position: fixed;
     bottom: 30px;
 }
+
+tbody, td, tfoot, th, thead, tr {
+    /* border-color: blue;
+    border-style: solid;
+    border-width: 0; */
+}

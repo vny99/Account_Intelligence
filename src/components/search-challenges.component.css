@@ -1,10 +1,6 @@
 .list {
   text-align: left;
   max-width: 650px;
-  /* margin: auto; */
-  /* float: right; */
-  /* padding-right: 90px; */
-  /* padding: 14px 16px; */
 }
 
 .col-md-8{
@@ -20,31 +16,8 @@
   background-color: rgb(216, 214, 214);
 }
 
-/* 
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  background-color: red;
-} */
-
-/* .dropdown{
-  position: relative;
-  display: inline-block;
-} */
-
-/* .col-md-6{
-  display: none;
-  padding-bottom: -2cm;
-  position: absolute; */
-  /* background-color:;
-  min-width: 230px;
-  border: 0px solid rgb(240, 178, 178);
-    z-index: 9;
-} */ */
-
 .submit-form {
-  max-width: 300px;
+  /* max-width: 300px; */
   margin: auto;
 }
 

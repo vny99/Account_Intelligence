@@ -15,14 +15,6 @@ a{
     text-decoration: none;
 }
 
-a .idea-title{
-    color: dodgerblue
-}
-
-a .description, .status{
-    color: black;
-}
-
 .status{
     margin-left: 0px;
     font-size: medium;

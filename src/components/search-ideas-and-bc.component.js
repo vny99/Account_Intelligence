@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import IdeaService from "../services/idea.service";
+import BusinessChallengesService from "../services/business-challenge.service";
 import "./search-ideas.component.css";
 import Highlighter from "react-highlight-words";
-// import { FcSearch } from "react-icons/fc";
 
-export default class Ideasearch extends Component {
+export default class Dd extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchItem = this.onChangeSearchItem.bind(this);
@@ -48,16 +48,25 @@ export default class Ideasearch extends Component {
       .catch(e => {
         console.log(e);
       });
+      BusinessChallengesService.findByTitleDescription(this.state.searchItem)
+      .then(response => {
+        this.setState({
+          BusinessChallenges: response.data
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
       
   }
   
   render() {
-    const { searchItem, ideas, currentIndex } = this.state;
+    const { searchItem, ideas,BusinessChallenges, currentIndex } = this.state;
 
     return (
       <div className="list row">
         <div>
-          {/* <FcSearch /> */}
           <input
             type="text"
             className="form-control search-ideas-form-control"
@@ -101,9 +110,44 @@ export default class Ideasearch extends Component {
                   <div className="status"><b>Status : </b>{idea.ideaStatus}</div>
                 </a>
               </li>
+              
             ))}
+             
         </ul>
+        <ul className="list-group">
+            {BusinessChallenges &&
+              BusinessChallenges.map((challenge, index) => (
+                <li
+                  className={
+                    "list-group-item " +
+                    (index === currentIndex ? "active" : "")
+                  }
+                  onClick={() => this.setActiveTutorial(challenge, index)}
+                  key={index}
+                >
+                 <a href={'/viewChallenge/' + challenge.id} style = {{"text-decoration":"none"}}>
+                  <div className='challenge-title'><b><u>
+                    <Highlighter
+                      highlightClassName="YourHighlightClass"
+                      // searchWords={["auction", "or", "the"]}
+                      searchWords={[searchItem]}
+                      autoEscape={true}
+                      textToHighlight={challenge.challengeTitle}
+                    />
+                  </u></b> </div>
+                  <div className="description">
+                    <Highlighter
+                      highlightClassName="YourHighlightClass"
+                      // searchWords={["auction", "or", "the"]}
+                      searchWords={[searchItem]}
+                      autoEscape={true}
+                      textToHighlight={challenge.challengeDescription}
+                    />
+                  </div>
+                  <div className="status"><b>Status : </b>{challenge.challengeStatus}</div>
+                </a>
 
+                </li>))}</ul>
       </div>
     );
   }

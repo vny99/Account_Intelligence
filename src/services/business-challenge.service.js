@@ -28,6 +28,10 @@ class BusinessChallengesService {
     findByTitleDescription(searchItem) {
         return axios.get(CHALLENGES_API_BASE_URL + "/search", { params: { searchItem: searchItem}, headers: authHeader() });
     }
+
+    getBusinessAreasList(){
+        return axios.get(CHALLENGES_API_BASE_URL + "/businessAreas", {headers: authHeader() })
+    }
 }
 
 export default new BusinessChallengesService();

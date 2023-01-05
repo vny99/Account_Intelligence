@@ -1,13 +1,10 @@
 import React from 'react'
-import { useEffect } from 'react';
-import { useState } from 'react';
 
-import { AiFillHeart, AiOutlineHeart, AiOutlineLike } from "react-icons/ai";
+import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
-import { BiEditAlt } from "react-icons/bi";
-import IdeaService from '../services/idea.service';
 
-const MyIdeas = ({ data, userDetails }) => {
+const MyIdeas = ({ data }) => {
+    console.log(data)
     return (  
         <table className = "table">
             <thead style={{"textAlign":"center", "verticalAlign":"middle"}}>

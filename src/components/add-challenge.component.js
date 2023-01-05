@@ -7,42 +7,48 @@ export default class AddChallenge extends Component {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeBusinessArea = this.onChangeBusinessArea.bind(this);
     this.onChangeExpiryDate=this.onChangeExpiryDate.bind(this);
     this.saveChallenge = this.saveChallenge.bind(this);
     this.newChallenge = this.newChallenge.bind(this);
 
-    this.state = 
+    this.state =
     {
       id: null,
       title: "",
-      description: "", 
+      description: "",
+      businessArea: "Finance",
       expiryDate:"",
       submitted: false,
+      businessAreasList :[],
       tv:false,
       dv:false,
       dav:false
     };
   }
 
+  componentDidMount() {
+    BusinessChallengesService.getBusinessAreasList().then(res => {
+      this.setState({businessAreasList : res.data }) })
+  }
+
   onChangeTitle(e) {
     this.setState({tv:true})
-    this.setState({
-      title: e.target.value
-    });
+    this.setState({ title: e.target.value });
   }
 
   onChangeDescription(e) {
     this.setState({dv:true})
-    this.setState({
-      description: e.target.value
-    });
+    this.setState({ description: e.target.value });
+  }
+
+  onChangeBusinessArea(e) {
+    this.setState ({ businessArea: e.target.value });
   }
 
   onChangeExpiryDate(e) {
     this.setState({dav:true})
-    this.setState({
-      expiryDate: e.target.value
-    });
+    this.setState({ expiryDate: e.target.value });
   }
 
   saveChallenge() {
@@ -50,13 +56,19 @@ export default class AddChallenge extends Component {
       var challenge = {
         challengeTitle: this.state.title,
         challengeDescription: this.state.description,
+        businessArea: this.state.businessArea,
         expiryDate:this.state.expiryDate
       };
-      console.log(challenge)
       BusinessChallengesService.addBusinessChallenge(challenge)
-      .then((res)=>{
-        console.log(res.date);
-        this.setState({submitted:true})
+      .then((res)=>{ 
+        this.setState({
+          id: res.data.id,
+          title: res.data.challengeTitle,
+          description:res.data.challengeDescription ,
+          businessArea: res.data.businessArea,
+          expiryDate:res.data.expiryDate,
+          submitted:true
+        })
       })
     }
   }
@@ -67,6 +79,7 @@ export default class AddChallenge extends Component {
       id: null,
       title: "",
       description: "",
+      businessArea: "Finance",
       published: false,
       submitted: false
     });
@@ -109,6 +122,15 @@ export default class AddChallenge extends Component {
                 name="description"
               >
               </textarea>
+
+              <div class="form-group">
+                <label>Business Area</label>
+                <select class="form-select" aria-label="Default select example"
+                value={this.state.businessArea}
+                onChange={this.onChangeBusinessArea}>
+                  { this.state.businessAreasList.map( bc => <option>{bc.name}</option> )}
+                </select>
+              </div>
 
               <label htmlFor="date">Expiry Date</label>
               <input

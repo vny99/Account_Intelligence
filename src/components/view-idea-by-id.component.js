@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import IdeaService from "../services/idea.service";
 import "./view-idea-by-id.component.css";
-import { AiFillHeart, AiOutlineHeart, AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
+import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
 import { TbArrowBackUp } from "react-icons/tb";
 import { BiEditAlt, BiMedal } from "react-icons/bi";
 import flowImage from "./images/flowStatus.jpg";
@@ -41,33 +41,28 @@ function ViewIdeaById() {
       setBenefitCategory(res.data.benefitCategory)
       setCategory(res.data.category)
     });
-  }, [idea]);
-
-  useEffect(() => {
     IdeaCommentsService.getCommentsByIdeaId(id).then((res) => { setComments(res.data); })
     LikesService.getLikeOfCurrentUser(id).then((res)=>{ setLikeId(res.data); })
     IdeaService.isFavoriteIdeaOfCurrentUser(id).then((res) => { setLocalLiked(res.data); })
-  }, [comments, likeId, localLiked]);
-
-  useEffect(() => {
     setRewards(idea.rewards)
     const user = AuthService.getCurrentUser();
     setCurrentUserId(user.id)
     if (user.role.authority.includes("ROLE_FIADMIN")) { setAdmin(true); }
-  }, [currentUserId])
+  }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     setCommentButton(false);
     let ideaId = idea.id;
-    IdeaCommentsService.postComment(ideaId, commentText);
+    await IdeaCommentsService.postComment(ideaId, commentText);
+    await IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
+    await IdeaCommentsService.getCommentsByIdeaId(id).then((res) => { setComments(res.data); })
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async(e) => {
     setStatus(e.target.value);
     let myIdea = idea;
     myIdea.ideaStatus = e.target.value;
-    console.log(idea.id, myIdea)
-    IdeaService.updateIdea(idea.id, myIdea);
+    await IdeaService.updateIdea(idea.id, myIdea);
   };
 
   const handleShow = (data) => {
@@ -80,20 +75,24 @@ function ViewIdeaById() {
     setEditId("");
   };
 
-  const handleLike=()=>{
+  const handleLike = async()=>{
     if(likeId === "") {
       let data={ ideaId: idea.id }
-      LikesService.like(data);
+      await LikesService.like(data);
     }
 
     else{
-      LikesService.unLike(likeId)
-    } 
+      await LikesService.unLike(likeId)
+    }
+    await IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
+    await LikesService.getLikeOfCurrentUser(id).then((res)=>{ setLikeId(res.data); })
   }
 
-  const handleFavorite=()=>{
-    if(!localLiked) { UserService.addFavorite(id) }
-    else{ UserService.removeFavorite(id) } 
+  const handleFavorite = async()=>{
+    if(!localLiked) { await UserService.addFavorite(id) }
+    else{ await UserService.removeFavorite(id) }
+    await IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
+    await IdeaService.isFavoriteIdeaOfCurrentUser(id).then((res) => { setLocalLiked(res.data); }) 
   }
 
   const handleRewards=(e)=>{
@@ -105,11 +104,11 @@ function ViewIdeaById() {
     else{ setRewards(0); }
   }
 
-  const handleSave=()=>{
+  const handleSave = async()=>{
     let myIdea = idea;
     myIdea.rewards=rewards;
-    IdeaService.updateIdea(idea.id, myIdea);
-    console.log(myIdea)
+    await IdeaService.updateIdea(idea.id, myIdea);
+    await IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
   }
 
   const navigateToEditComment = (commentId, commentText) => {

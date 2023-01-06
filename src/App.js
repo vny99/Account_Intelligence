@@ -72,7 +72,6 @@ class App extends Component {
         <nav className="navbar nav-tabs navbar-expand-sm">
           <Link to={"/about"} className="navbar-brand">
             <strong style={{"fontSize":"xx-large"}}> <h1 className="app-title-navbar">Echo</h1></strong>
-
           </Link>
           <div className="navbar-nav mr-auto">
             {currentUser && (

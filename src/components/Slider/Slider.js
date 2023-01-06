@@ -49,17 +49,24 @@ export default function Slider() {
     BusinessChallengesService.getRecentFiveBusinessChallenges().then((res) => {
         setSlides(res.data);
     })
-    
+
     const delay = 4000;
     const timeoutRef = React.useRef(null);
+    
+    function resetTimeout() {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+    }
 
     React.useEffect(() => {
         resetTimeout();
-        if (slides.length > 1) {
+        // if (slides.length > 1) {
             timeoutRef.current = setTimeout(
                 () =>
                 setSlideIndex((prevIndex) =>
-                    prevIndex === slides.length  ? 1 : prevIndex + 1
+                    // prevIndex === slides.length - 1  ? 0 : prevIndex + 1
+                    prevIndex === slides.length ? 1 : prevIndex + 1
                 ),
                 delay
         );
@@ -67,7 +74,7 @@ export default function Slider() {
         return () => {
             resetTimeout();
         };
-    }
+    // }
     }, [slideIndex]);
  
     return (

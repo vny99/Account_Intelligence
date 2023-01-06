@@ -4,7 +4,6 @@ import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
 
 const MyIdeas = ({ data }) => {
-    console.log(data)
     return (  
         <table className = "table">
             <thead style={{"textAlign":"center", "verticalAlign":"middle"}}>

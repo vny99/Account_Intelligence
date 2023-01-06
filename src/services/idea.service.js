@@ -52,6 +52,10 @@ class IdeaService {
     getCategoriesList(){
         return axios.get(IDEA_API_BASE_URL + "/categories", {headers: authHeader() })
     }
+
+    getIdeasSortedById(){
+        return axios.get(IDEA_API_BASE_URL + "/sortById", {headers: authHeader() })
+    }
 }
 
 export default new IdeaService();

@@ -68,7 +68,7 @@ class App extends Component {
     return (
       <div>
         {/* <Sidebar currentUser = {currentUser} isAdmin = {showAdminBoard} /> */}
-        {currentUser && ( <Sidebar /> ) }
+        {currentUser && ( <Sidebar currentUser = {currentUser} isAdmin = {showAdminBoard} /> ) }
 
         <nav className="navbar nav-tabs navbar-expand-sm">
         {/* {currentUser && ( <Sidebar /> ) } */}

@@ -67,10 +67,11 @@ class App extends Component {
 
     return (
       <div>
-        <Sidebar currentUser = {currentUser} isAdmin = {showAdminBoard} />
-        {/* {currentUser && ( <Sidebar /> ) } */}
+        {/* <Sidebar currentUser = {currentUser} isAdmin = {showAdminBoard} /> */}
+        {currentUser && ( <Sidebar /> ) }
 
         <nav className="navbar nav-tabs navbar-expand-sm">
+        {/* {currentUser && ( <Sidebar /> ) } */}
           <Link to={"/about"} className="navbar-brand">
             <strong style={{"fontSize":"xx-large"}}> <h1 className="app-title-navbar">Echo</h1></strong>
           </Link>

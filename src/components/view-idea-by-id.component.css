@@ -63,7 +63,6 @@
 .Postedby {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
   gap: 50px;
   margin-left: 2rem;
   margin-bottom: 2rem;
@@ -399,18 +398,11 @@
   margin: auto;
 }
 
-/* .commentEdit button {
-  border: none;
-  color: white;
+.commentEdit button {
   padding: 1px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 2px 2px;
+  margin-right: 1rem;
   cursor: pointer;
-  background-color: #008cba;
-} */
+}
 
 .btn-secondary {
   --bs-btn-color: #444;

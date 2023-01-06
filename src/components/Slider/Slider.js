@@ -50,7 +50,7 @@ export default function Slider() {
         setSlides(res.data);
     })
     
-    const delay = 4000;
+    const delay = 1000;
     const timeoutRef = React.useRef(null);
 
     React.useEffect(() => {

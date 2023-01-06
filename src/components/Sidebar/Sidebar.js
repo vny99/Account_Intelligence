@@ -10,7 +10,7 @@ import { CgCardHearts } from "react-icons/cg";
 const Sidebar = (props) => {
   return (
       <Menu>
-        {props.currentUser && (
+        {/* {props.currentUser && ( */}
           <>
             <a className="bm-item" href="/ideas">
               <FcIdea style={{"fontSize":"30px"}} />
@@ -42,7 +42,7 @@ const Sidebar = (props) => {
               <div>My Favorites</div>
             </a>
           </>
-        )}
+        {/* )} */}
     </Menu>
   );
 };

@@ -166,17 +166,23 @@
 }
 
 .commentText{
-  margin-top: .5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   font-size: smaller;
   margin-right: 2rem;
   text-align: start;
 }
 
 .commentedBy{
-  text-align: end;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   font-size: smaller;
-  margin-right: 2rem;
+  margin-left: 1rem;
+}
+
+.commentedDate{
+  font-size: 12px;
+  color: darkslategray;
+  margin-left: 0.4rem;
 }
 
 .close_icon{
@@ -189,12 +195,6 @@
 .comment_head{
   display: flex;
   flex-direction: row;
-}
-
-.commentedDate{
-  text-align: end;
-  font-size: smaller;
-  margin-right: 2rem;
 }
 
 .challenge-comment-box{

@@ -272,19 +272,21 @@ function ViewIdeaById() {
           comment => (
             <div>
               <div className="commentBody">
-                <div className="commentText" key={comment.id}>
-                  {comment.commentText}
+                <span className="commentedBy" key={comment.id}>
+                  <b>{comment.fname + " " + comment.lname} </b> 
+                  {/* • */}
+                  <span className="commentedDate">~ {comment.commentedDate}</span>
                   {(currentUserId === comment.userId) ?
                     (
-                      <div className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
-                        <button className="btn btn-secondary"> <BiEditAlt onClick={() => {navigateToEditComment(comment.id, comment.commentText)}} size={"20px"} /> </button>
-                      </div>
-                    ) : ( <div> </div> )
+                      <span className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
+                        <button className="btn btn-secondary"> <BiEditAlt onClick={() => {navigateToEditComment(comment.id, comment.commentText)}} /> </button>
+                      </span>
+                    ) : ( <span> </span> )
                   }
+                </span>
+                <div className="commentText" key={comment.id}>
+                  {comment.commentText}
                 </div>
-
-                <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
-                <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>
 
               </div>
             </div>

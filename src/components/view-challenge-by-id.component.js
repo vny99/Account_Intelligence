@@ -125,23 +125,22 @@ function ViewChallengeById() {
                         comment => (
                             <div>
                                 <div className="commentBody">
+                                <span className="commentedBy" key={comment.id}>
+                                    <b>{comment.fname + " " + comment.lname} </b> 
+                                    {/* • */}
+                                    <span className="commentedDate">~ {comment.commentedDate}</span>
+                                    {(currentUserId === comment.userId) ? 
+                                        (
+                                        <span className="commentEdit" style={{ display: "inline-block", "float":"right" }}>
+                                            <button className="btn btn-secondary"><BiEditAlt onClick={() => navigateToEditComment(comment.id, comment.commentText, challenge.id)} /></button>
+                                        </span>
+                                        ) : ( <span> </span> )
+                                    }
+
+                                </span>
                                     <div className="commentText" key={comment.id}>
                                         {comment.commentText}
-                                        {(currentUserId === comment.userId) ? 
-                                            (
-                                                <div className="CommentEdit" style={{ display: "inline-block", "float":"right" }}>
-                                                    <button className="btn btn-secondary">
-                                                        <BiEditAlt
-                                                            onClick={() => navigateToEditComment(comment.id, comment.commentText, challenge.id)}
-                                                        size={"20px"}
-                                                        />
-                                                    </button>
-                                                </div>
-                                            ) :( <div> </div> )
-                                        }
                                     </div>
-                                    <div className="commentedBy" key={comment.id}> Posted by : {comment.fname + " " + comment.lname} </div>
-                                    <div className="commentedDate" key={comment.id}> Posted on : {comment.commentedDate} </div>
                                 </div>
                             </div>
                         )

@@ -25,6 +25,7 @@ import ViewChallengeById from "./components/view-challenge-by-id.component";
 import MyFavoriteIdeasPage from "./components/my-favorite-ideas-page.component";
 import EditIdeaComment from "./components/edit-idea-comment.component";
 import EditChallengeComment from "./components/edit-challenge-comment.component";
+import SSILogo from "./components/images/logosoprasteria.jpg"
 
 class App extends Component {
   constructor(props) {
@@ -119,7 +120,7 @@ class App extends Component {
           {currentUser ? (
             <div className="navbar-nav collapse navbar-collapse justify-content-end">
               <li className="nav-item" style={{"marginRight":"30px", "paddingTop":"0px"}}>
-                  <img src="logo-soprasteria.jpg" alt="Sopra Steria" />
+                  <img src={SSILogo} />
                   {/* <div lang="en-GB">The world is how we shape it</div> */}
               </li>
 
@@ -139,7 +140,7 @@ class App extends Component {
               <div className="navbar-nav collapse navbar-collapse justify-content-end">
                 
                 <li className="nav-item" style={{"marginRight":"30px", "paddingTop":"0px"}}>
-                  <img src="logo-soprasteria.jpg" alt="Sopra Steria" />
+                  <img src={SSILogo} />
                 </li>
 
                 <li className="nav-item">

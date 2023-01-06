@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { AiOutlineComment } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
 import {Swiper,SwiperSlide} from "swiper/react"
-import { Pagination,Navigation } from 'swiper';
+import { Pagination,Navigation, Mousewheel, Keyboard } from 'swiper';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -41,8 +41,11 @@ class MostLikedCardsComponent extends Component {
                         // loop={true}
                         loopFillGroupWithBlank={true}
                         navigation={true}
-                        modules={[Pagination, Navigation]}
                         className="mySwiper"
+                        cssMode={true}
+                        mousewheel={true}
+                        keyboard={true}
+                        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
                     >
                         {
                             this.state.ideas.map(

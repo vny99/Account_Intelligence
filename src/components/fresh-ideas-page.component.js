@@ -91,7 +91,8 @@ class FreshIdeasPage extends Component {
                             <label htmlFor="my-ideas-id">
                                 {/* <FcList size={"20px"} style={{"paddingRight":"10px"}} /> */}
                                 <input type="checkbox" id="my-ideas-id" onClick={this.myIdeas} />
-                                My Ideas
+                                {!myIdeasButton &&  "My Ideas"}
+                                {myIdeasButton &&  "All Ideas"}
                             </label> 
                         </div>
 

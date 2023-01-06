@@ -17,7 +17,7 @@ export default class EditChallenge extends React.Component{
 
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeClosingDate=this.onChangeClosingDate.bind(this);
+    this.onChangeExpiryDate=this.onChangeExpiryDate.bind(this);
     this.saveChallenge = this.saveChallenge.bind(this);
   }
 
@@ -27,7 +27,7 @@ export default class EditChallenge extends React.Component{
       this.setState({
           title: res.data.challengeTitle,
           description: res.data.challengeDescription,
-          closingdate: res.data.expiryDate,
+          expiryDate: res.data.expiryDate,
           status: res.data.challengeStatus
         });
    })
@@ -45,9 +45,9 @@ export default class EditChallenge extends React.Component{
     })
   }
 
-  onChangeClosingDate(e){
+  onChangeExpiryDate(e){
     this.setState({
-      closingdate: e.target.value
+      expiryDate: e.target.value
     })
   }
 
@@ -57,13 +57,14 @@ export default class EditChallenge extends React.Component{
       id: id,
       challengeTitle: this.state.title,
       challengeDescription: this.state.description,
-      expiryDate: this.state.closingdate,
+      expiryDate: this.state.expiryDate,
       challengeStatus: this.state.status
     };
     BusinessChallengesService.updateChallenge(id, challenge).then(()=>{ this.setState({submitted:true}) })
   }
 
   render() {
+    const { expiryDate } = this.state;
     return (
       <div className="submit-form">
         {this.state.submitted ? (
@@ -101,14 +102,15 @@ export default class EditChallenge extends React.Component{
               
             
               <label htmlFor="date">Expiry Date</label>
+              {/* {console.log(expiryDate.slice(0, 10))} */}
               <input
                 type="date"
                 className="form-control"
                 id="closingDate"
                 required
-                value={this.state.closingDate}
-                onChange={this.onChangeClosingDate}
-                name="closingdate"
+                value={expiryDate.slice(0, 10)}
+                onChange={this.onChangeExpiryDate}
+                name="expryDate"
               />
             </div>
 

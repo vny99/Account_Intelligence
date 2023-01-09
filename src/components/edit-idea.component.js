@@ -56,53 +56,51 @@ export default class EditIdea extends React.Component{
   render() 
   {
       return (
-        <div className=''>
-        <div className="
-        ">
-          {this.state.submitted ? (
-            <div style={{"textAlign":"center"}}>
-              <h4> Edit Fresh Idea Successfully!</h4>
-              <a href = {this.state.url}><button className="btn btn-secondary" style={{"width":"20%"}}>Ok</button></a>
-            </div>
-          ) : (
-            
-            <div class="">
-              <div className="form-group">
-                <label htmlFor="title">Title</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  required
-                  value={this.state.title}
-                  onChange={this.onChangeTitle}
-                  name="title"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="description">Description</label>
-                <textarea
-                  className="form-control"
-                  id="description"
-                  required
-                  rows="7"
-                  value={this.state.description}
-                  onChange={this.onChangeDescription}
-                  name="description"
-                >
-                </textarea>
-              </div>
-
+        <div>
+          <div>
+            {this.state.submitted ? (
               <div style={{"textAlign":"center"}}>
-                <button onClick={this.saveIdea} style={{"marginTop":"20px"}} className="btn btn-secondary">
-                  Submit
-                </button>
+                <h4>Fresh Idea Edited successfully!</h4>
+                <a href = {this.state.url}><button className="btn btn-secondary" style={{"width":"20%"}}>Ok</button></a>
               </div>
+            ) : (
+              <div>
+                <div className="form-group">
+                  <label htmlFor="title">Title</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="title"
+                    required
+                    value={this.state.title}
+                    onChange={this.onChangeTitle}
+                    name="title"
+                  />
+                </div>
 
-            </div>
-          )}
-        </div>
+                <div className="form-group">
+                  <label for="description">Description</label>
+                  <textarea
+                    className="form-control"
+                    id="description"
+                    required
+                    rows="7"
+                    value={this.state.description}
+                    onChange={this.onChangeDescription}
+                    name="description"
+                  >
+                  </textarea>
+                </div>
+
+                <div style={{"textAlign":"center"}}>
+                  <button onClick={this.saveIdea} style={{"marginTop":"20px"}} className="btn btn-secondary">
+                    Submit
+                  </button>
+                </div>
+
+              </div>
+            )}
+          </div>
         </div>
       );
     }

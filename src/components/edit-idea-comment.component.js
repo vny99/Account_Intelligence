@@ -6,7 +6,8 @@ import IdeaCommentsService from "../services/idea-comments.service"
 function EditIdeaComment({ commentId, commentText }) {
   const [updatedcomment, setUpdatedComment] = useState("");
   const [com, setCom] = useState(commentText);
-  const [submitted, setSubmitted]=useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [url, setUrl] = useState("");
 
   const navigateToEditComment = () => {
     IdeaCommentsService.updateComment(commentId, updatedcomment).then((res) => {
@@ -22,23 +23,24 @@ function EditIdeaComment({ commentId, commentText }) {
         {submitted?(
         <div style={{"textAlign":"center"}}>
             <h4>Idea Comment Edited successfully!</h4>
+            <a href = {url}><button className="btn btn-secondary" style={{"width":"20%"}}>Ok</button></a>
         </div>):(
-
-        <div className="Comment-Box">
-        <p>Leave a Comment</p>
-        <form className="Comment-Form">
-          <textarea
-            className="Comment-Form Textarea"
-            rows="3"
-            placeholder="Write your Comment"
-            onChange={(e) => setUpdatedComment(e.target.value)}
-          >{com}</textarea>
-          <br/>
-          <button className="edit-Comment-form button"  disabled={updatedcomment.length < 1} onClick={navigateToEditComment}>
-            Post Comment
-          </button>
-        </form>
-      </div>)}
+        <div className="form-group">
+          <label for="description">Leave a Comment</label>
+            <textarea
+              className="form-control"
+              id="description"
+              rows="7"
+              placeholder="Write your Comment"
+              onChange={(e) => setUpdatedComment(e.target.value)}
+            >{com}</textarea>
+            <br/>
+            <div style={{"textAlign":"center"}}>
+              <button className="btn btn-secondary" disabled={updatedcomment.length < 1} onClick={navigateToEditComment}>
+                Post Comment
+              </button>
+            </div>
+        </div>)}
       </div>
     </div>
   );

@@ -14,7 +14,6 @@ import EditChallengeComment from './edit-challenge-comment.component';
 function ViewChallengeById() {
     const { challengeId } = useParams();
     const [challenge, setChallenge] = useState({});
-    // const [commentButton,setCommentButton]=useState()
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState({});
     const [show, setShow] = useState(false);
@@ -23,7 +22,7 @@ function ViewChallengeById() {
     const [commentshow, setCommentShow] = useState(false);
     const [comid, setComid] = useState("");
     const [comtext, setComtext] = useState("");
-    const [challenid, setChallenid] = useState("");
+    // const [challenid, setChallenid] = useState("");
     
     useEffect(() => {
         BusinessChallengesService.getBusinesssChallengeById(challengeId).then((res) => { setChallenge(res.data) });
@@ -59,14 +58,14 @@ function ViewChallengeById() {
         setCommentShow(false);
         setComid("");
         setComtext("");
-        setChallenid("");
+        // setChallenid("");
     };
 
     const handleCommentShow = (d1, d2, d3) => {
         setCommentShow(true);
         setComid(d1);
         setComtext(d2);
-        setChallenid(d3);
+        // setChallenid(d3);
     };
 
     const navigate = useNavigate();
@@ -125,12 +124,14 @@ function ViewChallengeById() {
                         rows="3"
                         placeholder="Write your Comment"
                         onChange={(e) => setCommentText(e.target.value)}
-                        >
-                        </textarea>
-            
-                        <button className="comment-form button" disabled={commentText.length < 1} onClick={handleSubmit}>
-                            Post Comment
-                        </button>
+                        ></textarea>
+                        <div style={{"textAlign":"center"}}>
+                            <button className="comment-form button"
+                            disabled={commentText.length < 1}
+                            onClick={handleSubmit}>
+                                Post Comment
+                            </button>
+                        </div>
                     </form>
                 </div>
         
@@ -144,49 +145,32 @@ function ViewChallengeById() {
                                     {/* • */}
                                     <span className="commentedDate">~ {comment.commentedDate}</span>
                                     {currentUserId === comment.userId ? (
-                    <div
-                      className="CommentEdit"
-                      style={{ display: "inline-block", float: "right" }}
-                    >
-                      <button className="btn btn-secondary">
-                        <BiEditAlt
-                          onClick={() =>
-                            handleCommentShow(
-                              comment.id,
-                              comment.commentText,
-                              challenge.id
-                            )
-                          }
-                          size={"20px"}
-                        />
-                      </button>
-                      <Modal
-                    show={commentshow}
-                    onHide={handleCommentClose}
-                    className="name"
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title>
-                        <h1>Edit Comment</h1>
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <EditChallengeComment
-                        commentId={comid}
-                        commentText={comtext}
-                        challengeId={challenge.id}
-                      />
-                    </Modal.Body>
-                  </Modal>
-                    </div>
-                  ) : (
-                    <div> </div>
-                  )}
-
+                                        <div
+                                        className="CommentEdit"
+                                        style={{ display: "inline-block", float: "right" }}
+                                        >
+                                            <button className="btn btn-secondary">
+                                                <BiEditAlt onClick={() => handleCommentShow(comment.id, comment.commentText, challenge.id )} size={"20px"} />
+                                            </button>
+                                            <Modal show={commentshow} onHide={handleCommentClose} className="name" >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title>
+                                                        <h1>Edit Comment</h1>
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                <EditChallengeComment
+                                                    commentId={comid}
+                                                    commentText={comtext}
+                                                    // challengeId={challenge.id}
+                                                />
+                                                </Modal.Body>
+                                            </Modal>
+                                        </div>
+                                        ) : ( <div> </div> )
+                                    }
                                 </span>
-                                    <div className="commentText" key={comment.id}>
-                                        {comment.commentText}
-                                    </div>
+                                <div className="commentText" key={comment.id}>{comment.commentText}</div>
                                 </div>
                             </div>
                         )

@@ -23,10 +23,8 @@ function ViewIdeaById() {
   const [benefitCategory, setBenefitCategory] = useState({});
   const [category, setCategory] = useState({});
   const { id } = useParams();
-  const [commentButton, setCommentButton] = useState(false);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
-  const [status, setStatus] = useState("RAISED");
   const [flow, toggleFlow] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [likeId, setLikeId] = useState("");
@@ -55,7 +53,6 @@ function ViewIdeaById() {
   }, []);
 
   const handleSubmit = async(e) => {
-    setCommentButton(false);
     let ideaId = idea.id;
     await IdeaCommentsService.postComment(ideaId, commentText);
     await IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
@@ -63,7 +60,6 @@ function ViewIdeaById() {
   };
 
   const handleUpdate = async(e) => {
-    setStatus(e.target.value);
     let myIdea = idea;
     myIdea.ideaStatus = e.target.value;
     await IdeaService.updateIdea(idea.id, myIdea);
@@ -139,7 +135,7 @@ function ViewIdeaById() {
       
       <div className="idea">
         {currentUserId === idea.userId && (
-          <div style={{"margin-left":"90%","padding-top":"5px"}}>
+          <div style={{"margin-left":"90%", "padding-top":"5px"}}>
             <BiEditAlt className="edit_idea_button" size={"45px"} onClick={() => { handleShow(idea.id) }} />
             <Modal show={show} onHide={handleClose} className="name">
               <Modal.Header closeButton>
@@ -257,26 +253,26 @@ function ViewIdeaById() {
             {idea.rewards===20&& <div className="badge_points"><BiMedal className="silver_badge" /><p>{idea.rewards}</p></div>}
             {idea.rewards===10&& <div className="badge_points"><BiMedal className="bronze_badge" /><p>{idea.rewards}</p></div>}
           </div>
-          
-          {/* <div className="Postedby"> Posted By: {idea.fname + " " + idea.lname}</div> */}
-
         </div>
       </div>
       
-      <br/>
-      <div className="Cards">
-        <div className="comment-box">
-          <p>Leave a Comment</p>
-          <form className="comment-form">
-            <textarea
-              className="comment-form textarea"
-              rows="3"
-              placeholder="Write your Comment"
-              onChange={(e) => setCommentText(e.target.value)}
-            ></textarea>
-            <button className="post-comment-form button" disabled={commentText.length < 1} onClick={handleSubmit}>Post Comment</button>
-          </form>
-        </div>
+      <div className="challenge-comment-box">
+        <p>Leave a Comment</p>
+        <form className="comment-form">
+          <textarea
+            className="comment-form textarea"
+            rows="3"
+            placeholder="Write your Comment"
+            onChange={(e) => setCommentText(e.target.value)}
+          ></textarea>
+          <div style={{"textAlign":"center"}}>
+            <button className="comment-form button"
+            disabled={commentText.length < 1}
+            onClick={handleSubmit}>
+              Post Comment
+            </button>
+          </div>
+        </form>
       </div>
 
       <div className="comments_section">
@@ -291,7 +287,6 @@ function ViewIdeaById() {
                   {currentUserId === comment.userId ? (
                     <div className="commentEdit" style={{ display: "inline-block", float: "right" }} >
                       <button className="btn btn-secondary">
-                        {" "}
                         <BiEditAlt
                           onClick={() => {
                             handleIdeacommentShow(
@@ -300,16 +295,16 @@ function ViewIdeaById() {
                             );
                           }}
                           size={"20px"}
-                        />{" "}
+                        />
                       </button>
-                      <Modal show={ideaCommentShow} onHide={ideaCommenthandleClose} className="name1">
+                      <Modal show={ideaCommentShow} onHide={ideaCommenthandleClose} className="name">
                         <Modal.Header closeButton>
                           <Modal.Title>
                             <h1>Edit Comment</h1>
                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                          <EditIdeaComment commentId={cid}commentText={ideacomment}/>
+                          <EditIdeaComment commentId={cid} commentText={ideacomment}/>
                         </Modal.Body>
                       </Modal>
                     </div>

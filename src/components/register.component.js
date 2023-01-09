@@ -5,56 +5,6 @@ import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import AuthService from "../services/auth.service";
 
-const required = value => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
-
-const vfname = value => {
-  if (value.length > 20) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        First name must be under 20 characters.
-      </div>
-    );
-  }
-};
-
-const vlname = value => {
-  if (value.length > 15) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        Last name must be under 15 characters.
-      </div>
-    );
-  }
-};
-
-const email = value => {
-  if (!isEmail(value)) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This is not a valid email.
-      </div>
-    );
-  }
-};
-
-const vpassword = value => {
-  if (value.length < 6 || value.length > 40) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        The password must be between 6 and 40 characters.
-      </div>
-    );
-  }
-};
-
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -65,18 +15,21 @@ export default class Register extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeDepartment = this.onChangeDepartment.bind(this);
-    // this.onChangeRole = this.onChangeRole.bind(this);
-    
+    this.onChangeAccount = this.onChangeAccount.bind(this);
+    this.saveidea = this.saveidea.bind(this);
+
     this.state = {
       fname: "",
       lname: "",
       email: "",
       password: "",
       department: "FCI",
-      // role: "",
+      role: "",
+      account:"",
       successful: false,
       message: "",
-
+      submitted: false,
+      errors: {},
       departmentsList: [],
       rolesList: []
     };
@@ -89,13 +42,59 @@ export default class Register extends Component {
     AuthService.getRolesList().then(res => {
       this.setState({ rolesList: res.data }) })
   }
+
+  formValidation = () => {
+    const { fname,lname,email,password,department,role, account} = this.state;
+    let isValid = true;
+    const errors = {};
+    
+    if (fname.length <=0 ) {
+      errors.fname = "Please Enter Your First Name";
+      isValid = false;
+    }
+
+    if (lname.length <=0 ) {
+      errors.lname = "Please Enter Your Last Name";
+      isValid = false;
+    }
+
+    if (email.length <=0 ) {
+      errors.email = "Please Enter Your Email Adddress";
+      isValid = false;
+    }
+
+    if (password.length <=8|| password.length>24 ) {
+      errors.password = "Password must be in range of 8 to 24 character";
+      isValid = false;
+    }
+
+    if (department.length <=0 ) {
+      errors.department = "Please Enter Your Department";
+      isValid = false;
+    }
+    
+    if (account.length <=0 ) {
+      errors.account = "Please Enter Your Account(Project Name)";
+      isValid = false;
+    }
+
+    console.log(errors);
+    this.setState({ errors });
+    return isValid;
+  };
+
+  onChangeTitle(e) {
+    this.setState({
+      title: e.target.value,
+    });
+  }
   
   onChangeFname(e) { this.setState({ fname: e.target.value }); }
   onChangeLname(e) { this.setState({ lname: e.target.value }); }
   onChangeEmail(e) { this.setState({ email: e.target.value }); }
   onChangePassword(e) { this.setState({ password: e.target.value }); }
   onChangeDepartment(e) { this.setState({ department: e.target.value }); }
-  // onChangeRole(e) { this.setState({ role: e.target.value }); }
+  onChangeAccount(e) { this.setState({ account: e.target.value }); }
 
   handleRegister(e) {
     e.preventDefault();
@@ -103,47 +102,38 @@ export default class Register extends Component {
       message: "",
       successful: false
     });
+  }
 
-    this.form.validateAll();
-
-    if (this.checkBtn.context._errors.length === 0) {
-      AuthService.register(
-        this.state.fname,
-        this.state.lname,
-        this.state.email,
-        this.state.password,
-        this.state.department,
-        // this.state.role
-      ).then(
-        response => {
-          this.setState({
-            message: response.data.message,
-            successful: true
-          });
-        },
-
-        error => {
-          const resMessage =
-            (
-              error.response &&
-              error.response.data &&
-              error.response.data.message
-            ) || error.message || error.toString();
-            
-            this.setState({
-            successful: false,
-            message: resMessage
-          });
-        }
-      );
+  saveidea(){
+    var profile = {
+      fname: this.state.fname,
+      lname: this.state.lname,
+      email: this.state.email,
+      password: this.state.password,
+      department:this.state.department,
+      account:this.state.account
+    };
+    
+    const isValid = this.formValidation();
+    if (isValid) {
+      AuthService.register(profile).then((res)=>{ this.setState({submitted:true}) })    
     }
+
   }
   
   render() {
-
     return (
       <div className="col-md-12">
-        <div className="card card-container" style={{"backgroundColor":"rgba(227, 213, 245, 0.632)"}}>
+        {this.state.submitted ? (
+          <div  className="card card-container" style={{"textAlign":"center" ,"margin-top":"3%","border-radius":"5px"}}>
+            <h4>Register successfully successfully!</h4>
+            <a href="/"> <button className="btn btn-success" style={{"width":"20%"}}>Ok</button></a>
+          </div>
+        ) : 
+        (
+        <div className="card card-container"
+        style={{"backgroundColor":"rgba(227, 213, 245, 0.632)", "textAlign":"center" ,"margin-top":"3%","border-radius":"5px"}}
+        >
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
@@ -157,6 +147,7 @@ export default class Register extends Component {
             {!this.state.successful && (
               <div>
                 <div className="form-group">
+                  <p className="error_class"style={{"color":"red"}}>{this.state.errors.fname}</p>
                   <label htmlFor="fname">First name</label>
                   <Input
                     type="text"
@@ -164,11 +155,11 @@ export default class Register extends Component {
                     name="fname"
                     value={this.state.fname}
                     onChange={this.onChangeFname}
-                    validations={[required, vfname]}
                   />
                 </div>
                 
                 <div className="form-group">
+                <p className="error_class" style={{"color":"red"}}>{this.state.errors.lname}</p>
                   <label htmlFor="lname">Last name</label>
                   <Input
                     type="text"
@@ -176,11 +167,11 @@ export default class Register extends Component {
                     name="lname"
                     value={this.state.lname}
                     onChange={this.onChangeLname}
-                    validations={[required, vlname]}
                   />
                 </div>
                 
                 <div className="form-group">
+                <p className="error_class" style={{"color":"red"}}>{this.state.errors.email}</p>
                   <label htmlFor="email">Email</label>
                   <Input
                     type="text"
@@ -188,11 +179,11 @@ export default class Register extends Component {
                     name="email"
                     value={this.state.email}
                     onChange={this.onChangeEmail}
-                    validations={[required, email]}
                   />
                 </div>
                 
                 <div className="form-group">
+                <p className="error_class" style={{"color":"red"}}>{this.state.errors.password}</p>
                   <label htmlFor="password">Password</label>
                   <Input
                     type="password"
@@ -200,11 +191,11 @@ export default class Register extends Component {
                     name="password"
                     value={this.state.password}
                     onChange={this.onChangePassword}
-                    validations={[required, vpassword]}
                   />
                 </div>
 
                 <div class="form-group">
+                  <p className="error_class" style={{"color":"red"}}>{this.state.errors.department}</p>
                   <label>Department</label>
                   <select class="form-select" aria-label="Default select example"
                     value={this.state.department}
@@ -214,26 +205,25 @@ export default class Register extends Component {
                   </select>
                 </div>
 
-                {/* <div class="form-group">
-                  <label>Role</label>
-                  <select class="form-select" aria-label="Default select example"
-                    value={this.state.role}
-                    onChange={this.onChangeRole}
-                  >
-                    { this.state.rolesList.map( r =>
-                      <option>
-                        {r.name}
-                      </option>
-                    )}
-
-                  </select>
-                </div> */}
+                <div className="form-group">
+                  <p className="error_class" style={{"color":"red"}}>{this.state.errors.account}</p>
+                  <label htmlFor="account">Account</label>
+                  <Input
+                    type="text"
+                    className="form-control w-1/4"
+                    name="account"
+                    value={this.state.account}
+                    onChange={this.onChangeAccount} 
+                  />
+                </div>
                 
                 <div className="form-group">
                   <br></br>
-                  <button style={{"marginLeft":"100px"}} className="btn btn-secondary"><span>Sign Up</span></button>
+                  <button
+                  onClick={this.saveidea} style={{ marginTop: "20px" }}
+                  // style={{"marginLeft":"100px"}}
+                  className="btn btn-secondary"><span>Sign Up</span></button>
                 </div>
-
               </div>
 
             )}
@@ -258,10 +248,9 @@ export default class Register extends Component {
               style={{ display: "none" }}
               ref={c => { this.checkBtn = c; }}
             />
-
           </Form>
-
         </div>
+        )}
       </div>
     );
   }

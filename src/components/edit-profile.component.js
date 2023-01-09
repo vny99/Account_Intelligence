@@ -15,9 +15,11 @@ export default class EditProfile extends Component {
       lname:"",
       email:"",
       department:"",
+      account:"",
       url: "",
       errors: {},
       departmentsList: [],
+      status: false
     };
 
     this.onChangeLname = this.onChangeLname.bind(this);
@@ -25,6 +27,7 @@ export default class EditProfile extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeDepartment = this.onChangeDepartment.bind(this);
     this.onChangeRole = this.onChangeRole.bind(this);
+    this.onChangeAccount = this.onChangeAccount.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
   }
 
@@ -42,6 +45,7 @@ export default class EditProfile extends Component {
           email:res.data.email,
           department:res.data.department,
           role:res.data.role.name,
+          account:res.data.account,
           url: "/profile" 
         });
       });
@@ -50,7 +54,7 @@ export default class EditProfile extends Component {
   }
 
   formValidation = () => {
-    const { fname, lname,department } = this.state;
+    const { fname, lname,department, account } = this.state;
     let isValid = true;
     const errors = {};
     if (fname.length <=0 ) {
@@ -63,6 +67,10 @@ export default class EditProfile extends Component {
     }
     if (department.length <=0 ) {
       errors.department = "Please Enter Your Department Name";
+      isValid = false;
+    }
+    if (account.length <=0 ) {
+      errors.account= "Please Enter Your Account Name";
       isValid = false;
     }
     this.setState({ errors });
@@ -87,16 +95,21 @@ export default class EditProfile extends Component {
     this.setState({ role: e.target.value, });
   }
 
+  onChangeAccount(e) {
+    this.setState({account: e.target.value, });
+  }
+
   saveProfile() {
     const isValid = this.formValidation();
-    var id1 = this.props;
+    var id1 = this.props.id;
     if (isValid) {
       var profile = {
-        id:id1.id,
+        id:id1,
         fname:this.state.fname,
         lname:this.state.lname,
         email:this.state.email,
-        department:this.state.department
+        department:this.state.department,
+        account:this.state.account
       };
       var user = AuthService.getCurrentUser();
       UserService.updateUserByEmail(profile.email, profile, user).then(() => { this.setState({ submitted: true }); });
@@ -172,6 +185,21 @@ export default class EditProfile extends Component {
                 </option> )}
               </select>
             </div>
+
+            <div className="form-group">
+              <p className="error_class">{this.state.errors.account}</p>
+              <label htmlFor="account">Account</label>
+              <input
+                type="text"
+                className="form-control"
+                id="account"
+                required
+                value={this.state.account}
+                onChange={this.onChangeAccount}
+                name="account"
+              />
+            </div>
+            
             <div className="form-group">
               <label htmlFor="ROle">Role</label>
               <input

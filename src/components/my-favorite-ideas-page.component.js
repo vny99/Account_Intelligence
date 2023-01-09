@@ -40,7 +40,7 @@ class MyFavoriteIdeasPage extends Component {
         const nPages = Math.ceil(data.length / recordsPerPage)
 
         return (
-            <div>
+            <div style={{"height":"500px"}}>
                 <div className="heading-line">
                     <h2
                     className="d-inline-flex display-5"

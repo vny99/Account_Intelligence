@@ -55,7 +55,7 @@ export default class Profile extends Component {
     
     return (
       <div>
-        <div className="profile-card" style={{"height":"450px"}}>
+        <div className="profile-card" style={{"height":"475px"}}>
           <div className='upper-container'>
               <div className='image-container'>
                 <img src="profileimage.jpg" alt='profile image' height="100px" width="100px"/>
@@ -72,6 +72,11 @@ export default class Profile extends Component {
             <div style={{"paddingTop":"10px"}}>
               <div style={{"fontWeight":"bold", "display":"inline", "textAlign":"left"}}>Department : </div>
                 <span>{ department }</span>
+            </div>
+
+            <div style={{"paddingTop":"10px"}}>
+              <div style={{"fontWeight":"bold", "display":"inline", "textAlign":"left"}}>Account : </div>
+                <span>{userDetails.account }</span>
             </div>
 
             <div style={{"paddingTop":"10px"}}>

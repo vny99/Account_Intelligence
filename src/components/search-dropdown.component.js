@@ -19,7 +19,7 @@ export default function SearchDropdown() {
   const handleOnChange = (e) => { setSearch(e.target.value); };
 
   return (
-    <div className="container mt-3">
+    <div className="container mt-3" style={{"height": "2900px"," min-height": "100%"}}>
       <div className="mt-4" style={{"padding-left": "-20px"}}>
         <select className="form-select" value={search} onChange={handleOnChange} 
         style={{"width": "210px", "float":"right" , "transform":"translateX(-100%)"}}>

@@ -35,8 +35,7 @@ const AllIdeas = ({data}) => {
                 <tr>
                     <th>
                         ID
-                        <span style={{"float":"right"}}><BiUpArrow textAlign="end" onClick={() => {handleIdSort()}}
-                        /></span>
+                        {/* <span style={{"float":"right"}}><BiUpArrow textAlign="end" onClick={() => {handleIdSort()}}/></span> */}
                     </th>
                     <th>
                         Idea
@@ -44,16 +43,16 @@ const AllIdeas = ({data}) => {
                     <th> Response</th>
                     <th>
                         Status
-                        <span style={{"float":"right"}}><VscFilter textAlign="end" /></span>
+                        {/* <span style={{"float":"right"}}><VscFilter textAlign="end" /></span> */}
                     </th>
 
                     <th>
                         Created by
-                        <span style={{"float":"right"}}><BiUpArrow textAlign="end" /></span>
+                        {/* <span style={{"float":"right"}}><BiUpArrow textAlign="end" /></span> */}
                     </th>
                     <th width="150px">
                         Created date
-                        <span style={{"float":"right"}}><BiDownArrow textAlign="end" /></span>
+                        {/* <span style={{"float":"right"}}><BiDownArrow textAlign="end" /></span> */}
                     </th>
                     {/* <th> Favourite</th> */}
                     <th> Rewards</th>

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import UserService from '../services/user.service';
 import AuthService from '../services/auth.service';
 import "./fresh-ideas-page.component.css"
-import Pagination from './Pagination';
+import Pagination from './pagination.component';
 import AllMyFavoriteIdeas from './all-favorite-ideas.component';
 
 

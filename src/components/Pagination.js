@@ -1,51 +1,30 @@
-import React from 'react'
-
-import { FcPrevious } from "react-icons/fc"
-import { FcNext } from "react-icons/fc"
-
-import "./Pagination.css"
-
-const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
-
-    const pageNumbers = [...Array(nPages + 1).keys()].slice(1)
-    
-    const nextPage = () => {
-        if(currentPage !== nPages) setCurrentPage(currentPage + 1)
-    }
-
-    const prevPage = () => {
-        if(currentPage !== 1) setCurrentPage(currentPage - 1)
-    }
-
+export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActivePage }) => {
+    const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1
+    const end = activePage === totalPages ? count : beginning + rowsPerPage - 1
+  
     return (
-        <nav style={{"zIndex":"8"}}>
-            <ul className='pagination'>
-                <li className="page-item">
-                    <a className="page-link" onClick={prevPage} href='#'>
-                        <FcPrevious />
-                    </a>
-                </li>
-
-                {pageNumbers.map(pgNumber => (
-                    <li key={pgNumber} 
-                        className= {`page-item ${currentPage == pgNumber ? 'active' : ''} `} >
-
-                        <a onClick={() => setCurrentPage(pgNumber)}  
-                            className='page-link' 
-                            href='#'>    
-                            {pgNumber}
-                        </a>
-                    </li>
-                ))}
-                
-                <li className="page-item">
-                    <a className="page-link" onClick={nextPage} href='#'>
-                        <FcNext />
-                    </a>
-                </li>
-            </ul>
-        </nav>
+      <>
+        <div className="pagination">
+          <button disabled={activePage === 1} onClick={() => setActivePage(1)}>
+            ⏮️ First
+          </button>
+          <button disabled={activePage === 1} onClick={() => setActivePage(activePage - 1)}>
+            ⬅️ Previous
+          </button>
+          <button disabled={activePage === totalPages} onClick={() => setActivePage(activePage + 1)}>
+            Next ➡️
+          </button>
+          <button disabled={activePage === totalPages} onClick={() => setActivePage(totalPages)}>
+            Last ⏭️
+          </button>
+        </div>
+        <p>
+          Page {activePage} of {totalPages}
+        </p>
+        <p>
+          Rows: {beginning === end ? end : `${beginning} - ${end}`} of {count}
+        </p>
+      </>
     )
-}
-
-export default Pagination
+  }
+  

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import BusinessChallengesService from '../services/business-challenge.service'
 
 // import "./business-challenges-page.component.css"
-import Pagination from './Pagination';
+import Pagination from './pagination.component';
 import Challenges from './challenges.component';
 import AuthService from '../services/auth.service';
 import UserService from '../services/user.service';

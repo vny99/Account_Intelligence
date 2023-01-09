@@ -93,7 +93,7 @@ export default class EditIdea extends React.Component{
                 </div>
 
                 <div style={{"textAlign":"center"}}>
-                  <button onClick={this.saveIdea} style={{"marginTop":"20px"}} className="btn btn-secondary">
+                  <button onClick={this.saveIdea} style={{"marginTop":"20px"}} className="btn btn-secondary" disabled={this.state.title.length<2||this.state.description.length<1}>
                     Submit
                   </button>
                 </div>

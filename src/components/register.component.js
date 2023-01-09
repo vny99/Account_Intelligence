@@ -44,50 +44,49 @@ export default class Register extends Component {
   }
 
   formValidation = () => {
-    const { fname,lname,email,password,department,role, account} = this.state;
+    const { fname, lname, email, password, department, account} = this.state;
     let isValid = true;
     const errors = {};
     
-    if (fname.length <=0 ) {
+    if (fname.length <= 0 ) {
       errors.fname = "Please Enter Your First Name";
       isValid = false;
     }
 
-    if (lname.length <=0 ) {
+    if (lname.length <= 0 ) {
       errors.lname = "Please Enter Your Last Name";
       isValid = false;
     }
 
-    if (email.length <=0 ) {
+    if (email.length <= 0 ) {
       errors.email = "Please Enter Your Email Adddress";
       isValid = false;
     }
 
-    if (password.length <=8|| password.length>24 ) {
+    if (password.length <= 8|| password.length > 24 ) {
       errors.password = "Password must be in range of 8 to 24 character";
       isValid = false;
     }
 
-    if (department.length <=0 ) {
+    if (department.length <= 0 ) {
       errors.department = "Please Enter Your Department";
       isValid = false;
     }
     
-    if (account.length <=0 ) {
+    if (account.length <= 0 ) {
       errors.account = "Please Enter Your Account(Project Name)";
       isValid = false;
     }
 
-    console.log(errors);
     this.setState({ errors });
     return isValid;
   };
 
-  onChangeTitle(e) {
-    this.setState({
-      title: e.target.value,
-    });
-  }
+  // onChangeTitle(e) {
+  //   this.setState({
+  //     title: e.target.value,
+  //   });
+  // }
   
   onChangeFname(e) { this.setState({ fname: e.target.value }); }
   onChangeLname(e) { this.setState({ lname: e.target.value }); }
@@ -116,9 +115,9 @@ export default class Register extends Component {
     
     const isValid = this.formValidation();
     if (isValid) {
-      AuthService.register(profile).then((res)=>{ this.setState({submitted:true}) })    
+      console.log(profile)
+      AuthService.register(profile).then(()=>{ this.setState({submitted:true}) })    
     }
-
   }
   
   render() {

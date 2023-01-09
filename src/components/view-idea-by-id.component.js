@@ -255,25 +255,6 @@ function ViewIdeaById() {
           </div>
         </div>
       </div>
-      
-      <div className="challenge-comment-box">
-        <p>Leave a Comment</p>
-        <form className="comment-form">
-          <textarea
-            className="comment-form textarea"
-            rows="3"
-            placeholder="Write your Comment"
-            onChange={(e) => setCommentText(e.target.value)}
-          ></textarea>
-          <div style={{"textAlign":"center"}}>
-            <button className="comment-form button"
-            disabled={commentText.length < 1}
-            onClick={handleSubmit}>
-              Post Comment
-            </button>
-          </div>
-        </form>
-      </div>
 
       <div className="comments_section">
         {comments.map(
@@ -320,6 +301,26 @@ function ViewIdeaById() {
           )
         )}
       </div>
+
+      <div className="challenge-comment-box">
+        <p>Leave a Comment</p>
+        <form className="comment-form">
+          <textarea
+            className="comment-form textarea"
+            rows="3"
+            placeholder="Write your Comment"
+            onChange={(e) => setCommentText(e.target.value)}
+          ></textarea>
+          <div style={{"textAlign":"center"}}>
+            <button className="comment-form button"
+            disabled={commentText.length < 1}
+            onClick={handleSubmit}>
+              Post Comment
+            </button>
+          </div>
+        </form>
+      </div>
+
     </div>
   );
 }

@@ -115,7 +115,7 @@ export default class EditChallenge extends React.Component{
             </div>
 
             <div style={{"textAlign":"center"}}>
-              <button onClick={this.saveChallenge} style={{"marginTop":"20px"}} className="btn btn-secondary">
+              <button onClick={this.saveChallenge} style={{"marginTop":"20px"}} className="btn btn-secondary" disabled={this.state.title.length<2||this.state.description.length<1}>
                 Submit
               </button>
             </div>

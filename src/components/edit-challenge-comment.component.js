@@ -20,7 +20,7 @@ function EditChallengeComment({ commentId, commentText }) {
       <div className="comment-edit-successful">
         {submitted?(
         <div style={{"textAlign":"center"}}>
-            <h4>Business Challenge Edited successfully!</h4>
+            <h4>Business Challenge Comment Edited successfully!</h4>
             <a href = {url}><button className="btn btn-secondary" style={{"width":"20%"}}>Ok</button></a>
         </div>
         ):(

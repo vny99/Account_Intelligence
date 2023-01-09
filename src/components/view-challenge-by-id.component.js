@@ -8,18 +8,22 @@ import ChallengeCommentsService from "../services/challenge-comments.service"
 import BusinessChallengesService from '../services/business-challenge.service'
 import { TbArrowBackUp } from 'react-icons/tb';
 import Modal from "react-bootstrap/Modal";
-import EditPage from "./edit-challenge.component.js";
 import EditChallenge from './edit-challenge.component.js';
+import EditChallengeComment from './edit-challenge-comment.component';
 
 function ViewChallengeById() {
     const { challengeId } = useParams();
     const [challenge, setChallenge] = useState({});
-    const [commentButton,setCommentButton]=useState()
+    // const [commentButton,setCommentButton]=useState()
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState({});
     const [show, setShow] = useState(false);
     const [editId, setEditId] = useState("");
     const [currentUserId, setCurrentUserId]=useState("");
+    const [commentshow, setCommentShow] = useState(false);
+    const [comid, setComid] = useState("");
+    const [comtext, setComtext] = useState("");
+    const [challenid, setChallenid] = useState("");
     
     useEffect(() => {
         BusinessChallengesService.getBusinesssChallengeById(challengeId).then((res) => { setChallenge(res.data) });
@@ -35,7 +39,7 @@ function ViewChallengeById() {
     } , []);
     
     const handleSubmit = (e) => {
-        setCommentButton(false);
+        // setCommentButton(false);
         ChallengeCommentsService.postComment(challengeId, commentText).then((res)=>{
             console.log(res.data);
         })
@@ -51,8 +55,18 @@ function ViewChallengeById() {
         setEditId(data);
     };
 
-    const navigateToEditComment = (commentId, commentText, challengeId ) => {
-        navigate("/editChallengeComment/" + commentId + "/" + commentText + "/" + challengeId);
+    const handleCommentClose = () => {
+        setCommentShow(false);
+        setComid("");
+        setComtext("");
+        setChallenid("");
+    };
+
+    const handleCommentShow = (d1, d2, d3) => {
+        setCommentShow(true);
+        setComid(d1);
+        setComtext(d2);
+        setChallenid(d3);
     };
 
     const navigate = useNavigate();
@@ -129,13 +143,45 @@ function ViewChallengeById() {
                                     <b>{comment.fname + " " + comment.lname} </b> 
                                     {/* • */}
                                     <span className="commentedDate">~ {comment.commentedDate}</span>
-                                    {(currentUserId === comment.userId) ? 
-                                        (
-                                        <span className="commentEdit" style={{ display: "inline-block", "float":"right" }}>
-                                            <button className="btn btn-secondary"><BiEditAlt onClick={() => navigateToEditComment(comment.id, comment.commentText, challenge.id)} /></button>
-                                        </span>
-                                        ) : ( <span> </span> )
-                                    }
+                                    {currentUserId === comment.userId ? (
+                    <div
+                      className="CommentEdit"
+                      style={{ display: "inline-block", float: "right" }}
+                    >
+                      <button className="btn btn-secondary">
+                        <BiEditAlt
+                          onClick={() =>
+                            handleCommentShow(
+                              comment.id,
+                              comment.commentText,
+                              challenge.id
+                            )
+                          }
+                          size={"20px"}
+                        />
+                      </button>
+                      <Modal
+                    show={commentshow}
+                    onHide={handleCommentClose}
+                    className="name"
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>
+                        <h1>Edit Comment</h1>
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <EditChallengeComment
+                        commentId={comid}
+                        commentText={comtext}
+                        challengeId={challenge.id}
+                      />
+                    </Modal.Body>
+                  </Modal>
+                    </div>
+                  ) : (
+                    <div> </div>
+                  )}
 
                                 </span>
                                     <div className="commentText" key={comment.id}>

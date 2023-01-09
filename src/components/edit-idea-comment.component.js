@@ -1,27 +1,30 @@
 import { useState } from "react";
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import "./edit-idea-comment.component.css";
 import IdeaCommentsService from "../services/idea-comments.service"
 
-function EditIdeaComment() {
-  const { commentId, commentText }  = useParams();
-  const navigate = useNavigate();
+function EditIdeaComment({ commentId, commentText }) {
   const [updatedcomment, setUpdatedComment] = useState("");
   const [com, setCom] = useState(commentText);
+  const [submitted, setSubmitted]=useState(false);
 
   const navigateToEditComment = () => {
     IdeaCommentsService.updateComment(commentId, updatedcomment).then((res) => {
-      console.log(commentId, updatedcomment)
       setUpdatedComment(res.data);
       setCom(res.data)
     });
-    navigate(-1);
+    setSubmitted(true);
   }
   
   return(
     <div>
-      <div className="Comment-Box">
+      <div className="comment-edit-successful">
+        {submitted?(
+        <div style={{"textAlign":"center"}}>
+            <h4>Idea Comment Edited successfully!</h4>
+        </div>):(
+
+        <div className="Comment-Box">
         <p>Leave a Comment</p>
         <form className="Comment-Form">
           <textarea
@@ -31,10 +34,11 @@ function EditIdeaComment() {
             onChange={(e) => setUpdatedComment(e.target.value)}
           >{com}</textarea>
           <br/>
-          <button className="edit-Comment-form button" onClick={navigateToEditComment}>
+          <button className="edit-Comment-form button"  disabled={updatedcomment.length < 1} onClick={navigateToEditComment}>
             Post Comment
           </button>
         </form>
+      </div>)}
       </div>
     </div>
   );

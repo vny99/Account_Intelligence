@@ -1,27 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import "./edit-challenge-comment.component.css";
 import challengeCommentsService from "../services/challenge-comments.service";
 
-function EditChallengeComment() {
-  const { commentId, commentText, challengeId } = useParams();
-  console.log(challengeId)
-  const navigate = useNavigate();
+function EditChallengeComment({ commentId, commentText, challengeId }) {
   const [updatedchallengecomment, setUpdatedChallengeComment] = useState("");
+  const [submitted, setSubmitted]=useState(false);
 
   const navigateToEditChallengeComment = () => {
     challengeCommentsService.updateBusinessChallengeComment(commentId, updatedchallengecomment).then((res) => {
       setUpdatedChallengeComment(res.data);
     });
-    // console.log(challengeId)
-    // navigate("/viewChallenge/${challengeId}");
-    navigate(-3)
+    setSubmitted(true);
   };
 
   return (
     <div>
-      <div className="Comment-Box">
+      <div className="comment-edit-successful">
+        {submitted?(
+        <div style={{"textAlign":"center"}}>
+            <h4>Business Challenge Edited successfully!</h4>
+        </div>
+        ):(
+        <div className="Comment-Box">
         <p>Leave a Comment</p>
         <form className="Comment-Form">
           <textarea
@@ -32,14 +33,16 @@ function EditChallengeComment() {
           >{commentText}</textarea>
           <br/>
           <button
-            className="Comment-form button"
+            className="Comment-form button" disabled={updatedchallengecomment.length<1}
             onClick={navigateToEditChallengeComment}
           >
             Post Comment
           </button>
         </form>
       </div>
+      )}</div>
     </div>
+    
   );
 }
 

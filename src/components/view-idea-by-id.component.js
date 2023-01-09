@@ -16,6 +16,7 @@ import Modal from "react-bootstrap/Modal";
 import EditIdea from "./edit-idea.component";
 import UserService from "../services/user.service";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
+import EditIdeaComment from "./edit-idea-comment.component";
 
 function ViewIdeaById() {
   const [idea, setIdea] = useState({});
@@ -32,6 +33,9 @@ function ViewIdeaById() {
   const [currentUserId, setCurrentUserId] = useState("");
   const [rewards,setRewards]=useState(0);
   const [show, setShow] = useState(false);
+  const [ideaCommentShow, setIdeacommentshow]=useState(false);
+  const [cid, setCid]=useState("");
+  const [ideacomment, setIdeaComment]=useState("");
   const [editId, setEditId] = useState("");
   const [localLiked, setLocalLiked] = useState(false);
 
@@ -111,8 +115,16 @@ function ViewIdeaById() {
     await IdeaService.getIdeaByIdeaId(id).then((res) => { setIdea(res.data); });
   }
 
-  const navigateToEditComment = (commentId, commentText) => {
-    navigate("/editIdeaComment/" + commentId + "/" + commentText );
+  const handleIdeacommentShow=(d1,d2)=>{
+    setIdeacommentshow(true);
+    setCid(d1);
+    setIdeaComment(d2); 
+  }
+  
+  const ideaCommenthandleClose = () => {
+    setIdeacommentshow(false);
+    setCid("");
+    setIdeaComment("");
   };
 
   const navigate = useNavigate();
@@ -276,12 +288,32 @@ function ViewIdeaById() {
                   <b>{comment.fname + " " + comment.lname} </b> 
                   {/* • */}
                   <span className="commentedDate">~ {comment.commentedDate}</span>
-                  {(currentUserId === comment.userId) ?
-                    (
-                      <span className="commentEdit" style={{"display":"inline-block", "float":"right"}}>
-                        <button className="btn btn-secondary"> <BiEditAlt onClick={() => {navigateToEditComment(comment.id, comment.commentText)}} /> </button>
-                      </span>
-                    ) : ( <span> </span> )
+                  {currentUserId === comment.userId ? (
+                    <div className="commentEdit" style={{ display: "inline-block", float: "right" }} >
+                      <button className="btn btn-secondary">
+                        {" "}
+                        <BiEditAlt
+                          onClick={() => {
+                            handleIdeacommentShow(
+                              comment.id,
+                              comment.commentText
+                            );
+                          }}
+                          size={"20px"}
+                        />{" "}
+                      </button>
+                      <Modal show={ideaCommentShow} onHide={ideaCommenthandleClose} className="name1">
+                        <Modal.Header closeButton>
+                          <Modal.Title>
+                            <h1>Edit Comment</h1>
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <EditIdeaComment commentId={cid}commentText={ideacomment}/>
+                        </Modal.Body>
+                      </Modal>
+                    </div>
+                    ) : ( <div> </div>)
                   }
                 </span>
                 <div className="commentText" key={comment.id}>

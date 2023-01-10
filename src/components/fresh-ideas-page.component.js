@@ -9,7 +9,6 @@ import MyIdeas from './my-ideas.components';
 import Pagination from './pagination.component';
 import { Table } from './Table';
 
-
 class FreshIdeasPage extends Component {
     constructor(props) {
         super(props)

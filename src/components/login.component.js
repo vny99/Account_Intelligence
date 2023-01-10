@@ -6,6 +6,9 @@ import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
 
 import { withRouter } from '../common/with-router';
+import { BiHide, BiShow } from "react-icons/bi";
+
+import "./login.component.css"
 
 const required = value => {
   if (!value) {
@@ -20,6 +23,7 @@ const required = value => {
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.handlePasswordView = this.handlePasswordView.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
@@ -28,25 +32,29 @@ class Login extends Component {
       email: "",
       password: "",
       loading: false,
-      message: ""
+      message: "",
+      show:false
     };
   }
 
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
+  onChangeEmail(e) { this.setState({ email: e.target.value }); }
 
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
+  onChangePassword(e) {  this.setState({ password: e.target.value }); }
+
+  handlePasswordView() {
+    var element = document.getElementById("showPassword");
+    if (element.type === "password") {
+      element.type = "text";
+      this.setState({ show: true })
+    }
+    else {
+      element.type = "password";
+      this.setState({ show: false })
+    }
   }
 
   handleLogin(e) {
     e.preventDefault();
-
     this.setState({
       message: "",
       loading: true
@@ -65,7 +73,7 @@ class Login extends Component {
             (error.response &&
               error.response.data &&
               error.response.data.message) ||
-            error.message ||
+            "Invalid credentials" ||
             error.toString();
 
           this.setState({
@@ -109,16 +117,21 @@ class Login extends Component {
               />
             </div>
 
-            <div className="form-group">
+            <div className="form-group" style={{"position":"relative"}}>
               <label htmlFor="password">Password</label>
               <Input
                 type="password"
-                className="form-control"
+                id="showPassword"
+                className="form-control prevent-select"
                 name="password"
                 value={this.state.password}
                 onChange={this.onChangePassword}
                 validations={[required]}
               />
+              
+              {!this.state.show && <BiShow className="field-icon" onClick={this.handlePasswordView} />}
+              {this.state.show && <BiHide className="field-icon" onClick={this.handlePasswordView} />}
+
             </div>
 
             <div className="form-group">

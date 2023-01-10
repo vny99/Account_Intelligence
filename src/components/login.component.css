@@ -1,0 +1,11 @@
+.field-icon {
+    float: right;
+    margin-right: 10px;
+    margin-top: -27px;
+    z-index: 2;
+    cursor: pointer;
+    font-size: larger;
+
+    /* margin-left: -25px; */
+    /* position: relative; */
+}

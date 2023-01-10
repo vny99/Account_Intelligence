@@ -17,7 +17,7 @@ export default class AddChallenge extends Component {
       id: null,
       title: "",
       description: "",
-      businessArea: "Finance",
+      businessArea: "",
       expiryDate:"",
       submitted: false,
       businessAreasList :[],
@@ -79,7 +79,7 @@ export default class AddChallenge extends Component {
       id: null,
       title: "",
       description: "",
-      businessArea: "Finance",
+      businessArea: "",
       published: false,
       submitted: false
     });
@@ -128,6 +128,7 @@ export default class AddChallenge extends Component {
                 <select class="form-select" aria-label="Default select example"
                 value={this.state.businessArea}
                 onChange={this.onChangeBusinessArea}>
+                  <option selected hidden>Select a Business Area</option>
                   { this.state.businessAreasList.map( bc => <option>{bc.name}</option> )}
                 </select>
               </div>
@@ -138,15 +139,16 @@ export default class AddChallenge extends Component {
                 className="form-control challenge-date-input"
                 id="expiryDate"
                 required
-                value=" "
-                // value={this.state.expiryDate}
+                // value=" "
+                value={this.state.expiryDate}
                 onChange={this.onChangeExpiryDate}
                 name="expiryDate"
               />
             </div>
 
             <div style={{"textAlign":"center"}}>
-              <button onClick={this.saveChallenge} style={{"marginTop":"20px"}} className="btn btn-secondary" disabled={this.state.title.length<2||this.state.description.length<1}>
+              <button onClick={this.saveChallenge} style={{"marginTop":"20px"}} className="btn btn-secondary"
+              disabled={this.state.title.length<2 || this.state.description.length<1 || this.state.businessArea===""}>
                 Submit
               </button>
             </div>

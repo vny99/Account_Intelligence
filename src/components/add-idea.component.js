@@ -17,8 +17,8 @@ export default class AddIdea extends Component {
       id: null,
       title: "",
       description: "", 
-      benefitCategory: "Internal",
-      category: "Account Initiatives", 
+      benefitCategory: "",
+      category: "", 
       published: false,
       submitted: false,
       benefitCategoriesList: [],
@@ -90,8 +90,8 @@ export default class AddIdea extends Component {
       id: null,
       title: "",
       description: "",
-      benefitCategory: "Internal",
-      category: "Account Initiatives",
+      benefitCategory: "",
+      category: "",
       published: false,
       submitted: false
     });
@@ -141,6 +141,7 @@ export default class AddIdea extends Component {
               <select class="form-select" aria-label="Default select example"
               value={this.state.benefitCategory}
               onChange={this.onChangeBenefitCategory}>
+                <option selected hidden>Select a Benefit category</option> 
                 { this.state.benefitCategoriesList.map( bc =>
                   <option>
                     {bc.name}
@@ -154,17 +155,19 @@ export default class AddIdea extends Component {
                 <select class="form-select" aria-label="Default select example"
                 value={this.state.category}
                 onChange={this.onChangeCategory}>
-                { this.state.categoriesList.map( c =>
-                  <option
-                  >
-                    {c.name}
-                  </option> 
-                )}
+                  <option selected hidden>Select a category</option>
+                  { this.state.categoriesList.map( c =>
+                    <option
+                    >
+                      {c.name}
+                    </option> 
+                  )}
                 </select>
             </div>
 
             <div style={{"textAlign":"center"}}>
-              <button onClick={this.saveidea} style={{"marginTop":"20px"}} className="btn btn-secondary" disabled={this.state.title.length<2||this.state.description.length<1}>
+              <button onClick={this.saveidea} style={{"marginTop":"20px"}} className="btn btn-secondary"
+              disabled={this.state.title.length<2 || this.state.description.length<1 || this.state.benefitCategory==="" || this.state.category===""}>
                 Submit
               </button>
             </div>

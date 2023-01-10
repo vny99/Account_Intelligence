@@ -108,8 +108,6 @@ public class IdeasCommentsController {
 	@PutMapping("/ideaComments/updateComment/{id}")
     public ResponseEntity<IdeaComments> updateComment(@PathVariable String id,
             @RequestBody IdeaComments ideaComments) {
-		System.out.println(id);
-		System.out.println(ideaComments);
         IdeaComments myComment = commentsRepo.findById(id).get();
         myComment.setCommentText(ideaComments.getCommentText());
         return new ResponseEntity<>(commentsRepo.save(myComment), HttpStatus.OK);

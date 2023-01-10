@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eureka.app.model.BenefitCategory;
-import com.eureka.app.model.Category;
 import com.eureka.app.model.Department;
 import com.eureka.app.model.ERole;
 import com.eureka.app.model.Role;
@@ -91,7 +89,8 @@ public class AuthController {
 		}
 
 		// Create new user's account
-		User user = new User(signUpRequest.getFname(), signUpRequest.getLname(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+		User user = new User(signUpRequest.getFname(), signUpRequest.getLname(),
+				signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), signUpRequest.getAccount());
 
 		String strDepartment = signUpRequest.getDepartment();
 		Department department = null;

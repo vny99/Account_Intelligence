@@ -30,6 +30,7 @@ public class User {
 	@NotBlank
 	@Size(min = 6, max = 40)
 	private String password;
+	private String account;
 	
 	@NotNull
 	@DBRef
@@ -48,11 +49,12 @@ public class User {
 	}
 
 	public User(@NotBlank @Size(max = 15) String fname, @NotBlank @Size(max = 20) String lname,
-			@NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 40) String password) {
+			@NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 6, max = 40) String password, String account) {
 		this.fname = fname;
 		this.lname = lname;
 		this.email = email;
 		this.password = password;
+		this.account = account;
 	}
 
 	public String getId() {
@@ -95,6 +97,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getAccount() {
+		return account;
+	}
+	public void setAccount(String account) {
+		this.account = account;
+	}
 	public Department getDepartment() {
 		return department;
 	}
@@ -133,8 +141,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", password="
-				+ password + ", department=" + department + ", role=" + role + ", isActive=" + isActive + ", rewards="
-				+ rewards + ", favorites=" + favorites + "]";
+				+ password + ", account=" + account + ", department=" + department + ", role=" + role + ", isActive="
+				+ isActive + ", rewards=" + rewards + ", favorites=" + favorites + "]";
 	}
-	
 }

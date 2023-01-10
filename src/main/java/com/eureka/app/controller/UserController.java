@@ -154,7 +154,6 @@ public class UserController {
 	@PostMapping("users/{email}")
     public User updateUserByEmail(@PathVariable String email, @RequestBody SignupRequest user) {
         User existingUser = userRepo.findByEmail(email);
-        
         Department department = null;
         String strDepartment = user.getDepartment();
         Department userDepartment = departmentsRepo.findByName(strDepartment);
@@ -164,6 +163,7 @@ public class UserController {
         existingUser.setLname(user.getLname());
         existingUser.setEmail(user.getEmail());
         existingUser.setDepartment(department);
+        existingUser.setAccount(user.getAccount());
         userRepo.save(existingUser);
         return existingUser;
     }

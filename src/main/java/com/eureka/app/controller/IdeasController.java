@@ -2,6 +2,8 @@ package com.eureka.app.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -269,6 +271,19 @@ public class IdeasController {
 		List<Category> catgoriesList = new ArrayList<>();
 		catgoriesList = categoriesRepo.findAll();
 		return catgoriesList;
+	}
+	
+	@GetMapping("/ideas/sortById")
+	public List<Idea> getIdeasSortedById(){
+		List<Idea> ideas = new ArrayList<>();
+		ideas = ideasRepo.findAll();
+		Collections.sort(ideas, Comparator.comparing(Idea::getIdeaId));
+		System.out.println("Before : ");
+		for (Idea i : ideas) System.out.println(i.getIdeaId());
+		Collections.reverse(ideas);
+        System.out.println("After : ");
+        for (Idea i : ideas) System.out.println(i.getIdeaId());
+        return ideas;
 	}
 
 }

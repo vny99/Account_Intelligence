@@ -1,6 +1,7 @@
 package com.eureka.app.controller;
 
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,6 +40,7 @@ import com.eureka.app.repository.IdeasRepository;
 import com.eureka.app.repository.UserRepository;
 import com.eureka.app.security.services.UserDetailsImpl;
 import com.eureka.app.service.SequenceGeneratorService;
+import com.eureka.app.security.services.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -142,7 +144,19 @@ public class IdeasController {
 		
 		Category category = categoriesRepo.findByName(ideaRequest.getCategory());
         
-        Idea idea = new Idea(idString, userId, fname, lname, ideaRequest.getIdeaTitle(), ideaRequest.getIdeaDescription(), createdDate, ideaStatus, benefitCategory, category);
+		 
+        Idea idea = new Idea();
+        idea.setId(idString);
+        idea.setUserId(userId);
+        idea.setFname(fname);
+        idea.setLname(lname);
+        idea.setIdeaTitle(ideaRequest.getIdeaTitle());
+        idea.setIdeaDescription(ideaRequest.getIdeaDescription());
+        idea.setCreatedDate(createdDate);
+        idea.setIdeaStatus(ideaStatus);
+        idea.setBenefitCategory(benefitCategory);
+        idea.setCategory(category);
+        idea.setFileId(ideaRequest.getFileId());
         ideasRepo.save(idea);
         
         return new ResponseEntity<>(idea, HttpStatus.CREATED);

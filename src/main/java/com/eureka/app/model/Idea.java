@@ -30,8 +30,10 @@ public class Idea {
 	private int likesCount;
 	private int commentsCount;
 	private int rewards;
+	private String fileId;
 	@DBRef
 	private List<IdeaComments> comments = new ArrayList<>();
+	
 //	@DBRef
 //	private List<Like> likes = new ArrayList<>();
 	private IStatus ideaStatus;
@@ -40,14 +42,16 @@ public class Idea {
 	private BenefitCategory benefitCategory;
 	@DBRef
 	private Category category;
-	
 	public Idea() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public Idea(String ideaId, String userId, String fname, String lname, String ideaTitle,
-			String ideaDescription, Date createdDate, IStatus ideaStatus, BenefitCategory benefitCategory, Category category) {
+	public Idea(String id, String ideaId, String userId, String fname, String lname, String ideaTitle,
+			String ideaDescription, Date createdDate, int likesCount, int commentsCount, int rewards,
+			List<IdeaComments> comments, String fileId, IStatus ideaStatus, BenefitCategory benefitCategory,
+			Category category) {
 		super();
+		this.id = id;
 		this.ideaId = ideaId;
 		this.userId = userId;
 		this.fname = fname;
@@ -55,137 +59,122 @@ public class Idea {
 		this.ideaTitle = ideaTitle;
 		this.ideaDescription = ideaDescription;
 		this.createdDate = createdDate;
+		this.likesCount = likesCount;
+		this.commentsCount = commentsCount;
+		this.rewards = rewards;
+		this.comments = comments;
+		this.fileId = fileId;
 		this.ideaStatus = ideaStatus;
 		this.benefitCategory = benefitCategory;
 		this.category = category;
 	}
-
+	@Override
+	public String toString() {
+		return "Idea [id=" + id + ", ideaId=" + ideaId + ", userId=" + userId + ", fname=" + fname + ", lname=" + lname
+				+ ", ideaTitle=" + ideaTitle + ", ideaDescription=" + ideaDescription + ", createdDate=" + createdDate
+				+ ", likesCount=" + likesCount + ", commentsCount=" + commentsCount + ", rewards=" + rewards
+				+ ", comments=" + comments + ", fileId=" + fileId + ", ideaStatus=" + ideaStatus + ", benefitCategory="
+				+ benefitCategory + ", category=" + category + "]";
+	}
 	public String getId() {
 		return id;
 	}
-	
 	public void setId(String id) {
 		this.id = id;
 	}
-	
 	public String getIdeaId() {
 		return ideaId;
 	}
 	public void setIdeaId(String ideaId) {
 		this.ideaId = ideaId;
 	}
-	
 	public String getUserId() {
 		return userId;
 	}
-	
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
 	public String getFname() {
 		return fname;
 	}
-	
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
-	
 	public String getLname() {
 		return lname;
 	}
-	
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	
 	public String getIdeaTitle() {
 		return ideaTitle;
 	}
-	
 	public void setIdeaTitle(String ideaTitle) {
 		this.ideaTitle = ideaTitle;
 	}
-	
 	public String getIdeaDescription() {
 		return ideaDescription;
 	}
-	
 	public void setIdeaDescription(String ideaDescription) {
 		this.ideaDescription = ideaDescription;
 	}
-	
 	public Date getCreatedDate() {
 		return createdDate;
 	}
-	
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-	
-	public int getCommentsCount() {
-		return commentsCount;
-	}
-	
-	public void setCommentsCount(int commentsCount) {
-		this.commentsCount = commentsCount;
-	}
-	
-	public int getRewards() {
-		return rewards;
-	}
-	
-	public void setRewards(int rewards) {
-		this.rewards = rewards;
-	}
-	
-	public List<IdeaComments> getComments() {
-		return comments;
-	}
-	
-	public void setComments(List<IdeaComments> comment) {
-		this.comments = comment;
-	}
-	
-	public IStatus getIdeaStatus() {
-		return ideaStatus;
-	}
-	
-	public void setIdeaStatus(IStatus ideaStatus) {
-		this.ideaStatus = ideaStatus;
-	}
-
 	public int getLikesCount() {
 		return likesCount;
 	}
-
 	public void setLikesCount(int likesCount) {
 		this.likesCount = likesCount;
 	}
-
+	public int getCommentsCount() {
+		return commentsCount;
+	}
+	public void setCommentsCount(int commentsCount) {
+		this.commentsCount = commentsCount;
+	}
+	public int getRewards() {
+		return rewards;
+	}
+	public void setRewards(int rewards) {
+		this.rewards = rewards;
+	}
+	public List<IdeaComments> getComments() {
+		return comments;
+	}
+	public void setComments(List<IdeaComments> comments) {
+		this.comments = comments;
+	}
+	public String getFileId() {
+		return fileId;
+	}
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+	public IStatus getIdeaStatus() {
+		return ideaStatus;
+	}
+	public void setIdeaStatus(IStatus ideaStatus) {
+		this.ideaStatus = ideaStatus;
+	}
 	public BenefitCategory getBenefitCategory() {
 		return benefitCategory;
 	}
-
 	public void setBenefitCategory(BenefitCategory benefitCategory) {
 		this.benefitCategory = benefitCategory;
 	}
-
 	public Category getCategory() {
 		return category;
 	}
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
-	@Override
-	public String toString() {
-		return "Idea [id=" + id + ", ideaId=" + ideaId + ", userId=" + userId + ", fname=" + fname + ", lname=" + lname
-				+ ", ideaTitle=" + ideaTitle + ", ideaDescription=" + ideaDescription + ", createdDate=" + createdDate
-				+ ", likesCount=" + likesCount + ", commentsCount=" + commentsCount + ", rewards=" + rewards
-				+ ", comments=" + comments + ", ideaStatus=" + ideaStatus + ", benefitCategory=" + benefitCategory
-				+ ", category=" + category + "]";
+	public static String getSequenceName() {
+		return SEQUENCE_NAME;
 	}
+	
 	
 }

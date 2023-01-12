@@ -121,9 +121,9 @@ public class AuthController {
 					
 				default:
 					System.out.println("case fiadmin : " + strRole);
-					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+					Role fiAdminRole1 = roleRepository.findByName(ERole.ROLE_FIADMIN)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					role = userRole;
+					role = fiAdminRole1;
 			}
 		}
 		user.setRole(role);

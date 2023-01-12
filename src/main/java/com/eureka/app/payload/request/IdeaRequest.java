@@ -12,28 +12,35 @@ public class IdeaRequest {
 	@NotBlank
 	private String category;
 	
+	private String fileId;
+
+	public IdeaRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public IdeaRequest(@NotBlank String ideaTitle, @NotBlank String ideaDescription, @NotBlank String benefitCategory,
-			@NotBlank String category) {
+			@NotBlank String category, String fileId) {
 		super();
 		this.ideaTitle = ideaTitle;
 		this.ideaDescription = ideaDescription;
 		this.benefitCategory = benefitCategory;
 		this.category = category;
+		this.fileId = fileId;
 	}
 
-	public IdeaRequest() {
-		super();
-	}
-	
 	public String getIdeaTitle() {
 		return ideaTitle;
 	}
+
 	public void setIdeaTitle(String ideaTitle) {
 		this.ideaTitle = ideaTitle;
 	}
+
 	public String getIdeaDescription() {
 		return ideaDescription;
 	}
+
 	public void setIdeaDescription(String ideaDescription) {
 		this.ideaDescription = ideaDescription;
 	}
@@ -53,5 +60,14 @@ public class IdeaRequest {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+	
 	
 }

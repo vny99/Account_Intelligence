@@ -134,7 +134,7 @@ public class IdeasController {
     	String lname = user.getLname();
         
         Date createdDate = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
         String formattedDate = formatter.format(createdDate);
         createdDate = formatter.parse(formattedDate);
         
@@ -146,7 +146,7 @@ public class IdeasController {
         
 		 
         Idea idea = new Idea();
-        idea.setId(idString);
+        idea.setIdeaId(idString);
         idea.setUserId(userId);
         idea.setFname(fname);
         idea.setLname(lname);
@@ -177,6 +177,7 @@ public class IdeasController {
 		myIdea.setIdeaDescription(idea.getIdeaDescription());
 		myIdea.setIdeaStatus(idea.getIdeaStatus());
 		myIdea.setRewards(idea.getRewards());
+		myIdea.setFileId(idea.getFileId());
 		
 		return new ResponseEntity<>(ideasRepo.save(myIdea), HttpStatus.OK);
 	}
@@ -205,18 +206,23 @@ public class IdeasController {
 	
 	@GetMapping("/ideas/search")
 	public ResponseEntity<List<Idea>> searchIdea(@RequestParam(required = false) String searchItem) {
+		
 		try {
 			List<Idea> freshideas = new ArrayList<>();
 			Set<String> ideasIdList = new HashSet<>();
+			//System.out.println(ideasIdList);
 			
 	    	if (searchItem != "" ) {
 	    		if ( matchTitle(searchItem).size() > 0) {
-	    			ideasIdList.addAll(matchTitle(searchItem));
+	    			
+	    			ideasIdList.addAll(matchTitle(searchItem));}
 	    		}
 	    		
 	    		if (matchDescription(searchItem).size() > 0) {
+	    			
 	    			ideasIdList.addAll(matchDescription(searchItem));
-	    		}
+	    			
+	    		
 	      	}
 	    	
 	    	for (String id : ideasIdList) {
@@ -275,6 +281,7 @@ public class IdeasController {
 	
 	@GetMapping("/ideas/benefitcategories")
 	public List<BenefitCategory> getBenefitCategoriesList() {
+		System.out.println("hello");
 		List<BenefitCategory> benefitCatgoriesList = new ArrayList<>();
 		benefitCatgoriesList = benefitCategoriesRepo.findAll();
 		return benefitCatgoriesList;

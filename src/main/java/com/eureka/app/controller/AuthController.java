@@ -104,7 +104,8 @@ public class AuthController {
 			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			role = userRole;
-		} else {
+		}
+		else {
 			switch (strRole) {
 				case "fiadmin":
 					System.out.println("case fiadmin : " + strRole);

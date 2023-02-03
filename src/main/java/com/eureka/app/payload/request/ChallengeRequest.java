@@ -12,20 +12,25 @@ public class ChallengeRequest {
 	@NotBlank
     private String businessArea;
     private Date expiryDate;
-	
-	public ChallengeRequest() {
-		super();
-	}
-	
+    private String fileId;
 	public ChallengeRequest(@NotBlank String challengeTitle, @NotBlank String challengeDescription,
-			@NotBlank String businessArea, Date expiryDate) {
+			@NotBlank String businessArea, Date expiryDate, String fileId) {
 		super();
 		this.challengeTitle = challengeTitle;
 		this.challengeDescription = challengeDescription;
 		this.businessArea = businessArea;
 		this.expiryDate = expiryDate;
+		this.fileId = fileId;
 	}
-
+	@Override
+	public String toString() {
+		return "ChallengeRequest [challengeTitle=" + challengeTitle + ", challengeDescription=" + challengeDescription
+				+ ", businessArea=" + businessArea + ", expiryDate=" + expiryDate + ", fileId=" + fileId + "]";
+	}
+	public ChallengeRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public String getChallengeTitle() {
 		return challengeTitle;
 	}
@@ -41,7 +46,6 @@ public class ChallengeRequest {
 	public String getBusinessArea() {
 		return businessArea;
 	}
-
 	public void setBusinessArea(String businessArea) {
 		this.businessArea = businessArea;
 	}
@@ -51,10 +55,12 @@ public class ChallengeRequest {
 	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
 	}
-
-	@Override
-	public String toString() {
-		return "ChallengeRequest [challengeTitle=" + challengeTitle + ", challengeDescription=" + challengeDescription
-				+ ", businessArea=" + businessArea + ", expiryDate=" + expiryDate + "]";
+	public String getFileId() {
+		return fileId;
 	}
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
+	
+	
 }

@@ -34,22 +34,30 @@ import com.eureka.app.security.services.UserDetailsImpl;
 public class UserController {
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Autowired
 	IdeasRepository ideasRepo;
-	
+
 	@Autowired
 	DepartmentRepository departmentsRepo;
-	
+
 	@GetMapping("/users")
 	public List<User> getAllUsers(@RequestParam(required = false) String email) {
 
 		if (email != null) {
 			List<User> users = new ArrayList<>();
 			users.add(userRepo.findByEmail(email));
+
 			return users;
 		}
 		return userRepo.findAll();
+	}
+
+	@GetMapping("/getAll")
+	public List<User> getUserAll() {
+		List<User> users = userRepo.findAll();
+		//System.out.println(users);
+		return users;
 	}
 
 	@PostMapping("/users")
@@ -60,12 +68,12 @@ public class UserController {
 	@PutMapping("users/{id}")
 	public ResponseEntity<User> updateUser(@RequestBody User updatedUser) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-    	String email = userDetails.getUsername();
-    	User user = userRepo.findByEmail(email);
-		
-    	user.setFname(updatedUser.getFname());
-    	
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		String email = userDetails.getUsername();
+		User user = userRepo.findByEmail(email);
+
+		user.setFname(updatedUser.getFname());
+
 		return new ResponseEntity<>(userRepo.save(user), HttpStatus.OK);
 	}
 
@@ -78,93 +86,96 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@GetMapping("/users/isActive")
-	public List<User> getAllActiveUsers(){
+	public List<User> getAllActiveUsers() {
 		return userRepo.findByIsActive(true);
 	}
-	
+
 	@GetMapping("users/emailExists/{email}")
 	public boolean emailExists(@PathVariable String email) {
 		return userRepo.existsByEmail(email);
 	}
-	
+
 	@PostMapping("users/addFavorite/{id}")
 	public User addFavorite(@PathVariable String id) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-    	String email = userDetails.getUsername();
-    	User user = userRepo.findByEmail(email);
-    	
+		String email = userDetails.getUsername();
+		User user = userRepo.findByEmail(email);
+
 		Idea idea = ideasRepo.findById(id).get();
 		List<Idea> favoriteIdeas = user.getFavorites();
-		
+
 		Set<String> favoriteIdeaIds = new HashSet<>();
-		
-		for (Idea fav : favoriteIdeas)  favoriteIdeaIds.add(fav.getId());
+
+		for (Idea fav : favoriteIdeas)
+			favoriteIdeaIds.add(fav.getId());
 		if (!favoriteIdeaIds.contains(idea.getId())) {
 			favoriteIdeas.add(idea);
 			user.setFavorites(favoriteIdeas);
 		}
-		
+
 		return userRepo.save(user);
 	}
-	
+
 	@PostMapping("users/removeFavorite/{id}")
 	public User removeFavorite(@PathVariable String id) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-    	String email = userDetails.getUsername();
-    	User user = userRepo.findByEmail(email);
-    	
+		String email = userDetails.getUsername();
+		User user = userRepo.findByEmail(email);
+
 		List<Idea> favoriteIdeas = user.getFavorites();
-		
+
 		List<Idea> newFavoriteIdeas = new ArrayList<>();
 //		for (Idea idea : favoriteIdeas) newFavoriteIdeas.add(idea);
-		
+
 //		System.out.println("Before : " + favoriteIdeas.size());
 		for (Idea idea : favoriteIdeas) {
-			if (!idea.getId().equals(id)) { newFavoriteIdeas.add(idea); }
+			if (!idea.getId().equals(id)) {
+				newFavoriteIdeas.add(idea);
+			}
 		}
 //		System.out.println("After : " + newFavoriteIdeas.size());
-		
+
 		user.setFavorites(newFavoriteIdeas);
 		return userRepo.save(user);
 	}
-	
-	@GetMapping("/users/favorites")
-	public List<Idea> getAllFavorites(){
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-    	String email = userDetails.getUsername();
-    	User user = userRepo.findByEmail(email);
-    	
+	@GetMapping("/users/favorites")
+	public List<Idea> getAllFavorites() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+		String email = userDetails.getUsername();
+		User user = userRepo.findByEmail(email);
+
 		List<Idea> favIdeas = new ArrayList<>(user.getFavorites());
 		return favIdeas;
 	}
-	
+
 	@GetMapping("users/{email}")
 	public User getUserByEmail(@PathVariable String email) {
 		return userRepo.findByEmail(email);
 	}
-	
+
 	@PostMapping("users/{email}")
-    public User updateUserByEmail(@PathVariable String email, @RequestBody SignupRequest user) {
-        User existingUser = userRepo.findByEmail(email);
-        Department department = null;
-        String strDepartment = user.getDepartment();
-        Department userDepartment = departmentsRepo.findByName(strDepartment);
-        department = userDepartment;
-        
-        existingUser.setFname(user.getFname());
-        existingUser.setLname(user.getLname());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setDepartment(department);
-        existingUser.setAccount(user.getAccount());
-        userRepo.save(existingUser);
-        return existingUser;
-    }
+	public User updateUserByEmail(@PathVariable String email, @RequestBody SignupRequest user) {
+		User existingUser = userRepo.findByEmail(email);
+		Department department = null;
+		String strDepartment = user.getDepartment();
+		Department userDepartment = departmentsRepo.findByName(strDepartment);
+		department = userDepartment;
+
+		existingUser.setFname(user.getFname());
+		existingUser.setLname(user.getLname());
+		existingUser.setEmail(user.getEmail());
+		existingUser.setDepartment(department);
+		existingUser.setAccount(user.getAccount());
+		userRepo.save(existingUser);
+		return existingUser;
+	}
 }

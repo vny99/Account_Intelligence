@@ -114,16 +114,16 @@ public class BusinessChallengesController {
 	        String lname = user.getLname();
 	    	
 	    	Date createdDate = new Date();
-	        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-	        String formattedDate = formatter.format(createdDate);
+	    	SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+	    	String formattedDate = formatter.format(createdDate);
 	        createdDate = formatter.parse(formattedDate);
 	        
 	        BStatus challengeStatus = BStatus.OPENED;
 	        
 	        BusinessArea businessArea = businessAreasRepo.findByName(challengeRequest.getBusinessArea());
 	        
-	        BusinessChallenges businessChallenge = new BusinessChallenges(idString, userId, fname, lname, challengeRequest.getChallengeTitle(),
-	        		challengeRequest.getChallengeDescription(), createdDate, challengeRequest.getExpiryDate(), challengeStatus, businessArea);
+	        BusinessChallenges businessChallenge = new BusinessChallenges(null,idString, userId, fname, lname, challengeRequest.getChallengeTitle(),
+	        		challengeRequest.getChallengeDescription(), createdDate, seqNumber, challengeRequest.getExpiryDate(), challengeStatus, null, businessArea,challengeRequest.getFileId());
 	        
 			businessChallengeRepo.save(businessChallenge);
 			
@@ -142,6 +142,12 @@ public class BusinessChallengesController {
         myChallenge.setChallengeDescription(challenge.getChallengeDescription());
         myChallenge.setExpiryDate(challenge.getExpiryDate());
         myChallenge.setChallengeStatus(challenge.getChallengeStatus());
+        if(challenge.getFileId()!=null) {
+        myChallenge.setFileId(challenge.getFileId());
+        }
+        else {
+        	myChallenge.setFileId(null);
+        }
         
         return new ResponseEntity<>(businessChallengeRepo.save(myChallenge), HttpStatus.OK);
     }
@@ -158,6 +164,7 @@ public class BusinessChallengesController {
     }
 
     private List<String> matchTitle(String searchItem) {
+    	
         List<BusinessChallenges> challnegesList =  businessChallengeRepo.findAll();
         List<String> matchingList = new ArrayList<>();
         for (BusinessChallenges challenges : challnegesList) {
@@ -170,6 +177,7 @@ public class BusinessChallengesController {
 
     @GetMapping("/businessChallenges/search")
     public ResponseEntity<List<BusinessChallenges>> searchChallenge(@RequestParam(required = false) String searchItem) {
+    	
         try {
             List<BusinessChallenges> freshchallenges = new ArrayList<>();
             Set<String> challengesIdList = new HashSet<>();

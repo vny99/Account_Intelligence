@@ -71,32 +71,13 @@ export default class Ideasearch extends Component {
         <ul className="list-group">
           {ideas &&
             ideas.map((idea, index) => (
-              <li
-                className={
-                  "list-group-item " +
-                  (index === currentIndex ? "active" : "")
-                }
-                onClick={() => this.setActiveTutorial(idea, index)}
-                key={index}
-              >
+              <li className={ "list-group-item " +(index === currentIndex ? "active" : "")} onClick={() => this.setActiveTutorial(idea, index)} key={index}>
                 <a href={'/viewIdea/' + idea.id}>
                   <div className='idea-title'><b><u>
-                    <Highlighter
-                      highlightClassName="YourHighlightClass"
-                      // searchWords={["auction", "or", "the"]}
-                      searchWords={[searchItem]}
-                      autoEscape={true}
-                      textToHighlight={idea.ideaTitle}
-                    />
+                    <Highlighter highlightClassName="YourHighlightClass" searchWords={[searchItem]} autoEscape={true} textToHighlight={idea.ideaTitle}/>
                   </u></b> </div>
                   <div className="description">
-                    <Highlighter
-                      highlightClassName="YourHighlightClass"
-                      // searchWords={["auction", "or", "the"]}
-                      searchWords={[searchItem]}
-                      autoEscape={true}
-                      textToHighlight={idea.ideaDescription}
-                    />
+                    <Highlighter highlightClassName="YourHighlightClass" searchWords={[searchItem]} autoEscape={true} textToHighlight={idea.ideaDescription}/>
                   </div>
                   <div className="status"><b>Status : </b>{idea.ideaStatus}</div>
                 </a>

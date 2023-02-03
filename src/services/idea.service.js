@@ -5,8 +5,8 @@ const IDEA_API_BASE_URL = "http://localhost:8080/ideas";
 
 class IdeaService {
 
-    getIdeas(){
-        return axios.get(IDEA_API_BASE_URL, { headers: authHeader() });
+    getIdeas = async()=>{
+        return await axios.get(IDEA_API_BASE_URL, { headers: authHeader() });
     }
 
     getRecentIdeas(){

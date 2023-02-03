@@ -3,30 +3,37 @@ import { useCallback } from 'react';
 import { useState } from 'react';
 
 import { AiOutlineLike, AiOutlineComment } from "react-icons/ai";
+import{FaSortDown, FaSortUp} from "react-icons/fa"
 import IdeaService from '../services/idea.service';
+import UserService from '../services/user.service';
 
 import { BiUpArrow, BiDownArrow } from "react-icons/bi"
 import { VscFilterFilled, VscFilter } from "react-icons/vsc"
 import { useEffect } from 'react';
 
 const AllIdeas = ({data}) => {
-    const [currentData, setCurrentData] = useState([])
+    const [currentData, setCurrentData] = useState(data)
     const [isFavorite, setIsFavorite] = useState(false)
+    const [idSort, setIdSort] = useState(true)
 
     useEffect(() => {
         setCurrentData(data)
-    }, []);
+    }, [data]);
 
     const checkFavorite = useCallback((id) => {
         IdeaService.isFavoriteIdeaOfCurrentUser(id).then(
             (res) => setIsFavorite(res.data)
         )
-        console.log(isFavorite)
     }, [isFavorite]);
 
     const handleIdSort = async()=>{
-        await IdeaService.getIdeasSortedById().then((res) => { setCurrentData(res.data) });
+        
+        await IdeaService.getIdeasSortedById().then((res) => { 
+           
+            setCurrentData(res.data) });
     }
+    UserService.getAllUsers().then((res)=>{
+    })
 
     return (
         <table className = "table">
@@ -35,6 +42,15 @@ const AllIdeas = ({data}) => {
                 <tr>
                     <th>
                         ID
+                        {idSort?<FaSortUp onClick={()=>{
+                            setCurrentData(currentData.sort(currentData.id).reverse());
+                            setIdSort(!idSort)
+                        }}/>:
+                        <FaSortDown onClick={()=>{
+                            setCurrentData(currentData.sort(currentData.id));
+                            setIdSort(!idSort)
+                        }}/>}
+
                         {/* <span style={{"float":"right"}}><BiUpArrow textAlign="end" onClick={() => {handleIdSort()}}/></span> */}
                     </th>
                     <th>
@@ -62,7 +78,7 @@ const AllIdeas = ({data}) => {
                 <br></br>
 
                 {
-                    data.map(
+                    currentData.map(
                     // currentData.map(
                         idea =>
                         <tr key = {idea.id} >

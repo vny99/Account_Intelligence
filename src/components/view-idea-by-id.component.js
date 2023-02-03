@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import IdeaService from "../services/idea.service";
 import "./view-idea-by-id.component.css";
-import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
+import { AiOutlineAlignCenter, AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
 import { TbArrowBackUp } from "react-icons/tb";
 import { BiEditAlt, BiMedal } from "react-icons/bi";
 import flowImage from "./images/flowStatus.jpg";
@@ -17,9 +17,15 @@ import EditIdea from "./edit-idea.component";
 import UserService from "../services/user.service";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import EditIdeaComment from "./edit-idea-comment.component";
+import fileService from "../services/file.service";
+import {AiFillFileText} from "react-icons/ai";
+import {FaRegCommentDots, FaComment} from "react-icons/fa"
+
 
 function ViewIdeaById() {
   const [idea, setIdea] = useState({});
+  const [Status, setStatus] = useState({});
+
   const [benefitCategory, setBenefitCategory] = useState({});
   const [category, setCategory] = useState({});
   const { id } = useParams();
@@ -36,9 +42,19 @@ function ViewIdeaById() {
   const [ideacomment, setIdeaComment]=useState("");
   const [editId, setEditId] = useState("");
   const [localLiked, setLocalLiked] = useState(false);
-
+  const [localcommented, setLocalcommented]=useState(false);
+  const [file,setFile]=useState(false)
+  const [fileName, setFileName]=useState("");
+ 
   useEffect(() => {
     IdeaService.getIdeaByIdeaId(id).then((res) => {
+      if(res.data.fileId!=null){
+        fileService.getFile(res.data.fileId).then((resp)=>{
+          setFileName(resp.data);
+        })
+        setFile(true)
+      }
+      console.log(+"hello")
       setIdea(res.data);
       setBenefitCategory(res.data.benefitCategory)
       setCategory(res.data.category)
@@ -60,6 +76,7 @@ function ViewIdeaById() {
   };
 
   const handleUpdate = async(e) => {
+    setStatus(e.target.value);
     let myIdea = idea;
     myIdea.ideaStatus = e.target.value;
     await IdeaService.updateIdea(idea.id, myIdea);
@@ -95,6 +112,14 @@ function ViewIdeaById() {
     await IdeaService.isFavoriteIdeaOfCurrentUser(id).then((res) => { setLocalLiked(res.data); }) 
   }
 
+  const handleComment=()=>{
+    setLocalcommented(false);
+  }
+  const handleComment1=()=>{
+    setLocalcommented(true);
+    }
+  
+   
   const handleRewards=(e)=>{
     if(e.target.value==="100"){ setRewards(100); }
     else if(e.target.value==="50"){ setRewards(50); }
@@ -125,6 +150,27 @@ function ViewIdeaById() {
 
   const navigate = useNavigate();
   const handleClick = () => { navigate(-1); };
+  const downloadFile=async(e)=>{
+    await fileService.downloadFile(idea.fileId).then((res)=>{
+      console.log(res.data)
+      const blob = new Blob([res.data], {type: res.data.type});
+      const href = URL.createObjectURL(blob);
+      const contentDisposition = res.headers.get("content-disposition");
+      let fileName = 'unknown';
+      if (contentDisposition) {
+        const fileNameMatch = contentDisposition.match(/filename="(.+)"/);
+        if (fileNameMatch.length === 2)
+            fileName = fileNameMatch[1];
+    }
+      const link = document.createElement('a');
+      link.href = href;
+      link.setAttribute('download', fileName); 
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+    })
+  }
 
   return (
     <div className="specific_idea">
@@ -185,7 +231,7 @@ function ViewIdeaById() {
               <div className="idea-rewards">
                 <p>Rewards:</p>
                 <select className="rewards_drop" onChange={handleRewards} name="rewards" >
-                  <option value="0" hidden><p>select rewards</p></option>
+                  <option value="0"><p>No rewards</p></option>
                   <option value="100">100 points</option>
                   <option value="50">50 points</option>
                   <option value="30">30 points</option>
@@ -198,20 +244,22 @@ function ViewIdeaById() {
                 </button>
               </div>
             </div>
-          }
+           } 
 
         </div>
         
         {admin && (
           <div className="change_status">
-            <strong><p>Want to change status of Idea</p></strong>
+           
             <div className="update__container">
               {idea.ideaStatus === "RAISED" && (
-                <button className="update__container_buttons" value="REVIEWED" onClick={handleUpdate} >Reviewed</button>
-              )}
 
-              {idea.ideaStatus === "REVIEWED" && (
+              //   <button className="update__container_buttons" value="REVIEWED" onClick={handleUpdate} >Reviewed</button>
+              // )}
+
+              // {idea.ideaStatus === "REVIEWED" && (
                 <div>
+                   <strong><p>Want to change status of Idea</p></strong>
                   <button className="update__container_buttons" value="ACCEPTED" onClick={handleUpdate} >Accepted</button>
                   <button className="update__container_buttons_r" value="REJECTED" onClick={handleUpdate} >Rejected</button>
                 </div>
@@ -219,12 +267,18 @@ function ViewIdeaById() {
 
               {idea.ideaStatus === "ACCEPTED" && (
                 <div>
+                   <strong><p>Want to change status of Idea</p></strong>
                   <button className="update__container_buttons" value="IMPLEMENTED" onClick={handleUpdate} >Implemented</button>
                 </div>
               )}
             </div>
           </div>
         )}
+        {idea.fileId!==null&& <div className="file_attachement" onClick={downloadFile}>
+         { file!==false&&<p>{fileName}</p>}
+         {file!==false&& <AiFillFileText className="file-icon"/>}
+        </div>}
+
 
         <div className="idea_likes">
           {likeId !== "" ?
@@ -245,7 +299,13 @@ function ViewIdeaById() {
               <FcLikePlaceholder size={"40px"} color="red" onClick={handleFavorite} />
             }
           </div>
-
+          <div>
+            {localcommented?(
+          <FaComment size={"40px"} color={"skyblue"} onClick={handleComment}/>)
+          :
+          <FaRegCommentDots size={"40px"} color={"skyblue"}  onClick={handleComment1}/>
+            }
+          </div>
           <div className="badge">
             {idea.rewards===100&& <div className="badge_points"><BiMedal className="ruby_badge" /><p>{idea.rewards}</p></div>}
             {idea.rewards===50&& <div className="badge_points"><BiMedal className="diamond_badge" /><p>{idea.rewards}</p></div>}
@@ -255,9 +315,30 @@ function ViewIdeaById() {
           </div>
         </div>
       </div>
-
+      <div>
+      {
+        localcommented?<div className="challenge-comment-box">
+        <p>Leave a Comment</p>
+        <form className="comment-form">
+          <textarea
+            className="comment-form textarea"
+            rows="3"
+            placeholder="Write your Comment"
+            onChange={(e) => setCommentText(e.target.value)}
+          ></textarea>
+          <div style={{"textAlign":"center"}}>
+            <button className="comment-form button"
+            disabled={commentText.length < 1}
+            onClick={handleSubmit}>
+              Post Comment
+            </button>
+          </div>
+        </form>
+      </div>:<div></div>
+      }</div>
+      <div>
       <div className="comments_section">
-        {comments.map(
+        { comments.map(
           comment => (
             <div>
               <div className="commentBody">
@@ -301,26 +382,8 @@ function ViewIdeaById() {
           )
         )}
       </div>
-
-      <div className="challenge-comment-box">
-        <p>Leave a Comment</p>
-        <form className="comment-form">
-          <textarea
-            className="comment-form textarea"
-            rows="3"
-            placeholder="Write your Comment"
-            onChange={(e) => setCommentText(e.target.value)}
-          ></textarea>
-          <div style={{"textAlign":"center"}}>
-            <button className="comment-form button"
-            disabled={commentText.length < 1}
-            onClick={handleSubmit}>
-              Post Comment
-            </button>
-          </div>
-        </form>
+    
       </div>
-
     </div>
   );
 }
